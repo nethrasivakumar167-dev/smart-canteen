@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { authenticateToken, requireRole, AuthenticatedRequest } from '../middleware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
@@ -82,7 +83,7 @@ router.use(requireRole('STAFF', 'ADMIN'));
  * @desc    Get all active kitchen orders grouped by status
  * @access  Private (Staff, Admin)
  */
-router.get('/orders', (req: AuthenticatedRequest, res: Response): void => {
+router.get('/orders', asyncHandler(async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   const pending = kitchenOrders.filter((o) => o.status === 'PENDING');
   const preparing = kitchenOrders.filter((o) => o.status === 'PREPARING');
   const ready = kitchenOrders.filter((o) => o.status === 'READY');
@@ -107,14 +108,14 @@ router.get('/orders', (req: AuthenticatedRequest, res: Response): void => {
       },
     },
   });
-});
+}));
 
 /**
  * @route   PATCH /api/staff/orders/:id/status
  * @desc    Update order preparation status
  * @access  Private (Staff, Admin)
  */
-router.patch('/orders/:id/status', (req: Request, res: Response): void => {
+router.patch('/orders/:id/status', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const { status } = req.body;
 
@@ -136,26 +137,26 @@ router.patch('/orders/:id/status', (req: Request, res: Response): void => {
     message: `Order #${order.orderNumber} status updated to ${status}.`,
     data: order,
   });
-});
+}));
 
 /**
  * @route   GET /api/staff/menu-status
  * @desc    Get item availability catalog
  * @access  Private (Staff, Admin)
  */
-router.get('/menu-status', (req: Request, res: Response): void => {
+router.get('/menu-status', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   res.status(200).json({
     success: true,
     data: menuAvailability,
   });
-});
+}));
 
 /**
  * @route   PATCH /api/staff/menu-status/:id
  * @desc    Toggle menu item availability in kitchen
  * @access  Private (Staff, Admin)
  */
-router.patch('/menu-status/:id', (req: Request, res: Response): void => {
+router.patch('/menu-status/:id', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const { isAvailable } = req.body;
 
@@ -173,6 +174,6 @@ router.patch('/menu-status/:id', (req: Request, res: Response): void => {
     message: `${item.name} availability is now ${item.isAvailable ? 'ACTIVE' : 'OUT OF STOCK'}.`,
     data: item,
   });
-});
+}));
 
 export default router;

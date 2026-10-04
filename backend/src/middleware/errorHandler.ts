@@ -7,12 +7,22 @@ export interface AppError extends Error {
   code?: string;
 }
 
+const PRISMA_CONNECTION_CODES = ['P1000', 'P1001', 'P1002', 'P1008', 'P1017'];
+
 function isPrismaConnectionError(error: unknown): boolean {
   if (error instanceof Prisma.PrismaClientInitializationError) return true;
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    return ['P1001', 'P1002', 'P1008', 'P1017'].includes(error.code);
+    return PRISMA_CONNECTION_CODES.includes(error.code);
   }
   return false;
+}
+
+function isPrismaError(error: unknown): boolean {
+  return error instanceof Prisma.PrismaClientKnownRequestError ||
+         error instanceof Prisma.PrismaClientInitializationError ||
+         error instanceof Prisma.PrismaClientValidationError ||
+         error instanceof Prisma.PrismaClientUnknownRequestError ||
+         error instanceof Prisma.PrismaClientRustPanicError;
 }
 
 export const errorHandler = (
@@ -22,6 +32,7 @@ export const errorHandler = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
+  // Log full error server-side (never exposed to client)
   console.error(`[Error] ${req.method} ${req.originalUrl}:`, err);
 
   // Handle Zod validation errors
@@ -36,7 +47,7 @@ export const errorHandler = (
     });
   }
 
-  // Handle Prisma connection errors
+  // Handle Prisma connection errors -> 503
   if (isPrismaConnectionError(err)) {
     return res.status(503).json({
       success: false,
@@ -44,6 +55,15 @@ export const errorHandler = (
     });
   }
 
+  // Handle other Prisma errors -> 500 with generic message
+  if (isPrismaError(err)) {
+    return res.status(500).json({
+      success: false,
+      error: 'Something went wrong. Please try again.',
+    });
+  }
+
+  // Handle other known errors
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal server error';
 

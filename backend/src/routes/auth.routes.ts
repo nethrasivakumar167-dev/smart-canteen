@@ -10,6 +10,7 @@ import {
 } from '../services/userService';
 import { authenticateToken, AuthenticatedRequest } from '../middleware/auth';
 import { env } from '../config/env';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 const JWT_EXPIRES_IN = env.JWT_EXPIRES_IN;
@@ -25,108 +26,92 @@ const generateToken = (userId: string, email: string, role: Role): string => {
  * @desc    Register a new Student account (Public registration is for Students only)
  * @access  Public
  */
-router.post('/register', async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { name, email, password, confirmPassword, studentId, phone } = req.body;
+router.post('/register', asyncHandler(async (req: Request, res: Response): Promise<void> => {
+  const { name, email, password, confirmPassword, studentId, phone } = req.body;
 
-    // 1. Mandatory field validation
-    if (!name || !name.trim()) {
-      res.status(400).json({ success: false, error: 'Full name is required.' });
-      return;
-    }
-    if (!email || !email.trim()) {
-      res.status(400).json({ success: false, error: 'Campus email address is required.' });
-      return;
-    }
-    if (!password) {
-      res.status(400).json({ success: false, error: 'Password is required.' });
-      return;
-    }
-
-    // 2. Email format validation, lowercase and trim
-    const normalizedEmail = email.trim().toLowerCase();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(normalizedEmail)) {
-      res.status(400).json({ success: false, error: 'Please enter a valid campus email address.' });
-      return;
-    }
-
-    // 3. Password validation & confirmation (min 8, max 72 for bcrypt)
-    if (password.length < 8 || password.length > 72) {
-      res.status(400).json({
-        success: false,
-        error: 'Password must be between 8 and 72 characters long.',
-      });
-      return;
-    }
-    if (confirmPassword !== undefined && password !== confirmPassword) {
-      res.status(400).json({
-        success: false,
-        error: 'Passwords do not match. Please verify your confirmation password.',
-      });
-      return;
-    }
-
-    // 4. Duplicate prevention
-    const existingEmail = await findUserByEmailOrId(normalizedEmail);
-    if (existingEmail) {
-      res.status(409).json({
-        success: false,
-        error: 'An account with this email address already exists. Please sign in.',
-      });
-      return;
-    }
-
-    if (studentId && studentId.trim()) {
-      const existingId = await findUserByEmailOrId(studentId.trim());
-      if (existingId) {
-        res.status(409).json({
-          success: false,
-          error: 'An account with this Student ID already exists.',
-        });
-        return;
-      }
-    }
-
-    // 5. Hash password with bcrypt
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
-
-    // 6. Create student user (clean empty profile)
-    const user = await createNewUser({
-      name: name.trim(),
-      email: normalizedEmail,
-      passwordHash,
-      phone: phone?.trim() || undefined,
-      studentId: studentId?.trim() || undefined,
-      role: 'STUDENT',
-    });
-
-    // 7. Generate JWT
-    const token = generateToken(user.id, user.email, user.role);
-
-    res.status(201).json({
-      success: true,
-      message: 'Student account registered successfully! Welcome to Smart Canteen.',
-      user,
-      token,
-    });
-  } catch (err: any) {
-    // Handle Prisma unique constraint violation (P2002)
-    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
-      res.status(409).json({
-        success: false,
-        error: 'An account with this email address already exists. Please sign in.',
-      });
-      return;
-    }
-    console.error('Registration error:', err);
-    res.status(500).json({
-      success: false,
-      error: 'An error occurred during registration. Please try again.',
-    });
+  // 1. Mandatory field validation
+  if (!name || !name.trim()) {
+    res.status(400).json({ success: false, error: 'Full name is required.' });
+    return;
   }
-});
+  if (!email || !email.trim()) {
+    res.status(400).json({ success: false, error: 'Campus email address is required.' });
+    return;
+  }
+  if (!password) {
+    res.status(400).json({ success: false, error: 'Password is required.' });
+    return;
+  }
+
+  // 2. Email format validation, lowercase and trim
+  const normalizedEmail = email.trim().toLowerCase();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(normalizedEmail)) {
+    res.status(400).json({ success: false, error: 'Please enter a valid campus email address.' });
+    return;
+  }
+
+  // 3. Password validation & confirmation (min 8, max 72 for bcrypt)
+  if (password.length < 8 || password.length > 72) {
+    res.status(400).json({
+      success: false,
+      error: 'Password must be between 8 and 72 characters long.',
+    });
+    return;
+  }
+  if (confirmPassword !== undefined && password !== confirmPassword) {
+    res.status(400).json({
+      success: false,
+      error: 'Passwords do not match. Please verify your confirmation password.',
+    });
+    return;
+  }
+
+  // 4. Duplicate prevention
+  const existingEmail = await findUserByEmailOrId(normalizedEmail);
+  if (existingEmail) {
+    res.status(409).json({
+      success: false,
+      error: 'An account with this email address already exists. Please sign in.',
+    });
+    return;
+  }
+
+  if (studentId && studentId.trim()) {
+    const existingId = await findUserByEmailOrId(studentId.trim());
+    if (existingId) {
+      res.status(409).json({
+        success: false,
+        error: 'An account with this Student ID already exists.',
+      });
+      return;
+    }
+  }
+
+  // 5. Hash password with bcrypt
+  const salt = await bcrypt.genSalt(10);
+  const passwordHash = await bcrypt.hash(password, salt);
+
+  // 6. Create student user (clean empty profile)
+  const user = await createNewUser({
+    name: name.trim(),
+    email: normalizedEmail,
+    passwordHash,
+    phone: phone?.trim() || undefined,
+    studentId: studentId?.trim() || undefined,
+    role: 'STUDENT',
+  });
+
+  // 7. Generate JWT
+  const token = generateToken(user.id, user.email, user.role);
+
+  res.status(201).json({
+    success: true,
+    message: 'Student account registered successfully! Welcome to Smart Canteen.',
+    user,
+    token,
+  });
+}));
 
 /**
  * Shared login verification logic
@@ -223,59 +208,59 @@ async function processLogin(
  * @desc    General login endpoint with optional portal verification
  * @access  Public
  */
-router.post('/login', (req: Request, res: Response) => {
+router.post('/login', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   return processLogin(req, res);
-});
+}));
 
 /**
  * @route   POST /api/auth/student/login
  * @desc    Student login endpoint with server-side portal validation
  * @access  Public
  */
-router.post('/student/login', (req: Request, res: Response) => {
+router.post('/student/login', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   return processLogin(req, res, 'STUDENT');
-});
+}));
 
 /**
  * @route   POST /api/auth/staff/login
  * @desc    Staff login endpoint with server-side role validation
  * @access  Public
  */
-router.post('/staff/login', (req: Request, res: Response) => {
+router.post('/staff/login', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   return processLogin(req, res, 'STAFF');
-});
+}));
 
 /**
  * @route   POST /api/auth/admin/login
  * @desc    Admin login endpoint with server-side role validation
  * @access  Public
  */
-router.post('/admin/login', (req: Request, res: Response) => {
+router.post('/admin/login', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   return processLogin(req, res, 'ADMIN');
-});
+}));
 
 /**
  * @route   GET /api/auth/me
  * @desc    Get current authenticated user profile
  * @access  Private (JWT)
  */
-router.get('/me', authenticateToken, (req: AuthenticatedRequest, res: Response): void => {
+router.get('/me', authenticateToken, asyncHandler(async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   res.status(200).json({
     success: true,
     user: req.user,
   });
-});
+}));
 
 /**
  * @route   POST /api/auth/logout
  * @desc    Logout user / invalidate session
  * @access  Public
  */
-router.post('/logout', (req: Request, res: Response): void => {
+router.post('/logout', asyncHandler(async (req: Request, res: Response): Promise<void> => {
   res.status(200).json({
     success: true,
     message: 'Logged out successfully.',
   });
-});
+}));
 
 export default router;
