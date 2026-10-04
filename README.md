@@ -102,7 +102,7 @@ Services will be available at:
 ```bash
 cd backend
 cp .env.example .env
-# Edit .env with your DATABASE_URL, JWT_SECRET, QR_SECRET (min 32 chars, no placeholders)
+# Edit .env with your DATABASE_URL, JWT_SECRET (min 32 chars, no placeholders)
 npm install
 npx prisma generate
 npx prisma migrate dev
@@ -162,7 +162,7 @@ App/
 ## 🛣️ Development Roadmap
 
 - [x] **Phase 1**: Architecture, monorepo foundation, Prisma models, core UI design system & routes (`/`, `/menu`, `/menu/:id`, `/cart`, `/login`, `/register`).
-- [x] **Phase 2**: Real JWT Authentication, PostgreSQL seed data & Prisma migration, Protected routes, Rate limiting, Docker foundation.
+- [ ] **Phase 2**: Real JWT Authentication, PostgreSQL seed data & Prisma migration, Protected routes, Rate limiting, Docker foundation.
 - [ ] **Phase 3**: End-to-end Preorder engine, Checkout, dynamic wait time estimation, QR generation.
 - [ ] **Phase 4**: Staff Kitchen Display System (KDS) & Live Queue tracking.
 - [ ] **Phase 5**: Inventory management, automatic recipe stock depletion, waste tracking.
