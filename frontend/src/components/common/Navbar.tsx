@@ -9,7 +9,6 @@ import {
   ShoppingBag,
   Sun,
   Moon,
-  User as UserIcon,
   LogOut,
   Menu as MenuIcon,
   X,
@@ -17,6 +16,11 @@ import {
   Flame,
   Award,
   ChevronDown,
+  LayoutDashboard,
+  ChefHat,
+  ShieldCheck,
+  GraduationCap,
+  Layers,
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -33,21 +37,35 @@ export const Navbar: React.FC = () => {
   const cartCount = getTotalItemsCount();
   const grandTotal = getGrandTotal();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     setProfileDropdownOpen(false);
     addToast({
       type: 'info',
-      title: 'Logged Out',
-      message: 'You have been logged out successfully.',
+      title: 'Signed Out',
+      message: 'You have been signed out successfully.',
     });
-    navigate('/');
+    navigate('/portals');
+  };
+
+  const getDashboardPath = () => {
+    if (!user) return '/portals';
+    if (user.role === 'STAFF') return '/staff/dashboard';
+    if (user.role === 'ADMIN') return '/admin/dashboard';
+    return '/student/dashboard';
+  };
+
+  const getDashboardLabel = () => {
+    if (!user) return 'Dashboard';
+    if (user.role === 'STAFF') return 'Kitchen Dashboard';
+    if (user.role === 'ADMIN') return 'Admin Console';
+    return 'Student Dashboard';
   };
 
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
-    { name: 'How It Works', path: '/#how-it-works' },
+    { name: 'Access Portals', path: '/portals' },
   ];
 
   return (
@@ -74,7 +92,7 @@ export const Navbar: React.FC = () => {
             {/* Live Rush / Open Pill */}
             <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>Live: <strong>Open</strong> (~10m wait)</span>
+              <span>Live: <strong>Open</strong> (~8m wait)</span>
             </div>
           </div>
 
@@ -96,6 +114,21 @@ export const Navbar: React.FC = () => {
                 </Link>
               );
             })}
+
+            {/* If logged in, show their role dashboard button in top nav */}
+            {isAuthenticated && user && (
+              <Link
+                to={getDashboardPath()}
+                className={`px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition ${
+                  location.pathname.includes('dashboard')
+                    ? 'bg-brand-500 text-white shadow-sm'
+                    : 'bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-400 hover:bg-brand-100'
+                }`}
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                <span>{getDashboardLabel()}</span>
+              </Link>
+            )}
           </nav>
 
           {/* Right Action Icons & Controls */}
@@ -176,6 +209,14 @@ export const Navbar: React.FC = () => {
 
                     <div className="py-1">
                       <Link
+                        to={getDashboardPath()}
+                        onClick={() => setProfileDropdownOpen(false)}
+                        className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/40 rounded-xl transition font-bold"
+                      >
+                        <LayoutDashboard className="w-4 h-4" />
+                        Go to {getDashboardLabel()}
+                      </Link>
+                      <Link
                         to="/menu"
                         onClick={() => setProfileDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-hover rounded-xl transition"
@@ -184,12 +225,12 @@ export const Navbar: React.FC = () => {
                         Explore Canteen Menu
                       </Link>
                       <Link
-                        to="/cart"
+                        to="/portals"
                         onClick={() => setProfileDropdownOpen(false)}
                         className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-dark-hover rounded-xl transition"
                       >
-                        <ShoppingBag className="w-4 h-4 text-brand-500" />
-                        My Cart ({cartCount})
+                        <Layers className="w-4 h-4 text-gray-400" />
+                        Switch Role Portal
                       </Link>
                     </div>
 
@@ -208,17 +249,17 @@ export const Navbar: React.FC = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Link
-                  to="/login"
+                  to="/portals"
                   className="px-3.5 py-2 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-brand-600 dark:hover:text-brand-400 transition"
                 >
-                  Login
+                  Portals
                 </Link>
                 <Link
-                  to="/menu"
+                  to="/student/login"
                   className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-amber-500 hover:from-brand-500 hover:to-amber-400 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-glow transition-all duration-200"
                 >
                   <Flame className="w-4 h-4" />
-                  Order Now
+                  Sign In
                 </Link>
               </div>
             )}
@@ -243,7 +284,7 @@ export const Navbar: React.FC = () => {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               Kitchen Live: Active & Taking Orders
             </span>
-            <span className="text-[11px] font-bold">~10 min wait</span>
+            <span className="text-[11px] font-bold">~8 min wait</span>
           </div>
 
           <nav className="flex flex-col space-y-1">
@@ -261,6 +302,17 @@ export const Navbar: React.FC = () => {
                 {link.name}
               </Link>
             ))}
+
+            {isAuthenticated && user && (
+              <Link
+                to={getDashboardPath()}
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-4 py-2.5 rounded-xl text-sm font-bold bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-400"
+              >
+                {getDashboardLabel()}
+              </Link>
+            )}
+
             <Link
               to="/menu"
               onClick={() => setMobileMenuOpen(false)}

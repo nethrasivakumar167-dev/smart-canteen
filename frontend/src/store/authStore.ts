@@ -1,65 +1,49 @@
 import { create } from 'zustand';
+import axios from 'axios';
 import { User, Role } from '../types';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+// Configure Axios defaults
+axios.defaults.baseURL = API_BASE_URL;
+
+interface AuthResponse {
+  success: boolean;
+  message?: string;
+  user?: User;
+  token?: string;
+  error?: string;
+}
+
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword?: string;
+  studentId?: string;
+  phone?: string;
+}
 
 interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  login: (user: User, token: string) => void;
-  demoLogin: (role: Role) => void;
-  logout: () => void;
+  isLoading: boolean;
+  isCheckingAuth: boolean;
+  error: string | null;
+
+  // Actions
+  login: (identifier: string, password: string, targetPortal?: 'STUDENT' | 'STAFF' | 'ADMIN') => Promise<{ success: boolean; error?: string; user?: User }>;
+  register: (data: RegisterData) => Promise<{ success: boolean; error?: string; user?: User }>;
+  logout: () => Promise<void>;
+  checkAuth: () => Promise<void>;
+  clearError: () => void;
   updateUser: (data: Partial<User>) => void;
 }
 
-export const DEMO_USERS: Record<Role, User> = {
-  STUDENT: {
-    id: 'usr-student-1',
-    name: 'Nethra Sundaram',
-    email: 'student@demo.com',
-    phone: '+91 98401 23456',
-    role: 'STUDENT',
-    institutionId: 'CS-2024-8841',
-    isActive: true,
-    points: 340,
-  },
-  FACULTY: {
-    id: 'usr-faculty-1',
-    name: 'Dr. S. Ramanathan',
-    email: 'faculty@demo.com',
-    phone: '+91 94440 87654',
-    role: 'FACULTY',
-    institutionId: 'FAC-EE-104',
-    isActive: true,
-    points: 820,
-  },
-  STAFF: {
-    id: 'usr-staff-1',
-    name: 'Murugan (Kitchen Lead)',
-    email: 'staff@demo.com',
-    phone: '+91 98844 55667',
-    role: 'STAFF',
-    institutionId: 'STF-KIT-01',
-    isActive: true,
-  },
-  ADMIN: {
-    id: 'usr-admin-1',
-    name: 'Ananya Sharma (General Mgr)',
-    email: 'admin@demo.com',
-    phone: '+91 97909 11223',
-    role: 'ADMIN',
-    institutionId: 'ADM-GEN-01',
-    isActive: true,
-  },
-  VISITOR: {
-    id: 'usr-visitor-1',
-    name: 'Campus Guest',
-    email: 'visitor@guest.com',
-    phone: '+91 91234 56789',
-    role: 'VISITOR',
-    institutionId: 'GUEST-V-99',
-    isActive: true,
-    points: 0,
-  },
+const getInitialToken = (): string | null => {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem('sc_token');
 };
 
 const getInitialUser = (): User | null => {
@@ -72,34 +56,146 @@ const getInitialUser = (): User | null => {
   }
 };
 
-const getInitialToken = (): string | null => {
-  if (typeof window === 'undefined') return null;
-  return localStorage.getItem('sc_token');
-};
+// Configure initial axios authorization header
+const initialToken = getInitialToken();
+if (initialToken) {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${initialToken}`;
+}
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   user: getInitialUser(),
   token: getInitialToken(),
-  isAuthenticated: !!getInitialUser(),
+  isAuthenticated: !!getInitialToken() && !!getInitialUser(),
+  isLoading: false,
+  isCheckingAuth: true,
+  error: null,
 
-  login: (user, token) => {
-    localStorage.setItem('sc_user', JSON.stringify(user));
-    localStorage.setItem('sc_token', token);
-    set({ user, token, isAuthenticated: true });
+  clearError: () => set({ error: null }),
+
+  login: async (identifier, password, targetPortal) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.post<AuthResponse>('/auth/login', {
+        identifier,
+        password,
+        portal: targetPortal,
+      });
+
+      if (response.data.success && response.data.user && response.data.token) {
+        const { user, token } = response.data;
+        localStorage.setItem('sc_token', token);
+        localStorage.setItem('sc_user', JSON.stringify(user));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        set({
+          user,
+          token,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+
+        return { success: true, user };
+      } else {
+        const errMsg = response.data.error || 'Authentication failed. Please check credentials.';
+        set({ isLoading: false, error: errMsg });
+        return { success: false, error: errMsg };
+      }
+    } catch (err: any) {
+      const errMsg =
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        'Unable to connect to authentication server. Please try again.';
+      set({ isLoading: false, error: errMsg });
+      return { success: false, error: errMsg };
+    }
   },
 
-  demoLogin: (role) => {
-    const demoUser = DEMO_USERS[role];
-    const demoToken = `mock-jwt-token-for-${role.toLowerCase()}-${Date.now()}`;
-    localStorage.setItem('sc_user', JSON.stringify(demoUser));
-    localStorage.setItem('sc_token', demoToken);
-    set({ user: demoUser, token: demoToken, isAuthenticated: true });
+  register: async (data) => {
+    set({ isLoading: true, error: null });
+    try {
+      const response = await axios.post<AuthResponse>('/auth/register', data);
+
+      if (response.data.success && response.data.user && response.data.token) {
+        const { user, token } = response.data;
+        localStorage.setItem('sc_token', token);
+        localStorage.setItem('sc_user', JSON.stringify(user));
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        set({
+          user,
+          token,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+
+        return { success: true, user };
+      } else {
+        const errMsg = response.data.error || 'Registration failed.';
+        set({ isLoading: false, error: errMsg });
+        return { success: false, error: errMsg };
+      }
+    } catch (err: any) {
+      const errMsg =
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        'Registration failed. Please check your information.';
+      set({ isLoading: false, error: errMsg });
+      return { success: false, error: errMsg };
+    }
   },
 
-  logout: () => {
-    localStorage.removeItem('sc_user');
-    localStorage.removeItem('sc_token');
-    set({ user: null, token: null, isAuthenticated: false });
+  checkAuth: async () => {
+    const token = localStorage.getItem('sc_token');
+    if (!token) {
+      set({ user: null, token: null, isAuthenticated: false, isCheckingAuth: false });
+      return;
+    }
+
+    try {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const response = await axios.get<AuthResponse>('/auth/me');
+
+      if (response.data.success && response.data.user) {
+        localStorage.setItem('sc_user', JSON.stringify(response.data.user));
+        set({
+          user: response.data.user,
+          token,
+          isAuthenticated: true,
+          isCheckingAuth: false,
+        });
+      } else {
+        localStorage.removeItem('sc_token');
+        localStorage.removeItem('sc_user');
+        delete axios.defaults.headers.common['Authorization'];
+        set({ user: null, token: null, isAuthenticated: false, isCheckingAuth: false });
+      }
+    } catch {
+      localStorage.removeItem('sc_token');
+      localStorage.removeItem('sc_user');
+      delete axios.defaults.headers.common['Authorization'];
+      set({ user: null, token: null, isAuthenticated: false, isCheckingAuth: false });
+    }
+  },
+
+  logout: async () => {
+    try {
+      await axios.post('/auth/logout');
+    } catch {
+      // Ignore network errors during logout
+    } finally {
+      localStorage.removeItem('sc_token');
+      localStorage.removeItem('sc_user');
+      delete axios.defaults.headers.common['Authorization'];
+      set({
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: null,
+      });
+    }
   },
 
   updateUser: (data) =>
