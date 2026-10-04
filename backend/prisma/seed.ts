@@ -4,6 +4,12 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
+  // Prevent seeding in production
+  if (process.env.NODE_ENV === 'production') {
+    console.error('❌ Seeding is not allowed in production environment.');
+    process.exit(1);
+  }
+
   console.log('🌱 Seeding Smart Canteen Database...');
 
   // 1. Clear existing records in reverse dependency order

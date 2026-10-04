@@ -96,9 +96,12 @@ export async function createNewUser(data: {
   phone?: string;
   role?: Role;
   institutionId?: string;
+  studentId?: string;
 }): Promise<SafeUser> {
   const role: Role = data.role || 'STUDENT';
   const cleanEmail = data.email.trim().toLowerCase();
+  // studentId maps to institutionId in the database
+  const institutionId = data.studentId?.trim() || data.institutionId?.trim() || null;
 
   const created = await prisma.user.create({
     data: {
@@ -107,7 +110,7 @@ export async function createNewUser(data: {
       passwordHash: data.passwordHash,
       phone: data.phone?.trim() || null,
       role: role as any,
-      institutionId: data.institutionId?.trim() || null,
+      institutionId,
       isActive: true,
       loyaltyAccount: {
         create: {

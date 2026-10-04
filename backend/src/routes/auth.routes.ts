@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { Prisma } from '@prisma/client';
 import {
   findUserByEmailOrId,
   createNewUser,
@@ -42,18 +43,19 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // 2. Email format validation
+    // 2. Email format validation, lowercase and trim
+    const normalizedEmail = email.trim().toLowerCase();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.trim())) {
+    if (!emailRegex.test(normalizedEmail)) {
       res.status(400).json({ success: false, error: 'Please enter a valid campus email address.' });
       return;
     }
 
-    // 3. Password validation & confirmation
-    if (password.length < 6) {
+    // 3. Password validation & confirmation (min 8, max 72 for bcrypt)
+    if (password.length < 8 || password.length > 72) {
       res.status(400).json({
         success: false,
-        error: 'Password must be at least 6 characters long.',
+        error: 'Password must be between 8 and 72 characters long.',
       });
       return;
     }
@@ -66,7 +68,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
     }
 
     // 4. Duplicate prevention
-    const existingEmail = await findUserByEmailOrId(email.trim());
+    const existingEmail = await findUserByEmailOrId(normalizedEmail);
     if (existingEmail) {
       res.status(409).json({
         success: false,
@@ -93,7 +95,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
     // 6. Create student user (clean empty profile)
     const user = await createNewUser({
       name: name.trim(),
-      email: email.trim(),
+      email: normalizedEmail,
       passwordHash,
       phone: phone?.trim() || undefined,
       studentId: studentId?.trim() || undefined,
@@ -110,6 +112,15 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
       token,
     });
   } catch (err: any) {
+    // Handle Prisma unique constraint violation (P2002)
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === 'P2002') {
+      res.status(409).json({
+        success: false,
+        error: 'An account with this email address already exists. Please sign in.',
+      });
+      return;
+    }
+    console.error('Registration error:', err);
     res.status(500).json({
       success: false,
       error: 'An error occurred during registration. Please try again.',
@@ -126,7 +137,7 @@ async function processLogin(
   targetPortal?: 'STUDENT' | 'STAFF' | 'ADMIN'
 ): Promise<void> {
   const { identifier, email, password, portal } = req.body;
-  const loginId = (identifier || email || '').trim();
+  const loginId = (identifier || email || '').trim().toLowerCase();
   const activePortal = targetPortal || portal;
 
   if (!loginId || !password) {
@@ -140,9 +151,10 @@ async function processLogin(
   // 1. Locate user in DB
   const user = await findUserByEmailOrId(loginId);
   if (!user) {
+    // Generic message for unknown user
     res.status(401).json({
       success: false,
-      error: 'Invalid credentials. Account not found.',
+      error: 'Invalid email/ID or password.',
     });
     return;
   }
@@ -159,6 +171,7 @@ async function processLogin(
   // 3. Verify password
   const isMatch = await bcrypt.compare(password, user.passwordHash);
   if (!isMatch) {
+    // Generic message for wrong password (same as unknown user)
     res.status(401).json({
       success: false,
       error: 'Invalid email/ID or password.',

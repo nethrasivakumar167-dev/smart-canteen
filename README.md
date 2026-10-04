@@ -73,26 +73,51 @@ Smart Canteen is engineered as a production-grade multi-role SaaS platform speci
 ## 🏃 Quick Start (Local Development)
 
 ### 1. Prerequisites
-- Node.js (v18+)
-- npm (v9+)
-- PostgreSQL (or Docker)
+- Node.js (v20+)
+- npm (v10+)
+- PostgreSQL (v15+) or Docker
 
-### 2. Frontend Setup
+### 2. Using Docker Compose (Recommended)
+```bash
+# Copy environment template and fill in secrets
+cp .env.example .env
+# Edit .env with secure values (generate with: openssl rand -hex 32)
+
+# Start all services
+docker compose up -d
+
+# Run database migrations and seed
+docker compose exec backend npx prisma migrate deploy
+docker compose exec backend npx prisma db seed
+```
+
+Services will be available at:
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:5000`
+- Health Check: `http://localhost:5000/api/health`
+
+### 3. Manual Setup (Without Docker)
+
+#### Backend
+```bash
+cd backend
+cp .env.example .env
+# Edit .env with your DATABASE_URL, JWT_SECRET, QR_SECRET (min 32 chars, no placeholders)
+npm install
+npx prisma generate
+npx prisma migrate dev
+npx prisma db seed
+npm run dev
+```
+Runs at: `http://localhost:5000`
+
+#### Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 Runs at: `http://localhost:5173`
-
-### 3. Backend Setup
-```bash
-cd backend
-npm install
-npx prisma generate
-npm run dev
-```
-Runs at: `http://localhost:5000`
 
 ---
 
@@ -109,6 +134,7 @@ App/
 │   │   ├── services/     # Axios API service instances
 │   │   ├── types/        # TypeScript models and DTO interfaces
 │   │   └── utils/        # Price helpers, time formatters
+│   ├── nginx.conf        # Nginx config for production (SPA fallback)
 │   ├── index.html
 │   └── package.json
 ├── backend/              # Node.js + Express + TypeScript + Prisma
@@ -116,22 +142,27 @@ App/
 │   │   ├── schema.prisma # PostgreSQL relational data model
 │   │   └── seed.ts       # Database seeder with Indian canteen menu
 │   ├── src/
-│   │   ├── controllers/  # Route handlers
+│   │   ├── config/       # Environment validation (Zod)
 │   │   ├── middleware/   # JWT auth, RBAC, error handlers
 │   │   ├── routes/       # Express route definitions
 │   │   ├── services/     # Business logic & AI adapters
-│   │   └── server.ts     # Express application bootstrap
+│   │   ├── tests/        # Vitest + Supertest integration tests
+│   │   ├── app.ts        # Express app factory
+│   │   ├── server.ts     # HTTP server + Socket.IO bootstrap
+│   │   └── socket.ts     # Socket.IO initialization
 │   └── package.json
-├── docker-compose.yml    # Containerized environment
-├── .env.example
+├── docker-compose.yml    # Containerized environment (uses root .env)
+├── .env.example          # Root environment template
+├── backend/.env.example  # Backend environment template
 └── README.md
 ```
 
 ---
 
 ## 🛣️ Development Roadmap
+
 - [x] **Phase 1**: Architecture, monorepo foundation, Prisma models, core UI design system & routes (`/`, `/menu`, `/menu/:id`, `/cart`, `/login`, `/register`).
-- [ ] **Phase 2**: Real JWT Authentication, PostgreSQL seed data & Prisma migration, Protected routes.
+- [x] **Phase 2**: Real JWT Authentication, PostgreSQL seed data & Prisma migration, Protected routes, Rate limiting, Docker foundation.
 - [ ] **Phase 3**: End-to-end Preorder engine, Checkout, dynamic wait time estimation, QR generation.
 - [ ] **Phase 4**: Staff Kitchen Display System (KDS) & Live Queue tracking.
 - [ ] **Phase 5**: Inventory management, automatic recipe stock depletion, waste tracking.
