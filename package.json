@@ -1,0 +1,18 @@
+{
+  "name": "smart-canteen-platform",
+  "version": "1.0.0",
+  "description": "Smart Canteen — Modern Campus Food Preordering and Management Platform",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "prisma:generate": "npm run prisma:generate --prefix backend",
+    "prisma:migrate": "npm run prisma:migrate --prefix backend",
+    "prisma:seed": "npm run prisma:seed --prefix backend"
+  },
+  "keywords": ["smart-canteen", "preorder", "queue-management", "campus-dining", "react", "express"],
+  "author": "Smart Canteen Architecture Team",
+  "license": "MIT"
+}
