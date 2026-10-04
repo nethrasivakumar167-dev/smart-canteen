@@ -28,7 +28,6 @@ services:
       NODE_ENV: production
       DATABASE_URL: "postgresql://postgres:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@postgres:5432/smart_canteen?schema=public"
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
-      QR_SECRET: ${QR_SECRET:?QR_SECRET is required}
       CLIENT_URL: "http://localhost:5173"
     ports:
       - "5000:5000"

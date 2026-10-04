@@ -40,7 +40,6 @@ export const envSchema = z.object({
     .min(1, 'DATABASE_URL cannot be empty'),
   JWT_SECRET: createSecretSchema('JWT_SECRET'),
   JWT_EXPIRES_IN: z.string().default('7d'),
-  QR_SECRET: createSecretSchema('QR_SECRET'),
   AI_PROVIDER: z.enum(['mock', 'gemini']).default('mock'),
   GEMINI_API_KEY: z.string().optional(),
 });
@@ -87,7 +86,6 @@ if (!validation.success) {
       DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/smart_canteen_test?schema=public',
       JWT_SECRET: '0123456789abcdef0123456789abcdef0123456789abcdef',
       JWT_EXPIRES_IN: '7d',
-      QR_SECRET: '0123456789abcdef0123456789abcdef0123456789abcdef',
       AI_PROVIDER: 'mock',
     };
   }
