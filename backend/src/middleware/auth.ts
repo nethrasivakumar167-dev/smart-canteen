@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { findUserById, SafeUser, toSafeUser, Role } from '../services/userService';
+import { env } from '../config/env';
 
 export interface AuthenticatedRequest extends Request {
   user?: SafeUser;
 }
-
-const JWT_SECRET = process.env.JWT_SECRET || 'smart-canteen-dev-jwt-secret-key-998822';
 
 export const authenticateToken = async (
   req: AuthenticatedRequest,
@@ -26,7 +25,7 @@ export const authenticateToken = async (
     }
 
     // Verify JWT
-    const decoded = jwt.verify(token, JWT_SECRET) as {
+    const decoded = jwt.verify(token, env.JWT_SECRET) as {
       userId: string;
       email: string;
       role: Role;

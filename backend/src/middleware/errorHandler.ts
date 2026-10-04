@@ -1,9 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
+import { Prisma } from '@prisma/client';
 
 export interface AppError extends Error {
   statusCode?: number;
   code?: string;
+}
+
+function isPrismaConnectionError(error: unknown): boolean {
+  if (error instanceof Prisma.PrismaClientInitializationError) return true;
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    return ['P1001', 'P1002', 'P1008', 'P1017'].includes(error.code);
+  }
+  return false;
 }
 
 export const errorHandler = (
@@ -24,6 +33,14 @@ export const errorHandler = (
         field: e.path.join('.'),
         message: e.message,
       })),
+    });
+  }
+
+  // Handle Prisma connection errors
+  if (isPrismaConnectionError(err)) {
+    return res.status(503).json({
+      success: false,
+      error: 'Service temporarily unavailable.',
     });
   }
 

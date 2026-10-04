@@ -8,13 +8,13 @@ import {
   Role,
 } from '../services/userService';
 import { authenticateToken, AuthenticatedRequest } from '../middleware/auth';
+import { env } from '../config/env';
 
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'smart-canteen-dev-jwt-secret-key-998822';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
+const JWT_EXPIRES_IN = env.JWT_EXPIRES_IN;
 
 const generateToken = (userId: string, email: string, role: Role): string => {
-  return jwt.sign({ userId, email, role }, JWT_SECRET, {
+  return jwt.sign({ userId, email, role }, env.JWT_SECRET, {
     expiresIn: JWT_EXPIRES_IN as any,
   });
 };
