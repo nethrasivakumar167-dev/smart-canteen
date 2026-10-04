@@ -35,7 +35,6 @@ router.get('/overview-stats', asyncHandler(async (req: AuthenticatedRequest, res
     userMetrics: {
       totalRegisteredUsers: users.length,
       studentsCount: users.filter((u) => u.role === 'STUDENT').length,
-      facultyCount: users.filter((u) => u.role === 'FACULTY').length,
       staffCount: users.filter((u) => u.role === 'STAFF').length,
       adminCount: users.filter((u) => u.role === 'ADMIN').length,
     },
@@ -87,7 +86,7 @@ router.post('/users', asyncHandler(async (req: Request, res: Response): Promise<
     return;
   }
 
-  const validRoles: Role[] = ['STUDENT', 'FACULTY', 'STAFF', 'ADMIN', 'VISITOR'];
+  const validRoles: Role[] = ['STUDENT', 'STAFF', 'ADMIN'];
   if (!validRoles.includes(role)) {
     res.status(400).json({ success: false, error: 'Invalid role specified.' });
     return;
@@ -153,7 +152,7 @@ router.get('/orders', asyncHandler(async (req: Request, res: Response): Promise<
       id: 'ord-1047',
       orderNumber: 'SC-1047',
       customerName: 'Dr. S. Ramanathan',
-      customerRole: 'FACULTY',
+      customerRole: 'STUDENT',
       items: 'South Indian Executive Mini Meals (x1)',
       total: 95,
       paymentMethod: 'CARD',

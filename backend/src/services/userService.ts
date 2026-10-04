@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { prisma } from '../prisma';
 import { Prisma } from '@prisma/client';
 
-export type Role = 'STUDENT' | 'FACULTY' | 'VISITOR' | 'STAFF' | 'ADMIN';
+export type Role = 'STUDENT' | 'STAFF' | 'ADMIN';
 
 export interface SafeUser {
   id: string;
@@ -12,7 +12,7 @@ export interface SafeUser {
   role: Role;
   institutionId?: string | null;
   isActive: boolean;
-  points?: number;
+  isDemo: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -30,7 +30,7 @@ export function toSafeUser(user: StoredUser | any): SafeUser {
     role: user.role as Role,
     institutionId: user.institutionId || null,
     isActive: user.isActive !== undefined ? user.isActive : true,
-    points: user.points !== undefined ? user.points : (user.loyaltyAccount?.pointsBalance || 0),
+    isDemo: user.isDemo !== undefined ? user.isDemo : false,
     createdAt: user.createdAt || new Date(),
     updatedAt: user.updatedAt || new Date(),
   };
@@ -46,7 +46,6 @@ export async function findUserByEmailOrId(identifier: string): Promise<StoredUse
         { institutionId: { equals: identifier.trim(), mode: 'insensitive' } },
       ],
     },
-    include: { loyaltyAccount: true },
   });
 
   if (!user) return null;
@@ -60,7 +59,7 @@ export async function findUserByEmailOrId(identifier: string): Promise<StoredUse
     role: user.role as Role,
     institutionId: user.institutionId,
     isActive: user.isActive,
-    points: user.loyaltyAccount?.pointsBalance || 0,
+    isDemo: user.isDemo,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
@@ -69,7 +68,6 @@ export async function findUserByEmailOrId(identifier: string): Promise<StoredUse
 export async function findUserById(id: string): Promise<StoredUser | null> {
   const user = await prisma.user.findUnique({
     where: { id },
-    include: { loyaltyAccount: true },
   });
 
   if (!user) return null;
@@ -83,7 +81,7 @@ export async function findUserById(id: string): Promise<StoredUser | null> {
     role: user.role as Role,
     institutionId: user.institutionId,
     isActive: user.isActive,
-    points: user.loyaltyAccount?.pointsBalance || 0,
+    isDemo: user.isDemo,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };
@@ -112,15 +110,8 @@ export async function createNewUser(data: {
       role: role as any,
       institutionId,
       isActive: true,
-      loyaltyAccount: {
-        create: {
-          pointsBalance: 50,
-          lifetimePoints: 50,
-          tier: 'Silver',
-        },
-      },
+      isDemo: false,
     },
-    include: { loyaltyAccount: true },
   });
 
   return toSafeUser(created);
@@ -128,7 +119,6 @@ export async function createNewUser(data: {
 
 export async function getAllUsersList(): Promise<SafeUser[]> {
   const users = await prisma.user.findMany({
-    include: { loyaltyAccount: true },
     orderBy: { createdAt: 'desc' },
   });
   return users.map(toSafeUser);

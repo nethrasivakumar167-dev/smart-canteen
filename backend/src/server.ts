@@ -31,6 +31,15 @@ process.on('uncaughtException', (err: Error) => {
 
 // Start server (skip in test environment)
 if (env.NODE_ENV !== 'test') {
+  httpServer.on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`❌ Port ${PORT} is already in use. Please stop the existing process or use a different PORT.`);
+    } else {
+      console.error('❌ Server listen error:', err);
+    }
+    process.exit(1);
+  });
+
   httpServer.listen(PORT, () => {
     console.log(`🚀 Smart Canteen Server running on http://localhost:${PORT}`);
     console.log(`📡 Health Check: http://localhost:${PORT}/api/health`);

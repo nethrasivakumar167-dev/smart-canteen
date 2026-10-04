@@ -6,12 +6,12 @@ const router = Router();
 
 // Protect all student routes
 router.use(authenticateToken);
-router.use(requireRole('STUDENT', 'FACULTY', 'VISITOR', 'ADMIN'));
+router.use(requireRole('STUDENT', 'ADMIN'));
 
 /**
  * @route   GET /api/student/dashboard-summary
  * @desc    Get student personalized dashboard data
- * @access  Private (Student, Faculty, Visitor, Admin)
+ * @access  Private (Student, Admin)
  */
 router.get('/dashboard-summary', asyncHandler(async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   const user = req.user!;
@@ -24,12 +24,10 @@ router.get('/dashboard-summary', asyncHandler(async (req: AuthenticatedRequest, 
       email: user.email,
       studentId: user.institutionId || 'CS-2024-8841',
       role: user.role,
-      points: user.points || 0,
     },
     stats: {
       activeOrdersCount: 1,
       totalOrdersCount: 14,
-      loyaltyPoints: user.points || 340,
       savedFavoritesCount: 4,
     },
     activeOrder: {
@@ -43,7 +41,6 @@ router.get('/dashboard-summary', asyncHandler(async (req: AuthenticatedRequest, 
         { name: 'Kumbakonam Degree Filter Coffee', quantity: 1, price: 30 },
       ],
       total: 105,
-      qrToken: 'sc-token-live-qr-892',
     },
     recentOrders: [
       {
