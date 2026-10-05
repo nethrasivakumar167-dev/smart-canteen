@@ -55,13 +55,13 @@ export const SmartFeaturesSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-200 dark:border-amber-800">
+          <span className="text-xs font-extrabold uppercase tracking-[0.15em] text-rust bg-sand px-3 py-1 rounded-full border border-line">
             Enterprise Grade Architecture
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-navy tracking-[0.15em] uppercase">
             Built for Modern High-Traffic Campuses
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-base text-espresso">
             A cohesive platform connecting students, faculty, kitchen chefs, inventory managers, and administrators.
           </p>
         </div>
@@ -73,28 +73,28 @@ export const SmartFeaturesSection: React.FC = () => {
             return (
               <div
                 key={feat.title}
-                className="bg-white dark:bg-dark-surface p-7 rounded-3xl border border-gray-200/80 dark:border-dark-border shadow-sm hover:shadow-xl hover:border-brand-500/40 transition-all duration-300 flex flex-col justify-between group"
+                className="bg-cream p-7 rounded-3xl border border-line shadow-sm hover:border-skyblue transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-full bg-skyblue text-navy flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider bg-gray-100 dark:bg-dark-card px-2.5 py-1 rounded-lg">
+                    <span className="text-[11px] font-bold text-espresso uppercase tracking-wider bg-sand px-2.5 py-1 rounded-full">
                       {feat.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition">
+                  <h3 className="text-lg font-semibold text-navy mb-2 group-hover:text-rust transition">
                     {feat.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-espresso leading-relaxed">
                     {feat.description}
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-rust">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Production Ready</span>
                 </div>

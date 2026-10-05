@@ -8,7 +8,6 @@ import {
   Coffee,
   IceCream,
   Salad,
-  Sparkles,
 } from 'lucide-react';
 
 interface CategoryFilterBarProps {
@@ -42,21 +41,21 @@ export const CategoryFilterBar: React.FC<CategoryFilterBarProps> = ({
   };
 
   return (
-    <div className="w-full overflow-x-auto pb-2 scrollbar-none">
-      <div className="flex items-center gap-2.5 min-w-max">
+    <div className="w-full overflow-x-auto pb-2 scrollbar-none -mx-4 px-4">
+      <div className="flex items-center gap-2 min-w-max">
         {categories.map((cat) => {
           const isSelected = selectedCategoryId === cat.id || (cat.slug === 'all' && selectedCategoryId === 'all');
           return (
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.slug === 'all' ? 'all' : cat.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 shadow-sm ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-full border font-bold text-xs sm:text-sm transition-all duration-200 shadow-sm ${
                 isSelected
-                  ? 'bg-brand-500 text-white shadow-glow scale-[1.02]'
-                  : 'bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-hover hover:text-gray-900 dark:hover:text-white'
+                  ? 'bg-navy border-navy text-cream'
+                  : 'bg-sand border-line text-navy hover:bg-skysoft'
               }`}
             >
-              <span className={isSelected ? 'text-white' : 'text-brand-500'}>
+              <span className={isSelected ? 'text-cream' : 'text-navy'}>
                 {getCategoryIcon(cat.slug)}
               </span>
               <span>{cat.name}</span>
@@ -64,8 +63,8 @@ export const CategoryFilterBar: React.FC<CategoryFilterBarProps> = ({
                 <span
                   className={`text-[10px] px-1.5 py-0.5 rounded-full font-extrabold ${
                     isSelected
-                      ? 'bg-white/20 text-white'
-                      : 'bg-gray-100 dark:bg-dark-card text-gray-500 dark:text-gray-400'
+                      ? 'bg-cream/20 text-cream'
+                  : 'bg-cream text-navy'
                   }`}
                 >
                   {cat.itemCount}
