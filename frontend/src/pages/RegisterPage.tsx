@@ -80,13 +80,13 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-beige">
       <div className="max-w-lg w-full space-y-6">
         
         {/* Back Link */}
         <Link
           to="/student/login"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-brand-600 transition"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso hover:text-navy transition"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Student Login</span>
@@ -94,45 +94,45 @@ export const RegisterPage: React.FC = () => {
 
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-amber-500 text-white flex items-center justify-center mx-auto shadow-glow">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-navy to-slate text-cream flex items-center justify-center mx-auto shadow-glow">
             <GraduationCap className="w-7 h-7" />
           </div>
-          <div className="inline-block px-3 py-0.5 rounded-full bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 text-xs font-extrabold uppercase tracking-wider">
+          <div className="inline-block px-3 py-0.5 rounded-full bg-navy/10 text-navy text-xs font-extrabold uppercase tracking-wider">
             New Student Onboarding
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-navy tracking-tight">
             Create Student Account
           </h1>
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-xs sm:text-sm text-espresso">
             Sign up to preorder hot food, skip queue lines & earn campus loyalty perks
           </p>
         </div>
 
         {/* Error Alert */}
         {(localError || error) && (
-          <div className="p-3.5 rounded-2xl bg-red-500/10 border border-red-500/20 text-xs text-red-700 dark:text-red-300 flex items-center gap-2.5 animate-in fade-in">
-            <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+          <div className="p-3.5 rounded-2xl bg-rust/10 border border-rust/20 text-xs text-rust flex items-center gap-2.5 animate-in fade-in">
+            <AlertCircle className="w-4 h-4 text-rust shrink-0" />
             <span>{localError || error}</span>
           </div>
         )}
 
         {/* Form Card */}
-        <form onSubmit={handleRegister} className="space-y-4 bg-white dark:bg-dark-surface p-6 sm:p-8 rounded-3xl border border-gray-200/80 dark:border-dark-border shadow-md">
+        <form onSubmit={handleRegister} className="space-y-4 bg-sand p-6 sm:p-8 rounded-3xl border border-line shadow-md">
           
           {/* Full Name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+            <label className="text-xs font-bold text-espresso">
               Full Name *
             </label>
             <div className="relative">
-              <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+              <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Nethra Sundaram"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
               />
             </div>
           </div>
@@ -140,24 +140,24 @@ export const RegisterPage: React.FC = () => {
           {/* Email & Student ID Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+              <label className="text-xs font-bold text-espresso">
                 Campus Email *
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="rollno@campus.edu"
-                  className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                  className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+              <label className="text-xs font-bold text-espresso">
                 Student ID / Roll No
               </label>
               <input
@@ -165,24 +165,24 @@ export const RegisterPage: React.FC = () => {
                 value={studentId}
                 onChange={(e) => setStudentId(e.target.value)}
                 placeholder="e.g. CS-2026-8841"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
               />
             </div>
           </div>
 
           {/* Phone Number */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+            <label className="text-xs font-bold text-espresso">
               Mobile Phone Number
             </label>
             <div className="relative">
-              <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98401 23456"
-                className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                className="w-full pl-10 pr-3 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
               />
             </div>
           </div>
@@ -190,23 +190,23 @@ export const RegisterPage: React.FC = () => {
           {/* Password & Confirm Password Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+              <label className="text-xs font-bold text-espresso">
                 Password *
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Min 6 characters"
-                  className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                  className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-espresso hover:text-navy"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -214,18 +214,18 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-gray-700 dark:text-gray-300">
+              <label className="text-xs font-bold text-espresso">
                 Confirm Password *
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm password"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/50"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
                 />
               </div>
             </div>
@@ -235,11 +235,11 @@ export const RegisterPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-amber-500 hover:from-brand-500 hover:to-amber-400 text-white font-bold text-sm shadow-md hover:shadow-glow transition transform active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-navy to-slate hover:from-slate hover:to-navy text-cream font-bold text-sm shadow-md hover:shadow-glow transition transform active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-cream border-t-transparent rounded-full animate-spin" />
                   Creating Student Account...
                 </span>
               ) : (
@@ -250,9 +250,9 @@ export const RegisterPage: React.FC = () => {
         </form>
 
         {/* Link to Login */}
-        <p className="text-center text-xs text-gray-500 dark:text-gray-400">
+        <p className="text-center text-xs text-espresso">
           Already have an account?{' '}
-          <Link to="/student/login" className="font-bold text-brand-600 dark:text-brand-400 hover:underline">
+          <Link to="/student/login" className="font-bold text-navy hover:underline">
             Sign in here
           </Link>
         </p>

@@ -133,22 +133,22 @@ export const AdminDashboardPage: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
       
       {/* Admin Executive Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
+      <div className="rounded-3xl bg-gradient-to-r from-slateblue via-slate to-indigo-950 p-6 sm:p-8 text-cream shadow-xl relative overflow-hidden">
+        <div className="absolute right-0 top-0 w-64 h-64 bg-cream/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
         
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slateblue/20 backdrop-blur-md text-slateblue text-xs font-bold uppercase tracking-wider">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Campus Dining Administration • Executive Level</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Administrator {user?.name || 'Officer'}
             </h1>
-            <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
+            <p className="text-dusty text-xs sm:text-sm max-w-xl">
               Canteen financial oversight, user credential provisioning, and real-time operational analytics.
             </p>
           </div>
@@ -156,7 +156,7 @@ export const AdminDashboardPage: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowProvisionModal(true)}
-              className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition flex items-center gap-2 shadow-md"
+              className="px-4 py-2.5 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold text-xs transition flex items-center gap-2 shadow-md"
             >
               <UserPlus className="w-3.5 h-3.5" />
               <span>Provision User</span>
@@ -164,14 +164,14 @@ export const AdminDashboardPage: React.FC = () => {
             <button
               onClick={loadAdminData}
               disabled={loading}
-              className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition flex items-center justify-center backdrop-blur-md"
+              className="p-2.5 rounded-xl bg-cream/10 hover:bg-cream/20 text-cream transition flex items-center justify-center backdrop-blur-md"
               title="Refresh Analytics"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             </button>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-xl bg-black/30 hover:bg-black/50 text-white transition flex items-center justify-center"
+              className="p-2.5 rounded-xl bg-black/30 hover:bg-black/50 text-cream transition flex items-center justify-center"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -182,63 +182,63 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* 4 Financial & Operational KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <div className="p-5 rounded-2xl bg-white dark:bg-dark-surface border border-gray-200/80 dark:border-dark-border shadow-sm flex items-center gap-4">
+        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900 dark:text-white">
+            <div className="text-2xl font-black text-slateblue">
               ₹{statsData?.financials?.todayRevenue?.toLocaleString() ?? '28,450'}
             </div>
-            <div className="text-xs text-gray-500 font-medium">Today's Revenue</div>
+            <div className="text-xs text-dusty font-medium">Today's Revenue</div>
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-dark-surface border border-gray-200/80 dark:border-dark-border shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center font-bold">
+        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-slateblue/10 text-slateblue flex items-center justify-center font-bold">
             <ShoppingBag className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900 dark:text-white">
+            <div className="text-2xl font-black text-slateblue">
               {statsData?.operations?.totalOrdersToday ?? '322'}
             </div>
-            <div className="text-xs text-gray-500 font-medium">Orders Processed</div>
+            <div className="text-xs text-dusty font-medium">Orders Processed</div>
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-dark-surface border border-gray-200/80 dark:border-dark-border shadow-sm flex items-center gap-4">
+        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
             <Users className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900 dark:text-white">
+            <div className="text-2xl font-black text-slateblue">
               {usersList.length || statsData?.userMetrics?.totalRegisteredUsers || 4}
             </div>
-            <div className="text-xs text-gray-500 font-medium">Registered Accounts</div>
+            <div className="text-xs text-dusty font-medium">Registered Accounts</div>
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-dark-surface border border-gray-200/80 dark:border-dark-border shadow-sm flex items-center gap-4">
+        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
             <Clock className="w-6 h-6" />
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900 dark:text-white">
+            <div className="text-2xl font-black text-slateblue">
               {statsData?.operations?.averagePreparationMinutes ?? '7.4'}m
             </div>
-            <div className="text-xs text-gray-500 font-medium">Avg Kitchen Prep Time</div>
+            <div className="text-xs text-dusty font-medium">Avg Kitchen Prep Time</div>
           </div>
         </div>
       </div>
 
       {/* Tabs Bar */}
-      <div className="flex items-center gap-2 border-b border-gray-200 dark:border-dark-border pb-4">
+      <div className="flex items-center gap-2 border-b border-line pb-4">
         <button
           onClick={() => setActiveTab('overview')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'overview'
-              ? 'bg-indigo-600 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-dark-card text-gray-700 dark:text-gray-300 hover:bg-gray-200'
+              ? 'bg-slateblue text-cream shadow-md'
+              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
           }`}
         >
           Overview & Demand Analytics
@@ -247,8 +247,8 @@ export const AdminDashboardPage: React.FC = () => {
           onClick={() => setActiveTab('users')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'users'
-              ? 'bg-indigo-600 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-dark-card text-gray-700 dark:text-gray-300 hover:bg-gray-200'
+              ? 'bg-slateblue text-cream shadow-md'
+              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
           }`}
         >
           User Accounts Directory ({usersList.length})
@@ -257,8 +257,8 @@ export const AdminDashboardPage: React.FC = () => {
           onClick={() => setActiveTab('orders')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'orders'
-              ? 'bg-indigo-600 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-dark-card text-gray-700 dark:text-gray-300 hover:bg-gray-200'
+              ? 'bg-slateblue text-cream shadow-md'
+              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
           }`}
         >
           Master Transaction Logs ({ordersList.length})
@@ -270,17 +270,17 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Hourly Demand Breakdown */}
-          <div className="lg:col-span-2 bg-white dark:bg-dark-surface rounded-3xl border border-gray-200/80 dark:border-dark-border p-6 shadow-md space-y-4">
-            <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-3">
+          <div className="lg:col-span-2 bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+            <div className="flex items-center justify-between border-b border-line pb-3">
               <div>
-                <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                <h3 className="text-base font-bold text-slateblue">
                   Peak Dining Rush Demand (Hourly)
                 </h3>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-dusty">
                   Peak order distribution across campus breakfast, lunch & evening snacks.
                 </p>
               </div>
-              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
+              <span className="text-xs font-bold text-slateblue">
                 Peak: 12:30 PM - 1:30 PM
               </span>
             </div>
@@ -303,18 +303,18 @@ export const AdminDashboardPage: React.FC = () => {
 
                 return (
                   <div key={idx} className="flex flex-col items-center gap-2 h-full justify-end group">
-                    <span className="text-[10px] font-bold text-gray-400 group-hover:text-indigo-600 transition">
+                    <span className="text-[10px] font-bold text-dusty group-hover:text-slateblue transition">
                       {item.orders}
                     </span>
                     <div
                       className={`w-full rounded-t-lg transition-all ${
                         isPeak
-                          ? 'bg-gradient-to-t from-indigo-600 to-purple-500'
-                          : 'bg-gray-200 dark:bg-dark-card group-hover:bg-indigo-300'
+                          ? 'bg-gradient-to-t from-slateblue to-slate'
+                          : 'bg-sand/50 dark:bg-slateblue group-hover:bg-slateblue'
                       }`}
                       style={{ height: `${heightPct}%` }}
                     />
-                    <span className="text-[10px] font-semibold text-gray-500">{item.hour}</span>
+                    <span className="text-[10px] font-semibold text-dusty">{item.hour}</span>
                   </div>
                 );
               })}
@@ -322,8 +322,8 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
 
           {/* Top Selling Items */}
-          <div className="bg-white dark:bg-dark-surface rounded-3xl border border-gray-200/80 dark:border-dark-border p-6 shadow-md space-y-4">
-            <h3 className="text-base font-bold text-gray-900 dark:text-white border-b border-gray-100 dark:border-dark-border pb-3">
+          <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+            <h3 className="text-base font-bold text-slateblue border-b border-line pb-3">
               Top Selling Preorders
             </h3>
 
@@ -336,13 +336,13 @@ export const AdminDashboardPage: React.FC = () => {
               ]).map((item: any, idx: number) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-2xl bg-gray-50 dark:bg-dark-card border border-gray-100 dark:border-dark-border flex items-center justify-between"
+                  className="p-3 rounded-2xl bg-cream border border-line flex items-center justify-between"
                 >
                   <div>
-                    <div className="text-xs font-bold text-gray-900 dark:text-white">{item.name}</div>
-                    <div className="text-[11px] text-gray-400">{item.ordersCount} orders placed</div>
+                    <div className="text-xs font-bold text-slateblue">{item.name}</div>
+                    <div className="text-[11px] text-dusty">{item.ordersCount} orders placed</div>
                   </div>
-                  <div className="text-xs font-extrabold text-indigo-600 dark:text-indigo-400">
+                  <div className="text-xs font-extrabold text-slateblue">
                     ₹{item.revenue.toLocaleString()}
                   </div>
                 </div>
@@ -355,16 +355,16 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Tab 2: User Directory */}
       {activeTab === 'users' && (
-        <div className="bg-white dark:bg-dark-surface rounded-3xl border border-gray-200/80 dark:border-dark-border p-6 shadow-md space-y-5">
+        <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-dusty" />
               <input
                 type="text"
                 placeholder="Search name, email, ID..."
                 value={userSearchTerm}
                 onChange={(e) => setUserSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                className="w-full pl-9 pr-4 py-2 rounded-xl bg-cream border border-line text-xs focus:outline-none focus:ring-2 focus:ring-slateblue/50"
               />
             </div>
 
@@ -375,8 +375,8 @@ export const AdminDashboardPage: React.FC = () => {
                   onClick={() => setUserRoleFilter(r)}
                   className={`px-3 py-1.5 rounded-xl font-bold text-[11px] transition ${
                     userRoleFilter === r
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-gray-300 hover:bg-gray-200'
+                      ? 'bg-slateblue text-cream'
+                      : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
                   }`}
                 >
                   {r}
@@ -388,7 +388,7 @@ export const AdminDashboardPage: React.FC = () => {
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-gray-200 dark:border-dark-border text-gray-400 uppercase font-bold text-[10px]">
+              <thead className="border-b border-line text-dusty uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">User</th>
                   <th className="pb-3 px-3">Role</th>
@@ -397,38 +397,38 @@ export const AdminDashboardPage: React.FC = () => {
                   <th className="pb-3 px-3">Joined Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-dark-border font-medium">
+              <tbody className="divide-y divide-line font-medium">
                 {filteredUsers.map((u) => (
-                  <tr key={u.id} className="hover:bg-gray-50/50 dark:hover:bg-dark-hover/50 transition">
+                  <tr key={u.id} className="hover:bg-sand/50 transition">
                     <td className="py-3.5 px-3">
-                      <div className="font-bold text-gray-900 dark:text-white">{u.name}</div>
-                      <div className="text-[11px] text-gray-400">{u.email}</div>
+                      <div className="font-bold text-slateblue">{u.name}</div>
+                      <div className="text-[11px] text-dusty">{u.email}</div>
                     </td>
                     <td className="py-3.5 px-3">
                       <span
                         className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase ${
                           u.role === 'ADMIN'
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-950/70 dark:text-purple-300'
+                            ? 'bg-purple-500/10 text-purple-700'
                             : u.role === 'STAFF'
-                            ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/70 dark:text-emerald-300'
+                            ? 'bg-emerald-500/10 text-emerald-700'
                             : u.role === 'FACULTY'
-                            ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/70 dark:text-amber-300'
-                            : 'bg-brand-50 text-brand-700 dark:bg-brand-950/70 dark:text-brand-300'
+                            ? 'bg-amber-500/10 text-amber-700'
+                            : 'bg-slateblue/10 text-slateblue'
                         }`}
                       >
                         {u.role}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 font-mono text-gray-600 dark:text-gray-300">
+                    <td className="py-3.5 px-3 font-mono text-dusty">
                       {u.institutionId || '—'}
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+                      <span className="inline-flex items-center gap-1 text-emerald-600 font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                         Active
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-gray-400">
+                    <td className="py-3.5 px-3 text-dusty">
                       {new Date(u.createdAt).toLocaleDateString()}
                     </td>
                   </tr>
@@ -441,14 +441,14 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Tab 3: Master Orders Log */}
       {activeTab === 'orders' && (
-        <div className="bg-white dark:bg-dark-surface rounded-3xl border border-gray-200/80 dark:border-dark-border p-6 shadow-md space-y-4">
-          <h3 className="text-base font-bold text-gray-900 dark:text-white border-b border-gray-100 dark:border-dark-border pb-3">
+        <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+          <h3 className="text-base font-bold text-slateblue border-b border-line pb-3">
             Campus Master Preorder Ledger
           </h3>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-gray-200 dark:border-dark-border text-gray-400 uppercase font-bold text-[10px]">
+              <thead className="border-b border-line text-dusty uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">Order #</th>
                   <th className="pb-3 px-3">Customer</th>
@@ -459,33 +459,33 @@ export const AdminDashboardPage: React.FC = () => {
                   <th className="pb-3 px-3">Time</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-dark-border font-medium">
+              <tbody className="divide-y divide-line font-medium">
                 {ordersList.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-gray-50/50 dark:hover:bg-dark-hover/50 transition">
-                    <td className="py-3.5 px-3 font-bold text-indigo-600 dark:text-indigo-400">
+                  <tr key={ord.id} className="hover:bg-cream/50 transition">
+                    <td className="py-3.5 px-3 font-bold text-slateblue">
                       #{ord.orderNumber}
                     </td>
                     <td className="py-3.5 px-3">
-                      <div className="font-bold text-gray-900 dark:text-white">{ord.customerName}</div>
-                      <div className="text-[10px] text-gray-400">{ord.customerRole}</div>
+                      <div className="font-bold text-slateblue">{ord.customerName}</div>
+                      <div className="text-[10px] text-dusty">{ord.customerRole}</div>
                     </td>
-                    <td className="py-3.5 px-3 max-w-xs truncate text-gray-600 dark:text-gray-300">
+                    <td className="py-3.5 px-3 max-w-xs truncate text-dusty">
                       {ord.items}
                     </td>
-                    <td className="py-3.5 px-3 font-bold text-gray-900 dark:text-white">
+                    <td className="py-3.5 px-3 font-bold text-slateblue">
                       ₹{ord.total}
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="px-2 py-0.5 rounded bg-gray-100 dark:bg-dark-card font-mono text-[10px] font-bold">
+                      <span className="px-2 py-0.5 rounded bg-sand/50 font-mono text-[10px] font-bold">
                         {ord.paymentMethod}
                       </span>
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full font-extrabold text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full font-extrabold text-[10px] bg-emerald-500/10 text-emerald-700">
                         {ord.orderStatus}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-gray-400">{ord.time}</td>
+                    <td className="py-3.5 px-3 text-dusty">{ord.time}</td>
                   </tr>
                 ))}
               </tbody>
@@ -496,16 +496,16 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Provisioning Modal */}
       {showProvisionModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-dark-surface rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-gray-200 dark:border-dark-border space-y-5 animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-3">
-              <h3 className="text-lg font-black text-gray-900 dark:text-white flex items-center gap-2">
-                <UserPlus className="w-5 h-5 text-indigo-600" />
+        <div className="fixed inset-0 z-50 bg-slateblue/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-sand rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-line space-y-5 animate-in zoom-in-95">
+            <div className="flex items-center justify-between border-b border-line pb-3">
+              <h3 className="text-lg font-black text-slateblue flex items-center gap-2">
+                <UserPlus className="w-5 h-5 text-slateblue" />
                 <span>Provision User Account</span>
               </h3>
               <button
                 onClick={() => setShowProvisionModal(false)}
-                className="text-gray-400 hover:text-gray-600 text-sm font-bold"
+                className="text-dusty hover:text-slateblue text-sm font-bold"
               >
                 ✕
               </button>
@@ -513,36 +513,36 @@ export const AdminDashboardPage: React.FC = () => {
 
             <form onSubmit={handleProvisionUser} className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="font-bold text-gray-700 dark:text-gray-300">Full Name *</label>
+                <label className="font-bold text-slateblue">Full Name *</label>
                 <input
                   type="text"
                   required
                   value={provisionName}
                   onChange={(e) => setProvisionName(e.target.value)}
                   placeholder="e.g. Ramesh Kumar"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-indigo-500/50 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-gray-700 dark:text-gray-300">Email Address *</label>
+                <label className="font-bold text-slateblue">Email Address *</label>
                 <input
                   type="email"
                   required
                   value={provisionEmail}
                   onChange={(e) => setProvisionEmail(e.target.value)}
                   placeholder="ramesh@canteen.edu"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-indigo-500/50 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="font-bold text-gray-700 dark:text-gray-300">Assigned Role *</label>
+                  <label className="font-bold text-slateblue">Assigned Role *</label>
                   <select
                     value={provisionRole}
                     onChange={(e) => setProvisionRole(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-indigo-500/50 outline-none font-bold"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none font-bold"
                   >
                     <option value="STAFF">STAFF (Kitchen)</option>
                     <option value="ADMIN">ADMIN (Manager)</option>
@@ -552,25 +552,25 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-gray-700 dark:text-gray-300">Staff / ID Code</label>
+                  <label className="font-bold text-slateblue">Staff / ID Code</label>
                   <input
                     type="text"
                     value={provisionId}
                     onChange={(e) => setProvisionId(e.target.value)}
                     placeholder="e.g. STF-KIT-02"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-indigo-500/50 outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-gray-700 dark:text-gray-300">Initial Password *</label>
+                <label className="font-bold text-slateblue">Initial Password *</label>
                 <input
                   type="password"
                   required
                   value={provisionPassword}
                   onChange={(e) => setProvisionPassword(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-indigo-500/50 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
                 />
               </div>
 
@@ -578,14 +578,14 @@ export const AdminDashboardPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowProvisionModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100"
+                  className="px-4 py-2.5 rounded-xl text-dusty font-bold hover:bg-sand/50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isProvisioning}
-                  className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold shadow-md disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold shadow-md disabled:opacity-50"
                 >
                   {isProvisioning ? 'Creating...' : 'Create Account'}
                 </button>
