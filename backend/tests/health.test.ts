@@ -8,6 +8,7 @@ describe('GET /api/health', () => {
     expect(response.body).toEqual(
       expect.objectContaining({
         status: 'online',
+        database: 'up',
         service: 'Smart Canteen API',
         timestamp: expect.any(String),
         version: '1.0.0',

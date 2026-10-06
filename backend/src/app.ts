@@ -47,22 +47,33 @@ const globalLimiter = rateLimit({
 });
 app.use(globalLimiter);
 
-// Auth-specific rate limiter: 10 requests per 15 minutes per IP
-const authLimiter = rateLimit({
+// Login rate limiter: 10 failed requests per 15 minutes per IP (skip successful logins)
+const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10,
+  skipSuccessfulRequests: true,
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, error: 'Too many authentication attempts, please try again later.' },
   keyGenerator: (req) => req.ip || 'unknown',
 });
 
-// Apply auth limiter to auth routes
-app.use('/api/auth/login', authLimiter);
-app.use('/api/auth/student/login', authLimiter);
-app.use('/api/auth/staff/login', authLimiter);
-app.use('/api/auth/admin/login', authLimiter);
-app.use('/api/auth/register', authLimiter);
+// Registration rate limiter: 10 requests per hour per IP (counts all attempts)
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, error: 'Too many registration attempts, please try again later.' },
+  keyGenerator: (req) => req.ip || 'unknown',
+});
+
+// Apply rate limiters to auth routes
+app.use('/api/auth/login', loginLimiter);
+app.use('/api/auth/student/login', loginLimiter);
+app.use('/api/auth/staff/login', loginLimiter);
+app.use('/api/auth/admin/login', loginLimiter);
+app.use('/api/auth/register', registerLimiter);
 
 // API Routes
 app.use('/api', routes);
