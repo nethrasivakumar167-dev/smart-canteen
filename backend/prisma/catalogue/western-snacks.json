@@ -1,0 +1,899 @@
+[
+  {
+    "name": "Veg Cheese Burger",
+    "description": "Soft bun with a savoury vegetable patty, cheese and fresh toppings",
+    "price": 105,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Veg",
+      "Fast Food"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk",
+      "gluten"
+    ],
+    "allergenNote": "Gluten, milk; sauces may contain soy or egg.",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "veg-cheese-burger",
+    "tags": [
+      "western",
+      "snacks",
+      "fast-food"
+    ]
+  },
+  {
+    "name": "Margherita Pizza",
+    "description": "Tangy tomato sauce, melted mozzarella and fragrant basil",
+    "price": 135,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Veg",
+      "Pizza"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "margherita-pizza",
+    "tags": [
+      "western",
+      "snacks",
+      "pizza"
+    ]
+  },
+  {
+    "name": "Paneer Tikka Pizza",
+    "description": "Spiced paneer, capsicum and cheese",
+    "price": 75,
+    "categories": [
+      "Western",
+      "Veg",
+      "Pizza"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "paneer-tikka-pizza",
+    "tags": [
+      "western",
+      "pizza"
+    ]
+  },
+  {
+    "name": "Farmhouse Pizza",
+    "description": "Vegetables, cheese and tomato sauce",
+    "price": 75,
+    "categories": [
+      "Western",
+      "Veg",
+      "Pizza"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "farmhouse-pizza",
+    "tags": [
+      "western",
+      "pizza"
+    ]
+  },
+  {
+    "name": "Chicken Pizza",
+    "description": "Chicken, cheese and savoury toppings",
+    "price": 130,
+    "categories": [
+      "Western",
+      "Non-veg",
+      "Pizza"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-pizza",
+    "tags": [
+      "western",
+      "pizza"
+    ]
+  },
+  {
+    "name": "Chicken Burger",
+    "description": "Chicken patty with lettuce and sauce",
+    "price": 130,
+    "categories": [
+      "Western",
+      "Non-veg",
+      "Fast Food"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; egg, milk possible",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-burger",
+    "tags": [
+      "western",
+      "fast-food"
+    ]
+  },
+  {
+    "name": "French Fries",
+    "description": "Golden, salted potato fries",
+    "price": 50,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check shared fryer",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "french-fries",
+    "tags": [
+      "western",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Peri-Peri Fries",
+    "description": "Crispy fries with tangy chilli seasoning",
+    "price": 50,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check seasoning",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "peri-peri-fries",
+    "tags": [
+      "western",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Grilled Veg Sandwich",
+    "description": "Toasted bread with vegetables and chutney",
+    "price": 50,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible milk",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "grilled-veg-sandwich",
+    "tags": [
+      "western",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Paneer Sandwich",
+    "description": "Paneer filling with vegetables and spices",
+    "price": 50,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "paneer-sandwich",
+    "tags": [
+      "western",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Chicken Sandwich",
+    "description": "Chicken filling with savoury sauce",
+    "price": 50,
+    "categories": [
+      "Western",
+      "Snacks",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible egg, milk",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-sandwich",
+    "tags": [
+      "western",
+      "snacks"
+    ]
+  },
+  {
+    "name": "White Sauce Pasta",
+    "description": "Creamy pasta with herbs and vegetables",
+    "price": 75,
+    "categories": [
+      "Western",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "white-sauce-pasta",
+    "tags": [
+      "western"
+    ]
+  },
+  {
+    "name": "Red Sauce Pasta",
+    "description": "Pasta in tangy tomato and herb sauce",
+    "price": 75,
+    "categories": [
+      "Western",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible milk",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "red-sauce-pasta",
+    "tags": [
+      "western"
+    ]
+  },
+  {
+    "name": "Chicken Alfredo Pasta",
+    "description": "Creamy pasta with chicken",
+    "price": 130,
+    "categories": [
+      "Western",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-alfredo-pasta",
+    "tags": [
+      "western"
+    ]
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "Toasted bread with garlic butter",
+    "price": 70,
+    "categories": [
+      "Western",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "garlic-bread",
+    "tags": [
+      "western",
+      "starter"
+    ]
+  },
+  {
+    "name": "Mac and Cheese",
+    "description": "Pasta in rich melted cheese sauce",
+    "price": 75,
+    "categories": [
+      "Western",
+      "Veg"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "mac-and-cheese",
+    "tags": [
+      "western"
+    ]
+  },
+  {
+    "name": "Pani Puri",
+    "description": "Crisp puris filled with potato, chickpeas and tangy, spicy mint water",
+    "price": 40,
+    "categories": [
+      "Chaat",
+      "Snacks",
+      "Veg",
+      "Street Food"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check puri ingredients, chutneys and shared preparation surfaces.",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "pani-puri",
+    "tags": [
+      "chaat",
+      "snacks",
+      "street-food"
+    ]
+  },
+  {
+    "name": "Pav Bhaji",
+    "description": "Buttery toasted buns with a rich, tangy mashed vegetable curry",
+    "price": 75,
+    "categories": [
+      "Chaat",
+      "Snacks",
+      "Veg",
+      "Street Food"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "pav-bhaji",
+    "tags": [
+      "chaat",
+      "snacks",
+      "street-food"
+    ]
+  },
+  {
+    "name": "Bhel Puri",
+    "description": "Crunchy puffed rice with chutneys and vegetables",
+    "price": 50,
+    "categories": [
+      "Chaat",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check chutneys and sev",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "bhel-puri",
+    "tags": [
+      "chaat",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Sev Puri",
+    "description": "Crisp puris with potatoes, chutneys and sev",
+    "price": 50,
+    "categories": [
+      "Chaat",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "sev-puri",
+    "tags": [
+      "chaat",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Dahi Puri",
+    "description": "Crisp puris with yoghurt and chutneys",
+    "price": 50,
+    "categories": [
+      "Chaat",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; check puris",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "dahi-puri",
+    "tags": [
+      "chaat",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Aloo Tikki Chaat",
+    "description": "Crisp potato patties with tangy chutneys",
+    "price": 50,
+    "categories": [
+      "Chaat",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check sauces and toppings",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "aloo-tikki-chaat",
+    "tags": [
+      "chaat",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Samosa",
+    "description": "Crisp pastry filled with spiced potatoes",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "samosa",
+    "tags": [
+      "snacks",
+      "indian"
+    ]
+  },
+  {
+    "name": "Onion Pakoda",
+    "description": "Crunchy onion fritters with gram flour",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check batter and shared fryer",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "onion-pakoda",
+    "tags": [
+      "snacks",
+      "indian"
+    ]
+  },
+  {
+    "name": "Paneer Pakoda",
+    "description": "Fried paneer coated in spiced batter",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; possible cross-contact",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "paneer-pakoda",
+    "tags": [
+      "snacks",
+      "starter"
+    ]
+  },
+  {
+    "name": "Veg Cutlet",
+    "description": "Crisp vegetable patties with a soft centre",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "veg-cutlet",
+    "tags": [
+      "snacks",
+      "indian"
+    ]
+  },
+  {
+    "name": "Masala Peanuts",
+    "description": "Crunchy peanuts tossed with spices",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "masala-peanuts",
+    "tags": [
+      "snacks"
+    ]
+  },
+  {
+    "name": "Sundal",
+    "description": "South Indian seasoned chickpeas or legumes",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check tempering",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "sundal",
+    "tags": [
+      "snacks",
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Sweet Corn Cup",
+    "description": "Steamed corn with butter, salt and seasoning",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Milk if butter is used",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "sweet-corn-cup",
+    "tags": [
+      "snacks"
+    ]
+  },
+  {
+    "name": "Chicken Samosa",
+    "description": "Crisp pastry with seasoned chicken filling",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-samosa",
+    "tags": [
+      "snacks"
+    ]
+  },
+  {
+    "name": "Chicken Popcorn",
+    "description": "Small, crunchy seasoned chicken pieces",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Starter",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-popcorn",
+    "tags": [
+      "snacks",
+      "starter"
+    ]
+  },
+  {
+    "name": "Egg Puff",
+    "description": "Flaky pastry with a spiced boiled egg",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Bakery",
+      "Egg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "egg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "egg-puff",
+    "tags": [
+      "snacks",
+      "bakery"
+    ]
+  }
+]

@@ -1,0 +1,446 @@
+[
+  {
+    "name": "Plain Dosa",
+    "description": "Crispy, golden fermented rice-and-lentil crepe served with chutney and sambar",
+    "price": 45,
+    "categories": [
+      "Breakfast",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check sambar and chutney ingredients; possible peanut or other nut cross-contact.",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "plain-dosa",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Masala Dosa",
+    "description": "Crispy dosa filled with mildly spiced potato masala",
+    "price": 65,
+    "categories": [
+      "Breakfast",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Possible milk if ghee is used; check accompaniments.",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "masala-dosa",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Idli with Sambar",
+    "description": "Soft steamed rice cakes with warm lentil sambar",
+    "price": 40,
+    "categories": [
+      "Breakfast",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check sambar and chutney; possible peanuts or other ingredients.",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "idli-with-sambar",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Medu Vada",
+    "description": "Crispy outside, soft inside, savoury urad dal fritters",
+    "price": 35,
+    "categories": [
+      "Breakfast",
+      "Snacks",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check batter and frying cross-contact.",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "medu-vada",
+    "tags": [
+      "snacks",
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Onion Uttapam",
+    "description": "Thick, soft pancake topped with caramelised onion",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check batter and accompaniments",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "onion-uttapam",
+    "tags": []
+  },
+  {
+    "name": "Podi Dosa",
+    "description": "Crispy dosa coated with aromatic spiced lentil powder",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Sesame, peanuts may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "podi-dosa",
+    "tags": []
+  },
+  {
+    "name": "Ghee Roast Dosa",
+    "description": "Extra-crispy dosa with rich ghee aroma",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "ghee-roast-dosa",
+    "tags": []
+  },
+  {
+    "name": "Rava Dosa",
+    "description": "Thin, lacy, peppery semolina dosa",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "rava-dosa",
+    "tags": []
+  },
+  {
+    "name": "Pesarattu",
+    "description": "Green gram crepe with earthy lentil flavour",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check accompaniments",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "pesarattu",
+    "tags": []
+  },
+  {
+    "name": "Pongal",
+    "description": "Soft rice and lentils seasoned with pepper and cumin",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Milk or cashews may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "pongal",
+    "tags": []
+  },
+  {
+    "name": "Upma",
+    "description": "Soft semolina cooked with vegetables and spices",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; cashews may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "upma",
+    "tags": []
+  },
+  {
+    "name": "Poori Masala",
+    "description": "Puffy fried bread with potato curry",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "poori-masala",
+    "tags": []
+  },
+  {
+    "name": "Appam with Vegetable Stew",
+    "description": "Soft, lacy rice pancake with mild coconut stew",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Coconut; possible cashew",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "appam-with-vegetable-stew",
+    "tags": []
+  },
+  {
+    "name": "Idiyappam",
+    "description": "Delicate steamed rice noodles",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check accompanying curry",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "idiyappam",
+    "tags": []
+  },
+  {
+    "name": "Parotta with Salna",
+    "description": "Flaky layered flatbread with spicy gravy",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible milk",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "parotta-with-salna",
+    "tags": []
+  },
+  {
+    "name": "Egg Dosa",
+    "description": "Dosa topped with cooked egg and pepper",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Egg",
+      "Egg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "egg"
+    ],
+    "allergens": [],
+    "allergenNote": "Egg; possible gluten cross-contact",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "egg-dosa",
+    "tags": []
+  },
+  {
+    "name": "Chicken Keema Dosa",
+    "description": "Dosa filled with savoury minced chicken",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Possible gluten; verify seasoning",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "chicken-keema-dosa",
+    "tags": []
+  },
+  {
+    "name": "Bread Omelette",
+    "description": "Toasted bread with a fluffy seasoned omelette",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Egg",
+      "Egg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST"
+    ],
+    "dietaryTags": [
+      "egg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "gluten; possible milk",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "bread-omelette",
+    "tags": []
+  }
+]

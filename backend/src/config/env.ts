@@ -42,6 +42,10 @@ export const envSchema = z.object({
   JWT_EXPIRES_IN: z.string().default('7d'),
   AI_PROVIDER: z.enum(['mock', 'gemini']).default('mock'),
   GEMINI_API_KEY: z.string().optional(),
+  GEMINI_MODEL: z.preprocess(
+    (value) => typeof value === 'string' && !value.trim() ? undefined : value,
+    z.string().trim().min(1).optional()
+  ),
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -87,6 +91,7 @@ if (!validation.success) {
       JWT_SECRET: '0123456789abcdef0123456789abcdef0123456789abcdef',
       JWT_EXPIRES_IN: '7d',
       AI_PROVIDER: 'mock',
+      GEMINI_MODEL: undefined,
     };
   }
 } else {

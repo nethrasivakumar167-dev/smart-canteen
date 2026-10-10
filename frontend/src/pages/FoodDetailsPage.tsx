@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MOCK_MENU_ITEMS } from '../data/mockData';
+import { fetchMenuItemById, fetchMenuItems } from '../api/menuApi';
+import { MenuItem, CartItemCustomization } from '../types';
 import { useCartStore } from '../store/cartStore';
 import { useFavoriteStore } from '../store/favoriteStore';
 import { useToastStore } from '../store/toastStore';
-import { CartItemCustomization } from '../types';
 import { FoodCard } from '../components/menu/FoodCard';
+import { FoodImage, hasUsableMenuImage } from '../components/common/FoodImage';
 import {
   Heart,
   Plus,
@@ -21,10 +22,56 @@ export const FoodDetailsPage: React.FC = () => {
   const { isFavorite, toggleFavorite } = useFavoriteStore();
   const { addToast } = useToastStore();
 
-  const item = MOCK_MENU_ITEMS.find((m) => m.id === id);
+  const [item, setItem] = useState<MenuItem | null>(null);
+  const [relatedItems, setRelatedItems] = useState<MenuItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showImage, setShowImage] = useState(false);
 
   const [quantity, setQuantity] = useState<number>(1);
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadItemDetails = async () => {
+      if (!id) {
+        setIsLoading(false);
+        return;
+      }
+      setIsLoading(true);
+      try {
+        const dish = await fetchMenuItemById(id);
+        if (isMounted) {
+          setItem(dish);
+          setShowImage(hasUsableMenuImage(dish?.imageUrl));
+          if (dish) {
+            const allCategoryItems = await fetchMenuItems({ category: dish.categoryId });
+            if (isMounted) {
+              setRelatedItems(
+                allCategoryItems.filter((m) => m.id !== dish.id).slice(0, 3)
+              );
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching dish details:', err);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
+    loadItemDetails();
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4">
+        <div className="w-10 h-10 border-4 border-navy border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-sm font-semibold text-espresso">Loading dish details...</p>
+      </div>
+    );
+  }
 
   if (!item) {
     return (
@@ -43,6 +90,7 @@ export const FoodDetailsPage: React.FC = () => {
   }
 
   const favorited = isFavorite(item.id);
+  const unavailable = item.availableNow === false || !item.isAvailable;
 
   const handleToggleOption = (groupId: string, optName: string, isSingle: boolean) => {
     setSelectedOptions((prev) => {
@@ -97,10 +145,6 @@ export const FoodDetailsPage: React.FC = () => {
     });
   };
 
-  const relatedItems = MOCK_MENU_ITEMS.filter(
-    (m) => m.categoryId === item.categoryId && m.id !== item.id
-  ).slice(0, 3);
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
       
@@ -117,12 +161,13 @@ export const FoodDetailsPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         {/* Left Column: Image Showcase */}
-        <div className="lg:col-span-6 space-y-4">
+        {showImage && <div className="lg:col-span-6 space-y-4">
           <div className="relative rounded-3xl overflow-hidden bg-cream border border-line shadow-sm aspect-square sm:aspect-4/3 max-h-[480px] w-full">
-            <img
-              src={item.imageUrl}
+            <FoodImage
+              imageUrl={item.imageUrl}
               alt={item.name}
               className="w-full h-full object-cover"
+              onError={() => setShowImage(false)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent pointer-events-none" />
 
@@ -145,10 +190,10 @@ export const FoodDetailsPage: React.FC = () => {
             </div>
 
           </div>
-        </div>
+        </div>}
 
         {/* Right Column: Information & Ordering Controls */}
-        <div className="lg:col-span-6 space-y-6 bg-cream border border-line rounded-3xl p-5 sm:p-7 shadow-sm">
+        <div className={`${showImage ? 'lg:col-span-6' : 'lg:col-span-12'} space-y-6 bg-cream border border-line rounded-3xl p-5 sm:p-7 shadow-sm`}>
           
           <div>
             <h1 className="text-2xl sm:text-3xl font-semibold text-navy tracking-tight">
@@ -169,6 +214,20 @@ export const FoodDetailsPage: React.FC = () => {
             <p className="mt-4 text-sm text-espresso leading-relaxed">
               {item.description}
             </p>
+            {!!item.allergens?.length && (
+              <div className="mt-4">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-navy">Allergens</h2>
+                <p className="mt-1 text-sm text-espresso">{item.allergens.map((allergen) => allergen.replace(/[-_]/g, ' ')).join(', ')}</p>
+              </div>
+            )}
+            {!!item.allergenNote && (
+              <p className="mt-2 text-sm text-espresso">Check: {item.allergenNote}</p>
+            )}
+            {(item.allergens?.length || item.allergenNote) && (
+              <p className="mt-2 text-xs text-espresso/75">
+                Allergen information is indicative. Please confirm with canteen staff before ordering.
+              </p>
+            )}
           </div>
 
           {/* Customization Options (if any) */}
@@ -261,10 +320,11 @@ export const FoodDetailsPage: React.FC = () => {
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="w-full flex-1 flex items-center justify-center gap-2.5 py-4 px-6 rounded-full bg-navy hover:bg-slateblue-light text-cream font-extrabold text-base shadow-sm transition transform active:scale-98"
+              disabled={unavailable}
+              className="w-full flex-1 flex items-center justify-center gap-2.5 py-4 px-6 rounded-full bg-navy hover:bg-slateblue-light text-cream font-extrabold text-base shadow-sm transition transform active:scale-98 disabled:cursor-not-allowed disabled:bg-slate-400 disabled:hover:bg-slate-400"
             >
               <ShoppingBag className="w-5 h-5" />
-              <span>Add to Preorder • ₹{totalPrice}</span>
+              <span>{unavailable ? item.unavailableReason || 'Unavailable now' : `Add to Preorder • ₹${totalPrice}`}</span>
             </button>
           </div>
 

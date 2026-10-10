@@ -1,6 +1,7 @@
 import { PrismaClient, Role } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
+import { CATALOGUE_LEGACY_MATCHES, menuCatalogue } from './catalogue';
 
 dotenv.config();
 
@@ -38,6 +39,12 @@ async function main() {
     { name: 'Beverages', slug: 'beverages', description: 'Kumbakonam degree filter coffee, masala tea, and juices', displayOrder: 4 },
     { name: 'Desserts', slug: 'desserts', description: 'Warm gulab jamuns, rabdi, and ice cream treats', displayOrder: 5 },
     { name: 'Healthy & Bowls', slug: 'healthy', description: 'Sprout salads, fruit bowls, and protein shakes', displayOrder: 6 },
+    { name: 'South Indian & Breakfast', slug: 'south-indian-breakfast', description: 'South Indian breakfast favourites', displayOrder: 7 },
+    { name: 'North Indian & Meals', slug: 'north-indian-meals', description: 'North Indian meals and curries', displayOrder: 8 },
+    { name: 'Non-Veg', slug: 'non-veg', description: 'Meat, seafood, and egg dishes', displayOrder: 9 },
+    { name: 'Chinese', slug: 'chinese', description: 'Chinese and Indo-Chinese dishes', displayOrder: 10 },
+    { name: 'Western & Fast Food', slug: 'western-fast-food', description: 'Western meals and fast food', displayOrder: 11 },
+    { name: 'Snacks & Chaats', slug: 'snacks-chaats', description: 'Snacks, chaats, and street food', displayOrder: 12 },
   ];
 
   // Upsert categories by slug
@@ -45,7 +52,7 @@ async function main() {
   for (const cat of categoryData) {
     const upserted = await prisma.category.upsert({
       where: { slug: cat.slug },
-      update: { ...cat, isAvailable: true },
+      update: cat,
       create: { ...cat, isAvailable: true },
     });
     categoryMap.set(cat.slug, upserted.id);
@@ -63,6 +70,7 @@ async function main() {
       categorySlug: 'breakfast',
       imageUrl: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     {
       name: 'Steamed Rice Idli with Medu Vada (2+1)',
@@ -71,6 +79,7 @@ async function main() {
       categorySlug: 'breakfast',
       imageUrl: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     {
       name: 'Ghee Ven Pongal with Cashews',
@@ -79,6 +88,7 @@ async function main() {
       categorySlug: 'breakfast',
       imageUrl: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: ['contains-nuts'],
     },
     {
       name: 'South Indian Breakfast Combo Feast',
@@ -87,6 +97,7 @@ async function main() {
       categorySlug: 'breakfast',
       imageUrl: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     // Lunch
     {
@@ -96,6 +107,7 @@ async function main() {
       categorySlug: 'lunch',
       imageUrl: 'https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     {
       name: 'Hyderabadi Dum Paneer Biryani Bowl',
@@ -104,6 +116,7 @@ async function main() {
       categorySlug: 'lunch',
       imageUrl: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: ['veg'],
     },
     {
       name: 'Tempered South Indian Curd Rice',
@@ -112,6 +125,7 @@ async function main() {
       categorySlug: 'lunch',
       imageUrl: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     // Snacks & Quick Bites
     {
@@ -121,6 +135,7 @@ async function main() {
       categorySlug: 'snacks',
       imageUrl: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: ['veg'],
     },
     {
       name: 'Crispy Onion Samosas (Plate of 2)',
@@ -129,6 +144,7 @@ async function main() {
       categorySlug: 'snacks',
       imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     {
       name: 'Crispy Peri Peri Potato Fries',
@@ -137,6 +153,7 @@ async function main() {
       categorySlug: 'snacks',
       imageUrl: 'https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     // Beverages
     {
@@ -146,6 +163,7 @@ async function main() {
       categorySlug: 'beverages',
       imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     {
       name: 'Alphonso Mango Lassi Shake',
@@ -154,6 +172,7 @@ async function main() {
       categorySlug: 'beverages',
       imageUrl: 'https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     // Desserts
     {
@@ -163,6 +182,7 @@ async function main() {
       categorySlug: 'desserts',
       imageUrl: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
     // Healthy & Bowls
     {
@@ -172,33 +192,51 @@ async function main() {
       categorySlug: 'healthy',
       imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
       isVegetarian: true,
+      dietaryTags: [],
     },
   ];
 
-  // Upsert menu items
-  let menuItemCount = 0;
+  const legacyMetadata: Record<string, {
+    tags: string[];
+    cuisines: string[];
+    mealTimes: string[];
+    dietaryTags: string[];
+    allergens: string[];
+    allergenNote: string | null;
+    spiceLevel: string;
+  }> = {
+    'Crispy Ghee Podi Masala Dosa': { tags: ['south-indian'], cuisines: ['south-indian'], mealTimes: ['BREAKFAST'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: null, spiceLevel: 'MEDIUM' },
+    'Steamed Rice Idli with Medu Vada (2+1)': { tags: ['south-indian', 'snacks'], cuisines: ['south-indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: [], allergenNote: null, spiceLevel: 'MILD' },
+    'Ghee Ven Pongal with Cashews': { tags: ['south-indian'], cuisines: ['south-indian'], mealTimes: ['BREAKFAST'], dietaryTags: ['veg', 'contains-nuts'], allergens: ['milk', 'tree-nuts'], allergenNote: null, spiceLevel: 'MILD' },
+    'South Indian Breakfast Combo Feast': { tags: ['south-indian'], cuisines: ['south-indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: null, spiceLevel: 'MILD' },
+    'South Indian Executive Mini Meals': { tags: ['south-indian'], cuisines: ['south-indian'], mealTimes: ['LUNCH'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: 'Milk if curd is included.', spiceLevel: 'MILD' },
+    'Hyderabadi Dum Paneer Biryani Bowl': { tags: ['indian'], cuisines: ['indian'], mealTimes: ['LUNCH', 'DINNER'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: 'Possible nuts.', spiceLevel: 'MEDIUM' },
+    'Tempered South Indian Curd Rice': { tags: ['south-indian'], cuisines: ['south-indian'], mealTimes: ['LUNCH'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: null, spiceLevel: 'MILD' },
+    'Paneer Butter Masala Kati Roll': { tags: ['north-indian', 'snacks'], cuisines: ['north-indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: ['milk', 'gluten'], allergenNote: null, spiceLevel: 'MILD' },
+    'Crispy Onion Samosas (Plate of 2)': { tags: ['indian', 'snacks'], cuisines: ['indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: ['gluten'], allergenNote: null, spiceLevel: 'MILD' },
+    'Crispy Peri Peri Potato Fries': { tags: ['western', 'snacks'], cuisines: ['western'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: [], allergenNote: null, spiceLevel: 'MEDIUM' },
+    'Authentic Kumbakonam Degree Filter Coffee': { tags: ['south-indian'], cuisines: ['south-indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: null, spiceLevel: 'NONE' },
+    'Alphonso Mango Lassi Shake': { tags: ['indian'], cuisines: ['indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg', 'contains-nuts'], allergens: ['milk', 'tree-nuts'], allergenNote: null, spiceLevel: 'NONE' },
+    'Warm Gulab Jamun with Rabdi (2 Pcs)': { tags: ['indian', 'dessert'], cuisines: ['indian'], mealTimes: ['ALL_DAY'], dietaryTags: ['veg'], allergens: ['milk'], allergenNote: 'Gluten may be present.', spiceLevel: 'NONE' },
+    'Avocado & Green Moong Sprouts Power Bowl': { tags: ['healthy'], cuisines: [], mealTimes: ['LUNCH'], dietaryTags: ['veg'], allergens: [], allergenNote: null, spiceLevel: 'MILD' },
+  };
+
+  const originalMenuItemByName = new Map(menuItemsData.map((item) => [item.name, item]));
+  const originalMenuItemIdByName = new Map<string, string>();
   for (const item of menuItemsData) {
     const categoryId = categoryMap.get(item.categorySlug);
-    if (!categoryId) {
-      console.error(`  ⚠ Category not found for slug: ${item.categorySlug}`);
-      continue;
-    }
-
-    await prisma.menuItem.upsert({
-      where: {
-        categoryId_name: {
-          categoryId,
-          name: item.name,
-        },
-      },
-      update: {
-        description: item.description,
-        price: item.price,
-        imageUrl: item.imageUrl,
-        isVegetarian: item.isVegetarian,
-        isAvailable: true,
-      },
-      create: {
+    if (!categoryId) throw new Error(`Category not found for menu item "${item.name}".`);
+    const current = await prisma.menuItem.findUnique({
+      where: { categoryId_name: { categoryId, name: item.name } },
+    });
+    const metadata = legacyMetadata[item.name];
+    const saved = current
+      ? await prisma.menuItem.update({
+          where: { id: current.id },
+          data: metadata,
+        })
+      : await prisma.menuItem.create({
+          data: {
         categoryId,
         name: item.name,
         description: item.description,
@@ -206,11 +244,107 @@ async function main() {
         imageUrl: item.imageUrl,
         isVegetarian: item.isVegetarian,
         isAvailable: true,
-      },
-    });
-    menuItemCount++;
-    console.log(`  ✓ MenuItem: ${item.name}`);
+            dietaryTags: metadata.dietaryTags,
+            tags: metadata.tags,
+            cuisines: metadata.cuisines,
+            mealTimes: metadata.mealTimes,
+            allergens: metadata.allergens,
+            allergenNote: metadata.allergenNote,
+            spiceLevel: metadata.spiceLevel,
+          },
+        });
+    originalMenuItemIdByName.set(item.name, saved.id);
   }
+
+  const normalizeMenuName = (name: string) =>
+    name.toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const legacyNormalizedNames = new Set(
+    [...originalMenuItemByName.keys()].map(normalizeMenuName)
+  );
+  const primaryCategorySlug = (categories: string[], cuisines: string[]) => {
+    const normalized = categories.map((value) => value.toLowerCase());
+    if (normalized.includes('breakfast')) return 'breakfast';
+    if (normalized.includes('lunch') || normalized.includes('dinner')) return 'lunch';
+    if (normalized.some((value) => ['snacks', 'starter', 'chaat', 'street food'].includes(value))) return 'snacks';
+    if (normalized.some((value) => ['dessert', 'bakery'].includes(value))) return 'desserts';
+    if (normalized.some((value) => ['hot beverages', 'cold beverages', 'juice'].includes(value))) return 'beverages';
+    if (normalized.includes('non-veg') || normalized.includes('seafood')) return 'non-veg';
+    if (normalized.some((value) => value.startsWith('chinese'))) return 'chinese';
+    if (normalized.some((value) => value.startsWith('western')) || normalized.includes('fast food') || normalized.includes('pizza')) return 'western-fast-food';
+    if (normalized.includes('north indian')) return 'north-indian-meals';
+    if (normalized.includes('south indian')) return 'south-indian-breakfast';
+    if (cuisines.includes('chinese')) return 'chinese';
+    if (cuisines.includes('western')) return 'western-fast-food';
+    return 'healthy';
+  };
+
+  let catalogueAddedCount = 0;
+  let catalogueMergedCount = 0;
+  const cataloguePrimaryCategoryCounts = new Map<string, number>();
+  for (const item of menuCatalogue) {
+    const categorySlug = primaryCategorySlug(item.categories, item.cuisines);
+    const categoryId = categoryMap.get(categorySlug);
+    if (!categoryId) throw new Error(`Category "${categorySlug}" not found for "${item.name}".`);
+
+    const legacyName = CATALOGUE_LEGACY_MATCHES[item.name];
+    const legacyId = legacyName ? originalMenuItemIdByName.get(legacyName) : undefined;
+    if (legacyId) {
+      await prisma.menuItem.update({
+        where: { id: legacyId },
+        data: {
+          tags: item.tags,
+          cuisines: item.cuisines,
+          mealTimes: item.mealTimes,
+          dietaryTags: item.dietaryTags,
+          allergens: item.allergens,
+          allergenNote: item.allergenNote,
+          spiceLevel: item.spiceLevel,
+        },
+      });
+      catalogueMergedCount++;
+    } else if (!legacyNormalizedNames.has(normalizeMenuName(item.name))) {
+      await prisma.menuItem.upsert({
+        where: { id: `item-${item.slug}` },
+        update: {
+          tags: item.tags,
+          cuisines: item.cuisines,
+          mealTimes: item.mealTimes,
+          dietaryTags: item.dietaryTags,
+          allergens: item.allergens,
+          allergenNote: item.allergenNote,
+          spiceLevel: item.spiceLevel,
+        },
+        create: {
+          id: `item-${item.slug}`,
+          categoryId,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          imageUrl: `/images/menu/${item.slug}.jpg`,
+          isVegetarian: !item.dietaryTags.includes('non-veg'),
+          isAvailable: item.defaultAvailable,
+          tags: item.tags,
+          cuisines: item.cuisines,
+          mealTimes: item.mealTimes,
+          dietaryTags: item.dietaryTags,
+          allergens: item.allergens,
+          allergenNote: item.allergenNote,
+          spiceLevel: item.spiceLevel,
+        },
+      });
+      catalogueAddedCount++;
+    } else {
+      catalogueMergedCount++;
+    }
+    cataloguePrimaryCategoryCounts.set(
+      categorySlug,
+      (cataloguePrimaryCategoryCounts.get(categorySlug) || 0) + 1
+    );
+  }
+
+  console.log(`  ✓ Catalogue items created: ${catalogueAddedCount}`);
+  console.log(`  ✓ Catalogue items matched to originals: ${catalogueMergedCount}`);
+  console.log('  ✓ Catalogue primary category counts:', Object.fromEntries(cataloguePrimaryCategoryCounts));
 
   // Verify all categories have at least one menu item
   for (const cat of categoryData) {

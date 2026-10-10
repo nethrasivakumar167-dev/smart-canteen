@@ -1,4 +1,4 @@
-export type Role = 'STUDENT' | 'FACULTY' | 'VISITOR' | 'STAFF' | 'ADMIN';
+export type Role = 'STUDENT' | 'STAFF' | 'ADMIN';
 
 export type OrderStatus = 'PENDING' | 'CONFIRMED' | 'PREPARING' | 'READY' | 'COMPLETED' | 'CANCELLED';
 
@@ -53,6 +53,15 @@ export interface MenuItem {
   isVegetarian: boolean;
   ingredients: string[];
   allergens: string[];
+  allergenNote?: string | null;
+  dietaryTags?: string[];
+  cuisines?: string[];
+  tags?: string[];
+  mealTimes?: string[];
+  spiceLevel?: 'NONE' | 'MILD' | 'MEDIUM' | 'HOT' | string | null;
+  isSpecial?: boolean;
+  availableNow?: boolean;
+  unavailableReason?: string | null;
   preparationTime: number; // in minutes
   calories?: number;
   isAvailable: boolean;
@@ -81,6 +90,14 @@ export interface CartItem {
   preparationTime: number;
   customizations?: CartItemCustomization[];
   itemTotal: number;
+}
+
+export interface OrderFeedback {
+  id: string;
+  rating: number;
+  comment: string | null;
+  createdAt: string;
+  items: Array<{ menuItemId: string; tags: string[] }>;
 }
 
 export interface Review {

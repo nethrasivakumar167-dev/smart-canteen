@@ -1,0 +1,395 @@
+[
+  {
+    "name": "Mango Lassi",
+    "description": "Thick yoghurt drink with sweet mango flavour",
+    "price": 55,
+    "categories": [
+      "Cold Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "mango-lassi",
+    "tags": [
+      "cold-beverages",
+      "indian"
+    ]
+  },
+  {
+    "name": "Iced Coffee",
+    "description": "Chilled coffee with milk, ice and a smooth roasted flavour",
+    "price": 55,
+    "categories": [
+      "Cold Beverages",
+      "Western"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Milk if dairy is used.",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "iced-coffee",
+    "tags": [
+      "cold-beverages",
+      "western"
+    ]
+  },
+  {
+    "name": "Sweet Lime Juice",
+    "description": "Refreshing citrus juice",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Juice"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check cross-contact",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "sweet-lime-juice",
+    "tags": [
+      "cold-beverages",
+      "juice"
+    ]
+  },
+  {
+    "name": "Fresh Lime Soda",
+    "description": "Fizzy lime drink, sweet or salted",
+    "price": 40,
+    "categories": [
+      "Cold Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check additives",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "fresh-lime-soda",
+    "tags": [
+      "cold-beverages"
+    ]
+  },
+  {
+    "name": "Watermelon Juice",
+    "description": "Light, naturally sweet fruit juice",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Juice"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check cross-contact",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "watermelon-juice",
+    "tags": [
+      "cold-beverages",
+      "juice"
+    ]
+  },
+  {
+    "name": "Orange Juice",
+    "description": "Bright, tangy citrus drink",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Juice"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check cross-contact",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "orange-juice",
+    "tags": [
+      "cold-beverages",
+      "juice"
+    ]
+  },
+  {
+    "name": "Buttermilk",
+    "description": "Cooling, lightly spiced yoghurt drink",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "buttermilk",
+    "tags": [
+      "cold-beverages",
+      "indian"
+    ]
+  },
+  {
+    "name": "Rose Milk",
+    "description": "Sweet chilled milk with rose flavour",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "rose-milk",
+    "tags": [
+      "cold-beverages",
+      "indian"
+    ]
+  },
+  {
+    "name": "Chocolate Milkshake",
+    "description": "Creamy chocolate blended with milk",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Dessert"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; possible soy",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "chocolate-milkshake",
+    "tags": [
+      "cold-beverages",
+      "dessert"
+    ]
+  },
+  {
+    "name": "Strawberry Milkshake",
+    "description": "Sweet strawberry drink blended with milk",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Dessert"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "strawberry-milkshake",
+    "tags": [
+      "cold-beverages",
+      "dessert"
+    ]
+  },
+  {
+    "name": "Oreo Milkshake",
+    "description": "Thick cookie milkshake",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Dessert"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Milk, gluten, soy may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "oreo-milkshake",
+    "tags": [
+      "cold-beverages",
+      "dessert"
+    ]
+  },
+  {
+    "name": "Cold Badam Milk",
+    "description": "Chilled almond-flavoured milk",
+    "price": 40,
+    "categories": [
+      "Cold Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "cold-badam-milk",
+    "tags": [
+      "cold-beverages",
+      "indian"
+    ]
+  },
+  {
+    "name": "Lemon Mint Cooler",
+    "description": "Citrus drink with mint and ice",
+    "price": 40,
+    "categories": [
+      "Cold Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check additives",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "lemon-mint-cooler",
+    "tags": [
+      "cold-beverages"
+    ]
+  },
+  {
+    "name": "Iced Tea",
+    "description": "Chilled tea with a light citrus flavour",
+    "price": 40,
+    "categories": [
+      "Cold Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check additives",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "iced-tea",
+    "tags": [
+      "cold-beverages"
+    ]
+  },
+  {
+    "name": "Bottled Water",
+    "description": "Packaged drinking water",
+    "price": 40,
+    "categories": [
+      "Cold Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "bottled-water",
+    "tags": [
+      "cold-beverages"
+    ]
+  },
+  {
+    "name": "Fresh Fruit Salad",
+    "description": "Fresh seasonal fruit pieces served chilled.",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Veg"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg",
+      "vegan",
+      "dairy-free"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 5,
+    "defaultAvailable": true,
+    "slug": "fresh-fruit-salad",
+    "tags": [
+      "dessert"
+    ]
+  }
+]

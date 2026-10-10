@@ -39,6 +39,7 @@ export default {
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
         display: ['Georgia', 'Times New Roman', 'serif'],
+        pacifico: ['Pacifico', 'cursive'],
       },
       boxShadow: {
         glow: '0 8px 18px -14px rgba(11, 42, 74, 0.5)',

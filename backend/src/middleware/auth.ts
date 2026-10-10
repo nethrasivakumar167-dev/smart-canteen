@@ -24,8 +24,8 @@ export const authenticateToken = async (
       return;
     }
 
-    // Verify JWT
-    const decoded = jwt.verify(token, env.JWT_SECRET) as {
+    // Verify JWT with pinned algorithm
+    const decoded = jwt.verify(token, env.JWT_SECRET, { algorithms: ['HS256'] }) as {
       userId: string;
       email: string;
       role: Role;

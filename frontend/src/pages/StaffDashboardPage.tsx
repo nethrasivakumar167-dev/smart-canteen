@@ -28,8 +28,13 @@ export const StaffDashboardPage: React.FC = () => {
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string>('ALL');
   const [ordersData, setOrdersData] = useState<any>(null);
   const [menuItems, setMenuItems] = useState<any[]>([]);
+  const [menuSearch, setMenuSearch] = useState('');
+  const [menuCategoryFilter, setMenuCategoryFilter] = useState('');
+  const [menuCuisineFilter, setMenuCuisineFilter] = useState('');
   const [loading, setLoading] = useState<boolean>(true);
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
+  const [deliveryIds, setDeliveryIds] = useState<Record<string, string>>({});
+  const [deliveryErrors, setDeliveryErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     loadData();
@@ -56,13 +61,45 @@ export const StaffDashboardPage: React.FC = () => {
     }
   };
 
-  const handleUpdateStatus = async (orderId: string, nextStatus: string) => {
-    setActionLoadingId(orderId);
+  const handleUpdateStatus = async (
+    order: any,
+    nextStatus: string,
+    verificationId?: string
+  ) => {
+    if (nextStatus === 'CANCELLED' && !window.confirm(`Cancel order #${order.orderNumber}?`)) return;
+    setActionLoadingId(order.id);
     try {
-      const res = await axios.patch(`/staff/orders/${orderId}/status`, {
+      const res = await axios.patch(`/staff/orders/${order.id}/status`, {
         status: nextStatus,
+        ...(verificationId ? { verificationId } : {}),
       });
       if (res.data.success) {
+        const updatedOrder = res.data.data;
+        setOrdersData((current: any) => {
+          if (!current) return current;
+          const all = current.all.map((entry: any) =>
+            entry.id === updatedOrder.id ? updatedOrder : entry
+          );
+          const pending = all.filter((entry: any) => entry.orderStatus === 'RECEIVED');
+          const preparing = all.filter((entry: any) => entry.orderStatus === 'PREPARING');
+          const ready = all.filter((entry: any) => entry.orderStatus === 'READY_TO_PICK');
+          const completed = all.filter((entry: any) => entry.orderStatus === 'DELIVERED');
+          const cancelled = all.filter((entry: any) => entry.orderStatus === 'CANCELLED');
+          return {
+            ...current,
+            all,
+            counts: {
+              pending: pending.length,
+              preparing: preparing.length,
+              ready: ready.length,
+              completed: completed.length,
+              cancelled: cancelled.length,
+              totalActive: pending.length + preparing.length + ready.length,
+            },
+            grouped: { pending, preparing, ready, completed },
+          };
+        });
+        setDeliveryErrors((current) => ({ ...current, [order.id]: '' }));
         addToast({
           type: 'success',
           title: 'Order Status Updated',
@@ -71,10 +108,14 @@ export const StaffDashboardPage: React.FC = () => {
         loadData();
       }
     } catch (err: any) {
+      const errorMessage = err.response?.data?.error || 'Could not update order status.';
+      if (nextStatus === 'DELIVERED') {
+        setDeliveryErrors((current) => ({ ...current, [order.id]: errorMessage }));
+      }
       addToast({
         type: 'error',
         title: 'Update Failed',
-        message: err.response?.data?.error || 'Could not update order status.',
+        message: errorMessage,
       });
     } finally {
       setActionLoadingId(null);
@@ -92,11 +133,7 @@ export const StaffDashboardPage: React.FC = () => {
           title: 'Item Stock Updated',
           message: res.data.message,
         });
-        setMenuItems((prev) =>
-          prev.map((item) =>
-            item.id === itemId ? { ...item, isAvailable: !currentStatus, stockStatus: !currentStatus ? 'AVAILABLE' : 'OUT_OF_STOCK' } : item
-          )
-        );
+        await loadData();
       }
     } catch {
       addToast({
@@ -119,8 +156,20 @@ export const StaffDashboardPage: React.FC = () => {
 
   const filteredOrders = (ordersData?.all || []).filter((o: any) => {
     if (selectedStatusFilter === 'ALL') return true;
-    return o.status === selectedStatusFilter;
+    const statusFilterMap: Record<string, string> = {
+      PENDING: 'RECEIVED',
+      READY: 'READY_TO_PICK',
+      COMPLETED: 'DELIVERED',
+    };
+    return o.orderStatus === (statusFilterMap[selectedStatusFilter] || selectedStatusFilter);
   });
+  const staffCategories = [...new Set(menuItems.map((item) => item.category))].sort();
+  const staffCuisines = [...new Set(menuItems.flatMap((item) => item.cuisines || []))].sort();
+  const filteredMenuItems = menuItems.filter((item) =>
+    (!menuSearch || item.name.toLowerCase().includes(menuSearch.toLowerCase().trim())) &&
+    (!menuCategoryFilter || item.category === menuCategoryFilter) &&
+    (!menuCuisineFilter || (item.cuisines || []).includes(menuCuisineFilter))
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
@@ -174,15 +223,15 @@ export const StaffDashboardPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-amber-600">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-amber-900">
               New / Pending
             </span>
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
-            {ordersData?.counts?.pending ?? 1}
+            {ordersData?.counts?.pending ?? 0}
           </div>
-          <div className="text-[11px] text-dusty mt-1">Awaiting kitchen confirmation</div>
+          <div className="text-[11px] text-navy/75 mt-1">Awaiting kitchen confirmation</div>
         </button>
 
         <button
@@ -194,15 +243,15 @@ export const StaffDashboardPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-blue-600">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-navy/80">
               Cooking / In Kitchen
             </span>
             <Flame className="w-4 h-4 text-blue-500" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
-            {ordersData?.counts?.preparing ?? 1}
+            {ordersData?.counts?.preparing ?? 0}
           </div>
-          <div className="text-[11px] text-dusty mt-1">Currently being prepared</div>
+          <div className="text-[11px] text-navy/75 mt-1">Currently being prepared</div>
         </button>
 
         <button
@@ -214,15 +263,15 @@ export const StaffDashboardPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-600">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-900">
               Ready for Pickup
             </span>
             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
-            {ordersData?.counts?.ready ?? 1}
+            {ordersData?.counts?.ready ?? 0}
           </div>
-          <div className="text-[11px] text-dusty mt-1">At collection counter</div>
+          <div className="text-[11px] text-navy/75 mt-1">At collection counter</div>
         </button>
 
         <button
@@ -234,15 +283,15 @@ export const StaffDashboardPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-dusty">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-navy/75">
               Completed
             </span>
             <PackageCheck className="w-4 h-4 text-dusty" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
-            {ordersData?.counts?.completed ?? 1}
+            {ordersData?.counts?.completed ?? 0}
           </div>
-          <div className="text-[11px] text-dusty mt-1">Handed over to diners</div>
+          <div className="text-[11px] text-navy/75 mt-1">Handed over to diners</div>
         </button>
       </div>
 
@@ -273,7 +322,7 @@ export const StaffDashboardPage: React.FC = () => {
 
         {activeTab === 'queue' && (
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-dusty hidden sm:inline">Filter:</span>
+            <span className="text-navy/75 hidden sm:inline">Filter:</span>
             {['ALL', 'PENDING', 'PREPARING', 'READY', 'COMPLETED'].map((st) => (
               <button
                 key={st}
@@ -281,7 +330,7 @@ export const StaffDashboardPage: React.FC = () => {
                 className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition ${
                   selectedStatusFilter === st
                     ? 'bg-slateblue text-cream'
-                    : 'text-dusty hover:bg-sand/20'
+                    : 'text-navy/75 hover:bg-sand/50'
                 }`}
               >
                 {st}
@@ -300,15 +349,15 @@ export const StaffDashboardPage: React.FC = () => {
             </div>
           ) : (
             filteredOrders.map((order: any) => {
-              const isPending = order.status === 'PENDING';
-              const isPreparing = order.status === 'PREPARING';
-              const isReady = order.status === 'READY';
-              const isCompleted = order.status === 'COMPLETED';
+              const isPending = order.orderStatus === 'RECEIVED';
+              const isPreparing = order.orderStatus === 'PREPARING';
+              const isReady = order.orderStatus === 'READY_TO_PICK';
+              const isActive = isPending || isPreparing || isReady;
 
               return (
                 <div
                   key={order.id}
-                  className={`rounded-3xl bg-sand border-2 p-6 shadow-md transition-all flex flex-col justify-between ${
+                  className={`h-full rounded-3xl bg-sand border-2 p-6 shadow-md transition-all flex flex-col ${
                     isPending
                       ? 'border-amber-500/40 bg-amber-500/5'
                       : isPreparing
@@ -325,10 +374,10 @@ export const StaffDashboardPage: React.FC = () => {
                         <span className="text-2xl font-black text-slateblue">
                           #{order.orderNumber}
                         </span>
-                        <div className="text-xs font-bold text-dusty mt-0.5">
-                          {order.customerName}
+                        <div className="text-xs font-bold text-navy/80 mt-0.5">
+                          {order.studentName}
                         </div>
-                        <div className="text-[11px] text-dusty">{order.customerPhone}</div>
+                        <div className="text-[11px] text-navy/70">{order.studentEmail}</div>
                       </div>
 
                       <span
@@ -342,23 +391,25 @@ export const StaffDashboardPage: React.FC = () => {
                             : 'bg-sand/30 text-dusty'
                         }`}
                       >
-                        {order.status}
+                        {order.orderStatus}
                       </span>
                     </div>
 
                     {/* Pickup slot & elapsed time */}
                     <div className="flex items-center justify-between text-xs py-2 px-3 rounded-xl bg-sand/30 font-medium">
-                      <span className="flex items-center gap-1.5 text-dusty">
+                      <span className="flex items-center gap-1.5 text-navy/75">
                         <Clock className="w-3.5 h-3.5" />
-                        Pickup: <strong>{order.pickupSlot}</strong>
+                        Pickup: <strong>{order.pickupSlot || 'Not scheduled'}</strong>
                       </span>
-                      <span className="text-dusty text-[11px]">{order.elapsedMinutes}m ago</span>
+                      <span className="text-navy/70 text-[11px]">
+                        {Math.max(0, Math.floor((Date.now() - new Date(order.createdAt).getTime()) / 60000))}m ago
+                      </span>
                     </div>
 
                     {/* Order Items List */}
                     <div className="space-y-2 pt-1 border-t border-line">
-                      <span className="text-[11px] font-bold text-dusty uppercase tracking-wider">
-                        Kitchen Ticket:
+                      <span className="text-[11px] font-bold text-navy/75 uppercase tracking-wider">
+                        Kitchen Ticket
                       </span>
                       <ul className="space-y-2 text-xs font-semibold">
                         {order.items.map((item: any, idx: number) => (
@@ -371,6 +422,11 @@ export const StaffDashboardPage: React.FC = () => {
                                 ↳ Note: {item.notes}
                               </span>
                             )}
+                            {item.cookingTip && (
+                              <span className="mt-1 rounded-lg bg-amber-500/10 px-2 py-1 text-[11px] font-medium text-amber-800">
+                                Cooking tip: {item.cookingTip}
+                              </span>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -378,46 +434,81 @@ export const StaffDashboardPage: React.FC = () => {
                   </div>
 
                   {/* Action Transition Buttons */}
-                  <div className="mt-6 pt-4 border-t border-line">
+                  {isActive && <div className="mt-auto pt-4 border-t border-line">
                     {isPending && (
-                      <button
-                        onClick={() => handleUpdateStatus(order.id, 'PREPARING')}
-                        disabled={actionLoadingId === order.id}
-                        className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-cream font-extrabold text-xs shadow-md transition flex items-center justify-center gap-1.5"
-                      >
-                        <Flame className="w-4 h-4" />
-                        <span>Start Cooking in Kitchen</span>
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => void handleUpdateStatus(order, 'PREPARING')}
+                          disabled={actionLoadingId === order.id}
+                          className="flex-1 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-cream font-extrabold text-xs shadow-md transition disabled:opacity-50"
+                        >
+                          <Flame className="inline w-4 h-4 mr-1" />
+                          Start preparing
+                        </button>
+                        <button
+                          onClick={() => void handleUpdateStatus(order, 'CANCELLED')}
+                          disabled={actionLoadingId === order.id}
+                          className="rounded-xl border border-rust/40 px-3 py-3 text-rust font-bold text-xs disabled:opacity-50"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     )}
 
                     {isPreparing && (
-                      <button
-                        onClick={() => handleUpdateStatus(order.id, 'READY')}
-                        disabled={actionLoadingId === order.id}
-                        className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-cream font-extrabold text-xs shadow-md transition flex items-center justify-center gap-1.5"
-                      >
-                        <CheckCircle2 className="w-4 h-4" />
-                        <span>Mark Ready for Pickup</span>
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => void handleUpdateStatus(order, 'READY_TO_PICK')}
+                          disabled={actionLoadingId === order.id}
+                          className="flex-1 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-cream font-extrabold text-xs shadow-md transition disabled:opacity-50"
+                        >
+                          <CheckCircle2 className="inline w-4 h-4 mr-1" />
+                          Mark ready
+                        </button>
+                        <button
+                          onClick={() => void handleUpdateStatus(order, 'CANCELLED')}
+                          disabled={actionLoadingId === order.id}
+                          className="rounded-xl border border-rust/40 px-3 py-3 text-rust font-bold text-xs disabled:opacity-50"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     )}
 
                     {isReady && (
-                      <button
-                        onClick={() => handleUpdateStatus(order.id, 'COMPLETED')}
-                        disabled={actionLoadingId === order.id}
-                        className="w-full py-3 rounded-xl bg-slateblue text-cream font-extrabold text-xs shadow-md transition flex items-center justify-center gap-1.5"
-                      >
-                        <PackageCheck className="w-4 h-4" />
-                        <span>Handed to Diner (Complete)</span>
-                      </button>
-                    )}
-
-                    {isCompleted && (
-                      <div className="text-center text-[11px] font-bold text-dusty py-2">
-                        ✓ Order Fulfilled
+                      <div className="space-y-2">
+                        <label htmlFor={`delivery-id-${order.id}`} className="block text-xs font-bold text-navy/80">
+                          Order ID
+                        </label>
+                        <input
+                          id={`delivery-id-${order.id}`}
+                          value={deliveryIds[order.id] || ''}
+                          onChange={(event) => {
+                            setDeliveryIds((current) => ({ ...current, [order.id]: event.target.value }));
+                            setDeliveryErrors((current) => ({ ...current, [order.id]: '' }));
+                          }}
+                          disabled={actionLoadingId === order.id}
+                          aria-invalid={Boolean(deliveryErrors[order.id])}
+                          aria-describedby={deliveryErrors[order.id] ? `delivery-error-${order.id}` : undefined}
+                          className="w-full rounded-xl border border-line bg-cream px-3 py-2 text-sm text-navy focus:outline-none focus:ring-2 focus:ring-skyblue disabled:opacity-50"
+                        />
+                        {deliveryErrors[order.id] && (
+                          <p id={`delivery-error-${order.id}`} role="alert" className="text-xs font-semibold text-red-700">
+                            {deliveryErrors[order.id]}
+                          </p>
+                        )}
+                        <button
+                          onClick={() => void handleUpdateStatus(order, 'DELIVERED', deliveryIds[order.id])}
+                          disabled={actionLoadingId === order.id || !deliveryIds[order.id]?.trim()}
+                          className="w-full py-3 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-extrabold text-xs shadow-md transition flex items-center justify-center gap-1.5 disabled:opacity-50"
+                        >
+                          <PackageCheck className="w-4 h-4" />
+                          Deliver
+                        </button>
                       </div>
                     )}
-                  </div>
+
+                  </div>}
                 </div>
               );
             })
@@ -438,15 +529,38 @@ export const StaffDashboardPage: React.FC = () => {
               </p>
             </div>
             <span className="text-xs font-semibold text-emerald-600">
-              {menuItems.filter((m) => m.isAvailable).length} / {menuItems.length} items active
+              {menuItems.filter((m) => m.availableNow).length} / {menuItems.length} items available now
             </span>
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label className="relative sm:col-span-1">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-dusty" />
+              <input value={menuSearch} onChange={(event) => setMenuSearch(event.target.value)} placeholder="Search menu items" className="w-full rounded-xl border border-line bg-cream py-2.5 pl-9 pr-3 text-xs text-slateblue focus:outline-none focus:ring-2 focus:ring-skyblue" />
+            </label>
+            <select value={menuCategoryFilter} onChange={(event) => setMenuCategoryFilter(event.target.value)} aria-label="Filter by category" className="rounded-xl border border-line bg-cream px-3 py-2.5 text-xs text-slateblue">
+              <option value="">All categories</option>
+              {staffCategories.map((category) => <option key={category} value={category}>{category}</option>)}
+            </select>
+            <select value={menuCuisineFilter} onChange={(event) => setMenuCuisineFilter(event.target.value)} aria-label="Filter by cuisine" className="rounded-xl border border-line bg-cream px-3 py-2.5 text-xs text-slateblue">
+              <option value="">All cuisines</option>
+              {staffCuisines.map((cuisine: string) => <option key={cuisine} value={cuisine}>{cuisine.replace(/-/g, ' ')}</option>)}
+            </select>
+          </div>
+
+          <p className="text-[11px] text-dusty">Showing {filteredMenuItems.length} of {menuItems.length} items</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {menuItems.map((item) => (
+            {filteredMenuItems.map((item) => {
+              const effectiveAvailable = item.availableNow ?? item.isAvailable;
+              const statusText = !item.isAvailable
+                ? 'Disabled by staff'
+                : !effectiveAvailable
+                  ? 'Auto-unavailable (meal window)'
+                  : 'Available now';
+              return (
               <div
                 key={item.id}
-                className="p-4 rounded-2xl bg-cream border border-line flex items-center justify-between gap-4"
+                className={`p-4 rounded-2xl bg-cream border border-line flex items-center justify-between gap-4 ${effectiveAvailable ? '' : 'opacity-70'}`}
               >
                 <div>
                   <h4 className="text-xs font-bold text-slateblue">
@@ -458,13 +572,18 @@ export const StaffDashboardPage: React.FC = () => {
                   <div className="mt-1">
                     <span
                       className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold ${
-                        item.isAvailable
+                        effectiveAvailable
                           ? 'bg-emerald-500/10 text-emerald-700'
-                          : 'bg-red-500/10 text-red-700'
+                          : !item.isAvailable
+                            ? 'bg-red-500/10 text-red-700'
+                            : 'bg-amber-500/10 text-amber-700'
                       }`}
                     >
-                      {item.isAvailable ? 'IN STOCK' : 'OUT OF STOCK'}
+                      {statusText}
                     </span>
+                    {!effectiveAvailable && item.unavailableReason && item.isAvailable && (
+                      <div className="mt-1 text-[10px] text-dusty">{item.unavailableReason}</div>
+                    )}
                   </div>
                 </div>
 
@@ -481,7 +600,8 @@ export const StaffDashboardPage: React.FC = () => {
                   <span>{item.isAvailable ? 'Active' : 'Disabled'}</span>
                 </button>
               </div>
-            ))}
+            );})}
+            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 rounded-2xl bg-cream border border-line p-6 text-center text-sm text-dusty">No menu items match these filters.</div>}
           </div>
         </div>
       )}

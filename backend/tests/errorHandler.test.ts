@@ -45,4 +45,17 @@ describe('Error handling', () => {
     // Ensure no internal details leaked
     expect(JSON.stringify(response.body)).not.toMatch(/prisma|table|localhost/i);
   });
+
+  it('returns 400 for malformed JSON request bodies', async () => {
+    const response = await request(app)
+      .post('/api/auth/login')
+      .set('Content-Type', 'application/json')
+      .send('{ invalid json')
+      .expect(400);
+
+    expect(response.body).toEqual({
+      success: false,
+      error: 'Request body contains invalid JSON.',
+    });
+  });
 });

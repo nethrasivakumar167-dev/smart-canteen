@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
+import { LandingPage } from './pages/Landing';
 import { HomePage } from './pages/HomePage';
 import { MenuPage } from './pages/MenuPage';
 import { FoodDetailsPage } from './pages/FoodDetailsPage';
@@ -11,6 +12,8 @@ import { StaffLoginPage } from './pages/StaffLoginPage';
 import { AdminLoginPage } from './pages/AdminLoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { StudentDashboardPage } from './pages/StudentDashboardPage';
+import { OrderHistoryPage } from './pages/OrderHistoryPage';
+import { FavoritesPage } from './pages/FavoritesPage';
 import { StaffDashboardPage } from './pages/StaffDashboardPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -29,10 +32,44 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           {/* Public Dining & Menu Routes */}
-          <Route index element={<HomePage />} />
-          <Route path="menu" element={<MenuPage />} />
+          <Route index element={<LandingPage />} />
+          <Route path="home" element={<HomePage />} />
           <Route path="menu/:id" element={<FoodDetailsPage />} />
-          <Route path="cart" element={<CartPage />} />
+          
+          {/* Student-only routes - Protected for STUDENT role only */}
+          <Route
+            path="menu"
+            element={
+              <ProtectedRoute allowedRoles={['STUDENT']}>
+                <MenuPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="cart"
+            element={
+              <ProtectedRoute allowedRoles={['STUDENT']}>
+                <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="orders"
+            element={
+              <ProtectedRoute allowedRoles={['STUDENT']}>
+                <OrderHistoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="student/orders" element={<Navigate to="/orders" replace />} />
+          <Route
+            path="favourites"
+            element={
+              <ProtectedRoute allowedRoles={['STUDENT']}>
+                <FavoritesPage />
+              </ProtectedRoute>
+            }
+          />
           
           {/* Portal Gateway */}
           <Route path="portals" element={<PortalSelectionPage />} />
@@ -48,7 +85,7 @@ export const App: React.FC = () => {
           <Route
             path="student/dashboard"
             element={
-              <ProtectedRoute allowedRoles={['STUDENT', 'FACULTY', 'VISITOR', 'ADMIN']}>
+              <ProtectedRoute allowedRoles={['STUDENT']}>
                 <StudentDashboardPage />
               </ProtectedRoute>
             }
@@ -56,7 +93,7 @@ export const App: React.FC = () => {
           <Route
             path="dashboard"
             element={
-              <ProtectedRoute allowedRoles={['STUDENT', 'FACULTY', 'VISITOR', 'ADMIN']}>
+              <ProtectedRoute allowedRoles={['STUDENT']}>
                 <StudentDashboardPage />
               </ProtectedRoute>
             }

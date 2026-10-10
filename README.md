@@ -7,7 +7,7 @@
 
 ## 🌟 Overview & Architecture
 
-Smart Canteen is engineered as a production-grade multi-role SaaS platform specifically designed for educational institutions, colleges, and enterprise food courts. It eliminates congestion during peak lunch and breakfast hours through real-time queue calculation, scheduled pre-ordering, digital QR pickup verification, dynamic wait time estimation, inventory recipe linkage, and smart recommendations.
+Smart Canteen is engineered as a production-grade multi-role SaaS platform specifically designed for educational institutions, colleges, and enterprise food courts. It eliminates congestion during peak lunch and breakfast hours through real-time queue calculation, scheduled pre-ordering, digital pickup verification, dynamic wait time estimation, and staff kitchen management.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -15,18 +15,18 @@ Smart Canteen is engineered as a production-grade multi-role SaaS platform speci
 │          Students • Faculty • Visitors • Staff          │
 └───────────────┬─────────────────────────┬───────────────┘
                 │                         │
-         REST API (Axios)             WebSockets
+          REST API (Axios)            Socket.IO
                 │                         │
 ┌───────────────▼─────────────────────────▼───────────────┐
 │                  EXPRESS.JS BACKEND                     │
-│    JWT Auth • RBAC • Order Engine • Inventory Recipes   │
+│    JWT Auth • RBAC • Order Engine • Socket Broadcast    │
 └───────────────┬─────────────────────────┬───────────────┘
                 │                         │
-       Prisma ORM (PostgreSQL)       AI Service Adapter
+       Prisma ORM (PostgreSQL)       AI Feedback Adapter
                 │                         │
 ┌───────────────▼─────────────┐   ┌───────▼───────────────┐
-│     PostgreSQL Database     │   │ LLM / Natural Search  │
-│  Users, Orders, Items, etc. │   │ Recommendations Engine│
+│     PostgreSQL Database     │   │  Optional AI Provider │
+│  Users, Orders, Items, etc. │   │ (Gemini / Mock)       │
 └─────────────────────────────┘   └───────────────────────┘
 ```
 
@@ -34,16 +34,24 @@ Smart Canteen is engineered as a production-grade multi-role SaaS platform speci
 
 ## 🚀 Key Features
 
-* **Real-Time Preordering & Smart Queue**: Estimated preparation calculation, live queue rank (`#4 in kitchen queue`), and estimated ready timestamps.
-* **Instant Digital QR Pickup Pass**: Secure server-validated QR tokens for counterfeit-proof order handover.
+* **Real-Time Preordering & Order Flow**:
+  - Student order creation inside Prisma transaction.
+  - Server-side validation of item & category availability.
+  - Unique order IDs (`SC-XXXXXX`).
+  - Cash & mock payment integration.
+* **Server-Enforced Order Lifecycle**:
+  - `RECEIVED` → `PREPARING` → `READY_TO_PICK` → `DELIVERED`.
+  - Server-side delivery verification requiring `READY_TO_PICK` status before marking `DELIVERED`.
+* **Real-Time WebSockets**:
+  - Authenticated Socket.IO with JWT verification and user/role rooms (`user:id`, `role:STAFF`, `role:ADMIN`).
+  - Real-time event broadcasting (`order-created`, `order-status-updated`, `availability-updated`).
 * **Role-Based Access Control (RBAC)**:
-  * `STUDENT` & `FACULTY`: Pre-order, dietary filter, favorites, wallet/points loyalty, order history, review system.
-  * `VISITOR / GUEST`: Instant phone/name guest checkout mode without institutional credentials.
-  * `STAFF`: Touch-optimized Kitchen Display System (KDS) with `NEW`, `PREPARING`, `READY`, and `COMPLETED` swimlanes.
-  * `ADMIN`: Revenue analytics, hourly peak demand heatmap, item pricing/availability toggle, user audits.
-* **Inventory & Recipe Deductions**: Automatic ingredient depletion based on order items.
-* **AI Food Assistant & Natural Query**: Intelligent meal suggestions based on budget, preparation speed, and dietary preferences.
-* **Dark / Light Theme & Tamil Localization Ready**: Designed with modern typography, glassmorphism, responsive mobile-first UI.
+  - `STUDENT`: Browse menu, cart management, order creation, order tracking, rating/feedback submission for delivered orders.
+  - `STAFF`: Kitchen Display System (KDS), menu item/category availability toggles, delivery verification.
+  - `ADMIN`: User provisioning, master order logs, PostgreSQL analytics (revenue, order counts, status breakdown, top items), optional failure-safe AI feedback summary.
+* **Failure-Safe AI Integration**:
+  - Optional AI feedback summary adapter (`GeminiAIFeedbackProvider` / `MockAIFeedbackProvider`).
+  - Environment-driven configuration (`AI_PROVIDER`, `GEMINI_API_KEY`). Safe fallback when API key is unconfigured or call fails.
 
 ---
 
@@ -51,123 +59,128 @@ Smart Canteen is engineered as a production-grade multi-role SaaS platform speci
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | React 18, Vite, TypeScript, Tailwind CSS, React Router v6, Zustand, Axios, Lucide Icons |
-| **Backend** | Node.js, Express, TypeScript, Zod, JWT, bcryptjs, Socket.IO, Helmet, Morgan |
+| **Frontend** | React 19, Vite 8, TypeScript 6, Tailwind CSS 3, React Router 7, Zustand, Axios, Lucide Icons |
+| **Backend** | Node.js, Express, TypeScript, Zod, JWT, bcryptjs, Socket.IO, Helmet, Morgan, Vitest, Supertest |
 | **Database & ORM** | PostgreSQL, Prisma ORM |
-| **Styling & Design** | Custom Design System, Plus Jakarta Sans & Outfit Fonts, Dark Mode |
-| **DevOps & Tooling** | Docker, Docker Compose, TypeScript strict mode |
+| **Design & Styling** | Custom Design System, HSL Color Palette, Modern Typography, Responsive Mobile-First Layout |
 
 ---
 
-## 👥 Demo Accounts
+## 📋 API Overview
 
-| Role | Email | Password | Access Area |
-|---|---|---|---|
-| **Student** | `student@demo.com` | `password123` | Preorder, Favorites, Cart, Live Queue |
-| **Faculty** | `faculty@demo.com` | `password123` | Preorder, Priority Slots, Loyalty |
-| **Staff** | `staff@demo.com` | `password123` | Kitchen Display System, QR Scanner |
-| **Admin** | `admin@demo.com` | `password123` | Master Analytics, Menu & Inventory Control |
+### Public & Auth Routes (`/api/auth`)
+- `POST /api/auth/register` — Public student registration
+- `POST /api/auth/login` — Universal login (supports portal parameter)
+- `POST /api/auth/student/login` — Student portal login
+- `POST /api/auth/staff/login` — Staff portal login
+- `POST /api/auth/admin/login` — Admin portal login
+- `POST /api/auth/logout` — Client sign-out acknowledgement; bearer JWTs remain valid until expiry
+
+### Public Menu Routes (`/api`)
+- `GET /api/categories` — List available categories
+- `GET /api/menu` — Search & list available menu items
+- `GET /api/menu/:id` — Get menu item details
+
+### Student Routes (`/api/student`) — *Requires STUDENT Role (admins may access order endpoints)*
+- `POST /api/student/orders` — Create preorder inside Prisma transaction
+- `GET /api/student/orders` — Get student order history
+- `GET /api/student/orders/:id` — Get specific order details
+- `POST /api/student/orders/:id/feedback` — Submit rating and comment for completed (`DELIVERED`) order
+
+### Staff Routes (`/api/staff`) — *Requires STAFF or ADMIN Role*
+- `GET /api/staff/orders` — Get active kitchen orders
+- `PATCH /api/staff/orders/:id/status` — Enforce order status transition (`RECEIVED` → `PREPARING` → `READY_TO_PICK` → `DELIVERED`)
+- `POST /api/staff/verify-delivery` — Verify an `orderNumber` or `id` and mark the order delivered
+- `GET /api/staff/menu-status` — Get menu item availability
+- `PATCH /api/staff/menu-status/:id` — Toggle item availability
+- `PATCH /api/staff/categories/:id/availability` — Toggle category availability
+
+### Admin Routes (`/api/admin`) — *Requires ADMIN Role*
+- `GET /api/admin/overview-stats` — PostgreSQL analytics (revenue, order status breakdown, top items)
+- `GET /api/admin/users` — User directory
+- `POST /api/admin/users` — Provision staff or admin user account
+- `GET /api/admin/orders` — Master transaction ledger
+- `GET /api/admin/feedback` — List student order ratings & reviews
+- `GET /api/admin/feedback/summary` — Get a daily cached feedback summary; `?refresh=true` requests a rate-limited refresh
+- `POST /api/admin/cooking-tips/recompute` — Recompute staff cooking tips from recent per-item feedback
 
 ---
 
-## 🏃 Quick Start (Local Development)
+## 🔑 Environment Variables (Names Only)
+
+### Backend Environment Variables (`backend/.env`)
+- `NODE_ENV` (e.g. `development`, `test`, `production`)
+- `PORT` (e.g. `5000`)
+- `CLIENT_URL` (e.g. `http://localhost:5173`)
+- `DATABASE_URL` (PostgreSQL connection string)
+- `JWT_SECRET` (Minimum 32 characters long)
+- `JWT_EXPIRES_IN` (e.g. `7d`)
+- `AI_PROVIDER` (`mock` or `gemini`)
+- `GEMINI_API_KEY` (Optional Gemini API key)
+- `DEMO_PASSWORD` (Required only when running the non-production database seed)
+
+### Frontend Environment Variables (`frontend/.env`)
+- `VITE_API_URL` (Backend HTTP API origin)
+- `VITE_SOCKET_URL` (Backend Socket.IO origin)
+
+---
+
+## ⚙️ Local Setup & Database Initialization
 
 ### 1. Prerequisites
-- Node.js (v20+)
-- npm (v10+)
-- PostgreSQL (v15+) or Docker
+- Node.js (v20.19+ or v22.12+)
+- npm (v9+)
+- PostgreSQL (v14+) running locally or via Docker
 
-### 2. Using Docker Compose (Recommended)
-```bash
-# Copy environment template and fill in secrets
-cp .env.example .env
-# Edit .env with secure values (generate with: openssl rand -hex 32)
-
-# Start all services
-docker compose up -d
-
-# Run database migrations and seed
-docker compose exec backend npx prisma migrate deploy
-docker compose exec backend npx prisma db seed
-```
-
-Services will be available at:
-- Frontend: `http://localhost:5173`
-- Backend API: `http://localhost:5000`
-- Health Check: `http://localhost:5000/api/health`
-
-### 3. Manual Setup (Without Docker)
-
-#### Backend
+### 2. Database Setup
 ```bash
 cd backend
 cp .env.example .env
-# Edit .env with your DATABASE_URL, JWT_SECRET (min 32 chars, no placeholders)
-npm install
+# Edit .env with your DATABASE_URL and JWT_SECRET
+
 npx prisma generate
-npx prisma migrate dev
+npx prisma migrate dev --name init
 npx prisma db seed
+```
+
+### 3. Start Backend Development Server
+```bash
+cd backend
 npm run dev
 ```
-Runs at: `http://localhost:5000`
+Backend server runs on `http://localhost:5000`
 
-#### Frontend
+### 4. Start Frontend Development Server
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Runs at: `http://localhost:5173`
+Frontend client runs on `http://localhost:5173`
 
 ---
 
-## 📂 Project Structure
+## 🧪 Running Tests & Build Verification
 
-```text
-App/
-├── frontend/             # React + Vite + TypeScript + Tailwind CSS
-│   ├── src/
-│   │   ├── components/   # UI components, cards, navbar, modals
-│   │   ├── layouts/      # MainLayout, AuthLayout, DashboardLayout
-│   │   ├── pages/        # Home, Menu, FoodDetails, Cart, Auth
-│   │   ├── store/        # Zustand state stores (cart, auth, theme)
-│   │   ├── services/     # Axios API service instances
-│   │   ├── types/        # TypeScript models and DTO interfaces
-│   │   └── utils/        # Price helpers, time formatters
-│   ├── nginx.conf        # Nginx config for production (SPA fallback)
-│   ├── index.html
-│   └── package.json
-├── backend/              # Node.js + Express + TypeScript + Prisma
-│   ├── prisma/
-│   │   ├── schema.prisma # PostgreSQL relational data model
-│   │   └── seed.ts       # Database seeder with Indian canteen menu
-│   ├── src/
-│   │   ├── config/       # Environment validation (Zod)
-│   │   ├── middleware/   # JWT auth, RBAC, error handlers
-│   │   ├── routes/       # Express route definitions
-│   │   ├── services/     # Business logic & AI adapters
-│   │   ├── tests/        # Vitest + Supertest integration tests
-│   │   ├── app.ts        # Express app factory
-│   │   ├── server.ts     # HTTP server + Socket.IO bootstrap
-│   │   └── socket.ts     # Socket.IO initialization
-│   └── package.json
-├── docker-compose.yml    # Containerized environment (uses root .env)
-├── .env.example          # Root environment template
-├── backend/.env.example  # Backend environment template
-└── README.md
+```bash
+# Run backend Vitest test suites (61 tests)
+cd backend
+npm test
+
+# Run frontend TypeScript typecheck & production build
+cd frontend
+npm run build
 ```
 
 ---
 
-## 🛣️ Development Roadmap
+## 🚢 Production Deployment Steps
 
-- [x] **Phase 1**: Architecture, monorepo foundation, Prisma models, core UI design system & routes (`/`, `/menu`, `/menu/:id`, `/cart`, `/login`, `/register`).
-- [ ] **Phase 2**: Real JWT Authentication, PostgreSQL seed data & Prisma migration, Protected routes, Rate limiting, Docker foundation.
-- [ ] **Phase 3**: End-to-end Preorder engine, Checkout, dynamic wait time estimation, QR generation.
-- [ ] **Phase 4**: Staff Kitchen Display System (KDS) & Live Queue tracking.
-- [ ] **Phase 5**: Inventory management, automatic recipe stock depletion, waste tracking.
-- [ ] **Phase 6**: Admin Analytics Dashboard, peak-hour heatmap, menu management.
-- [ ] **Phase 7**: QR pickup scanner, reviews & ratings, loyalty points, coupons.
-- [ ] **Phase 8**: AI Food Assistant & natural language menu query engine.
-- [ ] **Phase 9**: PWA configuration, dark mode refinement, bilingual Tamil support.
-- [ ] **Phase 10**: E2E validation, Docker integration, production hardening.
+1. **Database Migration**:
+   Run `npx prisma migrate deploy` against the target production PostgreSQL instance.
+2. **Environment Variables**:
+   Set all required backend environment variables (`NODE_ENV=production`, `DATABASE_URL`, `JWT_SECRET` >= 32 chars, `CLIENT_URL`). Set `VITE_API_URL` to the publicly reachable backend API origin before building the frontend image.
+3. **Backend Production Start**:
+   Compile backend using `npm run build` and run `npm start`; the start script runs `prisma migrate deploy` before starting the server. The Docker image uses this same start script.
+4. **Frontend Static Production Build**:
+   Build the frontend bundle using `npm run build` inside `frontend/` and serve static assets via Nginx or CDN. Ensure CORS `CLIENT_URL` matches the frontend domain.

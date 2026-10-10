@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HeroSection } from '../components/home/HeroSection';
 import { LiveRushMeter } from '../components/home/LiveRushMeter';
 import { HowItWorksSection } from '../components/home/HowItWorksSection';
 import { SmartFeaturesSection } from '../components/home/SmartFeaturesSection';
 import { FoodCard } from '../components/menu/FoodCard';
-import { MOCK_MENU_ITEMS, MOCK_CATEGORIES } from '../data/mockData';
+import { fetchCategories, fetchMenuItems } from '../api/menuApi';
+import { Category, MenuItem } from '../types';
 import {
   Flame,
   ArrowRight,
@@ -21,14 +22,38 @@ import {
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
-  const popularItems = MOCK_MENU_ITEMS.filter((item) => item.isPopular).slice(0, 6);
-  const categories = MOCK_CATEGORIES.filter((c) => c.slug !== 'all');
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadData = async () => {
+      try {
+        const [cats, items] = await Promise.all([fetchCategories(), fetchMenuItems()]);
+        if (isMounted) {
+          setCategories(cats.filter((c) => c.slug !== 'all'));
+          setMenuItems(items);
+        }
+      } catch (err) {
+        console.error('Error loading home data:', err);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
+    loadData();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const popularItems = (
+    menuItems.filter((item) => item.isPopular).length > 0
+      ? menuItems.filter((item) => item.isPopular)
+      : menuItems
+  ).slice(0, 6);
+
   const categoryIcons = { Sunrise, Soup, Sandwich, Coffee, IceCream, Salad };
-  const categoryCircleStyles = [
-    'bg-dusty text-navy',
-    'bg-cream text-rust',
-    'bg-navy text-cream',
-  ];
 
   return (
     <div className="bg-beige">
@@ -61,22 +86,23 @@ export const HomePage: React.FC = () => {
 
           <div className="overflow-x-auto pb-4 -mx-4 px-4">
             <div className="flex gap-3 min-w-max">
-              {categories.map((cat, index) => {
-                const Icon = categoryIcons[cat.icon as keyof typeof categoryIcons] || Flame;
+              {categories.map((cat) => {
+                const Icon = categoryIcons[cat.slug as keyof typeof categoryIcons] || Flame;
                 return (
-                <Link
-                  key={cat.id}
-                  to={`/menu?category=${cat.id}`}
-                  className="flex flex-col items-center gap-2 px-4 py-3 bg-cream text-navy hover:bg-sand rounded-3xl border border-line transition-all duration-200 whitespace-nowrap group"
-                >
-                  <div className="w-11 h-11 rounded-xl bg-cream text-navy flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className="font-bold text-xs sm:text-sm text-navy group-hover:text-rust transition-colors">
-                    {cat.name}
-                  </span>
-                </Link>
-                )})}
+                  <Link
+                    key={cat.id}
+                    to={`/menu?category=${cat.slug || cat.id}`}
+                    className="flex flex-col items-center gap-2 px-4 py-3 bg-cream text-navy hover:bg-sand rounded-3xl border border-line transition-all duration-200 whitespace-nowrap group"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-cream text-navy flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="font-bold text-xs sm:text-sm text-navy group-hover:text-rust transition-colors">
+                      {cat.name}
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -100,7 +126,7 @@ export const HomePage: React.FC = () => {
               to="/menu"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sand text-xs sm:text-sm font-bold text-navy hover:bg-dusty transition group"
             >
-              <span>Explore Complete Menu ({MOCK_MENU_ITEMS.length})</span>
+              <span>Explore Complete Menu ({menuItems.length})</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

@@ -10,7 +10,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "prisma db seed",
-    "test": "vitest run"
+    "test": "node --max-old-space-size=4096 ./node_modules/vitest/vitest.mjs run --fileParallelism=false"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

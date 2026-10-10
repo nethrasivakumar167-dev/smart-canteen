@@ -1,0 +1,536 @@
+[
+  {
+    "name": "South Indian Meals",
+    "description": "Rice with sambar, rasam, vegetable sides, and accompaniments",
+    "price": 105,
+    "categories": [
+      "Lunch",
+      "Indian",
+      "Veg",
+      "Meals"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk if curd is included; verify each side dish.",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "south-indian-meals",
+    "tags": [
+      "indian",
+      "meals"
+    ]
+  },
+  {
+    "name": "Paneer Butter Masala",
+    "description": "Soft paneer in a creamy, mildly sweet tomato gravy",
+    "price": 130,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; possible cashews.",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "paneer-butter-masala",
+    "tags": [
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Chole Bhature",
+    "description": "Tangy, spiced chickpea curry with fluffy fried bread",
+    "price": 100,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible milk in dough.",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chole-bhature",
+    "tags": [
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Paneer Tikka",
+    "description": "Smoky grilled paneer with aromatic spices",
+    "price": 70,
+    "categories": [
+      "Starter",
+      "Veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "paneer-tikka",
+    "tags": [
+      "starter",
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Palak Paneer",
+    "description": "Paneer in a smooth spinach gravy",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "palak-paneer",
+    "tags": []
+  },
+  {
+    "name": "Dal Tadka",
+    "description": "Yellow lentils tempered with garlic and spices",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check tempering",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "dal-tadka",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Dal Makhani",
+    "description": "Creamy slow-cooked black lentils",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Milk, possible butter",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "dal-makhani",
+    "tags": []
+  },
+  {
+    "name": "Rajma Chawal",
+    "description": "Kidney bean curry with steamed rice",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check accompaniments",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "rajma-chawal",
+    "tags": [
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Chole Rice",
+    "description": "Spicy chickpeas with rice",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check accompaniments",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chole-rice",
+    "tags": [
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Veg Pulao",
+    "description": "Fragrant rice with mixed vegetables",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Possible milk or nuts",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "veg-pulao",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Lemon Rice",
+    "description": "Tangy rice with lemon, curry leaves and spices",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Peanuts may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "lemon-rice",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Curd Rice",
+    "description": "Cooling rice mixed with seasoned yoghurt",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "curd-rice",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Bisibele Bath",
+    "description": "Karnataka-style rice, lentils and vegetables",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check spice mix",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "bisibele-bath",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Veg Biryani",
+    "description": "Aromatic rice with vegetables and spices",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Possible milk or nuts",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "veg-biryani",
+    "tags": []
+  },
+  {
+    "name": "Paneer Biryani",
+    "description": "Spiced rice with tender paneer",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; possible nuts",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "paneer-biryani",
+    "tags": []
+  },
+  {
+    "name": "Chapati with Kurma",
+    "description": "Soft flatbread with aromatic vegetable curry",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible nuts",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chapati-with-kurma",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Aloo Paratha",
+    "description": "Stuffed flatbread with spiced potatoes",
+    "price": 50,
+    "categories": [
+      "Breakfast",
+      "Lunch",
+      "Veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "BREAKFAST",
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible milk",
+    "spiceLevel": "MILD",
+    "preparationTime": 10,
+    "defaultAvailable": true,
+    "slug": "aloo-paratha",
+    "tags": []
+  },
+  {
+    "name": "Veg Khichdi",
+    "description": "Comforting rice and lentils cooked together",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check tempering",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "veg-khichdi",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Kadhi Pakora",
+    "description": "Yoghurt-based curry with fritters",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Milk, gluten may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "kadhi-pakora",
+    "tags": [
+      "north-indian"
+    ]
+  }
+]

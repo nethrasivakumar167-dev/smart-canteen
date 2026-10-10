@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import { useCartStore } from '../store/cartStore';
 import { useToastStore } from '../store/toastStore';
+import { fetchStudentOrders } from '../api/orderApi';
+import { FoodCard } from '../components/menu/FoodCard';
 import {
   GraduationCap,
   UtensilsCrossed,
@@ -27,11 +29,48 @@ export const StudentDashboardPage: React.FC = () => {
   const { addToast } = useToastStore();
 
   const [dashboardData, setDashboardData] = useState<any>(null);
+  const [feedbackEntries, setFeedbackEntries] = useState<any[]>([]);
+  const [hasUnreviewedDeliveredOrder, setHasUnreviewedDeliveredOrder] = useState(false);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetchDashboard();
+    fetchFeedback();
+    fetchUnreviewedDeliveredOrder();
+    fetchRecommendations();
   }, []);
+
+  const fetchUnreviewedDeliveredOrder = async () => {
+    try {
+      const response = await fetchStudentOrders();
+      if (response.success) {
+        setHasUnreviewedDeliveredOrder(
+          (response.data || []).some((order: any) => order.orderStatus === 'DELIVERED' && !order.feedback)
+        );
+      }
+    } catch (error) {
+      console.error('Failed to check delivered orders awaiting feedback:', error);
+    }
+  };
+
+  const fetchFeedback = async () => {
+    try {
+      const response = await axios.get('/student/feedback');
+      if (response.data.success) setFeedbackEntries(response.data.data || []);
+    } catch (error) {
+      console.error('Failed to load student feedback:', error);
+    }
+  };
+
+  const fetchRecommendations = async () => {
+    try {
+      const response = await axios.get('/student/recommendations');
+      if (response.data.success) setRecommendations(response.data.data || []);
+    } catch (error) {
+      console.error('Failed to load student recommendations:', error);
+    }
+  };
 
   const fetchDashboard = async () => {
     setLoading(true);
@@ -40,8 +79,8 @@ export const StudentDashboardPage: React.FC = () => {
       if (res.data.success) {
         setDashboardData(res.data.data);
       }
-    } catch {
-      // Fallback local representation if network issue
+    } catch (error) {
+      console.error('Failed to load student dashboard:', error);
     } finally {
       setLoading(false);
     }
@@ -51,18 +90,10 @@ export const StudentDashboardPage: React.FC = () => {
     addItem({
       id: item.id,
       name: item.name,
-      description: item.name,
       price: item.price,
-      categoryId: 'quick',
       imageUrl: item.imageUrl || '',
       isVegetarian: true,
-      ingredients: [],
-      allergens: [],
       preparationTime: item.preparationTime || 5,
-      isAvailable: true,
-      stockStatus: 'AVAILABLE',
-      rating: 4.9,
-      reviewCount: 50,
     });
     addToast({
       type: 'success',
@@ -81,6 +112,16 @@ export const StudentDashboardPage: React.FC = () => {
     navigate('/student/login');
   };
 
+  const orderSteps = [
+    { status: 'RECEIVED', label: 'Confirmed' },
+    { status: 'PREPARING', label: 'Preparing' },
+    { status: 'READY_TO_PICK', label: 'Ready for Pickup' },
+    { status: 'DELIVERED', label: 'Delivered' },
+  ];
+  const currentOrderStep = orderSteps.findIndex(
+    (step) => step.status === dashboardData?.activeOrder?.status
+  );
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
       
@@ -92,7 +133,7 @@ export const StudentDashboardPage: React.FC = () => {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slateblue/20 backdrop-blur-md text-cream text-xs font-bold uppercase tracking-wider">
               <GraduationCap className="w-3.5 h-3.5" />
-              <span>Student Account • {user?.institutionId || 'Campus Member'}</span>
+              <span>Student Account • {user?.institutionId || 'Not set'}</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Welcome back, {user?.name || 'Student'}!
@@ -129,9 +170,9 @@ export const StudentDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              {dashboardData?.stats?.activeOrdersCount ?? 1}
+              {dashboardData?.stats?.activeOrdersCount ?? 0}
             </div>
-            <div className="text-xs text-dusty font-medium">Active Orders</div>
+            <div className="text-xs text-navy/75 font-medium">Active Orders</div>
           </div>
         </div>
 
@@ -141,9 +182,9 @@ export const StudentDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              {dashboardData?.stats?.totalOrdersCount ?? 14}
+              {dashboardData?.stats?.totalOrdersCount ?? 0}
             </div>
-            <div className="text-xs text-dusty font-medium">Total Preorders</div>
+            <div className="text-xs text-navy/75 font-medium">Total Preorders</div>
           </div>
         </div>
 
@@ -153,12 +194,36 @@ export const StudentDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              {dashboardData?.stats?.savedFavoritesCount ?? 4}
+              {dashboardData?.stats?.savedFavoritesCount ?? 0}
             </div>
-            <div className="text-xs text-dusty font-medium">Favorite Items</div>
+            <div className="text-xs text-navy/75 font-medium">Favorite Items</div>
           </div>
         </div>
       </div>
+
+      {recommendations.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-end justify-between">
+            <div>
+              <h2 className="text-lg font-black text-slateblue">Recommended for you</h2>
+              <p className="text-xs text-dusty">Picks based on today's menu and your activity.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {recommendations.map((recommendation) => (
+              <article key={recommendation.item.id} className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[10px] font-extrabold text-amber-800">
+                    {recommendation.label === 'Smart pick' ? 'Smart pick' : 'Popular now'}
+                  </span>
+                  <span className="truncate text-right text-[10px] text-dusty">{recommendation.reason}</span>
+                </div>
+                <FoodCard item={recommendation.item} />
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Main Grid: Active Order + Favorites */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -172,63 +237,128 @@ export const StudentDashboardPage: React.FC = () => {
                   Live Order Tracker
                 </span>
                 <h2 className="text-lg sm:text-xl font-black text-slateblue mt-0.5">
-                  Order #{dashboardData?.activeOrder?.orderNumber || 'SC-1048'}
+                  {dashboardData?.activeOrder
+                    ? `Order #${dashboardData.activeOrder.orderNumber}`
+                    : 'No active orders'}
                 </h2>
               </div>
 
               <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-                <span>Preparing in Kitchen (~8 mins)</span>
+                <span>
+                  {dashboardData?.activeOrder
+                    ? dashboardData.activeOrder.status.replace(/_/g, ' ')
+                    : 'No active order'}
+                </span>
               </div>
+              <section className="p-6 sm:p-7 rounded-3xl bg-sand border border-line shadow-md space-y-4">
+                <div className="flex items-center justify-between gap-3">
+                  <h2 className="text-base font-bold text-slateblue">My Feedback</h2>
+                  {hasUnreviewedDeliveredOrder && (
+                    <Link to="/orders" className="text-xs font-bold text-navy hover:text-rust hover:underline">
+                      Rate your order
+                    </Link>
+                  )}
+                </div>
+                {feedbackEntries.length ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {feedbackEntries.map((feedback) => (
+                      <article key={feedback.id} className="rounded-2xl bg-cream border border-line p-4 space-y-1.5">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-sm font-bold text-slateblue">{feedback.rating}/5 stars</span>
+                          <span className="text-[11px] text-dusty">{new Date(feedback.createdAt).toLocaleDateString()}</span>
+                        </div>
+                        <p className="text-xs font-semibold text-espresso">Order #{feedback.orderNumber}</p>
+                        <p className="text-sm text-espresso">{feedback.comment || 'No comment provided.'}</p>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-2xl bg-cream border border-line p-4 text-sm text-navy/75">No feedback yet.</div>
+                )}
+              </section>
             </div>
 
-            {/* Preparation Steps Progress */}
-            <div className="grid grid-cols-3 gap-2 text-center text-xs font-bold pt-2">
-              <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 border border-emerald-500/30">
-                <CheckCircle2 className="w-4 h-4 mx-auto mb-1 text-emerald-500" />
-                <span>1. Confirmed</span>
+            {/* Order Status Progress */}
+            {dashboardData?.activeOrder && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-bold pt-2">
+                {orderSteps.map((step, index) => {
+                  const isComplete = currentOrderStep > index;
+                  const isCurrent = currentOrderStep === index;
+                  const isDelivered = step.status === 'DELIVERED' && isCurrent;
+                  return (
+                    <div
+                      key={step.status}
+                      className={`p-3 rounded-xl border ${
+                        isComplete || isDelivered
+                          ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/30'
+                          : isCurrent
+                            ? 'bg-amber-500/10 text-amber-600 border-amber-500/30 animate-pulse'
+                            : 'bg-sand/30 text-navy/70 border-line'
+                      }`}
+                    >
+                      {(isComplete || isDelivered) && (
+                        <CheckCircle2 className="w-4 h-4 mx-auto mb-1 text-emerald-500" />
+                      )}
+                      {isCurrent && !isDelivered && (
+                        <Flame className="w-4 h-4 mx-auto mb-1 text-amber-500" />
+                      )}
+                      {!isComplete && !isCurrent && (
+                        <span className="block mb-1">{index + 1}.</span>
+                      )}
+                      <span>{step.label}</span>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="p-3 rounded-xl bg-amber-500/10 text-amber-600 border border-amber-500/30 animate-pulse">
-                <Flame className="w-4 h-4 mx-auto mb-1 text-amber-500" />
-                <span>2. Cooking</span>
-              </div>
-              <div className="p-3 rounded-xl bg-sand/30 text-slateblue border border-line">
-                <span className="w-4 h-4 mx-auto mb-1 text-dusty">📦</span>
-                <span>3. Ready for Pickup</span>
-              </div>
-            </div>
+            )}
 
             {/* Order Items Summary */}
             <div className="p-4 rounded-2xl bg-cream border border-line space-y-2 text-xs sm:text-sm">
-              <div className="flex justify-between font-medium text-slateblue">
-                <span>1x Crispy Ghee Podi Masala Dosa</span>
-                <span className="font-bold text-slateblue">₹75</span>
-              </div>
-              <div className="flex justify-between font-medium text-slateblue">
-                <span>1x Authentic Kumbakonam Filter Coffee</span>
-                <span className="font-bold text-slateblue">₹30</span>
-              </div>
-              <div className="pt-2 border-t border-line flex justify-between font-extrabold text-slateblue">
-                <span>Total Amount Paid</span>
-                <span className="text-slateblue">₹105</span>
-              </div>
+              {dashboardData?.activeOrder ? (
+                <>
+                  {dashboardData.activeOrder.items.map((item: any, index: number) => (
+                    <div key={`${item.name}-${index}`} className="flex justify-between font-medium text-slateblue">
+                      <span>{item.quantity}x {item.name}</span>
+                      <span className="font-bold text-slateblue">₹{item.price * item.quantity}</span>
+                    </div>
+                  ))}
+                  <div className="pt-2 border-t border-line flex justify-between font-extrabold text-slateblue">
+                    <span>Total Amount</span>
+                    <span className="text-slateblue">₹{dashboardData.activeOrder.total}</span>
+                  </div>
+                </>
+              ) : (
+                <div className="p-3 text-center text-navy/75">
+                  No active order. Place an order to see its status here.
+                </div>
+              )}
             </div>
 
-            {/* Pickup Info (QR removed) */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slateblue/5 border border-slateblue/10 text-xs">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-slateblue text-cream flex items-center justify-center font-bold">
-                  <span className="font-mono text-xs">SC-892</span>
+            {dashboardData?.activeOrder && (
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slateblue/5 border border-slateblue/10 text-xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-slateblue text-cream flex items-center justify-center font-bold">
+                    <span className="font-mono text-xs">{dashboardData.activeOrder.orderNumber}</span>
+                  </div>
+                  <div className="space-y-1">
+                    {dashboardData.activeOrder.estimatedMinutes != null && (
+                      <div className="text-navy/75">
+                        ETA: {dashboardData.activeOrder.estimatedMinutes} minutes
+                      </div>
+                    )}
+                    {dashboardData.activeOrder.pickupSlot != null && (
+                      <div className="text-navy/75">
+                        Pickup slot: {dashboardData.activeOrder.pickupSlot}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <div className="font-bold text-cream">Show Order ID at Counter 02</div>
-                  <div className="text-dusty">Scheduled Pickup: 13:45 - 14:00</div>
-                </div>
+                <span className="px-3 py-1 rounded-lg bg-cream text-slateblue font-extrabold text-[11px]">
+                  Order ID: {dashboardData.activeOrder.orderNumber}
+                </span>
               </div>
-              <span className="px-3 py-1 rounded-lg bg-cream text-slateblue font-extrabold text-[11px]">
-                Order ID: SC-892
-              </span>
-            </div>
+            )}
           </div>
 
           {/* Past Order History */}
@@ -241,10 +371,7 @@ export const StudentDashboardPage: React.FC = () => {
             </h3>
 
             <div className="space-y-2.5">
-              {(dashboardData?.recentOrders || [
-                { id: '1', orderNumber: 'SC-1022', date: 'Yesterday, 1:15 PM', items: 'South Indian Executive Mini Meals', total: 95, status: 'COMPLETED' },
-                { id: '2', orderNumber: 'SC-0985', date: '02 Oct 2026, 9:30 AM', items: 'Steamed Rice Idli with Medu Vada (2+1)', total: 55, status: 'COMPLETED' },
-              ]).map((order: any) => (
+              {(dashboardData?.recentOrders || []).map((order: any) => (
                 <div
                   key={order.id}
                   className="flex items-center justify-between p-3.5 rounded-2xl bg-cream border border-line text-xs"
@@ -253,7 +380,7 @@ export const StudentDashboardPage: React.FC = () => {
                     <div className="font-bold text-slateblue">
                       #{order.orderNumber} • {order.items}
                     </div>
-                    <div className="text-dusty text-[11px]">{order.date}</div>
+                    <div className="text-navy/70 text-[11px]">{order.date}</div>
                   </div>
                   <div className="text-right">
                     <div className="font-extrabold text-slateblue">₹{order.total}</div>
@@ -263,6 +390,9 @@ export const StudentDashboardPage: React.FC = () => {
                   </div>
                 </div>
               ))}
+              {!dashboardData?.recentOrders?.length && (
+                <div className="p-3.5 text-xs text-dusty">No previous orders yet.</div>
+              )}
             </div>
           </div>
         </div>
@@ -275,26 +405,11 @@ export const StudentDashboardPage: React.FC = () => {
                 <Flame className="w-4 h-4 text-slateblue" />
                 <span>Quick Re-Order</span>
               </h3>
-              <span className="text-xs text-dusty">Top Picks</span>
+              <span className="text-xs text-navy/75">Top Picks</span>
             </div>
 
             <div className="space-y-3">
-              {(dashboardData?.quickFavorites || [
-                {
-                  id: 'item-1',
-                  name: 'Crispy Ghee Podi Masala Dosa',
-                  price: 75,
-                  preparationTime: 8,
-                  imageUrl: 'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=80',
-                },
-                {
-                  id: 'item-4',
-                  name: 'Authentic Kumbakonam Filter Coffee',
-                  price: 30,
-                  preparationTime: 3,
-                  imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80',
-                },
-              ]).map((item: any) => (
+              {(dashboardData?.quickFavorites || []).map((item: any) => (
                 <div
                   key={item.id}
                   className="p-3 rounded-2xl bg-cream border border-line flex items-center justify-between gap-3"
@@ -321,6 +436,9 @@ export const StudentDashboardPage: React.FC = () => {
                   </button>
                 </div>
               ))}
+              {!dashboardData?.quickFavorites?.length && (
+                <div className="p-3 text-center text-xs text-navy/75">No saved favourites yet.</div>
+              )}
             </div>
 
             <Link
@@ -329,6 +447,9 @@ export const StudentDashboardPage: React.FC = () => {
             >
               <span>View Complete Canteen Menu</span>
               <ChevronRight className="w-4 h-4" />
+            </Link>
+            <Link to="/favourites" className="block text-center text-xs font-bold text-navy hover:text-rust hover:underline">
+              View all favourites
             </Link>
           </div>
         </div>

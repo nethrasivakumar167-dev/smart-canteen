@@ -71,20 +71,31 @@ model Category {
 }
 
 model MenuItem {
-  id           String   @id @default(uuid())
-  categoryId   String
-  name         String
-  description  String?
-  price        Decimal  @db.Decimal(10, 2)
-  imageUrl     String?
-  isVegetarian Boolean  @default(true)
-  isAvailable  Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                  String    @id @default(uuid())
+  categoryId          String
+  name                String
+  description         String?
+  price               Decimal   @db.Decimal(10, 2)
+  imageUrl            String?
+  isVegetarian        Boolean   @default(true)
+  isAvailable         Boolean   @default(true)
+  dietaryTags         String[]  @default([])
+  tags                String[]  @default([])
+  cuisines            String[]  @default([])
+  mealTimes           String[]  @default([])
+  allergens           String[]  @default([])
+  allergenNote        String?
+  spiceLevel          String?
+  isSpecial           Boolean   @default(false)
+  cookingTip          String?
+  cookingTipUpdatedAt DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 
-  category   Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
-  orderItems OrderItem[]
-  favorites  Favorite[]
+  category      Category       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  orderItems    OrderItem[]
+  favorites     Favorite[]
+  feedbackItems FeedbackItem[]
 
   @@unique([categoryId, name])
   @@index([categoryId])
@@ -99,6 +110,7 @@ model Order {
   paymentMethod PaymentMethod
   paymentStatus PaymentStatus @default(PENDING)
   orderStatus   OrderStatus   @default(RECEIVED)
+  pickupSlotStart DateTime?
   deliveredAt   DateTime?
   deliveredById String?
   createdAt     DateTime      @default(now())
@@ -113,6 +125,7 @@ model Order {
   @@index([studentId])
   @@index([orderStatus])
   @@index([createdAt])
+  @@index([pickupSlotStart, orderStatus])
 }
 
 model OrderItem {
@@ -153,10 +166,23 @@ model Feedback {
   comment   String?
   createdAt DateTime @default(now())
 
-  student User  @relation(fields: [studentId], references: [id], onDelete: Restrict)
-  order   Order @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  student User           @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  items   FeedbackItem[]
 
   @@index([studentId])
+}
+
+model FeedbackItem {
+  id         String   @id @default(uuid())
+  feedbackId String
+  menuItemId String
+  tags       String[] @default([])
+
+  feedback Feedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+
+  @@unique([feedbackId, menuItemId])
 }
 
 model Favorite {

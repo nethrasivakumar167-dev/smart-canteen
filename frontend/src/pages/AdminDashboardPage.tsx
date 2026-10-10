@@ -27,10 +27,14 @@ export const AdminDashboardPage: React.FC = () => {
   const { user, logout } = useAuthStore();
   const { addToast } = useToastStore();
 
-  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'orders'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'orders' | 'feedback'>('overview');
+  const [analyticsRange, setAnalyticsRange] = useState<'today' | '7d' | '30d' | 'all'>('today');
   const [statsData, setStatsData] = useState<any>(null);
   const [usersList, setUsersList] = useState<any[]>([]);
   const [ordersList, setOrdersList] = useState<any[]>([]);
+  const [feedbackData, setFeedbackData] = useState<any>(null);
+  const [feedbackSummary, setFeedbackSummary] = useState<any>(null);
+  const [generatingAi, setGeneratingAi] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   // User filter state
@@ -41,7 +45,7 @@ export const AdminDashboardPage: React.FC = () => {
   const [showProvisionModal, setShowProvisionModal] = useState<boolean>(false);
   const [provisionName, setProvisionName] = useState<string>('');
   const [provisionEmail, setProvisionEmail] = useState<string>('');
-  const [provisionPassword, setProvisionPassword] = useState<string>('password123');
+  const [provisionPassword, setProvisionPassword] = useState<string>('');
   const [provisionRole, setProvisionRole] = useState<string>('STAFF');
   const [provisionId, setProvisionId] = useState<string>('');
   const [isProvisioning, setIsProvisioning] = useState<boolean>(false);
@@ -50,22 +54,60 @@ export const AdminDashboardPage: React.FC = () => {
     loadAdminData();
   }, []);
 
-  const loadAdminData = async () => {
+  const loadAdminData = async (range: typeof analyticsRange = analyticsRange) => {
     setLoading(true);
     try {
-      const [statsRes, usersRes, ordersRes] = await Promise.all([
-        axios.get('/admin/overview-stats'),
+      const [statsRes, usersRes, ordersRes, feedbackRes] = await Promise.all([
+        axios.get('/admin/overview-stats', { params: { range } }),
         axios.get('/admin/users'),
         axios.get('/admin/orders'),
+        axios.get('/admin/feedback'),
       ]);
 
       if (statsRes.data.success) setStatsData(statsRes.data.data);
       if (usersRes.data.success) setUsersList(usersRes.data.data);
       if (ordersRes.data.success) setOrdersList(ordersRes.data.data);
-    } catch {
-      // Fallback
+      if (feedbackRes?.data?.success) {
+        setFeedbackData(feedbackRes.data.data);
+        if (feedbackRes.data.data.totalFeedbacks > 0) {
+          try {
+            const summaryRes = await axios.get('/admin/feedback/summary');
+            setFeedbackSummary(summaryRes.data.data);
+          } catch (summaryError) {
+            console.error('Failed to load feedback summary:', summaryError);
+            setFeedbackSummary(null);
+          }
+        } else {
+          setFeedbackSummary(null);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load admin dashboard data:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRefreshFeedbackSummary = async () => {
+    setGeneratingAi(true);
+    try {
+      const res = await axios.get('/admin/feedback/summary', { params: { refresh: true } });
+      if (res.data.success) {
+        setFeedbackSummary(res.data.data);
+        addToast({
+          type: 'success',
+          title: 'Feedback Summary Refreshed',
+          message: 'Feedback insights updated successfully.',
+        });
+      }
+    } catch (err: any) {
+      addToast({
+        type: 'error',
+        title: 'AI Summary Failed',
+        message: err.response?.data?.error || 'Could not refresh the feedback summary.',
+      });
+    } finally {
+      setGeneratingAi(false);
     }
   };
 
@@ -162,13 +204,30 @@ export const AdminDashboardPage: React.FC = () => {
               <span>Provision User</span>
             </button>
             <button
-              onClick={loadAdminData}
+              onClick={() => loadAdminData()}
               disabled={loading}
               className="p-2.5 rounded-xl bg-cream/10 hover:bg-cream/20 text-cream transition flex items-center justify-center backdrop-blur-md"
               title="Refresh Analytics"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             </button>
+            <select
+              value={analyticsRange}
+              onChange={(event) => {
+                const range = event.target.value;
+                if (range === 'today' || range === '7d' || range === '30d' || range === 'all') {
+                  setAnalyticsRange(range);
+                  void loadAdminData(range);
+                }
+              }}
+              className="px-3 py-2.5 rounded-xl bg-sand border border-line text-slateblue text-xs font-bold"
+              aria-label="Analytics date range"
+            >
+              <option value="today">Today</option>
+              <option value="7d">Last 7 days</option>
+              <option value="30d">Last 30 days</option>
+              <option value="all">All time</option>
+            </select>
             <button
               onClick={handleLogout}
               className="p-2.5 rounded-xl bg-black/30 hover:bg-black/50 text-cream transition flex items-center justify-center"
@@ -188,9 +247,17 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              ₹{statsData?.financials?.todayRevenue?.toLocaleString() ?? '28,450'}
+              ₹{(statsData?.financials?.revenue ?? 0).toLocaleString()}
             </div>
-            <div className="text-xs text-dusty font-medium">Today's Revenue</div>
+            <div className="text-xs text-navy/75 font-medium">
+              Revenue • {analyticsRange === 'today'
+                ? 'Today'
+                : analyticsRange === '7d'
+                  ? 'Last 7 days'
+                  : analyticsRange === '30d'
+                    ? 'Last 30 days'
+                    : 'All time'}
+            </div>
           </div>
         </div>
 
@@ -200,9 +267,9 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              {statsData?.operations?.totalOrdersToday ?? '322'}
+              {statsData?.operations?.totalOrders ?? 0}
             </div>
-            <div className="text-xs text-dusty font-medium">Orders Processed</div>
+            <div className="text-xs text-navy/75 font-medium">Orders Processed</div>
           </div>
         </div>
 
@@ -212,9 +279,9 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              {usersList.length || statsData?.userMetrics?.totalRegisteredUsers || 4}
+              {statsData?.userMetrics?.totalRegisteredUsers ?? usersList.length}
             </div>
-            <div className="text-xs text-dusty font-medium">Registered Accounts</div>
+            <div className="text-xs text-navy/75 font-medium">Registered Accounts</div>
           </div>
         </div>
 
@@ -224,9 +291,9 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
-              {statsData?.operations?.averagePreparationMinutes ?? '7.4'}m
+              {statsData?.operations?.averageFulfillmentMinutes ?? 0}m
             </div>
-            <div className="text-xs text-dusty font-medium">Avg Kitchen Prep Time</div>
+            <div className="text-xs text-navy/75 font-medium">Avg Order Fulfillment</div>
           </div>
         </div>
       </div>
@@ -263,6 +330,16 @@ export const AdminDashboardPage: React.FC = () => {
         >
           Master Transaction Logs ({ordersList.length})
         </button>
+        <button
+          onClick={() => setActiveTab('feedback')}
+          className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
+            activeTab === 'feedback'
+              ? 'bg-slateblue text-cream shadow-md'
+              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+          }`}
+        >
+          Student Feedback & AI Insights
+        </button>
       </div>
 
       {/* Tab 1: Overview & Analytics */}
@@ -277,29 +354,19 @@ export const AdminDashboardPage: React.FC = () => {
                   Peak Dining Rush Demand (Hourly)
                 </h3>
                 <p className="text-xs text-dusty">
-                  Peak order distribution across campus breakfast, lunch & evening snacks.
+                  Orders placed from 8 AM to 4 PM across the selected date range.
                 </p>
               </div>
               <span className="text-xs font-bold text-slateblue">
-                Peak: 12:30 PM - 1:30 PM
+                Peak: {statsData?.operations?.peakRushHour ?? 'No orders'}
               </span>
             </div>
 
             <div className="grid grid-cols-9 gap-2 pt-6 items-end h-48 text-center text-xs">
-              {(statsData?.hourlyDemand || [
-                { hour: '8 AM', orders: 42 },
-                { hour: '9 AM', orders: 68 },
-                { hour: '10 AM', orders: 35 },
-                { hour: '11 AM', orders: 28 },
-                { hour: '12 PM', orders: 95 },
-                { hour: '1 PM', orders: 112 },
-                { hour: '2 PM', orders: 46 },
-                { hour: '3 PM', orders: 22 },
-                { hour: '4 PM', orders: 54 },
-              ]).map((item: any, idx: number) => {
-                const max = 120;
+              {(statsData?.hourlyDemand || []).map((item: any, idx: number, rows: any[]) => {
+                const max = Math.max(...rows.map((row) => row.orders), 1);
                 const heightPct = Math.min(100, Math.round((item.orders / max) * 100));
-                const isPeak = item.orders > 90;
+                const isPeak = item.orders > 0 && item.orders === max;
 
                 return (
                   <div key={idx} className="flex flex-col items-center gap-2 h-full justify-end group">
@@ -328,12 +395,7 @@ export const AdminDashboardPage: React.FC = () => {
             </h3>
 
             <div className="space-y-3">
-              {(statsData?.topSellingItems || [
-                { name: 'Crispy Ghee Podi Masala Dosa', ordersCount: 142, revenue: 10650 },
-                { name: 'South Indian Executive Meals', ordersCount: 118, revenue: 11210 },
-                { name: 'Authentic Filter Coffee', ordersCount: 240, revenue: 7200 },
-                { name: 'Rice Idli with Medu Vada', ordersCount: 94, revenue: 5170 },
-              ]).map((item: any, idx: number) => (
+              {(statsData?.topSellingItems || []).map((item: any, idx: number) => (
                 <div
                   key={idx}
                   className="p-3 rounded-2xl bg-cream border border-line flex items-center justify-between"
@@ -347,6 +409,9 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
                 </div>
               ))}
+              {!statsData?.topSellingItems?.length && (
+                <div className="p-3 text-xs text-dusty">No sales data for this period.</div>
+              )}
             </div>
           </div>
 
@@ -369,7 +434,7 @@ export const AdminDashboardPage: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-1.5 text-xs overflow-x-auto w-full sm:w-auto">
-              {['ALL', 'STUDENT', 'FACULTY', 'STAFF', 'ADMIN'].map((r) => (
+              {['ALL', 'STUDENT', 'STAFF', 'ADMIN'].map((r) => (
                 <button
                   key={r}
                   onClick={() => setUserRoleFilter(r)}
@@ -411,8 +476,6 @@ export const AdminDashboardPage: React.FC = () => {
                             ? 'bg-purple-500/10 text-purple-700'
                             : u.role === 'STAFF'
                             ? 'bg-emerald-500/10 text-emerald-700'
-                            : u.role === 'FACULTY'
-                            ? 'bg-amber-500/10 text-amber-700'
                             : 'bg-slateblue/10 text-slateblue'
                         }`}
                       >
@@ -494,6 +557,94 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
       )}
 
+      {/* Tab 4: Student Feedback & AI Insights */}
+      {activeTab === 'feedback' && (
+        <div className="space-y-6">
+          {feedbackData?.totalFeedbacks > 0 && (
+          <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-line pb-4">
+              <div>
+                <h3 className="text-base font-bold text-slateblue flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-amber-500" />
+                  <span>Feedback Summary</span>
+                  {feedbackSummary?.source && (
+                    <span className="rounded-full bg-amber-500/10 px-2 py-1 text-[10px] font-extrabold uppercase text-amber-800">
+                      {feedbackSummary.source === 'ai' ? 'AI' : 'Rule-based'}
+                    </span>
+                  )}
+                </h3>
+                <p className="text-xs text-dusty">
+                  Aggregate themes, recurring complaints, and practical recommendations.
+                </p>
+              </div>
+              <button
+                onClick={handleRefreshFeedbackSummary}
+                disabled={generatingAi}
+                className="px-4 py-2 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold text-xs shadow-md flex items-center gap-2 transition disabled:opacity-50"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${generatingAi ? 'animate-spin' : ''}`} />
+                <span>{generatingAi ? 'Refreshing...' : 'Refresh'}</span>
+              </button>
+            </div>
+
+            {feedbackSummary && (
+              <div className="grid gap-4 md:grid-cols-3">
+                {[
+                  ['Themes', feedbackSummary.themes],
+                  ['Complaints', feedbackSummary.complaints],
+                  ['Recommendations', feedbackSummary.recommendations],
+                ].map(([title, entries]: any) => (
+                  <div key={title} className="p-4 rounded-2xl bg-cream border border-amber-500/30 text-xs text-slateblue shadow-inner">
+                    <h4 className="mb-2 font-extrabold">{title}</h4>
+                    <ul className="list-disc space-y-1 pl-4 leading-relaxed">
+                      {entries.map((entry: string, index: number) => <li key={`${title}-${index}`}>{entry}</li>)}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          )}
+
+          <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+            <div className="flex items-center justify-between border-b border-line pb-3">
+              <h3 className="text-base font-bold text-slateblue">
+                Student Order Ratings & Reviews
+              </h3>
+              <span className="text-xs font-bold text-slateblue">
+                {feedbackData?.totalFeedbacks > 0
+                  ? `Avg Rating: ⭐ ${feedbackData.averageRating} / 5.0 (${feedbackData.totalFeedbacks} reviews)`
+                  : 'No ratings yet'}
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              {feedbackData?.list && feedbackData.list.length > 0 ? (
+                feedbackData.list.map((fb: any) => (
+                  <div key={fb.id} className="p-4 rounded-2xl bg-cream border border-line flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                    <div>
+                      <div className="flex items-center gap-2 font-bold text-slateblue">
+                        <span>{fb.studentName}</span>
+                        <span className="text-amber-500 font-extrabold">⭐ {fb.rating}/5</span>
+                        <span className="text-[10px] text-dusty font-normal">Order #{fb.orderNumber}</span>
+                      </div>
+                      <p className="text-dusty mt-1">{fb.comment || 'No text review provided.'}</p>
+                    </div>
+                    <div className="text-[10px] text-dusty font-mono whitespace-nowrap">
+                      {new Date(fb.createdAt).toLocaleDateString()}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8 text-xs text-navy/75">
+                  No student feedback submissions recorded yet.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Provisioning Modal */}
       {showProvisionModal && (
         <div className="fixed inset-0 z-50 bg-slateblue/50 backdrop-blur-sm flex items-center justify-center p-4">
@@ -546,7 +697,6 @@ export const AdminDashboardPage: React.FC = () => {
                   >
                     <option value="STAFF">STAFF (Kitchen)</option>
                     <option value="ADMIN">ADMIN (Manager)</option>
-                    <option value="FACULTY">FACULTY</option>
                     <option value="STUDENT">STUDENT</option>
                   </select>
                 </div>

@@ -3,7 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
 import { useAuthStore } from '../store/authStore';
 import { useToastStore } from '../store/toastStore';
-import { MOCK_COUPONS } from '../data/mockData';
+import { createOrder } from '../api/orderApi';
+import axios from 'axios';
+import { fetchMenuItems } from '../api/menuApi';
+import { MenuItem } from '../types';
+import { FoodImage, hasUsableMenuImage } from '../components/common/FoodImage';
 import {
   ShoppingBag,
   Trash2,
@@ -11,10 +15,7 @@ import {
   Minus,
   ArrowRight,
   Clock,
-  Tag,
   CheckCircle2,
-  AlertCircle,
-  Award,
   Zap,
   CreditCard,
   ShieldCheck,
@@ -22,90 +23,136 @@ import {
 
 export const CartPage: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
   const {
     items,
     updateQuantity,
     removeItem,
     clearCart,
-    coupon,
-    couponError,
-    applyCoupon,
-    removeCoupon,
-    pickupOption,
-    setPickupOption,
-    scheduledTime,
     specialInstructions,
     setSpecialInstructions,
     getSubtotal,
-    getTax,
-    getDiscount,
     getGrandTotal,
-    getEstimatedPreparationTime,
   } = useCartStore();
 
   const { addToast } = useToastStore();
 
-  const [couponInput, setCouponInput] = useState<string>('');
   const [paymentMethod, setPaymentMethod] = useState<'DEMO' | 'UPI' | 'CARD' | 'CASH'>('DEMO');
   const [isPlacingOrder, setIsPlacingOrder] = useState<boolean>(false);
   const [orderSuccessModal, setOrderSuccessModal] = useState<boolean>(false);
+  const [placedOrder, setPlacedOrder] = useState<any>(null);
+  const [pickupSlots, setPickupSlots] = useState<Array<{
+    start: string;
+    end: string;
+    label: string;
+    remainingCapacity: number;
+    bookable: boolean;
+    unavailableReason: string | null;
+  }>>([]);
+  const [selectedSlotStart, setSelectedSlotStart] = useState('');
+  const [slotItems, setSlotItems] = useState<Map<string, MenuItem>>(new Map());
+  const [slotsLoading, setSlotsLoading] = useState(true);
 
   const subtotal = getSubtotal();
-  const tax = getTax();
-  const discount = getDiscount();
   const grandTotal = getGrandTotal();
-  const estimatedPrepTime = getEstimatedPreparationTime();
+  const selectedSlot = pickupSlots.find((slot) => slot.start === selectedSlotStart);
 
-  const handleApplyCustomCoupon = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!couponInput.trim()) return;
-    const found = MOCK_COUPONS.find((c) => c.code.toUpperCase() === couponInput.trim().toUpperCase());
-    if (found) {
-      const success = applyCoupon(found);
-      if (success) {
-        addToast({
-          type: 'success',
-          title: 'Coupon Applied!',
-          message: `Saved ₹${discount || found.discountValue} with ${found.code}`,
+  React.useEffect(() => {
+    let active = true;
+    axios.get('/student/slots')
+      .then((response) => {
+        if (!active || !response.data.success) return;
+        const slots = response.data.data || [];
+        setPickupSlots(slots);
+        setSelectedSlotStart(slots.find((slot: any) => slot.bookable)?.start || '');
+      })
+      .catch((error) => {
+        if (active) addToast({
+          type: 'error',
+          title: 'Pickup slots unavailable',
+          message: error.response?.data?.error || error.message || 'Could not load pickup slots.',
         });
-      }
-    } else {
-      addToast({
-        type: 'error',
-        title: 'Invalid Coupon',
-        message: 'This promo code does not exist or has expired.',
+      })
+      .finally(() => { if (active) setSlotsLoading(false); });
+    return () => { active = false; };
+  }, [addToast]);
+
+  React.useEffect(() => {
+    if (!selectedSlotStart || items.length === 0) {
+      setSlotItems(new Map());
+      return;
+    }
+    let active = true;
+    fetchMenuItems({ availableAt: selectedSlotStart })
+      .then((results) => {
+        if (active) setSlotItems(new Map(results.map((item) => [item.id, item])));
       });
-    }
-  };
+    return () => { active = false; };
+  }, [selectedSlotStart, items]);
 
-  const handleQuickApply = (code: string) => {
-    const found = MOCK_COUPONS.find((c) => c.code === code);
-    if (found) {
-      const success = applyCoupon(found);
-      if (success) {
-        setCouponInput(code);
-        addToast({
-          type: 'success',
-          title: 'Coupon Applied!',
-          message: `Discount code ${code} activated.`,
-        });
-      }
-    }
-  };
+  const unavailableAtSlot = items.filter((cartItem) => {
+    const menuItem = slotItems.get(cartItem.menuItemId);
+    return Boolean(menuItem && menuItem.availableNow === false);
+  });
 
-  const handleSimulateCheckout = () => {
+  const handleSimulateCheckout = async () => {
     if (items.length === 0) return;
+
+    if (!isAuthenticated) {
+      addToast({
+        type: 'info',
+        title: 'Authentication Required',
+        message: 'Please sign in to your student account to place preorders.',
+      });
+      navigate('/student/login');
+      return;
+    }
+
     setIsPlacingOrder(true);
 
-    setTimeout(() => {
-      setIsPlacingOrder(false);
-      setOrderSuccessModal(true);
+    try {
+      const payload = {
+        items: items.map((i) => ({
+          menuItemId: i.menuItemId,
+          quantity: i.quantity,
+          customizations: i.customizations,
+        })),
+        paymentMethod,
+        specialInstructions,
+        pickupSlotStart: selectedSlotStart,
+      };
+
+      const res = await createOrder(payload);
+
+      if (res.success && res.data) {
+        setPlacedOrder(res.data);
+        clearCart();
+        setOrderSuccessModal(true);
+        addToast({
+          type: 'success',
+          title: 'Preorder Placed Successfully!',
+          message: `Order #${res.data.orderNumber} registered in kitchen queue.`,
+        });
+      } else {
+        addToast({
+          type: 'error',
+          title: 'Order Failed',
+          message: res.error || 'Failed to place order. Please try again.',
+        });
+      }
+    } catch (err: any) {
+      const errMsg =
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        'Unable to complete order. Please check item availability.';
       addToast({
-        type: 'success',
-        title: 'Preorder Placed Successfully!',
-        message: `Order #SC-1024 registered in kitchen queue.`,
+        type: 'error',
+        title: 'Order Placement Error',
+        message: errMsg,
       });
-    }, 1200);
+    } finally {
+      setIsPlacingOrder(false);
+    }
   };
 
   if (items.length === 0 && !orderSuccessModal) {
@@ -171,11 +218,7 @@ export const CartPage: React.FC = () => {
                 className="bg-sand p-4 rounded-2xl border border-line shadow-sm flex items-center justify-between gap-4"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="w-16 h-16 rounded-xl object-cover shrink-0 bg-cream"
-                  />
+                  <CartFoodImage imageUrl={item.imageUrl} name={item.name} />
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       {item.isVegetarian ? (
@@ -250,42 +293,43 @@ export const CartPage: React.FC = () => {
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setPickupOption('ASAP')}
-                className={`p-3.5 rounded-xl border text-left transition flex items-center justify-between ${
-                  pickupOption === 'ASAP'
-                    ? 'bg-navy text-cream border-navy shadow-sm'
-                    : 'bg-cream border-line text-navy'
-                }`}
-              >
-                <div>
-                  <div className="font-bold text-xs sm:text-sm">⚡ ASAP (Fastest Handover)</div>
-                  <div className="text-[11px] text-espresso mt-0.5">
-                    Ready in ~{estimatedPrepTime} minutes
-                  </div>
-                </div>
-                {pickupOption === 'ASAP' && <CheckCircle2 className="w-5 h-5 text-cream" />}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setPickupOption('SCHEDULED', '12:45 PM (Lunch Recess)')}
-                className={`p-3.5 rounded-xl border text-left transition flex items-center justify-between ${
-                  pickupOption === 'SCHEDULED'
-                    ? 'bg-navy text-cream border-navy shadow-sm'
-                    : 'bg-cream border-line text-navy'
-                }`}
-              >
-                <div>
-                  <div className="font-bold text-xs sm:text-sm">🕒 Scheduled Preorder</div>
-                  <div className="text-[11px] text-espresso mt-0.5">
-                    12:45 PM (Recess Time)
-                  </div>
-                </div>
-                {pickupOption === 'SCHEDULED' && <CheckCircle2 className="w-5 h-5 text-cream" />}
-              </button>
+              {slotsLoading ? (
+                <p className="col-span-full text-xs text-espresso">Loading available pickup slots...</p>
+              ) : pickupSlots.map((slot) => (
+                <button
+                  key={slot.start}
+                  type="button"
+                  disabled={!slot.bookable}
+                  onClick={() => setSelectedSlotStart(slot.start)}
+                  className={`p-3 rounded-xl border text-left transition flex items-center justify-between disabled:cursor-not-allowed disabled:opacity-50 ${
+                    selectedSlotStart === slot.start
+                      ? 'bg-navy text-cream border-navy shadow-sm'
+                      : 'bg-cream border-line text-navy'
+                  }`}
+                >
+                  <span className="text-xs font-bold">{slot.label}</span>
+                  {!slot.bookable ? (
+                    <span className="text-[10px] font-semibold">
+                      {slot.unavailableReason === 'Full'
+                        ? 'Full'
+                        : slot.unavailableReason === 'Past'
+                          ? 'Past'
+                          : 'Soon'}
+                    </span>
+                  ) : selectedSlotStart === slot.start ? (
+                    <CheckCircle2 className="w-4 h-4 text-cream" />
+                  ) : null}
+                </button>
+              ))}
             </div>
+            {unavailableAtSlot.length > 0 && (
+              <p role="alert" className="text-xs font-semibold text-amber-700">
+                Not available at this slot: {unavailableAtSlot.map((item) => item.name).join(', ')}.
+              </p>
+            )}
+            {!selectedSlotStart && !slotsLoading && (
+              <p role="alert" className="text-xs font-semibold text-red-700">No pickup slot is currently bookable. Please try again later.</p>
+            )}
           </div>
 
           {/* Cooking Notes / Special Instructions */}
@@ -304,70 +348,8 @@ export const CartPage: React.FC = () => {
 
         </div>
 
-        {/* Right Column: Order Summary, Coupons, Payment & Checkout */}
+        {/* Right Column: Order Summary, Payment & Checkout */}
         <div className="lg:col-span-5 space-y-6">
-          
-          {/* Coupon Box */}
-          <div className="p-5 bg-sand border border-line rounded-2xl shadow-sm space-y-3">
-            <h3 className="text-sm font-bold text-navy flex items-center gap-2">
-              <Tag className="w-4 h-4 text-navy" />
-              Apply Campus Coupon
-            </h3>
-
-            {coupon ? (
-              <div className="flex items-center justify-between p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700">
-                <div className="text-xs">
-                  <span className="font-extrabold font-mono">{coupon.code}</span> applied!
-                  <p className="text-[11px] text-emerald-600">
-                    {coupon.description}
-                  </p>
-                </div>
-                <button
-                  onClick={removeCoupon}
-                  className="text-xs font-bold text-red-600 hover:underline"
-                >
-                  Remove
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleApplyCustomCoupon} className="flex gap-2">
-                <input
-                  type="text"
-                  value={couponInput}
-                  onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
-                  placeholder="Enter code (e.g. WELCOME20)"
-                  className="flex-1 px-3 py-2 rounded-xl bg-white border border-line text-xs sm:text-sm font-mono uppercase focus:outline-none focus:ring-2 focus:ring-skyblue/50"
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2 rounded-xl bg-navy text-cream font-bold text-xs shadow-sm hover:bg-slate transition"
-                >
-                  Apply
-                </button>
-              </form>
-            )}
-
-            {couponError && (
-              <div className="flex items-center gap-1.5 text-xs text-red-500">
-                <AlertCircle className="w-3.5 h-3.5" />
-                <span>{couponError}</span>
-              </div>
-            )}
-
-            {/* Quick Coupon Chips */}
-            <div className="flex flex-wrap gap-1.5 pt-1">
-              {MOCK_COUPONS.map((c) => (
-                <button
-                  key={c.code}
-                  type="button"
-                  onClick={() => handleQuickApply(c.code)}
-                  className="px-2.5 py-1 rounded-lg bg-navy/10 text-navy border border-navy/20 text-[11px] font-mono font-bold hover:bg-navy/20"
-                >
-                  {c.code}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Payment Method Selector */}
           <div className="p-5 bg-sand border border-line rounded-2xl shadow-sm space-y-3">
@@ -443,20 +425,9 @@ export const CartPage: React.FC = () => {
                 <span className="font-mono font-bold text-navy">₹{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
-                <span>GST Taxes (5%)</span>
-                <span className="font-mono text-espresso">₹{tax.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
                 <span>Campus Preorder Fee</span>
                 <span className="font-mono text-emerald-600 font-bold">FREE (₹0.00)</span>
               </div>
-
-              {discount > 0 && (
-                <div className="flex justify-between text-emerald-600 font-bold">
-                  <span>Coupon Discount ({coupon?.code})</span>
-                  <span className="font-mono">-₹{discount.toFixed(2)}</span>
-                </div>
-              )}
 
               <div className="pt-3 border-t border-line flex justify-between items-baseline text-base font-extrabold text-navy">
                 <span>To Pay</span>
@@ -491,7 +462,7 @@ export const CartPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Simulated Order Success Modal */}
+      {/* Real Order Success Modal */}
       {orderSuccessModal && (
         <div className="fixed inset-0 z-50 bg-navy/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
           <div className="bg-sand rounded-3xl max-w-md w-full p-6 sm:p-8 border border-line shadow-2xl text-center space-y-5 animate-in zoom-in-95">
@@ -505,37 +476,32 @@ export const CartPage: React.FC = () => {
                 Order Received in Kitchen
               </span>
               <h3 className="text-2xl font-extrabold text-navy">
-                Preorder #SC-1024
+                Preorder #{placedOrder?.orderNumber || 'SC-1024'}
               </h3>
               <p className="text-xs text-espresso">
-                Pickup Slot: <strong>{scheduledTime}</strong>
+                Pickup Slot: <strong>{placedOrder?.pickupSlot || selectedSlot?.label || '—'}</strong>
               </p>
             </div>
 
-            {/* Order Token (replaces QR) */}
+            {/* Order Token */}
             <div className="p-4 bg-cream rounded-2xl border border-line flex flex-col items-center gap-2">
               <div className="w-24 h-24 rounded-xl bg-navy text-cream flex items-center justify-center font-mono text-[11px] font-bold">
-                SC-1024
+                {placedOrder?.orderNumber || 'SC-1024'}
               </div>
               <span className="text-[10px] font-mono text-espresso">
-                Order ID: SC-1024
+                Order ID: {placedOrder?.orderNumber || 'SC-1024'}
               </span>
-            </div>
-
-            <div className="p-3 bg-emerald-500/10 rounded-xl text-xs font-semibold text-emerald-700">
-              🍱 You are <strong>#3 in the kitchen queue</strong> (~{estimatedPrepTime} mins estimated)
             </div>
 
             <div className="flex gap-2">
               <button
                 onClick={() => {
                   setOrderSuccessModal(false);
-                  clearCart();
-                  navigate('/menu');
+                  navigate('/student/dashboard');
                 }}
                 className="flex-1 py-3 rounded-xl bg-navy text-cream font-bold text-xs shadow-md hover:bg-slate transition"
               >
-                Back to Menu
+                Go to Student Dashboard
               </button>
             </div>
 
@@ -544,5 +510,18 @@ export const CartPage: React.FC = () => {
       )}
 
     </div>
+  );
+};
+
+const CartFoodImage: React.FC<{ imageUrl: string; name: string }> = ({ imageUrl, name }) => {
+  const [showImage, setShowImage] = useState(() => hasUsableMenuImage(imageUrl));
+  if (!showImage) return null;
+  return (
+    <FoodImage
+      imageUrl={imageUrl}
+      alt={name}
+      className="w-16 h-16 rounded-xl object-cover shrink-0 bg-cream"
+      onError={() => setShowImage(false)}
+    />
   );
 };

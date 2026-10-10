@@ -7,6 +7,7 @@ import { useToastStore } from '../../store/toastStore';
 import {
   UtensilsCrossed,
   ShoppingBag,
+  Heart,
   Sun,
   Moon,
   LogOut,
@@ -64,6 +65,7 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
+    { name: 'Favourites', path: '/favourites' },
     { name: 'Access Portals', path: '/portals' },
   ];
 
@@ -71,7 +73,7 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-40 w-full bg-navy border-b border-navy transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          
+
           {/* Logo & Live Status */}
           <div className="flex items-center gap-4 sm:gap-6">
             <Link to="/" className="flex items-center gap-2.5 group">
@@ -80,7 +82,7 @@ export const Navbar: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="font-display italic font-semibold text-xl tracking-wide text-cream flex items-center gap-1.5">
-                  SMART<span className="text-cream">CANTEEN</span>
+                  CampusBite
                 </span>
                 <span className="text-[10px] tracking-wider uppercase font-semibold text-skyblue hidden sm:inline">
                   Skip the Queue • Eat Smarter
@@ -95,44 +97,46 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all ${
-                    isActive
-                      ? 'text-navy bg-cream'
-                      : 'text-skyblue hover:text-cream hover:bg-slateblue-light'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
+          {/* Desktop Nav Links - Only show when authenticated and STUDENT role */}
+          {isAuthenticated && user?.role === 'STUDENT' && (
+            <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all ${
+                      isActive
+                        ? 'text-navy bg-cream'
+                        : 'text-skyblue hover:text-cream hover:bg-slateblue-light'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
+          )}
 
-            {/* If logged in, show their role dashboard button in top nav */}
-            {isAuthenticated && user && (
-              <Link
-                to={getDashboardPath()}
-                className={`px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition ${
-                  location.pathname.includes('dashboard')
-                    ? 'text-navy bg-cream shadow-sm'
-                    : 'bg-slateblue-light text-cream hover:bg-dark-hover'
-                }`}
-              >
-                <LayoutDashboard className="w-3.5 h-3.5" />
-                <span>{getDashboardLabel()}</span>
-              </Link>
-            )}
-          </nav>
+          {/* If logged in, show their role dashboard button in top nav */}
+          {isAuthenticated && user && (
+            <Link
+              to={getDashboardPath()}
+              className={`px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition ${
+                location.pathname.includes('dashboard')
+                  ? 'text-navy bg-cream shadow-sm'
+                  : 'bg-slateblue-light text-cream hover:bg-dark-hover'
+              }`}
+            >
+              <LayoutDashboard className="w-3.5 h-3.5" />
+              <span>{getDashboardLabel()}</span>
+            </Link>
+          )}
 
           {/* Right Action Icons & Controls */}
           <div className="flex items-center gap-2.5 sm:gap-3.5">
-            
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -146,21 +150,23 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* Cart Button with Count Badge */}
-            <Link
-              to="/cart"
-              className="relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-cream hover:bg-skysoft text-navy transition group"
-            >
-              <ShoppingBag className="w-5 h-5 text-navy group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline text-xs font-bold">
-                {cartCount > 0 ? `₹${grandTotal.toFixed(0)}` : 'Cart'}
-              </span>
-              {cartCount > 0 && (
-                <span className="flex items-center justify-center min-w-[20px] h-5 px-1 text-[11px] font-extrabold text-cream bg-rust rounded-full shadow-sm animate-in zoom-in">
-                  {cartCount}
+            {/* Cart Button with Count Badge - Only for STUDENT role */}
+            {isAuthenticated && user?.role === 'STUDENT' && (
+              <Link
+                to="/cart"
+                className="relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-cream hover:bg-skysoft text-navy transition group"
+              >
+                <ShoppingBag className="w-5 h-5 text-navy group-hover:scale-110 transition-transform" />
+                <span className="hidden sm:inline text-xs font-bold">
+                  {cartCount > 0 ? `₹${grandTotal.toFixed(0)}` : 'Cart'}
                 </span>
-              )}
-            </Link>
+                {cartCount > 0 && (
+                  <span className="flex items-center justify-center min-w-[20px] h-5 px-1 text-[11px] font-extrabold text-cream bg-rust rounded-full shadow-sm animate-in zoom-in">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Auth Dropdown / Login CTA */}
             {isAuthenticated && user ? (
@@ -209,14 +215,34 @@ export const Navbar: React.FC = () => {
                         <LayoutDashboard className="w-4 h-4" />
                         Go to {getDashboardLabel()}
                       </Link>
-                      <Link
-                        to="/menu"
-                        onClick={() => setProfileDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-espresso hover:bg-skysoft rounded-xl transition"
-                      >
-                        <UtensilsCrossed className="w-4 h-4 text-navy" />
-                        Explore Canteen Menu
-                      </Link>
+                      {user?.role === 'STUDENT' && (
+                        <React.Fragment>
+                          <Link
+                            to="/menu"
+                            onClick={() => setProfileDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-espresso hover:bg-skysoft rounded-xl transition"
+                          >
+                            <UtensilsCrossed className="w-4 h-4 text-navy" />
+                            Explore Canteen Menu
+                          </Link>
+                          <Link
+                            to="/favourites"
+                            onClick={() => setProfileDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-espresso hover:bg-skysoft rounded-xl transition"
+                          >
+                            <Heart className="w-4 h-4 text-navy" />
+                            Favourites
+                          </Link>
+                          <Link
+                            to="/orders"
+                            onClick={() => setProfileDropdownOpen(false)}
+                            className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-espresso hover:bg-skysoft rounded-xl transition"
+                          >
+                            <LayoutDashboard className="w-4 h-4" />
+                            My Orders
+                          </Link>
+                        </React.Fragment>
+                      )}
                       <Link
                         to="/portals"
                         onClick={() => setProfileDropdownOpen(false)}
@@ -242,17 +268,17 @@ export const Navbar: React.FC = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Link
-                  to="/portals"
-                  className="px-3.5 py-2 text-xs sm:text-sm font-semibold text-skyblue hover:text-cream transition"
+                  to="/register"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream hover:bg-skysoft text-navy text-xs sm:text-sm font-bold shadow-sm transition"
                 >
-                  Portals
+                  <span className="font-bold">Register</span>
                 </Link>
                 <Link
                   to="/student/login"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream hover:bg-skysoft text-navy text-xs sm:text-sm font-bold shadow-sm transition-all duration-200"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cream hover:bg-skysoft text-navy text-xs sm:text-sm font-bold shadow-sm transition"
                 >
                   <Flame className="w-4 h-4" />
-                  Sign In
+                  Login
                 </Link>
               </div>
             )}
@@ -263,3 +289,5 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
+
+export default Navbar;

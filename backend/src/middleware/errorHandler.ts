@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 
 export interface AppError extends Error {
   statusCode?: number;
+  type?: string;
   code?: string;
 }
 
@@ -44,6 +45,20 @@ export const errorHandler = (
         field: e.path.join('.'),
         message: e.message,
       })),
+    });
+  }
+
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({
+      success: false,
+      error: 'Request body contains invalid JSON.',
+    });
+  }
+
+  if (err.type === 'entity.too.large') {
+    return res.status(413).json({
+      success: false,
+      error: 'Request body exceeds the allowed size.',
     });
   }
 

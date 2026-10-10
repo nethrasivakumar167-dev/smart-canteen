@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
 import { User, Role } from '../types';
+import { useCartStore } from './cartStore';
+import { useFavoriteStore } from './favoriteStore';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -41,6 +43,13 @@ interface AuthState {
   updateUser: (data: Partial<User>) => void;
 }
 
+const setScopedStoreUser = (user: User | null) => {
+  const isStudent = user?.role === 'STUDENT';
+  const userId = isStudent ? user.id : null;
+  useCartStore.getState().setUserId(userId);
+  useFavoriteStore.getState().setUserId(userId, isStudent);
+};
+
 const getInitialToken = (): string | null => {
   if (typeof window === 'undefined') return null;
   return localStorage.getItem('sc_token');
@@ -61,6 +70,27 @@ const initialToken = getInitialToken();
 if (initialToken) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${initialToken}`;
 }
+
+// Global response interceptor to handle 401 Unauthorized (clears auth & storage)
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem('sc_token');
+      localStorage.removeItem('sc_user');
+      delete axios.defaults.headers.common['Authorization'];
+      setScopedStoreUser(null);
+      useAuthStore.setState({
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        isLoading: false,
+        isCheckingAuth: false,
+      });
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: getInitialUser(),
@@ -83,6 +113,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
       if (response.data.success && response.data.user && response.data.token) {
         const { user, token } = response.data;
+        setScopedStoreUser(user);
         localStorage.setItem('sc_token', token);
         localStorage.setItem('sc_user', JSON.stringify(user));
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -118,6 +149,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
       if (response.data.success && response.data.user && response.data.token) {
         const { user, token } = response.data;
+        setScopedStoreUser(user);
         localStorage.setItem('sc_token', token);
         localStorage.setItem('sc_user', JSON.stringify(user));
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -149,6 +181,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   checkAuth: async () => {
     const token = localStorage.getItem('sc_token');
     if (!token) {
+      setScopedStoreUser(null);
       set({ user: null, token: null, isAuthenticated: false, isCheckingAuth: false });
       return;
     }
@@ -158,6 +191,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const response = await axios.get<AuthResponse>('/auth/me');
 
       if (response.data.success && response.data.user) {
+        setScopedStoreUser(response.data.user);
         localStorage.setItem('sc_user', JSON.stringify(response.data.user));
         set({
           user: response.data.user,
@@ -166,12 +200,14 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           isCheckingAuth: false,
         });
       } else {
+        setScopedStoreUser(null);
         localStorage.removeItem('sc_token');
         localStorage.removeItem('sc_user');
         delete axios.defaults.headers.common['Authorization'];
         set({ user: null, token: null, isAuthenticated: false, isCheckingAuth: false });
       }
     } catch {
+      setScopedStoreUser(null);
       localStorage.removeItem('sc_token');
       localStorage.removeItem('sc_user');
       delete axios.defaults.headers.common['Authorization'];
@@ -185,6 +221,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } catch {
       // Ignore network errors during logout
     } finally {
+      setScopedStoreUser(null);
       localStorage.removeItem('sc_token');
       localStorage.removeItem('sc_user');
       delete axios.defaults.headers.common['Authorization'];

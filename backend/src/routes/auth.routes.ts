@@ -15,8 +15,11 @@ import { asyncHandler } from '../utils/asyncHandler';
 const router = Router();
 const JWT_EXPIRES_IN = env.JWT_EXPIRES_IN;
 
+const DUMMY_HASH = '$2a$10$wK1W.Q37fA6V7Kz1mN1Zg.0n6U1w5Q2.u2T7.Y3aK6g7H8i9j0k1l';
+
 const generateToken = (userId: string, email: string, role: Role): string => {
   return jwt.sign({ userId, email, role }, env.JWT_SECRET, {
+    algorithm: 'HS256',
     expiresIn: JWT_EXPIRES_IN as any,
   });
 };
@@ -136,7 +139,8 @@ async function processLogin(
   // 1. Locate user in DB
   const user = await findUserByEmailOrId(loginId);
   if (!user) {
-    // Generic message for unknown user
+    // Perform dummy bcrypt hash comparison to prevent timing side-channel attacks
+    await bcrypt.compare(password, DUMMY_HASH);
     res.status(401).json({
       success: false,
       error: 'Invalid email/ID or password.',
@@ -166,7 +170,7 @@ async function processLogin(
 
   // 4. Server-Side Role & Portal Enforcement
   if (activePortal === 'STAFF') {
-    if (user.role !== 'STAFF' && user.role !== 'ADMIN') {
+    if (user.role !== 'STAFF') {
       res.status(403).json({
         success: false,
         error: 'Access denied. This account does not have permission to access the Staff portal.',
@@ -182,10 +186,10 @@ async function processLogin(
       return;
     }
   } else if (activePortal === 'STUDENT') {
-    if (user.role === 'STAFF') {
+    if (user.role !== 'STUDENT') {
       res.status(403).json({
         success: false,
-        error: 'Staff accounts must use the Staff Sign In portal.',
+        error: 'Access denied. This account does not have permission to access the Student portal.',
       });
       return;
     }

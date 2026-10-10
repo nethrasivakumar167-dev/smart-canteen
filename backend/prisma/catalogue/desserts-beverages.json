@@ -1,0 +1,650 @@
+[
+  {
+    "name": "Gulab Jamun",
+    "description": "Soft milk-based dumplings soaked in fragrant sugar syrup",
+    "price": 35,
+    "categories": [
+      "Dessert",
+      "Indian",
+      "Veg"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; gluten may be present.",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "gulab-jamun",
+    "tags": [
+      "dessert",
+      "indian"
+    ]
+  },
+  {
+    "name": "Chocolate Brownie",
+    "description": "Dense, fudgy chocolate cake with a rich cocoa flavour",
+    "price": 55,
+    "categories": [
+      "Dessert",
+      "Bakery",
+      "Western"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Gluten, egg, milk may be present.",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chocolate-brownie",
+    "tags": [
+      "dessert",
+      "bakery",
+      "western"
+    ]
+  },
+  {
+    "name": "Ice Cream",
+    "description": "Cold, creamy dessert in assorted flavours",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Cold"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "ice-cream",
+    "tags": [
+      "dessert",
+      "cold"
+    ]
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "Warm cake with a soft chocolate centre",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Western"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chocolate-lava-cake",
+    "tags": [
+      "dessert",
+      "western"
+    ]
+  },
+  {
+    "name": "Chocolate Pastry",
+    "description": "Layered sponge with chocolate cream",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Bakery"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chocolate-pastry",
+    "tags": [
+      "dessert",
+      "bakery"
+    ]
+  },
+  {
+    "name": "Black Forest Pastry",
+    "description": "Chocolate sponge with cream and cherry",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Bakery"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "black-forest-pastry",
+    "tags": [
+      "dessert",
+      "bakery"
+    ]
+  },
+  {
+    "name": "Cheesecake",
+    "description": "Creamy cheese filling with a biscuit base",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Western"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk",
+      "gluten"
+    ],
+    "allergenNote": "Milk, gluten; egg may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "cheesecake",
+    "tags": [
+      "dessert",
+      "western"
+    ]
+  },
+  {
+    "name": "Carrot Halwa",
+    "description": "Sweet grated carrot pudding with aromatic spices",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; nuts may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "carrot-halwa",
+    "tags": [
+      "dessert",
+      "indian"
+    ]
+  },
+  {
+    "name": "Rasgulla",
+    "description": "Soft cottage-cheese balls in light syrup",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "rasgulla",
+    "tags": [
+      "dessert",
+      "indian"
+    ]
+  },
+  {
+    "name": "Kesar Kulfi",
+    "description": "Dense frozen dessert flavoured with saffron",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Indian",
+      "Cold"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; nuts may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "kesar-kulfi",
+    "tags": [
+      "dessert",
+      "indian",
+      "cold"
+    ]
+  },
+  {
+    "name": "Fruit Custard",
+    "description": "Chilled fruit pieces in creamy custard",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Indian",
+      "Cold"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; egg may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "fruit-custard",
+    "tags": [
+      "dessert",
+      "indian",
+      "cold"
+    ]
+  },
+  {
+    "name": "Muffin",
+    "description": "Soft baked cake in chocolate or vanilla flavours",
+    "price": 50,
+    "categories": [
+      "Dessert",
+      "Bakery"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Gluten, egg, milk may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "muffin",
+    "tags": [
+      "dessert",
+      "bakery"
+    ]
+  },
+  {
+    "name": "Cookies",
+    "description": "Crunchy or chewy baked biscuits",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Bakery",
+      "Dessert"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; milk, egg or nuts vary",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "cookies",
+    "tags": [
+      "snacks",
+      "bakery",
+      "dessert"
+    ]
+  },
+  {
+    "name": "Banana Cake",
+    "description": "Soft, sweet cake with ripe banana flavour",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Bakery",
+      "Dessert"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Gluten, egg, milk may be present",
+    "spiceLevel": "NONE",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "banana-cake",
+    "tags": [
+      "snacks",
+      "bakery",
+      "dessert"
+    ]
+  },
+  {
+    "name": "South Indian Filter Coffee",
+    "description": "Strong, aromatic coffee traditionally blended with hot milk",
+    "price": 25,
+    "categories": [
+      "Hot Beverages",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "south-indian-filter-coffee",
+    "tags": [
+      "hot-beverages",
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Masala Tea",
+    "description": "Strong tea simmered with ginger, cardamom and warming spices",
+    "price": 20,
+    "categories": [
+      "Hot Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Milk if dairy is added.",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "masala-tea",
+    "tags": [
+      "hot-beverages",
+      "indian"
+    ]
+  },
+  {
+    "name": "Ginger Tea",
+    "description": "Comforting tea with fresh ginger",
+    "price": 25,
+    "categories": [
+      "Hot Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "ginger-tea",
+    "tags": [
+      "hot-beverages"
+    ]
+  },
+  {
+    "name": "Black Coffee",
+    "description": "Strong coffee without milk",
+    "price": 25,
+    "categories": [
+      "Hot Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check additives",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "black-coffee",
+    "tags": [
+      "hot-beverages"
+    ]
+  },
+  {
+    "name": "Cappuccino",
+    "description": "Espresso with steamed milk foam",
+    "price": 25,
+    "categories": [
+      "Hot Beverages",
+      "Western"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "cappuccino",
+    "tags": [
+      "hot-beverages",
+      "western"
+    ]
+  },
+  {
+    "name": "Café Latte",
+    "description": "Smooth espresso with steamed milk",
+    "price": 25,
+    "categories": [
+      "Hot Beverages",
+      "Western"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "cafe-latte",
+    "tags": [
+      "hot-beverages",
+      "western"
+    ]
+  },
+  {
+    "name": "Hot Chocolate",
+    "description": "Rich cocoa drink with warm milk",
+    "price": 25,
+    "categories": [
+      "Hot Beverages",
+      "Dessert"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; possible soy",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "hot-chocolate",
+    "tags": [
+      "hot-beverages",
+      "dessert"
+    ]
+  },
+  {
+    "name": "Green Tea",
+    "description": "Light tea with fresh, grassy notes",
+    "price": 25,
+    "categories": [
+      "Hot Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check additives",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "green-tea",
+    "tags": [
+      "hot-beverages"
+    ]
+  },
+  {
+    "name": "Lemon Tea",
+    "description": "Tea with citrus and a refreshing finish",
+    "price": 25,
+    "categories": [
+      "Hot Beverages"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check additives",
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "lemon-tea",
+    "tags": [
+      "hot-beverages"
+    ]
+  },
+  {
+    "name": "Badam Milk",
+    "description": "Sweet milk drink flavoured with almonds",
+    "price": 25,
+    "categories": [
+      "Hot Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "badam-milk",
+    "tags": [
+      "hot-beverages",
+      "indian"
+    ]
+  },
+  {
+    "name": "Turmeric Milk",
+    "description": "Warm milk with turmeric and gentle spices",
+    "price": 25,
+    "categories": [
+      "Hot Beverages",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "NONE",
+    "preparationTime": 3,
+    "defaultAvailable": true,
+    "slug": "turmeric-milk",
+    "tags": [
+      "hot-beverages",
+      "indian"
+    ]
+  }
+]

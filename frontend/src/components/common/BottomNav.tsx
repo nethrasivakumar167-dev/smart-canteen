@@ -6,6 +6,7 @@ import {
   Home,
   UtensilsCrossed,
   ShoppingBag,
+  Heart,
   LayoutDashboard,
   User,
 } from 'lucide-react';
@@ -23,6 +24,7 @@ export const BottomNav: React.FC = () => {
   const { user, isAuthenticated } = useAuthStore();
 
   const cartCount = getTotalItemsCount();
+  const isStudent = isAuthenticated && user?.role === 'STUDENT';
 
   // Only show on public pages, /cart, and /student/dashboard (not staff/admin dashboards or login pages)
   const publicPaths = ['/', '/menu', '/menu/', '/cart', '/student/dashboard'];
@@ -36,7 +38,8 @@ export const BottomNav: React.FC = () => {
 
   const shouldShow = publicPaths.some(p => location.pathname === p || location.pathname.startsWith(p + '/')) ||
                      location.pathname === '/cart' ||
-                     location.pathname === '/student/dashboard';
+                     location.pathname === '/student/dashboard' ||
+                     (location.pathname === '/favourites' && isStudent);
 
   if (!shouldShow || isLoginPage || isStaffOrAdminDashboard) {
     return null;
@@ -45,6 +48,7 @@ export const BottomNav: React.FC = () => {
   const navItems: NavItem[] = [
     { label: 'Home', path: '/', icon: Home },
     { label: 'Menu', path: '/menu', icon: UtensilsCrossed },
+    ...(isStudent ? [{ label: 'Favourites', path: '/favourites', icon: Heart }] : []),
     { label: 'Cart', path: '/cart', icon: ShoppingBag, badge: cartCount },
     {
       label: 'Profile',
@@ -55,7 +59,7 @@ export const BottomNav: React.FC = () => {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-navy border-t border-slateblue-light transition-colors duration-200">
-      <div className="grid grid-cols-4">
+      <div className={`grid ${isStudent ? 'grid-cols-5' : 'grid-cols-4'}`}>
         {navItems.map((item) => {
           const isActive = location.pathname === item.path ||
             (item.path !== '/' && location.pathname.startsWith(item.path + '/'));

@@ -415,7 +415,7 @@ export const MOCK_REVIEWS: Review[] = [
   {
     id: 'rev-2',
     userName: 'Dr. S. Ramanathan',
-    userRole: 'FACULTY',
+    userRole: 'STAFF',
     rating: 5,
     comment: 'Filter coffee is consistent every morning. Degree coffee decoction aroma is outstanding. Great initiative for our department staff.',
     date: '2 days ago'

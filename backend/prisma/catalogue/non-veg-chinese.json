@@ -1,0 +1,892 @@
+[
+  {
+    "name": "Chicken Biryani",
+    "description": "Fragrant spiced rice with juicy chicken and fried onions",
+    "price": 155,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Non-veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Possible milk, nuts or gluten depending on recipe.",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-biryani",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Chicken Chettinad",
+    "description": "Bold, peppery chicken curry with roasted South Indian spices",
+    "price": 160,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Non-veg",
+      "South Indian"
+    ],
+    "cuisines": [
+      "south-indian"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check spice blends, coconut and other recipe ingredients.",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-chettinad",
+    "tags": [
+      "south-indian"
+    ]
+  },
+  {
+    "name": "Egg Curry",
+    "description": "Boiled eggs in a rich onion-tomato masala",
+    "price": 100,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Egg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "egg"
+    ],
+    "allergens": [
+      "egg"
+    ],
+    "allergenNote": "Egg; verify gravy ingredients.",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "egg-curry",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Chicken 65",
+    "description": "Crispy, spicy fried chicken bites",
+    "price": 70,
+    "categories": [
+      "Starter",
+      "Snacks",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten may be present",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-65",
+    "tags": [
+      "starter",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Chicken Fried Rice",
+    "description": "Wok-tossed rice with chicken and vegetables",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Chinese",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Soy, egg, gluten may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-fried-rice",
+    "tags": [
+      "chinese"
+    ]
+  },
+  {
+    "name": "Chicken Noodles",
+    "description": "Stir-fried noodles with chicken and vegetables",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Chinese",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [
+      "gluten",
+      "soy",
+      "egg"
+    ],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-noodles",
+    "tags": [
+      "chinese"
+    ]
+  },
+  {
+    "name": "Chicken Kothu Parotta",
+    "description": "Chopped parotta tossed with chicken and masala",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten, egg may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-kothu-parotta",
+    "tags": []
+  },
+  {
+    "name": "Chicken Curry",
+    "description": "Homestyle chicken in spiced gravy",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": "Check gravy ingredients",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "chicken-curry",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Butter Chicken",
+    "description": "Creamy tomato-based chicken curry",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [],
+    "allergens": [
+      "milk"
+    ],
+    "allergenNote": "Milk; possible nuts",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "butter-chicken",
+    "tags": [
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Tandoori Chicken",
+    "description": "Charred, yoghurt-marinated chicken",
+    "price": 70,
+    "categories": [
+      "Starter",
+      "Non-veg",
+      "North Indian"
+    ],
+    "cuisines": [
+      "north-indian"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "tandoori-chicken",
+    "tags": [
+      "starter",
+      "north-indian"
+    ]
+  },
+  {
+    "name": "Chicken Tikka",
+    "description": "Grilled marinated chicken pieces",
+    "price": 70,
+    "categories": [
+      "Starter",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-tikka",
+    "tags": [
+      "starter"
+    ]
+  },
+  {
+    "name": "Fish Fry",
+    "description": "Crisp fish coated in spiced masala",
+    "price": 70,
+    "categories": [
+      "Starter",
+      "Lunch",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [
+      "fish"
+    ],
+    "allergenNote": "Fish; possible gluten",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": false,
+    "slug": "fish-fry",
+    "tags": [
+      "starter"
+    ]
+  },
+  {
+    "name": "Fish Curry Rice",
+    "description": "Fish curry with steamed rice",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Non-veg",
+      "Indian"
+    ],
+    "cuisines": [
+      "indian"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": false,
+    "slug": "fish-curry-rice",
+    "tags": [
+      "indian"
+    ]
+  },
+  {
+    "name": "Prawn Masala",
+    "description": "Prawns cooked in aromatic spicy gravy",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Seafood"
+    ],
+    "cuisines": [
+      "seafood"
+    ],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 15,
+    "defaultAvailable": false,
+    "slug": "prawn-masala",
+    "tags": [
+      "seafood"
+    ]
+  },
+  {
+    "name": "Mutton Biryani",
+    "description": "Fragrant rice with tender spiced mutton",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Possible milk or nuts",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": false,
+    "slug": "mutton-biryani",
+    "tags": []
+  },
+  {
+    "name": "Mutton Curry",
+    "description": "Slow-cooked mutton in a rich gravy",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Dinner",
+      "Non-veg"
+    ],
+    "cuisines": [],
+    "mealTimes": [
+      "LUNCH",
+      "DINNER"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Verify recipe ingredients",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": false,
+    "slug": "mutton-curry",
+    "tags": []
+  },
+  {
+    "name": "Egg Fried Rice",
+    "description": "Rice stir-fried with scrambled egg and vegetables",
+    "price": 90,
+    "categories": [
+      "Lunch",
+      "Chinese",
+      "Egg",
+      "Egg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "egg"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "allergenNote": "soy; possible gluten",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "egg-fried-rice",
+    "tags": [
+      "chinese"
+    ]
+  },
+  {
+    "name": "Chicken Kebab Roll",
+    "description": "Grilled chicken wrapped in flatbread",
+    "price": 50,
+    "categories": [
+      "Snacks",
+      "Non-veg",
+      "Western-inspired"
+    ],
+    "cuisines": [
+      "western"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [
+      "gluten"
+    ],
+    "allergenNote": "Gluten; possible milk",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-kebab-roll",
+    "tags": [
+      "snacks",
+      "western-inspired"
+    ]
+  },
+  {
+    "name": "Veg Hakka Noodles",
+    "description": "Springy noodles tossed with crunchy vegetables and savoury sauces",
+    "price": 90,
+    "categories": [
+      "Chinese",
+      "Lunch",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "allergenNote": "Gluten, soy; check sauces.",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "veg-hakka-noodles",
+    "tags": [
+      "chinese",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Chilli Paneer",
+    "description": "Paneer tossed with capsicum, onion, chilli and tangy sauce",
+    "price": 125,
+    "categories": [
+      "Chinese",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "milk",
+      "soy"
+    ],
+    "allergenNote": "Milk, soy; gluten may be present.",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chilli-paneer",
+    "tags": [
+      "chinese",
+      "starter"
+    ]
+  },
+  {
+    "name": "Veg Fried Rice",
+    "description": "Savoury rice with vegetables",
+    "price": 90,
+    "categories": [
+      "Chinese",
+      "Lunch",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "allergenNote": "Soy; possible egg",
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "veg-fried-rice",
+    "tags": [
+      "chinese"
+    ]
+  },
+  {
+    "name": "Schezwan Fried Rice",
+    "description": "Spicy rice with chilli-garlic sauce",
+    "price": 90,
+    "categories": [
+      "Chinese",
+      "Lunch",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "LUNCH"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "allergenNote": "Soy; possible gluten",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "schezwan-fried-rice",
+    "tags": [
+      "chinese"
+    ]
+  },
+  {
+    "name": "Veg Manchurian",
+    "description": "Vegetable dumplings in a tangy sauce",
+    "price": 70,
+    "categories": [
+      "Chinese",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "veg-manchurian",
+    "tags": [
+      "chinese",
+      "starter"
+    ]
+  },
+  {
+    "name": "Gobi Manchurian",
+    "description": "Crispy cauliflower in Indo-",
+    "price": 75,
+    "categories": [
+      "Chinese"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [],
+    "dietaryTags": [],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 15,
+    "defaultAvailable": true,
+    "slug": "gobi-manchurian",
+    "tags": [
+      "chinese"
+    ]
+  },
+  {
+    "name": "Chilli Chicken",
+    "description": "Chicken tossed with peppers and chilli sauce",
+    "price": 70,
+    "categories": [
+      "Chinese",
+      "Starter",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Soy, gluten may be present",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chilli-chicken",
+    "tags": [
+      "chinese",
+      "starter"
+    ]
+  },
+  {
+    "name": "Chicken Manchurian",
+    "description": "Chicken bites in a savoury, tangy sauce",
+    "price": 70,
+    "categories": [
+      "Chinese",
+      "Starter",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Soy, gluten may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-manchurian",
+    "tags": [
+      "chinese",
+      "starter"
+    ]
+  },
+  {
+    "name": "Chicken Momos",
+    "description": "Steamed dumplings with seasoned chicken",
+    "price": 50,
+    "categories": [
+      "Chinese-inspired",
+      "Snacks",
+      "Non-veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "non-veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten, soy may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "chicken-momos",
+    "tags": [
+      "chinese-inspired",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Veg Momos",
+    "description": "Vegetable-filled steamed dumplings",
+    "price": 50,
+    "categories": [
+      "Chinese-inspired",
+      "Snacks",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Gluten, soy may be present",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "veg-momos",
+    "tags": [
+      "chinese-inspired",
+      "snacks"
+    ]
+  },
+  {
+    "name": "Spring Rolls",
+    "description": "Crisp rolls with seasoned vegetable filling",
+    "price": 70,
+    "categories": [
+      "Chinese-inspired",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": null,
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "spring-rolls",
+    "tags": [
+      "chinese-inspired",
+      "starter"
+    ]
+  },
+  {
+    "name": "Hot and Sour Soup",
+    "description": "Spicy, tangy soup with vegetables",
+    "price": 70,
+    "categories": [
+      "Chinese",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [
+      "soy"
+    ],
+    "allergenNote": "Soy; possible gluten",
+    "spiceLevel": "MEDIUM",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "hot-and-sour-soup",
+    "tags": [
+      "chinese",
+      "starter"
+    ]
+  },
+  {
+    "name": "Sweet Corn Soup",
+    "description": "Mild, comforting sweet corn soup",
+    "price": 70,
+    "categories": [
+      "Chinese",
+      "Starter",
+      "Veg"
+    ],
+    "cuisines": [
+      "chinese"
+    ],
+    "mealTimes": [
+      "ALL_DAY"
+    ],
+    "dietaryTags": [
+      "veg"
+    ],
+    "allergens": [],
+    "allergenNote": "Check thickeners and seasonings",
+    "spiceLevel": "MILD",
+    "preparationTime": 8,
+    "defaultAvailable": true,
+    "slug": "sweet-corn-soup",
+    "tags": [
+      "chinese",
+      "starter"
+    ]
+  }
+]
