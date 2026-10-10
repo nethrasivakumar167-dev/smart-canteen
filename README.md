@@ -1,186 +1,126 @@
-# 🍽️ SMART CANTEEN — Full-Stack Preorder & Management Platform
+# Smart Canteen
 
-> **"Skip the Queue. Eat Smarter."**  
-> A high-performance, real-time campus canteen preordering, smart queue dispatch, and kitchen management platform.
+Smart Canteen is a campus food preordering and canteen-management application. Students browse the menu, reserve a pickup slot, place and track orders, and leave feedback. Staff manage kitchen order status and menu availability. Admins manage accounts and view operational and feedback summaries.
 
----
+## Stack
 
-## 🌟 Overview & Architecture
+- Frontend: React 19, TypeScript 6, Vite 8, Tailwind CSS 3, React Router 7, Zustand, Axios
+- Backend: Node.js, Express 4, TypeScript, Zod, Prisma, bcryptjs, JWT, Socket.IO
+- Database: PostgreSQL 15 (Docker image)
+- Tests: Vitest and Supertest (backend); TypeScript and Vite production build (frontend)
 
-Smart Canteen is engineered as a production-grade multi-role SaaS platform specifically designed for educational institutions, colleges, and enterprise food courts. It eliminates congestion during peak lunch and breakfast hours through real-time queue calculation, scheduled pre-ordering, digital pickup verification, dynamic wait time estimation, and staff kitchen management.
+## Features by role
 
+- **Student:** browse menu and categories, manage favorites, place cash or mock-online orders, choose a pickup slot, view order history/status, and submit feedback for delivered orders. Student APIs also provide recommendations and chat.
+- **Staff:** view kitchen orders, transition orders through `RECEIVED`, `PREPARING`, `READY_TO_PICK`, and `DELIVERED`, verify delivery using an order ID or number, and change menu-item/category availability.
+- **Admin:** access staff functions, provision staff/admin accounts, view order and sales analytics, inspect feedback, and retrieve AI-assisted feedback summaries and cooking tips.
+
+## Repository layout
+
+```text
+backend/
+  prisma/       Prisma schema, migrations, seed, menu catalogue
+  scripts/      create-admin and live walkthrough scripts
+  src/          Express routes, middleware, services, and configuration
+  tests/        Vitest API and service tests
+frontend/
+  src/          React app, components, pages, API clients, and stores
+  scripts/      Frontend build-time asset manifest generator
+scripts/        Repository development helpers
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    SMART CANTEEN                        │
-│          Students • Faculty • Visitors • Staff          │
-└───────────────┬─────────────────────────┬───────────────┘
-                │                         │
-          REST API (Axios)            Socket.IO
-                │                         │
-┌───────────────▼─────────────────────────▼───────────────┐
-│                  EXPRESS.JS BACKEND                     │
-│    JWT Auth • RBAC • Order Engine • Socket Broadcast    │
-└───────────────┬─────────────────────────┬───────────────┘
-                │                         │
-       Prisma ORM (PostgreSQL)       AI Feedback Adapter
-                │                         │
-┌───────────────▼─────────────┐   ┌───────▼───────────────┐
-│     PostgreSQL Database     │   │  Optional AI Provider │
-│  Users, Orders, Items, etc. │   │ (Gemini / Mock)       │
-└─────────────────────────────┘   └───────────────────────┘
-```
 
----
+## Prerequisites
 
-## 🚀 Key Features
+- Node.js 20.19+ or 22.12+
+- npm
+- Docker Desktop with Docker Compose, or a PostgreSQL server
 
-* **Real-Time Preordering & Order Flow**:
-  - Student order creation inside Prisma transaction.
-  - Server-side validation of item & category availability.
-  - Unique order IDs (`SC-XXXXXX`).
-  - Cash & mock payment integration.
-* **Server-Enforced Order Lifecycle**:
-  - `RECEIVED` → `PREPARING` → `READY_TO_PICK` → `DELIVERED`.
-  - Server-side delivery verification requiring `READY_TO_PICK` status before marking `DELIVERED`.
-* **Real-Time WebSockets**:
-  - Authenticated Socket.IO with JWT verification and user/role rooms (`user:id`, `role:STAFF`, `role:ADMIN`).
-  - Real-time event broadcasting (`order-created`, `order-status-updated`, `availability-updated`).
-* **Role-Based Access Control (RBAC)**:
-  - `STUDENT`: Browse menu, cart management, order creation, order tracking, rating/feedback submission for delivered orders.
-  - `STAFF`: Kitchen Display System (KDS), menu item/category availability toggles, delivery verification.
-  - `ADMIN`: User provisioning, master order logs, PostgreSQL analytics (revenue, order counts, status breakdown, top items), optional failure-safe AI feedback summary.
-* **Failure-Safe AI Integration**:
-  - Optional AI feedback summary adapter (`GeminiAIFeedbackProvider` / `MockAIFeedbackProvider`).
-  - Environment-driven configuration (`AI_PROVIDER`, `GEMINI_API_KEY`). Safe fallback when API key is unconfigured or call fails.
+## Environment variable names
 
----
+The checked-in templates are `/.env.example`, `/backend/.env.example`, and `/frontend/.env.example`. Copy the relevant template to `.env` in the same directory, then provide appropriate local values. Do not commit `.env` files.
 
-## 🛠️ Technology Stack
+- Root/Docker template: `POSTGRES_PASSWORD`, `JWT_SECRET`, `CLIENT_URL`, `VITE_API_URL`
+- Backend template: `PORT`, `NODE_ENV`, `CLIENT_URL`, `DATABASE_URL`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `GEMINI_API_KEY`, `AI_PROVIDER`, `GEMINI_MODEL`, `DEMO_PASSWORD`, `MENU_TIME_WINDOWS`, `PICKUP_SLOT_STRICT`
+- Frontend template: `VITE_API_URL`, `VITE_SOCKET_URL`, `VITE_APP_NAME`
+- Optional walkthrough override: `API_BASE_URL`
 
-| Layer | Technologies |
-|---|---|
-| **Frontend** | React 19, Vite 8, TypeScript 6, Tailwind CSS 3, React Router 7, Zustand, Axios, Lucide Icons |
-| **Backend** | Node.js, Express, TypeScript, Zod, JWT, bcryptjs, Socket.IO, Helmet, Morgan, Vitest, Supertest |
-| **Database & ORM** | PostgreSQL, Prisma ORM |
-| **Design & Styling** | Custom Design System, HSL Color Palette, Modern Typography, Responsive Mobile-First Layout |
+The backend reads its variables through the Zod-validated backend configuration. `AI_PROVIDER` accepts `mock` or `gemini`; Gemini features require `GEMINI_API_KEY` and `GEMINI_MODEL`. The frontend uses `VITE_API_URL` and `VITE_SOCKET_URL` for API and Socket.IO connections.
 
----
+## Local setup
 
-## 📋 API Overview
+1. Install dependencies:
 
-### Public & Auth Routes (`/api/auth`)
-- `POST /api/auth/register` — Public student registration
-- `POST /api/auth/login` — Universal login (supports portal parameter)
-- `POST /api/auth/student/login` — Student portal login
-- `POST /api/auth/staff/login` — Staff portal login
-- `POST /api/auth/admin/login` — Admin portal login
-- `POST /api/auth/logout` — Client sign-out acknowledgement; bearer JWTs remain valid until expiry
+   ```sh
+   cd backend
+   npm ci
+   cd ../frontend
+   npm ci
+   ```
 
-### Public Menu Routes (`/api`)
-- `GET /api/categories` — List available categories
-- `GET /api/menu` — Search & list available menu items
-- `GET /api/menu/:id` — Get menu item details
+2. Configure the root and backend environment files using the templates. The root Compose configuration reads its PostgreSQL and Docker service settings from the root `.env`; the local backend reads `backend/.env`.
 
-### Student Routes (`/api/student`) — *Requires STUDENT Role (admins may access order endpoints)*
-- `POST /api/student/orders` — Create preorder inside Prisma transaction
-- `GET /api/student/orders` — Get student order history
-- `GET /api/student/orders/:id` — Get specific order details
-- `POST /api/student/orders/:id/feedback` — Submit rating and comment for completed (`DELIVERED`) order
+3. Start PostgreSQL with Docker Compose:
 
-### Staff Routes (`/api/staff`) — *Requires STAFF or ADMIN Role*
-- `GET /api/staff/orders` — Get active kitchen orders
-- `PATCH /api/staff/orders/:id/status` — Enforce order status transition (`RECEIVED` → `PREPARING` → `READY_TO_PICK` → `DELIVERED`)
-- `POST /api/staff/verify-delivery` — Verify an `orderNumber` or `id` and mark the order delivered
-- `GET /api/staff/menu-status` — Get menu item availability
-- `PATCH /api/staff/menu-status/:id` — Toggle item availability
-- `PATCH /api/staff/categories/:id/availability` — Toggle category availability
+   ```sh
+   docker compose up -d postgres
+   ```
 
-### Admin Routes (`/api/admin`) — *Requires ADMIN Role*
-- `GET /api/admin/overview-stats` — PostgreSQL analytics (revenue, order status breakdown, top items)
-- `GET /api/admin/users` — User directory
-- `POST /api/admin/users` — Provision staff or admin user account
-- `GET /api/admin/orders` — Master transaction ledger
-- `GET /api/admin/feedback` — List student order ratings & reviews
-- `GET /api/admin/feedback/summary` — Get a daily cached feedback summary; `?refresh=true` requests a rate-limited refresh
-- `POST /api/admin/cooking-tips/recompute` — Recompute staff cooking tips from recent per-item feedback
+   The container is published on `localhost:5433` and uses PostgreSQL's default container port `5432`. Set the backend `DATABASE_URL` to connect to the published host port.
 
----
+4. Create/update the database and seed the demo menu and accounts:
 
-## 🔑 Environment Variables (Names Only)
+   ```sh
+   cd backend
+   npx prisma generate
+   npm run prisma:migrate
+   npm run prisma:seed
+   ```
 
-### Backend Environment Variables (`backend/.env`)
-- `NODE_ENV` (e.g. `development`, `test`, `production`)
-- `PORT` (e.g. `5000`)
-- `CLIENT_URL` (e.g. `http://localhost:5173`)
-- `DATABASE_URL` (PostgreSQL connection string)
-- `JWT_SECRET` (Minimum 32 characters long)
-- `JWT_EXPIRES_IN` (e.g. `7d`)
-- `AI_PROVIDER` (`mock` or `gemini`)
-- `GEMINI_API_KEY` (Optional Gemini API key)
-- `DEMO_PASSWORD` (Required only when running the non-production database seed)
+   Seeding is for non-production environments and requires `DEMO_PASSWORD`.
 
-### Frontend Environment Variables (`frontend/.env`)
-- `VITE_API_URL` (Backend HTTP API origin)
-- `VITE_SOCKET_URL` (Backend Socket.IO origin)
+5. In separate terminals, start the backend and frontend:
 
----
+   ```sh
+   cd backend
+   npm run dev
+   ```
 
-## ⚙️ Local Setup & Database Initialization
+   ```sh
+   cd frontend
+   npm run dev
+   ```
 
-### 1. Prerequisites
-- Node.js (v20.19+ or v22.12+)
-- npm (v9+)
-- PostgreSQL (v14+) running locally or via Docker
+## Demo accounts
 
-### 2. Database Setup
-```bash
+The seed creates `student@demo.com`, `staff@demo.com`, and `admin@demo.com` with their corresponding roles. All seeded accounts use the value configured by `DEMO_PASSWORD`; no fixed password is documented here.
+
+## Operational scripts
+
+Create an initial production admin or staff account with the backend TypeScript runner. Supply only name, email, and role as command-line arguments; the script prompts for a hidden password unless `ADMIN_PASSWORD` is set in the environment. Passwords must contain 12–72 characters. The script refuses duplicate email addresses.
+
+```sh
 cd backend
-cp .env.example .env
-# Edit .env with your DATABASE_URL and JWT_SECRET
-
-npx prisma generate
-npx prisma migrate dev --name init
-npx prisma db seed
+npm run create-admin -- "Campus Admin" admin@example.edu ADMIN
 ```
 
-### 3. Start Backend Development Server
-```bash
+Run the live walkthrough only while the backend and database are already running and the demo staff/admin accounts exist. It uses the real HTTP API and database, creates a unique throwaway student and order, prompts for the order ID before delivery, and uses `DEMO_PASSWORD` or a hidden prompt for demo logins. It does not remove the throwaway data.
+
+```sh
 cd backend
-npm run dev
+npm run walkthrough
 ```
-Backend server runs on `http://localhost:5000`
 
-### 4. Start Frontend Development Server
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Frontend client runs on `http://localhost:5173`
+## Tests and builds
 
----
-
-## 🧪 Running Tests & Build Verification
-
-```bash
-# Run backend Vitest test suites (61 tests)
+```sh
 cd backend
+npx tsc --noEmit
 npm test
+```
 
-# Run frontend TypeScript typecheck & production build
+```sh
 cd frontend
 npm run build
 ```
 
----
-
-## 🚢 Production Deployment Steps
-
-1. **Database Migration**:
-   Run `npx prisma migrate deploy` against the target production PostgreSQL instance.
-2. **Environment Variables**:
-   Set all required backend environment variables (`NODE_ENV=production`, `DATABASE_URL`, `JWT_SECRET` >= 32 chars, `CLIENT_URL`). Set `VITE_API_URL` to the publicly reachable backend API origin before building the frontend image.
-3. **Backend Production Start**:
-   Compile backend using `npm run build` and run `npm start`; the start script runs `prisma migrate deploy` before starting the server. The Docker image uses this same start script.
-4. **Frontend Static Production Build**:
-   Build the frontend bundle using `npm run build` inside `frontend/` and serve static assets via Nginx or CDN. Ensure CORS `CLIENT_URL` matches the frontend domain.
+`npm run build` in the backend generates the Prisma client and compiles TypeScript. In production, `npm start` runs `prisma migrate deploy` before starting the compiled server.

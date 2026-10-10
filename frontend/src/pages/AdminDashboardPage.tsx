@@ -249,7 +249,7 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               ₹{(statsData?.financials?.revenue ?? 0).toLocaleString()}
             </div>
-            <div className="text-xs text-navy/75 font-medium">
+            <div className="text-xs text-navy font-medium">
               Revenue • {analyticsRange === 'today'
                 ? 'Today'
                 : analyticsRange === '7d'
@@ -269,7 +269,7 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               {statsData?.operations?.totalOrders ?? 0}
             </div>
-            <div className="text-xs text-navy/75 font-medium">Orders Processed</div>
+            <div className="text-xs text-navy font-medium">Orders Processed</div>
           </div>
         </div>
 
@@ -281,7 +281,7 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               {statsData?.userMetrics?.totalRegisteredUsers ?? usersList.length}
             </div>
-            <div className="text-xs text-navy/75 font-medium">Registered Accounts</div>
+            <div className="text-xs text-navy font-medium">Registered Accounts</div>
           </div>
         </div>
 
@@ -293,7 +293,7 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               {statsData?.operations?.averageFulfillmentMinutes ?? 0}m
             </div>
-            <div className="text-xs text-navy/75 font-medium">Avg Order Fulfillment</div>
+            <div className="text-xs text-navy font-medium">Avg Order Fulfillment</div>
           </div>
         </div>
       </div>
@@ -353,7 +353,7 @@ export const AdminDashboardPage: React.FC = () => {
                 <h3 className="text-base font-bold text-slateblue">
                   Peak Dining Rush Demand (Hourly)
                 </h3>
-                <p className="text-xs text-dusty">
+                <p className="text-xs text-navy">
                   Orders placed from 8 AM to 4 PM across the selected date range.
                 </p>
               </div>
@@ -370,7 +370,7 @@ export const AdminDashboardPage: React.FC = () => {
 
                 return (
                   <div key={idx} className="flex flex-col items-center gap-2 h-full justify-end group">
-                    <span className="text-[10px] font-bold text-dusty group-hover:text-slateblue transition">
+                    <span className="text-[10px] font-bold text-navy group-hover:text-slateblue transition">
                       {item.orders}
                     </span>
                     <div
@@ -381,7 +381,7 @@ export const AdminDashboardPage: React.FC = () => {
                       }`}
                       style={{ height: `${heightPct}%` }}
                     />
-                    <span className="text-[10px] font-semibold text-dusty">{item.hour}</span>
+                    <span className="text-[10px] font-semibold text-navy">{item.hour}</span>
                   </div>
                 );
               })}
@@ -402,7 +402,7 @@ export const AdminDashboardPage: React.FC = () => {
                 >
                   <div>
                     <div className="text-xs font-bold text-slateblue">{item.name}</div>
-                    <div className="text-[11px] text-dusty">{item.ordersCount} orders placed</div>
+                    <div className="text-[11px] text-navy">{item.ordersCount} orders placed</div>
                   </div>
                   <div className="text-xs font-extrabold text-slateblue">
                     ₹{item.revenue.toLocaleString()}
@@ -410,7 +410,7 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
               ))}
               {!statsData?.topSellingItems?.length && (
-                <div className="p-3 text-xs text-dusty">No sales data for this period.</div>
+                <div className="p-3 text-xs text-navy">No sales data for this period.</div>
               )}
             </div>
           </div>

@@ -172,7 +172,7 @@ export const StudentDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               {dashboardData?.stats?.activeOrdersCount ?? 0}
             </div>
-            <div className="text-xs text-navy/75 font-medium">Active Orders</div>
+            <div className="text-xs text-navy font-medium">Active Orders</div>
           </div>
         </div>
 
@@ -184,7 +184,7 @@ export const StudentDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               {dashboardData?.stats?.totalOrdersCount ?? 0}
             </div>
-            <div className="text-xs text-navy/75 font-medium">Total Preorders</div>
+            <div className="text-xs text-navy font-medium">Total Preorders</div>
           </div>
         </div>
 
@@ -196,7 +196,7 @@ export const StudentDashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slateblue">
               {dashboardData?.stats?.savedFavoritesCount ?? 0}
             </div>
-            <div className="text-xs text-navy/75 font-medium">Favorite Items</div>
+            <div className="text-xs text-navy font-medium">Favorite Items</div>
           </div>
         </div>
       </div>

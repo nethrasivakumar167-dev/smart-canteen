@@ -231,7 +231,7 @@ export const StaffDashboardPage: React.FC = () => {
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.pending ?? 0}
           </div>
-          <div className="text-[11px] text-navy/75 mt-1">Awaiting kitchen confirmation</div>
+          <div className="text-[11px] text-navy mt-1">Awaiting kitchen confirmation</div>
         </button>
 
         <button
@@ -251,7 +251,7 @@ export const StaffDashboardPage: React.FC = () => {
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.preparing ?? 0}
           </div>
-          <div className="text-[11px] text-navy/75 mt-1">Currently being prepared</div>
+          <div className="text-[11px] text-navy mt-1">Currently being prepared</div>
         </button>
 
         <button
@@ -271,7 +271,7 @@ export const StaffDashboardPage: React.FC = () => {
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.ready ?? 0}
           </div>
-          <div className="text-[11px] text-navy/75 mt-1">At collection counter</div>
+          <div className="text-[11px] text-navy mt-1">At collection counter</div>
         </button>
 
         <button
@@ -291,7 +291,7 @@ export const StaffDashboardPage: React.FC = () => {
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.completed ?? 0}
           </div>
-          <div className="text-[11px] text-navy/75 mt-1">Handed over to diners</div>
+          <div className="text-[11px] text-navy mt-1">Handed over to diners</div>
         </button>
       </div>
 
@@ -322,7 +322,7 @@ export const StaffDashboardPage: React.FC = () => {
 
         {activeTab === 'queue' && (
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-navy/75 hidden sm:inline">Filter:</span>
+            <span className="text-navy hidden sm:inline">Filter:</span>
             {['ALL', 'PENDING', 'PREPARING', 'READY', 'COMPLETED'].map((st) => (
               <button
                 key={st}
@@ -330,7 +330,7 @@ export const StaffDashboardPage: React.FC = () => {
                 className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition ${
                   selectedStatusFilter === st
                     ? 'bg-slateblue text-cream'
-                    : 'text-navy/75 hover:bg-sand/50'
+                    : 'text-navy hover:bg-sand/50'
                 }`}
               >
                 {st}
