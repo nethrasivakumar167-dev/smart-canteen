@@ -1,0 +1,113 @@
+# Wikimedia Commons photo credits
+
+- Aloo Paratha | /menu/aloo-paratha.jpg | Agasthya.rana | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aloo_Paratha_with_Sabzi.jpg
+- Aloo Tikki Chaat | /menu/aloo-tikki-chaat.jpg | Nanditamomai | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aloo_Tikki_Chaat.JPG
+- Badam Milk | /menu/badam-milk.jpg | Harikrishnan N | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Pheni_with_Badam_Milk_-_VV_Puram_Food_Street,_Bangalore_-_Karnataka_-_PXL4222.jpg
+- Banana Cake | /menu/banana-cake.jpg | FotoosVanRobin | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Britisch_Banana_Caramel_Cake,_January_2008.jpg
+- Bhel Puri | /menu/bhel-puri.jpg | Billjones94 | CC0 | https://commons.wikimedia.org/wiki/File:Bhel_puri_chat,_photographed_in_West_Bengal,_India,_September_24,_2024.jpg
+- Black Forest Pastry | /menu/black-forest-pastry.jpg | Gaurav Dhwaj Khadka | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Black_Forest_Pastry.jpg
+- Bread Omelette | /menu/bread-omelette.jpg | Omya kitchen | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bread_Omelette_Sandwich.jpg
+- Butter Chicken | /menu/butter-chicken.jpg | Ser Amantio di Nicolao | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Butter_chicken,_chickpeas,_and_rice_in_a_takeout_container.jpg
+- Buttermilk | /menu/buttermilk.jpg | Ukko-wc | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Buttermilk-(right)-and-Milk-(left).jpg
+- Café Latte | /menu/caf-latte.jpg | Andy Li | CC0 | https://commons.wikimedia.org/wiki/File:Carrot_cake_slice_and_latte_-_Saltmarsh_Farmhouse_%26_Cafe_2024-12-19.jpg
+- Cappuccino | /menu/cappuccino.jpg | Aneth David (SLU) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:A-cup-of-cappuccino-coffee-dar-es-salaam-cafe.jpg
+- Carrot Halwa | /menu/carrot-halwa.jpg | Jing | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Carrot_gajar_halwa_with_kheer_India_Sweets.jpg
+- Cheesecake | /menu/cheesecake.jpg | zingyyellow | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Baked_cheesecake_with_raspberries_and_blueberries.jpg
+- Chicken 65 | /menu/chicken-65.jpg | Amiyashrivastava | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Chicken_65_(Dish).jpg
+- Chicken Alfredo Pasta | /menu/chicken-alfredo-pasta.jpg | Audrey Freemy | CC0 | https://commons.wikimedia.org/wiki/File:Chicken_Alfredo_Pasta.jpg
+- Chicken Biryani | /menu/chicken-biryani.jpg | Shivani shipra | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_biryani_02-06-2015_(India).jpg
+- Chicken Burger | /menu/chicken-burger.jpg | Horacio Cambeiro | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Argentine_chicken_burger_sandwich_with_lettuce,_tomato,_fried_egg,_and_mozzarella_cheese_on_Don_Yeyo_bun_-_High_angle_view.jpg
+- Chicken Chettinad | /menu/chicken-chettinad.jpg | Andy Li | CC0 | https://commons.wikimedia.org/wiki/File:CHICKEN_CHETTINAD_-_Mini_Madras_2026-03-13.jpg
+- Chicken Curry | /menu/chicken-curry.jpg | Gaurav Dhwaj Khadka | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_Curry_6.jpg
+- Chicken Fried Rice | /menu/chicken-fried-rice.jpg | Andy Li | CC0 | https://commons.wikimedia.org/wiki/File:Khao_Pad_(Rosa%27s_Fried_Rice)_with_Chicken_-_Rosa%27s_Thai_2025-07-22.jpg
+- Chicken Kothu Parotta | /menu/chicken-kothu-parotta.jpg | Thamizhpparithi Maari | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_Kothu_Parotta.jpg
+- Chicken Momos | /menu/chicken-momos.jpg | Rupasree | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Beef_glass_noodles_and_Chicken_momos_(cropped).JPG
+- Chicken Noodles | /menu/chicken-noodles.jpg | NNbengal | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Special_Chicken_Noodles.jpg
+- Chicken Pizza | /menu/chicken-pizza.jpg | Debasree1983 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_Pizza_-_Home_Made_-_Howrah_-_West_Bengal_-_010.jpg
+- Chicken Popcorn | /menu/chicken-popcorn.jpg | Mike Mozart from Funny YouTube, USA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:KFC_Popcorn_Chicken_(12956064765).jpg
+- Chicken Samosa | /menu/chicken-samosa.jpg | Vis M | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_samosa_03.jpg
+- Chicken Sandwich | /menu/chicken-sandwich.jpg | Tmannya | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Chicken_sandwich.jpg
+- Chicken Tikka | /menu/chicken-tikka.jpg | Minaxibose1992 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken-Tikka.jpg
+- Chilli Chicken | /menu/chilli-chicken.jpg | Gaurav Dhwaj Khadka | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_Chilli_1.jpg
+- Chilli Paneer | /menu/chilli-paneer.jpg | Vikramdewangan22889 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Paneer_Chilli_with_Hakka_Noodels.JPG
+- Chocolate Brownie | /menu/chocolate-brownie.jpg | Contrapunctus-1 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chocolate_brownie_at_Pizza_Hut,_Mayur_Vihar_1,_Delhi_(2025-08-29).jpg
+- Chocolate Lava Cake | /menu/chocolate-lava-cake.jpg | sanctumsolitude | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Chocolate_lava_cake.jpg
+- Chocolate Milkshake | /menu/chocolate-milkshake.jpg | Bernard DUPONT | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chocolate_milkshake_..._%F0%9F%98%8B.jpg
+- Chole Bhature | /menu/chole-bhature.jpg | Aleemk72 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bikaner_chole_bhature.jpg
+- Cookies | /menu/cookies.jpg | Basile Morin | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Illuminated_wooden_shelf_with_many_glass_jars_containing_cookies_for_sale_in_Tokyo.jpg
+- Curd Rice | /menu/curd-rice.jpg | Sudharshan Shanmugasundaram | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Curd_Rice.jpg
+- Dahi Puri | /menu/dahi-puri.jpg | POOJAKALSE | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Dahi_paani_puri.JPG
+- Dal Makhani | /menu/dal-makhani.jpg | TarnishedPath | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Dal_makhani.jpg
+- Dal Tadka | /menu/dal-tadka.jpg | AugustineKajur | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Dal_Tadka-Delhi.jpg
+- Egg Dosa | /menu/egg-dosa.jpg | Boopathi Raja123 | CC0 | https://commons.wikimedia.org/wiki/File:Egg_dosa*.jpg
+- Egg Puff | /menu/egg-puff.jpg | Ajaycarnet | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bangalore_Egg_puff.jpg
+- Farmhouse Pizza | /menu/farmhouse-pizza.jpg | AakritiGupta2 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Farmhouse_Pizza-Domino%27s-Ahmedabad-Gujarat-202013-1.jpg
+- Fish Curry Rice | /menu/fish-curry-rice.jpg | goanfishcurryrice3 | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Fish_Curry_Rice_(18211453836).jpg
+- Fish Fry | /menu/fish-fry.jpg | Harrison Keely | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:A_fish_fry_in_the_southern_United_States_in_Brasstown,_North_Carolina_06.jpg
+- French Fries | /menu/french-fries.jpg | Tony Webster from Minneapolis, Minnesota, United States | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Truffle_oil_french_fries_(33024792848).jpg
+- Garlic Bread | /menu/garlic-bread.jpg | Infrogmation of New Orleans | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Garlic_bread_-_preparation_in_home_kitchen.jpg
+- Ghee Roast Dosa | /menu/ghee-roast-dosa.jpg | Soooji | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Ghee_Roast_Dosa.jpg
+- Ginger Tea | /menu/ginger-tea.jpg | Gleb from St.Petersburg, Russia | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Ginger_tea-01.jpg
+- Gobi Manchurian | /menu/gobi-manchurian.jpg | Harsha K R from Bangalore, India | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Gobi_Manchurian.jpg
+- Gulab Jamun | /menu/gulab-jamun.jpg | Cabeza2000 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Gulab_jamun_(Gibraltar,_November_2020).jpg
+- Hot and Sour Soup | /menu/hot-and-sour-soup.jpg | NeoBatfreak | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hot_%26_Sour_Soup_in_Clovis_Ca.jpg
+- Ice Cream | /menu/ice-cream.jpg | Ella Olsson from Stockholm, Sweden | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Frozen_Fruit_Ice_Cream_(44474096241).jpg
+- Iced Coffee | /menu/iced-coffee.jpg | Ahri.boy | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Iced_coffee_(with_special_milk).jpg
+- Iced Tea | /menu/iced-tea.jpg | Renee Comet (photographer) | Public domain | https://commons.wikimedia.org/wiki/File:NCI_iced_tea.jpg
+- Idiyappam | /menu/idiyappam.jpg | Sundar | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Idiyappam.jpg
+- Idli with Sambar | /menu/idli-with-sambar.jpg | V Bhavya | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Idli_with_sambar,_chutney,_Tirupati,_Andhra_Pradesh-DSC_0009.jpg
+- Lemon Mint Cooler | /menu/lemon-mint-cooler.jpg | Riddhichoksi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lemon_Mint_Cooler_2.JPG
+- Lemon Rice | /menu/lemon-rice.jpg | Zeel Patel | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lemon_Rice_-_Perfect_use_of_Left_over_rice.JPG
+- Lemon Tea | /menu/lemon-tea.jpg | Gannu03 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lemon_tea_2.jpg
+- Mac and Cheese | /menu/mac-and-cheese.jpg | Texasfoodgawker | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg
+- Margherita Pizza | /menu/margherita-pizza.jpg | Ruth Hartnup from Vancouver, Canada | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Pizza_margherita_at_Portland_Craft_(9536186941).jpg
+- Masala Dosa | /menu/masala-dosa.jpg | Bhavana Homecook | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Benne_Masala_Dosa.jpg
+- Masala Peanuts | /menu/masala-peanuts.jpg | Daderot | CC0 | https://commons.wikimedia.org/wiki/File:Vegetable_tikka_masala,_peanuts,_and_Ning_Chi_chili_with_garlic,_on_wild_rice_-_Massachusetts.jpg
+- Masala Tea | /menu/masala-tea.jpg | Miansari66 | Public domain | https://commons.wikimedia.org/wiki/File:Masala_Chai.JPG
+- Medu Vada | /menu/medu-vada.jpg | Lubnakarim06 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Medu_Vada.JPG
+- Muffin | /menu/muffin.jpg | National Cancer Institute, Renee Comet (photographer) | Public domain | https://commons.wikimedia.org/wiki/File:Muffin_NIH.jpg
+- Mutton Biryani | /menu/mutton-biryani.jpg | Bhaskaranaidu | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mutton_biryani.JPG
+- Mutton Curry | /menu/mutton-curry.jpg | Gaurav Dhwaj Khadka | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mutton_Curry_(44786).jpg
+- Onion Pakoda | /menu/onion-pakoda.jpg | Vatsalkumar brahmbhatt | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chana_Dal_Onion_Pakoda.jpg
+- Onion Uttapam | /menu/onion-uttapam.jpg | Foody1989 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tomato_onion_Uttapam.jpg
+- Orange Juice | /menu/orange-juice.jpg | Agency of the United States Department of Agriculture Edited Version by: Arad | Public domain | https://commons.wikimedia.org/wiki/File:Orange_juice_1_edit1.jpg
+- Oreo Milkshake | /menu/oreo-milkshake.jpg | Donald Trung Quoc Don (Chữ Hán: 徵國單) - Wikimedia Commons - © CC BY-SA 4.0 International . ( Want to use this image? ) Original publication 📤: -- Donald Trung 『徵國單』 ( No Fake News 💬 ) ( WikiProject Numismatics 💴) ( Articles 📚 ) 21:59, 17 October 2021 (UTC) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Wyback_Burgers_Oreo_milkshake,_Winschoten_(2021)_03.jpg
+- Palak Paneer | /menu/palak-paneer.jpg | DreamyFlutura11 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Palak_Paneer_(Cottage_cheese_in_spinach_gravy).jpg
+- Paneer Butter Masala | /menu/paneer-butter-masala.jpg | Ganesh Mohan T | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rotti_and_Paneer_Butter_Masala.jpg
+- Paneer Pakoda | /menu/paneer-pakoda.jpg | Mdsmds0 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Paneer_Pakoda_(Cheese_Pakoda).JPG
+- Paneer Sandwich | /menu/paneer-sandwich.jpg | Thamizhpparithi Maari | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Paneer_Sandwich.jpg
+- Paneer Tikka | /menu/paneer-tikka.jpg | YKanchan07 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hot_Paneer_tikka.jpg
+- Paneer Tikka Pizza | /menu/paneer-tikka-pizza.jpg | Gandhi Mudit | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Paneer_Tikka_Pizza_with_Mushroom.jpg
+- Pani Puri | /menu/pani-puri.jpg | Teena Sometimes | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Crispy_Pani_Puri.jpg
+- Parotta with Salna | /menu/parotta-with-salna.jpg | Evangelin5 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Parotta_with_Salna-Thoothukudi-Tamil_Nadu-DED_002.jpg
+- Pav Bhaji | /menu/pav-bhaji.jpg | BHAAGIi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bhaji_pav_2.jpg
+- Peri-Peri Fries | /menu/peri-peri-fries.jpg | Barkathnisa Ashaqilahi | CC0 | https://commons.wikimedia.org/wiki/File:Peri_peri_fries.jpg
+- Pesarattu | /menu/pesarattu.jpg | ukanda | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Pesarattu_and_Ginger_chutney.jpg
+- Plain Dosa | /menu/plain-dosa.jpg | Barry Pousman from New York, NY | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Rava_plain_dosa_(6105492594).jpg
+- Podi Dosa | /menu/podi-dosa.jpg | Manukrishnan80 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Podi_Dosa_(73144).jpg
+- Poori Masala | /menu/poori-masala.jpg | Maddyatpondy | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Poori_masala_-_tamilnadu_-_IMG_20190924_090142_1.jpg
+- Prawn Masala | /menu/prawn-masala.jpg | Seethabharathi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chettinad_Prawn_Masala.JPG
+- Rajma Chawal | /menu/rajma-chawal.jpg | Shreya151994 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rajma_Chawal_by_Rama_Bhave.jpg
+- Rasgulla | /menu/rasgulla.jpg | Prakrutim | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rasgulla_With_Rabdi.jpg
+- Rava Dosa | /menu/rava-dosa.jpg | w:en:User:Chaitanya.lala | Public domain | https://commons.wikimedia.org/wiki/File:Rava_dosa.JPG
+- Red Sauce Pasta | /menu/red-sauce-pasta.jpg | Rocky Masum This work was made by Masum-al-Hasan Rocky and released under the license(s) stated below. Please feel free to use it for any purpose as long as you credit Masum-al-Hasan Rocky as author and follow the terms of the chosen license. If you use this work outside of the Wikimedia projects, I would very much like to get a note from you. Thanks! | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:A_plate_of_red_sauce_pasta.jpg
+- Rose Milk | /menu/rose-milk.jpg | Harikrishnan N | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rose_Milk_-_Sri_Arasan_Sweets,_Trichy_-_TamilNadu_-_PXL1447.jpg
+- Samosa | /menu/samosa.jpg | ClumsyHomeChef | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Indian_Samosa_by_clumsy_home_chef.jpg
+- Schezwan Fried Rice | /menu/schezwan-fried-rice.jpg | Nandhinikandhasamy | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Schezwan_Egg_Fried_Rice_with_raitha_01.jpg
+- Sev Puri | /menu/sev-puri.jpg | https://www.flickr.com/photos/feastguru_kirti/ | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Sev_Puri.jpg
+- South Indian Filter Coffee | /menu/south-indian-filter-coffee.jpg | Charles Haynes | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Foaming_filter_coffee.jpg
+- South Indian Meals | /menu/south-indian-meals.jpg | Raj1818913 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Traditional_south_indian_meals.jpg
+- Spring Rolls | /menu/spring-rolls.jpg | No machine-readable author provided. Rose SP Ring~commonswiki assumed (based on copyright claims). | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Spring_rolls_on_sale.jpg
+- Strawberry Milkshake | /menu/strawberry-milkshake.jpg | Alex Gorzen | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Strawberry_Milkshake_Whipped_Cream.jpg
+- Sweet Corn Soup | /menu/sweet-corn-soup.jpg | Thamizhpparithi Maari | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Chicken_sweet_corn_soup.jpg
+- Tandoori Chicken | /menu/tandoori-chicken.jpg | Bharat Mirchandani from Mumbai, India | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Tandoori_chicken_laccha_piyaz1_(36886283595).jpg
+- Upma | /menu/upma.jpg | Intodustin | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Upma_South_India.JPG
+- Veg Biryani | /menu/veg-biryani.jpg | Lakshmi kanth raju | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Daba_Veg_Biryani.jpg
+- Veg Cheese Burger | /menu/veg-cheese-burger.jpg | Virajnene95 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Soni_Snacks-_Veg_Cheese_Burger.jpg
+- Veg Cutlet | /menu/veg-cutlet.jpg | Maneesh Srivastva | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Veg_cutlet.jpg
+- Veg Fried Rice | /menu/veg-fried-rice.jpg | Akhil | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Veg_Fried_Rice_001.jpg
+- Veg Hakka Noodles | /menu/veg-hakka-noodles.jpg | Farhana Sayyed | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hakka_Noodles_Veg.jpg
+- Veg Manchurian | /menu/veg-manchurian.jpg | Saumendra | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Veg-dry-manchurian,_cuttack_-_odisha.jpg
+- Veg Momos | /menu/veg-momos.jpg | Ganesh Mohan T | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Veg_Momos.jpg
+- Veg Pulao | /menu/veg-pulao.jpg | Sumit Surai | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lunch_-_Wikimedia_Commons_Workshop_-_Kolkata_-_August_2023_-_Veg_Pulao.jpg
+- White Sauce Pasta | /menu/white-sauce-pasta.jpg | Samudra013 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Home_made_White_Sauce_pasta_at_Bankura.jpg

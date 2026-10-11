@@ -6,6 +6,7 @@ import { useCartStore } from '../store/cartStore';
 import { useToastStore } from '../store/toastStore';
 import { fetchStudentOrders } from '../api/orderApi';
 import { FoodCard } from '../components/menu/FoodCard';
+import { FoodImage, hasUsableMenuImage } from '../components/common/FoodImage';
 import {
   GraduationCap,
   UtensilsCrossed,
@@ -414,11 +415,15 @@ export const StudentDashboardPage: React.FC = () => {
                   key={item.id}
                   className="p-3 rounded-2xl bg-cream border border-line flex items-center justify-between gap-3"
                 >
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="w-12 h-12 rounded-xl object-cover shrink-0"
-                  />
+                  {hasUsableMenuImage(item.imageUrl, item.name) && (
+                    <div className="aspect-square w-12 shrink-0 overflow-hidden rounded-xl">
+                      <FoodImage
+                        imageUrl={item.imageUrl}
+                        alt={item.name}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  )}
                   <div className="flex-1 min-w-0">
                     <h4 className="text-xs font-bold text-slateblue truncate">
                       {item.name}

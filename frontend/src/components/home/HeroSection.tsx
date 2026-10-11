@@ -7,6 +7,7 @@ import {
   KitchenStatus,
 } from '../../api/publicApi';
 import { MenuItem } from '../../types';
+import { FoodImage, hasUsableMenuImage } from '../common/FoodImage';
 import {
   Flame,
   ArrowRight,
@@ -45,6 +46,9 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   const featuredItem = menuItems?.[0];
+  const featuredHasImage = featuredItem
+    ? hasUsableMenuImage(featuredItem.imageUrl, featuredItem.name)
+    : false;
   const kitchenActivity = kitchenStatus
     ? getKitchenActivity(kitchenStatus.activeOrdersCount)
     : null;
@@ -130,26 +134,29 @@ export const HeroSection: React.FC = () => {
               {/* Featured available menu item */}
               {featuredItem && (
               <div className="bg-cream rounded-3xl p-4 sm:p-5 shadow-sm border border-line relative z-20">
-                <div className="relative h-56 rounded-3xl overflow-hidden">
-                  {featuredItem.imageUrl && (
-                    <img
-                      src={featuredItem.imageUrl}
+                {featuredHasImage ? (
+                  <div className="relative aspect-[3/2] rounded-3xl overflow-hidden">
+                    <FoodImage
+                      imageUrl={featuredItem.imageUrl}
                       alt={featuredItem.name}
                       className="w-full h-full object-cover"
                     />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/75 via-transparent to-transparent" />
-                  
-                  <div className="absolute top-3 left-3 bg-cream px-3 py-1 rounded-full text-xs font-bold text-navy flex items-center gap-1.5 shadow-sm">
-                    <Flame className="w-3.5 h-3.5 fill-navy" />
-                    Available now
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/75 via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3 bg-cream px-3 py-1 rounded-full text-xs font-bold text-navy flex items-center gap-1.5 shadow-sm">
+                      <Flame className="w-3.5 h-3.5 fill-navy" />
+                      Available now
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3 text-cream">
+                      <span className="text-xs font-semibold text-cream/85">{featuredItem.categoryName}</span>
+                      <h3 className="text-lg font-bold">{featuredItem.name}</h3>
+                    </div>
                   </div>
-
-                  <div className="absolute bottom-3 left-3 right-3 text-cream">
-                    <span className="text-xs font-semibold text-cream/85">{featuredItem.categoryName}</span>
-                    <h3 className="text-lg font-bold">{featuredItem.name}</h3>
+                ) : (
+                  <div className="px-2 pt-2">
+                    <span className="text-xs font-semibold text-espresso">{featuredItem.categoryName}</span>
+                    <h3 className="text-lg font-bold text-navy">{featuredItem.name}</h3>
                   </div>
-                </div>
+                )}
 
                 <div className="mt-4 flex items-center justify-between">
                   <div className="text-right">

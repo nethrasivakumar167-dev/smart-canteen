@@ -514,7 +514,7 @@ export const CartPage: React.FC = () => {
 };
 
 const CartFoodImage: React.FC<{ imageUrl: string; name: string }> = ({ imageUrl, name }) => {
-  const [showImage, setShowImage] = useState(() => hasUsableMenuImage(imageUrl));
+  const [showImage, setShowImage] = useState(() => hasUsableMenuImage(imageUrl, name));
   if (!showImage) return null;
   return (
     <FoodImage

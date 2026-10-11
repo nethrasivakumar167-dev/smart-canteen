@@ -1,0 +1,779 @@
+{
+  "plain-dosa": {
+    "dish": "Plain Dosa",
+    "file": "/menu/plain-dosa.jpg",
+    "author": "Barry Pousman from New York, NY",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rava_plain_dosa_(6105492594).jpg"
+  },
+  "masala-dosa": {
+    "dish": "Masala Dosa",
+    "file": "/menu/masala-dosa.jpg",
+    "author": "Bhavana Homecook",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Benne_Masala_Dosa.jpg"
+  },
+  "idli-with-sambar": {
+    "dish": "Idli with Sambar",
+    "file": "/menu/idli-with-sambar.jpg",
+    "author": "V Bhavya",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Idli_with_sambar,_chutney,_Tirupati,_Andhra_Pradesh-DSC_0009.jpg"
+  },
+  "medu-vada": {
+    "dish": "Medu Vada",
+    "file": "/menu/medu-vada.jpg",
+    "author": "Lubnakarim06",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Medu_Vada.JPG"
+  },
+  "onion-uttapam": {
+    "dish": "Onion Uttapam",
+    "file": "/menu/onion-uttapam.jpg",
+    "author": "Foody1989",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Tomato_onion_Uttapam.jpg"
+  },
+  "podi-dosa": {
+    "dish": "Podi Dosa",
+    "file": "/menu/podi-dosa.jpg",
+    "author": "Manukrishnan80",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Podi_Dosa_(73144).jpg"
+  },
+  "ghee-roast-dosa": {
+    "dish": "Ghee Roast Dosa",
+    "file": "/menu/ghee-roast-dosa.jpg",
+    "author": "Soooji",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Ghee_Roast_Dosa.jpg"
+  },
+  "rava-dosa": {
+    "dish": "Rava Dosa",
+    "file": "/menu/rava-dosa.jpg",
+    "author": "w:en:User:Chaitanya.lala",
+    "license": "Public domain",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rava_dosa.JPG"
+  },
+  "pesarattu": {
+    "dish": "Pesarattu",
+    "file": "/menu/pesarattu.jpg",
+    "author": "ukanda",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Pesarattu_and_Ginger_chutney.jpg"
+  },
+  "upma": {
+    "dish": "Upma",
+    "file": "/menu/upma.jpg",
+    "author": "Intodustin",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Upma_South_India.JPG"
+  },
+  "poori-masala": {
+    "dish": "Poori Masala",
+    "file": "/menu/poori-masala.jpg",
+    "author": "Maddyatpondy",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Poori_masala_-_tamilnadu_-_IMG_20190924_090142_1.jpg"
+  },
+  "idiyappam": {
+    "dish": "Idiyappam",
+    "file": "/menu/idiyappam.jpg",
+    "author": "Sundar",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Idiyappam.jpg"
+  },
+  "parotta-with-salna": {
+    "dish": "Parotta with Salna",
+    "file": "/menu/parotta-with-salna.jpg",
+    "author": "Evangelin5",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Parotta_with_Salna-Thoothukudi-Tamil_Nadu-DED_002.jpg"
+  },
+  "egg-dosa": {
+    "dish": "Egg Dosa",
+    "file": "/menu/egg-dosa.jpg",
+    "author": "Boopathi Raja123",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Egg_dosa*.jpg"
+  },
+  "bread-omelette": {
+    "dish": "Bread Omelette",
+    "file": "/menu/bread-omelette.jpg",
+    "author": "Omya kitchen",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bread_Omelette_Sandwich.jpg"
+  },
+  "south-indian-meals": {
+    "dish": "South Indian Meals",
+    "file": "/menu/south-indian-meals.jpg",
+    "author": "Raj1818913",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Traditional_south_indian_meals.jpg"
+  },
+  "paneer-butter-masala": {
+    "dish": "Paneer Butter Masala",
+    "file": "/menu/paneer-butter-masala.jpg",
+    "author": "Ganesh Mohan T",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rotti_and_Paneer_Butter_Masala.jpg"
+  },
+  "chole-bhature": {
+    "dish": "Chole Bhature",
+    "file": "/menu/chole-bhature.jpg",
+    "author": "Aleemk72",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bikaner_chole_bhature.jpg"
+  },
+  "paneer-tikka": {
+    "dish": "Paneer Tikka",
+    "file": "/menu/paneer-tikka.jpg",
+    "author": "YKanchan07",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Hot_Paneer_tikka.jpg"
+  },
+  "palak-paneer": {
+    "dish": "Palak Paneer",
+    "file": "/menu/palak-paneer.jpg",
+    "author": "DreamyFlutura11",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Palak_Paneer_(Cottage_cheese_in_spinach_gravy).jpg"
+  },
+  "dal-tadka": {
+    "dish": "Dal Tadka",
+    "file": "/menu/dal-tadka.jpg",
+    "author": "AugustineKajur",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Dal_Tadka-Delhi.jpg"
+  },
+  "dal-makhani": {
+    "dish": "Dal Makhani",
+    "file": "/menu/dal-makhani.jpg",
+    "author": "TarnishedPath",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Dal_makhani.jpg"
+  },
+  "rajma-chawal": {
+    "dish": "Rajma Chawal",
+    "file": "/menu/rajma-chawal.jpg",
+    "author": "Shreya151994",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rajma_Chawal_by_Rama_Bhave.jpg"
+  },
+  "veg-pulao": {
+    "dish": "Veg Pulao",
+    "file": "/menu/veg-pulao.jpg",
+    "author": "Sumit Surai",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Lunch_-_Wikimedia_Commons_Workshop_-_Kolkata_-_August_2023_-_Veg_Pulao.jpg"
+  },
+  "lemon-rice": {
+    "dish": "Lemon Rice",
+    "file": "/menu/lemon-rice.jpg",
+    "author": "Zeel Patel",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Lemon_Rice_-_Perfect_use_of_Left_over_rice.JPG"
+  },
+  "curd-rice": {
+    "dish": "Curd Rice",
+    "file": "/menu/curd-rice.jpg",
+    "author": "Sudharshan Shanmugasundaram",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Curd_Rice.jpg"
+  },
+  "veg-biryani": {
+    "dish": "Veg Biryani",
+    "file": "/menu/veg-biryani.jpg",
+    "author": "Lakshmi kanth raju",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Daba_Veg_Biryani.jpg"
+  },
+  "aloo-paratha": {
+    "dish": "Aloo Paratha",
+    "file": "/menu/aloo-paratha.jpg",
+    "author": "Agasthya.rana",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Aloo_Paratha_with_Sabzi.jpg"
+  },
+  "chicken-biryani": {
+    "dish": "Chicken Biryani",
+    "file": "/menu/chicken-biryani.jpg",
+    "author": "Shivani shipra",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_biryani_02-06-2015_(India).jpg"
+  },
+  "chicken-chettinad": {
+    "dish": "Chicken Chettinad",
+    "file": "/menu/chicken-chettinad.jpg",
+    "author": "Andy Li",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:CHICKEN_CHETTINAD_-_Mini_Madras_2026-03-13.jpg"
+  },
+  "chicken-65": {
+    "dish": "Chicken 65",
+    "file": "/menu/chicken-65.jpg",
+    "author": "Amiyashrivastava",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_65_(Dish).jpg"
+  },
+  "chicken-fried-rice": {
+    "dish": "Chicken Fried Rice",
+    "file": "/menu/chicken-fried-rice.jpg",
+    "author": "Andy Li",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Khao_Pad_(Rosa%27s_Fried_Rice)_with_Chicken_-_Rosa%27s_Thai_2025-07-22.jpg"
+  },
+  "chicken-noodles": {
+    "dish": "Chicken Noodles",
+    "file": "/menu/chicken-noodles.jpg",
+    "author": "NNbengal",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Special_Chicken_Noodles.jpg"
+  },
+  "chicken-kothu-parotta": {
+    "dish": "Chicken Kothu Parotta",
+    "file": "/menu/chicken-kothu-parotta.jpg",
+    "author": "Thamizhpparithi Maari",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_Kothu_Parotta.jpg"
+  },
+  "chicken-curry": {
+    "dish": "Chicken Curry",
+    "file": "/menu/chicken-curry.jpg",
+    "author": "Gaurav Dhwaj Khadka",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_Curry_6.jpg"
+  },
+  "butter-chicken": {
+    "dish": "Butter Chicken",
+    "file": "/menu/butter-chicken.jpg",
+    "author": "Ser Amantio di Nicolao",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Butter_chicken,_chickpeas,_and_rice_in_a_takeout_container.jpg"
+  },
+  "tandoori-chicken": {
+    "dish": "Tandoori Chicken",
+    "file": "/menu/tandoori-chicken.jpg",
+    "author": "Bharat Mirchandani from Mumbai, India",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Tandoori_chicken_laccha_piyaz1_(36886283595).jpg"
+  },
+  "chicken-tikka": {
+    "dish": "Chicken Tikka",
+    "file": "/menu/chicken-tikka.jpg",
+    "author": "Minaxibose1992",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken-Tikka.jpg"
+  },
+  "fish-fry": {
+    "dish": "Fish Fry",
+    "file": "/menu/fish-fry.jpg",
+    "author": "Harrison Keely",
+    "license": "CC BY 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:A_fish_fry_in_the_southern_United_States_in_Brasstown,_North_Carolina_06.jpg"
+  },
+  "fish-curry-rice": {
+    "dish": "Fish Curry Rice",
+    "file": "/menu/fish-curry-rice.jpg",
+    "author": "goanfishcurryrice3",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Fish_Curry_Rice_(18211453836).jpg"
+  },
+  "prawn-masala": {
+    "dish": "Prawn Masala",
+    "file": "/menu/prawn-masala.jpg",
+    "author": "Seethabharathi",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chettinad_Prawn_Masala.JPG"
+  },
+  "mutton-biryani": {
+    "dish": "Mutton Biryani",
+    "file": "/menu/mutton-biryani.jpg",
+    "author": "Bhaskaranaidu",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Mutton_biryani.JPG"
+  },
+  "mutton-curry": {
+    "dish": "Mutton Curry",
+    "file": "/menu/mutton-curry.jpg",
+    "author": "Gaurav Dhwaj Khadka",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Mutton_Curry_(44786).jpg"
+  },
+  "veg-hakka-noodles": {
+    "dish": "Veg Hakka Noodles",
+    "file": "/menu/veg-hakka-noodles.jpg",
+    "author": "Farhana Sayyed",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Hakka_Noodles_Veg.jpg"
+  },
+  "chilli-paneer": {
+    "dish": "Chilli Paneer",
+    "file": "/menu/chilli-paneer.jpg",
+    "author": "Vikramdewangan22889",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Paneer_Chilli_with_Hakka_Noodels.JPG"
+  },
+  "veg-fried-rice": {
+    "dish": "Veg Fried Rice",
+    "file": "/menu/veg-fried-rice.jpg",
+    "author": "Akhil",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Veg_Fried_Rice_001.jpg"
+  },
+  "schezwan-fried-rice": {
+    "dish": "Schezwan Fried Rice",
+    "file": "/menu/schezwan-fried-rice.jpg",
+    "author": "Nandhinikandhasamy",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Schezwan_Egg_Fried_Rice_with_raitha_01.jpg"
+  },
+  "veg-manchurian": {
+    "dish": "Veg Manchurian",
+    "file": "/menu/veg-manchurian.jpg",
+    "author": "Saumendra",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Veg-dry-manchurian,_cuttack_-_odisha.jpg"
+  },
+  "gobi-manchurian": {
+    "dish": "Gobi Manchurian",
+    "file": "/menu/gobi-manchurian.jpg",
+    "author": "Harsha K R from Bangalore, India",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Gobi_Manchurian.jpg"
+  },
+  "chilli-chicken": {
+    "dish": "Chilli Chicken",
+    "file": "/menu/chilli-chicken.jpg",
+    "author": "Gaurav Dhwaj Khadka",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_Chilli_1.jpg"
+  },
+  "chicken-momos": {
+    "dish": "Chicken Momos",
+    "file": "/menu/chicken-momos.jpg",
+    "author": "Rupasree",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Beef_glass_noodles_and_Chicken_momos_(cropped).JPG"
+  },
+  "veg-momos": {
+    "dish": "Veg Momos",
+    "file": "/menu/veg-momos.jpg",
+    "author": "Ganesh Mohan T",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Veg_Momos.jpg"
+  },
+  "spring-rolls": {
+    "dish": "Spring Rolls",
+    "file": "/menu/spring-rolls.jpg",
+    "author": "No machine-readable author provided. Rose SP Ring~commonswiki assumed (based on copyright claims).",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Spring_rolls_on_sale.jpg"
+  },
+  "hot-and-sour-soup": {
+    "dish": "Hot and Sour Soup",
+    "file": "/menu/hot-and-sour-soup.jpg",
+    "author": "NeoBatfreak",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Hot_%26_Sour_Soup_in_Clovis_Ca.jpg"
+  },
+  "sweet-corn-soup": {
+    "dish": "Sweet Corn Soup",
+    "file": "/menu/sweet-corn-soup.jpg",
+    "author": "Thamizhpparithi Maari",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_sweet_corn_soup.jpg"
+  },
+  "veg-cheese-burger": {
+    "dish": "Veg Cheese Burger",
+    "file": "/menu/veg-cheese-burger.jpg",
+    "author": "Virajnene95",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Soni_Snacks-_Veg_Cheese_Burger.jpg"
+  },
+  "margherita-pizza": {
+    "dish": "Margherita Pizza",
+    "file": "/menu/margherita-pizza.jpg",
+    "author": "Ruth Hartnup from Vancouver, Canada",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Pizza_margherita_at_Portland_Craft_(9536186941).jpg"
+  },
+  "paneer-tikka-pizza": {
+    "dish": "Paneer Tikka Pizza",
+    "file": "/menu/paneer-tikka-pizza.jpg",
+    "author": "Gandhi Mudit",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Paneer_Tikka_Pizza_with_Mushroom.jpg"
+  },
+  "farmhouse-pizza": {
+    "dish": "Farmhouse Pizza",
+    "file": "/menu/farmhouse-pizza.jpg",
+    "author": "AakritiGupta2",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Farmhouse_Pizza-Domino%27s-Ahmedabad-Gujarat-202013-1.jpg"
+  },
+  "chicken-pizza": {
+    "dish": "Chicken Pizza",
+    "file": "/menu/chicken-pizza.jpg",
+    "author": "Debasree1983",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_Pizza_-_Home_Made_-_Howrah_-_West_Bengal_-_010.jpg"
+  },
+  "french-fries": {
+    "dish": "French Fries",
+    "file": "/menu/french-fries.jpg",
+    "author": "Tony Webster from Minneapolis, Minnesota, United States",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Truffle_oil_french_fries_(33024792848).jpg"
+  },
+  "peri-peri-fries": {
+    "dish": "Peri-Peri Fries",
+    "file": "/menu/peri-peri-fries.jpg",
+    "author": "Barkathnisa Ashaqilahi",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Peri_peri_fries.jpg"
+  },
+  "paneer-sandwich": {
+    "dish": "Paneer Sandwich",
+    "file": "/menu/paneer-sandwich.jpg",
+    "author": "Thamizhpparithi Maari",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Paneer_Sandwich.jpg"
+  },
+  "chicken-sandwich": {
+    "dish": "Chicken Sandwich",
+    "file": "/menu/chicken-sandwich.jpg",
+    "author": "Tmannya",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_sandwich.jpg"
+  },
+  "white-sauce-pasta": {
+    "dish": "White Sauce Pasta",
+    "file": "/menu/white-sauce-pasta.jpg",
+    "author": "Samudra013",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Home_made_White_Sauce_pasta_at_Bankura.jpg"
+  },
+  "red-sauce-pasta": {
+    "dish": "Red Sauce Pasta",
+    "file": "/menu/red-sauce-pasta.jpg",
+    "author": "Rocky Masum This work was made by Masum-al-Hasan Rocky and released under the license(s) stated below. Please feel free to use it for any purpose as long as you credit Masum-al-Hasan Rocky as author and follow the terms of the chosen license. If you use this work outside of the Wikimedia projects, I would very much like to get a note from you. Thanks!",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:A_plate_of_red_sauce_pasta.jpg"
+  },
+  "chicken-alfredo-pasta": {
+    "dish": "Chicken Alfredo Pasta",
+    "file": "/menu/chicken-alfredo-pasta.jpg",
+    "author": "Audrey Freemy",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_Alfredo_Pasta.jpg"
+  },
+  "garlic-bread": {
+    "dish": "Garlic Bread",
+    "file": "/menu/garlic-bread.jpg",
+    "author": "Infrogmation of New Orleans",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Garlic_bread_-_preparation_in_home_kitchen.jpg"
+  },
+  "mac-and-cheese": {
+    "dish": "Mac and Cheese",
+    "file": "/menu/mac-and-cheese.jpg",
+    "author": "Texasfoodgawker",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Original_Mac_n_Cheese_.jpg"
+  },
+  "pani-puri": {
+    "dish": "Pani Puri",
+    "file": "/menu/pani-puri.jpg",
+    "author": "Teena Sometimes",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Crispy_Pani_Puri.jpg"
+  },
+  "pav-bhaji": {
+    "dish": "Pav Bhaji",
+    "file": "/menu/pav-bhaji.jpg",
+    "author": "BHAAGIi",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bhaji_pav_2.jpg"
+  },
+  "bhel-puri": {
+    "dish": "Bhel Puri",
+    "file": "/menu/bhel-puri.jpg",
+    "author": "Billjones94",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bhel_puri_chat,_photographed_in_West_Bengal,_India,_September_24,_2024.jpg"
+  },
+  "sev-puri": {
+    "dish": "Sev Puri",
+    "file": "/menu/sev-puri.jpg",
+    "author": "https://www.flickr.com/photos/feastguru_kirti/",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Sev_Puri.jpg"
+  },
+  "dahi-puri": {
+    "dish": "Dahi Puri",
+    "file": "/menu/dahi-puri.jpg",
+    "author": "POOJAKALSE",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Dahi_paani_puri.JPG"
+  },
+  "aloo-tikki-chaat": {
+    "dish": "Aloo Tikki Chaat",
+    "file": "/menu/aloo-tikki-chaat.jpg",
+    "author": "Nanditamomai",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Aloo_Tikki_Chaat.JPG"
+  },
+  "samosa": {
+    "dish": "Samosa",
+    "file": "/menu/samosa.jpg",
+    "author": "ClumsyHomeChef",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Indian_Samosa_by_clumsy_home_chef.jpg"
+  },
+  "onion-pakoda": {
+    "dish": "Onion Pakoda",
+    "file": "/menu/onion-pakoda.jpg",
+    "author": "Vatsalkumar brahmbhatt",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chana_Dal_Onion_Pakoda.jpg"
+  },
+  "paneer-pakoda": {
+    "dish": "Paneer Pakoda",
+    "file": "/menu/paneer-pakoda.jpg",
+    "author": "Mdsmds0",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Paneer_Pakoda_(Cheese_Pakoda).JPG"
+  },
+  "veg-cutlet": {
+    "dish": "Veg Cutlet",
+    "file": "/menu/veg-cutlet.jpg",
+    "author": "Maneesh Srivastva",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Veg_cutlet.jpg"
+  },
+  "masala-peanuts": {
+    "dish": "Masala Peanuts",
+    "file": "/menu/masala-peanuts.jpg",
+    "author": "Daderot",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Vegetable_tikka_masala,_peanuts,_and_Ning_Chi_chili_with_garlic,_on_wild_rice_-_Massachusetts.jpg"
+  },
+  "chicken-samosa": {
+    "dish": "Chicken Samosa",
+    "file": "/menu/chicken-samosa.jpg",
+    "author": "Vis M",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chicken_samosa_03.jpg"
+  },
+  "chicken-popcorn": {
+    "dish": "Chicken Popcorn",
+    "file": "/menu/chicken-popcorn.jpg",
+    "author": "Mike Mozart from Funny YouTube, USA",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:KFC_Popcorn_Chicken_(12956064765).jpg"
+  },
+  "egg-puff": {
+    "dish": "Egg Puff",
+    "file": "/menu/egg-puff.jpg",
+    "author": "Ajaycarnet",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Bangalore_Egg_puff.jpg"
+  },
+  "gulab-jamun": {
+    "dish": "Gulab Jamun",
+    "file": "/menu/gulab-jamun.jpg",
+    "author": "Cabeza2000",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Gulab_jamun_(Gibraltar,_November_2020).jpg"
+  },
+  "chocolate-brownie": {
+    "dish": "Chocolate Brownie",
+    "file": "/menu/chocolate-brownie.jpg",
+    "author": "Contrapunctus-1",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chocolate_brownie_at_Pizza_Hut,_Mayur_Vihar_1,_Delhi_(2025-08-29).jpg"
+  },
+  "ice-cream": {
+    "dish": "Ice Cream",
+    "file": "/menu/ice-cream.jpg",
+    "author": "Ella Olsson from Stockholm, Sweden",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Frozen_Fruit_Ice_Cream_(44474096241).jpg"
+  },
+  "chocolate-lava-cake": {
+    "dish": "Chocolate Lava Cake",
+    "file": "/menu/chocolate-lava-cake.jpg",
+    "author": "sanctumsolitude",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chocolate_lava_cake.jpg"
+  },
+  "black-forest-pastry": {
+    "dish": "Black Forest Pastry",
+    "file": "/menu/black-forest-pastry.jpg",
+    "author": "Gaurav Dhwaj Khadka",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Black_Forest_Pastry.jpg"
+  },
+  "cheesecake": {
+    "dish": "Cheesecake",
+    "file": "/menu/cheesecake.jpg",
+    "author": "zingyyellow",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Baked_cheesecake_with_raspberries_and_blueberries.jpg"
+  },
+  "carrot-halwa": {
+    "dish": "Carrot Halwa",
+    "file": "/menu/carrot-halwa.jpg",
+    "author": "Jing",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Carrot_gajar_halwa_with_kheer_India_Sweets.jpg"
+  },
+  "rasgulla": {
+    "dish": "Rasgulla",
+    "file": "/menu/rasgulla.jpg",
+    "author": "Prakrutim",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rasgulla_With_Rabdi.jpg"
+  },
+  "muffin": {
+    "dish": "Muffin",
+    "file": "/menu/muffin.jpg",
+    "author": "National Cancer Institute, Renee Comet (photographer)",
+    "license": "Public domain",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Muffin_NIH.jpg"
+  },
+  "cookies": {
+    "dish": "Cookies",
+    "file": "/menu/cookies.jpg",
+    "author": "Basile Morin",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Illuminated_wooden_shelf_with_many_glass_jars_containing_cookies_for_sale_in_Tokyo.jpg"
+  },
+  "banana-cake": {
+    "dish": "Banana Cake",
+    "file": "/menu/banana-cake.jpg",
+    "author": "FotoosVanRobin",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Britisch_Banana_Caramel_Cake,_January_2008.jpg"
+  },
+  "south-indian-filter-coffee": {
+    "dish": "South Indian Filter Coffee",
+    "file": "/menu/south-indian-filter-coffee.jpg",
+    "author": "Charles Haynes",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Foaming_filter_coffee.jpg"
+  },
+  "masala-tea": {
+    "dish": "Masala Tea",
+    "file": "/menu/masala-tea.jpg",
+    "author": "Miansari66",
+    "license": "Public domain",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Masala_Chai.JPG"
+  },
+  "ginger-tea": {
+    "dish": "Ginger Tea",
+    "file": "/menu/ginger-tea.jpg",
+    "author": "Gleb from St.Petersburg, Russia",
+    "license": "CC BY 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Ginger_tea-01.jpg"
+  },
+  "cappuccino": {
+    "dish": "Cappuccino",
+    "file": "/menu/cappuccino.jpg",
+    "author": "Aneth David (SLU)",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:A-cup-of-cappuccino-coffee-dar-es-salaam-cafe.jpg"
+  },
+  "caf-latte": {
+    "dish": "Café Latte",
+    "file": "/menu/caf-latte.jpg",
+    "author": "Andy Li",
+    "license": "CC0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Carrot_cake_slice_and_latte_-_Saltmarsh_Farmhouse_%26_Cafe_2024-12-19.jpg"
+  },
+  "lemon-tea": {
+    "dish": "Lemon Tea",
+    "file": "/menu/lemon-tea.jpg",
+    "author": "Gannu03",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Lemon_tea_2.jpg"
+  },
+  "badam-milk": {
+    "dish": "Badam Milk",
+    "file": "/menu/badam-milk.jpg",
+    "author": "Harikrishnan N",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Pheni_with_Badam_Milk_-_VV_Puram_Food_Street,_Bangalore_-_Karnataka_-_PXL4222.jpg"
+  },
+  "iced-coffee": {
+    "dish": "Iced Coffee",
+    "file": "/menu/iced-coffee.jpg",
+    "author": "Ahri.boy",
+    "license": "CC BY 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Iced_coffee_(with_special_milk).jpg"
+  },
+  "orange-juice": {
+    "dish": "Orange Juice",
+    "file": "/menu/orange-juice.jpg",
+    "author": "Agency of the United States Department of Agriculture Edited Version by: Arad",
+    "license": "Public domain",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Orange_juice_1_edit1.jpg"
+  },
+  "buttermilk": {
+    "dish": "Buttermilk",
+    "file": "/menu/buttermilk.jpg",
+    "author": "Ukko-wc",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Buttermilk-(right)-and-Milk-(left).jpg"
+  },
+  "rose-milk": {
+    "dish": "Rose Milk",
+    "file": "/menu/rose-milk.jpg",
+    "author": "Harikrishnan N",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Rose_Milk_-_Sri_Arasan_Sweets,_Trichy_-_TamilNadu_-_PXL1447.jpg"
+  },
+  "chocolate-milkshake": {
+    "dish": "Chocolate Milkshake",
+    "file": "/menu/chocolate-milkshake.jpg",
+    "author": "Bernard DUPONT",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Chocolate_milkshake_..._%F0%9F%98%8B.jpg"
+  },
+  "strawberry-milkshake": {
+    "dish": "Strawberry Milkshake",
+    "file": "/menu/strawberry-milkshake.jpg",
+    "author": "Alex Gorzen",
+    "license": "CC BY-SA 2.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Strawberry_Milkshake_Whipped_Cream.jpg"
+  },
+  "oreo-milkshake": {
+    "dish": "Oreo Milkshake",
+    "file": "/menu/oreo-milkshake.jpg",
+    "author": "Donald Trung Quoc Don (Chữ Hán: 徵國單) - Wikimedia Commons - © CC BY-SA 4.0 International . ( Want to use this image? ) Original publication 📤: -- Donald Trung 『徵國單』 ( No Fake News 💬 ) ( WikiProject Numismatics 💴) ( Articles 📚 ) 21:59, 17 October 2021 (UTC)",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Wyback_Burgers_Oreo_milkshake,_Winschoten_(2021)_03.jpg"
+  },
+  "lemon-mint-cooler": {
+    "dish": "Lemon Mint Cooler",
+    "file": "/menu/lemon-mint-cooler.jpg",
+    "author": "Riddhichoksi",
+    "license": "CC BY-SA 4.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Lemon_Mint_Cooler_2.JPG"
+  },
+  "iced-tea": {
+    "dish": "Iced Tea",
+    "file": "/menu/iced-tea.jpg",
+    "author": "Renee Comet (photographer)",
+    "license": "Public domain",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:NCI_iced_tea.jpg"
+  },
+  "chicken-burger": {
+    "dish": "Chicken Burger",
+    "file": "/menu/chicken-burger.jpg",
+    "author": "Horacio Cambeiro",
+    "license": "CC BY-SA 3.0",
+    "pageUrl": "https://commons.wikimedia.org/wiki/File:Argentine_chicken_burger_sandwich_with_lettuce,_tomato,_fried_egg,_and_mozzarella_cheese_on_Don_Yeyo_bun_-_High_angle_view.jpg"
+  }
+}

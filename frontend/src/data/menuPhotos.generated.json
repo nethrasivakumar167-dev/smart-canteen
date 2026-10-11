@@ -1,0 +1,446 @@
+{
+  "plain-dosa": {
+    "file": "/menu/plain-dosa.jpg",
+    "alt": "Plain Dosa"
+  },
+  "masala-dosa": {
+    "file": "/menu/masala-dosa.jpg",
+    "alt": "Masala Dosa"
+  },
+  "idli-with-sambar": {
+    "file": "/menu/idli-with-sambar.jpg",
+    "alt": "Idli with Sambar"
+  },
+  "medu-vada": {
+    "file": "/menu/medu-vada.jpg",
+    "alt": "Medu Vada"
+  },
+  "onion-uttapam": {
+    "file": "/menu/onion-uttapam.jpg",
+    "alt": "Onion Uttapam"
+  },
+  "podi-dosa": {
+    "file": "/menu/podi-dosa.jpg",
+    "alt": "Podi Dosa"
+  },
+  "ghee-roast-dosa": {
+    "file": "/menu/ghee-roast-dosa.jpg",
+    "alt": "Ghee Roast Dosa"
+  },
+  "rava-dosa": {
+    "file": "/menu/rava-dosa.jpg",
+    "alt": "Rava Dosa"
+  },
+  "pesarattu": {
+    "file": "/menu/pesarattu.jpg",
+    "alt": "Pesarattu"
+  },
+  "upma": {
+    "file": "/menu/upma.jpg",
+    "alt": "Upma"
+  },
+  "poori-masala": {
+    "file": "/menu/poori-masala.jpg",
+    "alt": "Poori Masala"
+  },
+  "idiyappam": {
+    "file": "/menu/idiyappam.jpg",
+    "alt": "Idiyappam"
+  },
+  "parotta-with-salna": {
+    "file": "/menu/parotta-with-salna.jpg",
+    "alt": "Parotta with Salna"
+  },
+  "egg-dosa": {
+    "file": "/menu/egg-dosa.jpg",
+    "alt": "Egg Dosa"
+  },
+  "bread-omelette": {
+    "file": "/menu/bread-omelette.jpg",
+    "alt": "Bread Omelette"
+  },
+  "south-indian-meals": {
+    "file": "/menu/south-indian-meals.jpg",
+    "alt": "South Indian Meals"
+  },
+  "paneer-butter-masala": {
+    "file": "/menu/paneer-butter-masala.jpg",
+    "alt": "Paneer Butter Masala"
+  },
+  "chole-bhature": {
+    "file": "/menu/chole-bhature.jpg",
+    "alt": "Chole Bhature"
+  },
+  "paneer-tikka": {
+    "file": "/menu/paneer-tikka.jpg",
+    "alt": "Paneer Tikka"
+  },
+  "palak-paneer": {
+    "file": "/menu/palak-paneer.jpg",
+    "alt": "Palak Paneer"
+  },
+  "dal-tadka": {
+    "file": "/menu/dal-tadka.jpg",
+    "alt": "Dal Tadka"
+  },
+  "dal-makhani": {
+    "file": "/menu/dal-makhani.jpg",
+    "alt": "Dal Makhani"
+  },
+  "rajma-chawal": {
+    "file": "/menu/rajma-chawal.jpg",
+    "alt": "Rajma Chawal"
+  },
+  "veg-pulao": {
+    "file": "/menu/veg-pulao.jpg",
+    "alt": "Veg Pulao"
+  },
+  "lemon-rice": {
+    "file": "/menu/lemon-rice.jpg",
+    "alt": "Lemon Rice"
+  },
+  "curd-rice": {
+    "file": "/menu/curd-rice.jpg",
+    "alt": "Curd Rice"
+  },
+  "veg-biryani": {
+    "file": "/menu/veg-biryani.jpg",
+    "alt": "Veg Biryani"
+  },
+  "aloo-paratha": {
+    "file": "/menu/aloo-paratha.jpg",
+    "alt": "Aloo Paratha"
+  },
+  "chicken-biryani": {
+    "file": "/menu/chicken-biryani.jpg",
+    "alt": "Chicken Biryani"
+  },
+  "chicken-chettinad": {
+    "file": "/menu/chicken-chettinad.jpg",
+    "alt": "Chicken Chettinad"
+  },
+  "chicken-65": {
+    "file": "/menu/chicken-65.jpg",
+    "alt": "Chicken 65"
+  },
+  "chicken-fried-rice": {
+    "file": "/menu/chicken-fried-rice.jpg",
+    "alt": "Chicken Fried Rice"
+  },
+  "chicken-noodles": {
+    "file": "/menu/chicken-noodles.jpg",
+    "alt": "Chicken Noodles"
+  },
+  "chicken-kothu-parotta": {
+    "file": "/menu/chicken-kothu-parotta.jpg",
+    "alt": "Chicken Kothu Parotta"
+  },
+  "chicken-curry": {
+    "file": "/menu/chicken-curry.jpg",
+    "alt": "Chicken Curry"
+  },
+  "butter-chicken": {
+    "file": "/menu/butter-chicken.jpg",
+    "alt": "Butter Chicken"
+  },
+  "tandoori-chicken": {
+    "file": "/menu/tandoori-chicken.jpg",
+    "alt": "Tandoori Chicken"
+  },
+  "chicken-tikka": {
+    "file": "/menu/chicken-tikka.jpg",
+    "alt": "Chicken Tikka"
+  },
+  "fish-fry": {
+    "file": "/menu/fish-fry.jpg",
+    "alt": "Fish Fry"
+  },
+  "fish-curry-rice": {
+    "file": "/menu/fish-curry-rice.jpg",
+    "alt": "Fish Curry Rice"
+  },
+  "prawn-masala": {
+    "file": "/menu/prawn-masala.jpg",
+    "alt": "Prawn Masala"
+  },
+  "mutton-biryani": {
+    "file": "/menu/mutton-biryani.jpg",
+    "alt": "Mutton Biryani"
+  },
+  "mutton-curry": {
+    "file": "/menu/mutton-curry.jpg",
+    "alt": "Mutton Curry"
+  },
+  "veg-hakka-noodles": {
+    "file": "/menu/veg-hakka-noodles.jpg",
+    "alt": "Veg Hakka Noodles"
+  },
+  "chilli-paneer": {
+    "file": "/menu/chilli-paneer.jpg",
+    "alt": "Chilli Paneer"
+  },
+  "veg-fried-rice": {
+    "file": "/menu/veg-fried-rice.jpg",
+    "alt": "Veg Fried Rice"
+  },
+  "schezwan-fried-rice": {
+    "file": "/menu/schezwan-fried-rice.jpg",
+    "alt": "Schezwan Fried Rice"
+  },
+  "veg-manchurian": {
+    "file": "/menu/veg-manchurian.jpg",
+    "alt": "Veg Manchurian"
+  },
+  "gobi-manchurian": {
+    "file": "/menu/gobi-manchurian.jpg",
+    "alt": "Gobi Manchurian"
+  },
+  "chilli-chicken": {
+    "file": "/menu/chilli-chicken.jpg",
+    "alt": "Chilli Chicken"
+  },
+  "chicken-momos": {
+    "file": "/menu/chicken-momos.jpg",
+    "alt": "Chicken Momos"
+  },
+  "veg-momos": {
+    "file": "/menu/veg-momos.jpg",
+    "alt": "Veg Momos"
+  },
+  "spring-rolls": {
+    "file": "/menu/spring-rolls.jpg",
+    "alt": "Spring Rolls"
+  },
+  "hot-and-sour-soup": {
+    "file": "/menu/hot-and-sour-soup.jpg",
+    "alt": "Hot and Sour Soup"
+  },
+  "sweet-corn-soup": {
+    "file": "/menu/sweet-corn-soup.jpg",
+    "alt": "Sweet Corn Soup"
+  },
+  "veg-cheese-burger": {
+    "file": "/menu/veg-cheese-burger.jpg",
+    "alt": "Veg Cheese Burger"
+  },
+  "margherita-pizza": {
+    "file": "/menu/margherita-pizza.jpg",
+    "alt": "Margherita Pizza"
+  },
+  "paneer-tikka-pizza": {
+    "file": "/menu/paneer-tikka-pizza.jpg",
+    "alt": "Paneer Tikka Pizza"
+  },
+  "farmhouse-pizza": {
+    "file": "/menu/farmhouse-pizza.jpg",
+    "alt": "Farmhouse Pizza"
+  },
+  "chicken-pizza": {
+    "file": "/menu/chicken-pizza.jpg",
+    "alt": "Chicken Pizza"
+  },
+  "french-fries": {
+    "file": "/menu/french-fries.jpg",
+    "alt": "French Fries"
+  },
+  "peri-peri-fries": {
+    "file": "/menu/peri-peri-fries.jpg",
+    "alt": "Peri-Peri Fries"
+  },
+  "paneer-sandwich": {
+    "file": "/menu/paneer-sandwich.jpg",
+    "alt": "Paneer Sandwich"
+  },
+  "chicken-sandwich": {
+    "file": "/menu/chicken-sandwich.jpg",
+    "alt": "Chicken Sandwich"
+  },
+  "white-sauce-pasta": {
+    "file": "/menu/white-sauce-pasta.jpg",
+    "alt": "White Sauce Pasta"
+  },
+  "red-sauce-pasta": {
+    "file": "/menu/red-sauce-pasta.jpg",
+    "alt": "Red Sauce Pasta"
+  },
+  "chicken-alfredo-pasta": {
+    "file": "/menu/chicken-alfredo-pasta.jpg",
+    "alt": "Chicken Alfredo Pasta"
+  },
+  "garlic-bread": {
+    "file": "/menu/garlic-bread.jpg",
+    "alt": "Garlic Bread"
+  },
+  "mac-and-cheese": {
+    "file": "/menu/mac-and-cheese.jpg",
+    "alt": "Mac and Cheese"
+  },
+  "pani-puri": {
+    "file": "/menu/pani-puri.jpg",
+    "alt": "Pani Puri"
+  },
+  "pav-bhaji": {
+    "file": "/menu/pav-bhaji.jpg",
+    "alt": "Pav Bhaji"
+  },
+  "bhel-puri": {
+    "file": "/menu/bhel-puri.jpg",
+    "alt": "Bhel Puri"
+  },
+  "sev-puri": {
+    "file": "/menu/sev-puri.jpg",
+    "alt": "Sev Puri"
+  },
+  "dahi-puri": {
+    "file": "/menu/dahi-puri.jpg",
+    "alt": "Dahi Puri"
+  },
+  "aloo-tikki-chaat": {
+    "file": "/menu/aloo-tikki-chaat.jpg",
+    "alt": "Aloo Tikki Chaat"
+  },
+  "samosa": {
+    "file": "/menu/samosa.jpg",
+    "alt": "Samosa"
+  },
+  "onion-pakoda": {
+    "file": "/menu/onion-pakoda.jpg",
+    "alt": "Onion Pakoda"
+  },
+  "paneer-pakoda": {
+    "file": "/menu/paneer-pakoda.jpg",
+    "alt": "Paneer Pakoda"
+  },
+  "veg-cutlet": {
+    "file": "/menu/veg-cutlet.jpg",
+    "alt": "Veg Cutlet"
+  },
+  "masala-peanuts": {
+    "file": "/menu/masala-peanuts.jpg",
+    "alt": "Masala Peanuts"
+  },
+  "chicken-samosa": {
+    "file": "/menu/chicken-samosa.jpg",
+    "alt": "Chicken Samosa"
+  },
+  "chicken-popcorn": {
+    "file": "/menu/chicken-popcorn.jpg",
+    "alt": "Chicken Popcorn"
+  },
+  "egg-puff": {
+    "file": "/menu/egg-puff.jpg",
+    "alt": "Egg Puff"
+  },
+  "gulab-jamun": {
+    "file": "/menu/gulab-jamun.jpg",
+    "alt": "Gulab Jamun"
+  },
+  "chocolate-brownie": {
+    "file": "/menu/chocolate-brownie.jpg",
+    "alt": "Chocolate Brownie"
+  },
+  "ice-cream": {
+    "file": "/menu/ice-cream.jpg",
+    "alt": "Ice Cream"
+  },
+  "chocolate-lava-cake": {
+    "file": "/menu/chocolate-lava-cake.jpg",
+    "alt": "Chocolate Lava Cake"
+  },
+  "black-forest-pastry": {
+    "file": "/menu/black-forest-pastry.jpg",
+    "alt": "Black Forest Pastry"
+  },
+  "cheesecake": {
+    "file": "/menu/cheesecake.jpg",
+    "alt": "Cheesecake"
+  },
+  "carrot-halwa": {
+    "file": "/menu/carrot-halwa.jpg",
+    "alt": "Carrot Halwa"
+  },
+  "rasgulla": {
+    "file": "/menu/rasgulla.jpg",
+    "alt": "Rasgulla"
+  },
+  "muffin": {
+    "file": "/menu/muffin.jpg",
+    "alt": "Muffin"
+  },
+  "cookies": {
+    "file": "/menu/cookies.jpg",
+    "alt": "Cookies"
+  },
+  "banana-cake": {
+    "file": "/menu/banana-cake.jpg",
+    "alt": "Banana Cake"
+  },
+  "south-indian-filter-coffee": {
+    "file": "/menu/south-indian-filter-coffee.jpg",
+    "alt": "South Indian Filter Coffee"
+  },
+  "masala-tea": {
+    "file": "/menu/masala-tea.jpg",
+    "alt": "Masala Tea"
+  },
+  "ginger-tea": {
+    "file": "/menu/ginger-tea.jpg",
+    "alt": "Ginger Tea"
+  },
+  "cappuccino": {
+    "file": "/menu/cappuccino.jpg",
+    "alt": "Cappuccino"
+  },
+  "caf-latte": {
+    "file": "/menu/caf-latte.jpg",
+    "alt": "Café Latte"
+  },
+  "lemon-tea": {
+    "file": "/menu/lemon-tea.jpg",
+    "alt": "Lemon Tea"
+  },
+  "badam-milk": {
+    "file": "/menu/badam-milk.jpg",
+    "alt": "Badam Milk"
+  },
+  "iced-coffee": {
+    "file": "/menu/iced-coffee.jpg",
+    "alt": "Iced Coffee"
+  },
+  "orange-juice": {
+    "file": "/menu/orange-juice.jpg",
+    "alt": "Orange Juice"
+  },
+  "buttermilk": {
+    "file": "/menu/buttermilk.jpg",
+    "alt": "Buttermilk"
+  },
+  "rose-milk": {
+    "file": "/menu/rose-milk.jpg",
+    "alt": "Rose Milk"
+  },
+  "chocolate-milkshake": {
+    "file": "/menu/chocolate-milkshake.jpg",
+    "alt": "Chocolate Milkshake"
+  },
+  "strawberry-milkshake": {
+    "file": "/menu/strawberry-milkshake.jpg",
+    "alt": "Strawberry Milkshake"
+  },
+  "oreo-milkshake": {
+    "file": "/menu/oreo-milkshake.jpg",
+    "alt": "Oreo Milkshake"
+  },
+  "lemon-mint-cooler": {
+    "file": "/menu/lemon-mint-cooler.jpg",
+    "alt": "Lemon Mint Cooler"
+  },
+  "iced-tea": {
+    "file": "/menu/iced-tea.jpg",
+    "alt": "Iced Tea"
+  },
+  "chicken-burger": {
+    "file": "/menu/chicken-burger.jpg",
+    "alt": "Chicken Burger"
+  }
+}

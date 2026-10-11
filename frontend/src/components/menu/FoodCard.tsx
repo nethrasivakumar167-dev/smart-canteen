@@ -20,11 +20,11 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   const { isFavorite, toggleFavorite } = useFavoriteStore();
   const isStudent = useAuthStore((state) => state.user?.role === 'STUDENT');
   const { addToast } = useToastStore();
-  const [showImage, setShowImage] = useState(hasUsableMenuImage(item.imageUrl));
+  const [showImage, setShowImage] = useState(hasUsableMenuImage(item.imageUrl, item.name));
 
   useEffect(() => {
-    setShowImage(hasUsableMenuImage(item.imageUrl));
-  }, [item.imageUrl]);
+    setShowImage(hasUsableMenuImage(item.imageUrl, item.name));
+  }, [item.imageUrl, item.name]);
 
   const favorited = isFavorite(item.id);
   const cartItem = items.find((i) => i.menuItemId === item.id && !i.customizations);
@@ -163,7 +163,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   return (
     <div className={`food-card group relative transition-all duration-300 hover:-translate-y-1 flex flex-col ${unavailable ? 'opacity-65 grayscale-[0.25]' : ''}`}>
       {showImage ? (
-        <Link to={`/menu/${item.id}`} className="food-card__image relative h-44 sm:h-52 w-full overflow-hidden bg-sand block">
+        <Link to={`/menu/${item.id}`} className="food-card__image relative aspect-[3/2] w-full overflow-hidden bg-sand block">
           <FoodImage
             imageUrl={item.imageUrl}
             alt={item.name}

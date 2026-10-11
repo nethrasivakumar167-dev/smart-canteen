@@ -8,6 +8,7 @@
     "dev": "vite",
     "prebuild": "node scripts/generate-menu-image-manifest.mjs",
     "build": "tsc -b && vite build",
+    "photos": "node scripts/fetch-menu-photos.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

@@ -42,7 +42,7 @@ export const FoodDetailsPage: React.FC = () => {
         const dish = await fetchMenuItemById(id);
         if (isMounted) {
           setItem(dish);
-          setShowImage(hasUsableMenuImage(dish?.imageUrl));
+          setShowImage(hasUsableMenuImage(dish?.imageUrl, dish?.name));
           if (dish) {
             const allCategoryItems = await fetchMenuItems({ category: dish.categoryId });
             if (isMounted) {
