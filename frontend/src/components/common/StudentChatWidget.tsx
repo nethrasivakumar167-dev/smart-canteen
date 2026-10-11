@@ -17,7 +17,7 @@ const quickReplies = ["Today's special", 'Recommend something', "What's availabl
 const initialMessage: ChatMessage = {
   id: 'welcome',
   role: 'assistant',
-  text: 'Hi! Ask me about today’s specials, dishes, or what’s available.',
+  text: "Heyy, I'm ur BiteBuddy. I can help u make every Bite spl :)",
 };
 
 function errorText(error: unknown): string {
@@ -25,7 +25,7 @@ function errorText(error: unknown): string {
     const response = (error as { response?: { data?: { error?: unknown } } }).response;
     if (typeof response?.data?.error === 'string') return response.data.error;
   }
-  return 'Sorry, I couldn’t reach the canteen assistant. Please try again.';
+  return 'Sorry, I couldn’t reach BiteBuddy. Please try again.';
 }
 
 export const StudentChatWidget: React.FC = () => {
@@ -103,21 +103,21 @@ export const StudentChatWidget: React.FC = () => {
     <>
       {open && (
         <section
-          aria-label="Student canteen chat"
+          aria-label="BiteBuddy chat"
           className="fixed bottom-[5.25rem] right-3 z-[60] flex max-h-[calc(100dvh-7rem)] w-[min(23rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-2xl border border-line bg-cream shadow-2xl md:bottom-6"
         >
           <header className="flex items-center justify-between bg-navy px-4 py-3 text-cream">
             <div className="flex items-center gap-3">
               <PixelBot size={28} />
               <div>
-                <h2 className="font-serif text-lg font-semibold">CampusBite Assistant</h2>
+                <h2 className="font-serif text-lg font-semibold">BiteBuddy</h2>
                 <p className="text-[11px] text-skyblue">Menu, specials & availability</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              aria-label="Close chat"
+              aria-label="Close BiteBuddy chat"
               className="rounded-full p-2 text-cream transition hover:bg-slateblue-light"
             >
               <X className="h-4 w-4" />
@@ -169,7 +169,7 @@ export const StudentChatWidget: React.FC = () => {
             ))}
             {typing && (
               <p role="status" className="w-fit rounded-2xl bg-sand px-3 py-2 text-xs text-espresso">
-                Assistant is typing…
+                BiteBuddy is typing…
               </p>
             )}
             <div />
@@ -192,7 +192,7 @@ export const StudentChatWidget: React.FC = () => {
             {error && <p role="alert" className="text-xs font-medium text-rust">{error}</p>}
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
               <input
-                aria-label="Message the canteen assistant"
+                aria-label="Message BiteBuddy"
                 value={input}
                 onChange={(event) => setInput(event.target.value.slice(0, 300))}
                 maxLength={300}
@@ -215,7 +215,7 @@ export const StudentChatWidget: React.FC = () => {
       <button
         type="button"
         onClick={() => setOpen((current) => !current)}
-        aria-label={open ? 'Close canteen chat' : 'Open canteen chat'}
+        aria-label={open ? 'Close BiteBuddy chat' : 'Open BiteBuddy'}
         aria-expanded={open}
         className="px-btn fixed bottom-[5.25rem] right-4 z-[60] h-14 w-14 animate-bob p-0 shadow-xl md:bottom-6"
       >

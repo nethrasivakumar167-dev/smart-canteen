@@ -93,7 +93,7 @@ describe('Chat rules and grounded AI responses', () => {
 
     expect(greeting.intent).toBe('greeting');
     expect(casual.intent).toBe('greeting');
-    expect(greeting.reply).toMatch(/Hi!/);
+    expect(greeting.reply).toContain("I'm BiteBuddy.");
   });
 
   it('redirects unrelated questions without listing items or calling AI', async () => {

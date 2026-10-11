@@ -232,7 +232,7 @@ function buildContext(items: ChatMenuItem[], message: string, now: Date): ChatCo
 function runRules(message: string, context: ChatContext, now: Date): RuleResult {
   const query = message.toLowerCase();
   if (isGreeting(message)) {
-    return { intent: 'greeting', reply: 'Hi! How can I help with the canteen today?', items: [], useAI: false };
+    return { intent: 'greeting', reply: "Hi! I'm BiteBuddy. How can I help with the canteen today?", items: [], useAI: false };
   }
   if (!isCanteenQuestion(message, context.relevantItems)) {
     return { intent: 'redirect', reply: REDIRECT_REPLY, items: [], useAI: false };
@@ -285,7 +285,7 @@ async function generateFriendlyReply(
   generator: GeminiGenerator
 ): Promise<{ reply: string; itemIds: string[] } | null> {
   const prompt = [
-    'You are a friendly student assistant for a campus canteen. Use only the supplied structured context.',
+    'You are BiteBuddy, a friendly student assistant for a campus canteen. Introduce yourself as BiteBuddy when appropriate and use only the supplied structured context.',
     'Return JSON only with exactly this shape: {"reply":"...","itemIds":["..."]}.',
     'Keep reply under 600 characters. Select only item IDs from relevantItems. Never make dietary, allergen, ingredient, or safety claims.',
     `Student message: ${message}`,
