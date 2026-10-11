@@ -122,7 +122,7 @@ export const OrderHistoryPage: React.FC = () => {
       ) : errors.page ? (
         <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{errors.page}</div>
       ) : orders.length === 0 ? (
-        <div className="rounded-3xl border border-line bg-sand p-10 text-center text-sm font-semibold text-dusty">No orders yet.</div>
+        <div className="rounded-3xl border border-line bg-sand p-10 text-center text-sm font-semibold text-espresso">No orders yet.</div>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
@@ -130,7 +130,7 @@ export const OrderHistoryPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 border-b border-line pb-4">
                 <div>
                   <h2 className="text-base font-bold text-slateblue">Order #{order.orderNumber}</h2>
-                  <p className="mt-1 text-xs text-dusty">{new Date(order.createdAt).toLocaleString()}</p>
+                  <p className="mt-1 text-xs text-espresso">{new Date(order.createdAt).toLocaleString()}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 text-[11px] font-bold">
                   <span className="rounded-full bg-cream px-3 py-1 text-slateblue">{order.orderStatus.replace(/_/g, ' ')}</span>

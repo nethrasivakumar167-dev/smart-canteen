@@ -182,7 +182,7 @@ export const StudentLoginPage: React.FC = () => {
           </p>
           <div className="text-[11px] text-espresso">
             Are you Canteen Staff?{' '}
-            <Link to="/staff/login" className="font-semibold text-emerald-600 hover:underline">
+            <Link to="/staff/login" className="font-semibold text-navy hover:underline">
               Staff Portal →
             </Link>
           </div>

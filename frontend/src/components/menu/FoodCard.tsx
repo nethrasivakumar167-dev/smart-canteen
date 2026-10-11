@@ -114,7 +114,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
         </span>
       )}
       {!unavailable && item.availableNow === true && (
-        <span className="text-[10px] font-semibold text-emerald-800">Available now</span>
+        <span className="inline-flex items-center rounded-full bg-skyblue px-2 py-0.5 text-[10px] font-semibold text-navy">Available now</span>
       )}
     </div>
   );

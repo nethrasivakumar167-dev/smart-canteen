@@ -426,7 +426,7 @@ export const CartPage: React.FC = () => {
               </div>
               <div className="flex justify-between">
                 <span>Campus Preorder Fee</span>
-                <span className="font-mono text-emerald-600 font-bold">FREE (₹0.00)</span>
+                <span className="font-mono font-bold text-navy">FREE (₹0.00)</span>
               </div>
 
               <div className="pt-3 border-t border-line flex justify-between items-baseline text-base font-extrabold text-navy">
@@ -454,7 +454,7 @@ export const CartPage: React.FC = () => {
             </button>
 
             <div className="flex items-center justify-center gap-1.5 text-[11px] text-espresso text-center">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+              <ShieldCheck className="w-3.5 h-3.5 text-navy" />
               <span>Safe 256-bit encrypted checkout</span>
             </div>
           </div>
@@ -467,7 +467,7 @@ export const CartPage: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-navy/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
           <div className="bg-sand rounded-3xl max-w-md w-full p-6 sm:p-8 border border-line shadow-2xl text-center space-y-5 animate-in zoom-in-95">
             
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 rounded-full bg-skyblue text-navy flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-10 h-10" />
             </div>
 

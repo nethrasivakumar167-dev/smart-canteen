@@ -63,7 +63,7 @@ export const StaffLoginPage: React.FC = () => {
         {/* Back Link */}
         <Link
           to="/portals"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso hover:text-emerald-600 transition"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso hover:text-navy transition"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Switch Portal</span>
@@ -71,10 +71,10 @@ export const StaffLoginPage: React.FC = () => {
 
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
+          <div className="w-14 h-14 rounded-2xl bg-butter text-navy flex items-center justify-center mx-auto shadow-sm">
             <ChefHat className="w-7 h-7" />
           </div>
-          <div className="inline-block px-3 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 text-xs font-extrabold uppercase tracking-wider">
+          <div className="inline-block px-3 py-0.5 rounded-full bg-skyblue text-navy text-xs font-extrabold uppercase tracking-wider">
             Kitchen & Staff Portal
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-navy tracking-tight">
@@ -86,15 +86,15 @@ export const StaffLoginPage: React.FC = () => {
         </div>
 
         {/* Demo Credentials Quick Fill Banner */}
-        <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-800 flex items-center justify-between">
+        <div className="p-3.5 rounded-2xl bg-butter border border-gold text-xs text-navy flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-emerald-500 shrink-0" />
+            <Sparkles className="w-4 h-4 text-navy shrink-0" />
             <span>Staff Demo: <strong>staff@demo.com</strong> / <strong>password123</strong></span>
           </div>
           <button
             type="button"
             onClick={handleQuickFill}
-            className="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-bold text-[11px] hover:bg-emerald-700 transition"
+            className="px-2.5 py-1 rounded-lg bg-gold text-navy font-bold text-[11px] hover:bg-butter transition"
           >
             Auto-fill
           </button>
@@ -122,7 +122,7 @@ export const StaffLoginPage: React.FC = () => {
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="staff@demo.com or STF-KIT-01"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-skyblue"
               />
             </div>
           </div>
@@ -139,12 +139,12 @@ export const StaffLoginPage: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-skyblue"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-espresso hover:text-emerald-600"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-espresso hover:text-navy"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -154,7 +154,7 @@ export const StaffLoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-md transition transform active:scale-98 disabled:opacity-50 mt-2 flex items-center justify-center gap-2"
+            className="w-full py-3.5 rounded-xl bg-gold hover:bg-butter text-navy font-bold text-sm shadow-md transition transform active:scale-98 disabled:opacity-50 mt-2 flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export const StaffLoginPage: React.FC = () => {
 
         {/* Security Note */}
         <div className="p-3 rounded-xl bg-sand/30 border border-line text-center text-xs text-espresso flex items-center justify-center gap-1.5">
-          <ShieldAlert className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+          <ShieldAlert className="w-3.5 h-3.5 text-navy shrink-0" />
           <span>Staff credentials are provisioned by Canteen Administration.</span>
         </div>
 

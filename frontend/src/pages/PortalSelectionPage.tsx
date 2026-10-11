@@ -20,7 +20,7 @@ export const PortalSelectionPage: React.FC = () => {
     <div className="min-h-[85vh] flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-cream">
       {/* Header */}
       <div className="text-center max-w-3xl space-y-3 mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slateblue/10 border border-dusty/20 text-slateblue dark:text-dusty text-xs font-bold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slateblue/10 border border-dusty/20 text-slateblue dark:text-skyblue text-xs font-bold uppercase tracking-wider">
           <Sparkles className="w-3.5 h-3.5" />
           Smart Campus Dining Network
         </div>
@@ -93,16 +93,16 @@ export const PortalSelectionPage: React.FC = () => {
         </div>
 
         {/* Portal 2: Staff & Kitchen Operations */}
-        <div className="group relative rounded-3xl bg-card dark:bg-slateblue border-2 border-emerald-500/20 hover:border-emerald-500 p-7 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full -mr-6 -mt-6 group-hover:scale-110 transition-transform" />
+        <div className="group relative rounded-3xl bg-card dark:bg-slateblue border-2 border-skyblue/50 hover:border-skyblue p-7 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-butter rounded-bl-full -mr-6 -mt-6 group-hover:scale-110 transition-transform" />
           
           <div className="space-y-6 relative z-10">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/20">
+            <div className="w-14 h-14 rounded-2xl bg-butter text-navy flex items-center justify-center shadow-sm">
               <ChefHat className="w-7 h-7" />
             </div>
 
             <div>
-              <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">
+              <span className="text-xs font-bold text-navy uppercase tracking-wider">
                 Kitchen Operations
               </span>
               <h2 className="text-2xl font-black text-slateblue mt-1">
@@ -115,15 +115,15 @@ export const PortalSelectionPage: React.FC = () => {
 
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate">
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-navy shrink-0" />
                 <span>Live Kanban order fulfillment queue</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-navy shrink-0" />
                 <span>Instant 1-click stock availability toggle</span>
               </li>
               <li className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-navy shrink-0" />
                 <span>Kitchen rush time monitoring</span>
               </li>
             </ul>
@@ -132,7 +132,7 @@ export const PortalSelectionPage: React.FC = () => {
           <div className="mt-8 space-y-3 relative z-10">
             <Link
               to="/staff/login"
-              className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-4 rounded-xl bg-gold hover:bg-butter text-navy font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
             >
               <span>Staff Sign In</span>
               <ArrowRight className="w-4 h-4" />

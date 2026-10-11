@@ -175,19 +175,19 @@ export const StaffDashboardPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
       
       {/* Staff Kitchen Control Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-800 p-6 sm:p-8 text-cream shadow-xl relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-r from-navy via-slateblue to-navy p-6 sm:p-8 text-cream shadow-xl relative overflow-hidden">
         <div className="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
         
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/25 backdrop-blur-md text-cream text-xs font-bold uppercase tracking-wider">
-              <ChefHat className="w-3.5 h-3.5 text-emerald-300" />
+              <ChefHat className="w-3.5 h-3.5 text-skyblue" />
               <span>Kitchen Operations Panel • Station 01</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Chef {user?.name || 'Staff Member'}
             </h1>
-            <p className="text-emerald-100 text-xs sm:text-sm max-w-xl">
+            <p className="text-skyblue text-xs sm:text-sm max-w-xl">
               Monitor incoming campus meal orders, advance kitchen preparation stages, and manage live stock availability.
             </p>
           </div>
@@ -258,15 +258,15 @@ export const StaffDashboardPage: React.FC = () => {
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('READY'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'READY' && activeTab === 'queue'
-              ? 'bg-emerald-500/15 border-emerald-500 shadow-sm'
-              : 'bg-sand border border-line hover:border-emerald-500/50'
+              ? 'bg-skyblue border-skyblue shadow-sm'
+              : 'bg-sand border border-line hover:border-skyblue'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-900">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-navy">
               Ready for Pickup
             </span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <CheckCircle2 className="w-4 h-4 text-navy" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.ready ?? 0}
@@ -286,7 +286,7 @@ export const StaffDashboardPage: React.FC = () => {
             <span className="text-xs font-extrabold uppercase tracking-wider text-navy/75">
               Completed
             </span>
-            <PackageCheck className="w-4 h-4 text-dusty" />
+            <PackageCheck className="w-4 h-4 text-espresso" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.completed ?? 0}
@@ -302,7 +302,7 @@ export const StaffDashboardPage: React.FC = () => {
             onClick={() => setActiveTab('queue')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
               activeTab === 'queue'
-                ? 'bg-emerald-600 text-cream shadow-md'
+                ? 'bg-gold text-navy shadow-md'
                 : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
             }`}
           >
@@ -312,7 +312,7 @@ export const StaffDashboardPage: React.FC = () => {
             onClick={() => setActiveTab('availability')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
               activeTab === 'availability'
-                ? 'bg-emerald-600 text-cream shadow-md'
+                ? 'bg-gold text-navy shadow-md'
                 : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
             }`}
           >
@@ -344,7 +344,7 @@ export const StaffDashboardPage: React.FC = () => {
       {activeTab === 'queue' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredOrders.length === 0 ? (
-            <div className="col-span-full py-12 text-center text-dusty text-sm">
+            <div className="col-span-full py-12 text-center text-espresso text-sm">
               No orders found matching filter "{selectedStatusFilter}".
             </div>
           ) : (
@@ -363,7 +363,7 @@ export const StaffDashboardPage: React.FC = () => {
                       : isPreparing
                       ? 'border-blue-500/40 bg-blue-500/5'
                       : isReady
-                      ? 'border-emerald-500/40 bg-emerald-500/5'
+                      ? 'border-skyblue bg-skyblue'
                       : 'border-line opacity-70'
                   }`}
                 >
@@ -387,8 +387,8 @@ export const StaffDashboardPage: React.FC = () => {
                             : isPreparing
                             ? 'bg-blue-500/10 text-blue-800 animate-pulse'
                             : isReady
-                            ? 'bg-emerald-500/10 text-emerald-800'
-                            : 'bg-sand/30 text-dusty'
+                            ? 'bg-skyblue text-navy'
+                            : 'bg-sand/30 text-espresso'
                         }`}
                       >
                         {order.orderStatus}
@@ -460,7 +460,7 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'READY_TO_PICK')}
                           disabled={actionLoadingId === order.id}
-                          className="flex-1 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-cream font-extrabold text-xs shadow-md transition disabled:opacity-50"
+                          className="flex-1 py-3 rounded-xl bg-gold hover:bg-butter text-navy font-extrabold text-xs shadow-md transition disabled:opacity-50"
                         >
                           <CheckCircle2 className="inline w-4 h-4 mr-1" />
                           Mark ready
@@ -524,18 +524,18 @@ export const StaffDashboardPage: React.FC = () => {
               <h2 className="text-lg font-bold text-slateblue">
                 Live Menu Item Availability Control
               </h2>
-              <p className="text-xs text-dusty">
+              <p className="text-xs text-espresso">
                 Instantly turn items ON or OFF in the student mobile ordering menu when kitchen stock runs out.
               </p>
             </div>
-            <span className="text-xs font-semibold text-emerald-600">
+            <span className="inline-flex items-center rounded-full bg-skyblue px-2 py-1 text-xs font-semibold text-navy">
               {menuItems.filter((m) => m.availableNow).length} / {menuItems.length} items available now
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <label className="relative sm:col-span-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-dusty" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-espresso" />
               <input value={menuSearch} onChange={(event) => setMenuSearch(event.target.value)} placeholder="Search menu items" className="w-full rounded-xl border border-line bg-cream py-2.5 pl-9 pr-3 text-xs text-slateblue focus:outline-none focus:ring-2 focus:ring-skyblue" />
             </label>
             <select value={menuCategoryFilter} onChange={(event) => setMenuCategoryFilter(event.target.value)} aria-label="Filter by category" className="rounded-xl border border-line bg-cream px-3 py-2.5 text-xs text-slateblue">
@@ -548,7 +548,7 @@ export const StaffDashboardPage: React.FC = () => {
             </select>
           </div>
 
-          <p className="text-[11px] text-dusty">Showing {filteredMenuItems.length} of {menuItems.length} items</p>
+          <p className="text-[11px] text-espresso">Showing {filteredMenuItems.length} of {menuItems.length} items</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredMenuItems.map((item) => {
               const effectiveAvailable = item.availableNow ?? item.isAvailable;
@@ -566,14 +566,14 @@ export const StaffDashboardPage: React.FC = () => {
                   <h4 className="text-xs font-bold text-slateblue">
                     {item.name}
                   </h4>
-                  <span className="text-[10px] font-semibold text-dusty uppercase tracking-wider">
+                  <span className="text-[10px] font-semibold text-espresso uppercase tracking-wider">
                     {item.category}
                   </span>
                   <div className="mt-1">
                     <span
                       className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold ${
                         effectiveAvailable
-                          ? 'bg-emerald-500/10 text-emerald-700'
+                          ? 'bg-skyblue text-navy'
                           : !item.isAvailable
                             ? 'bg-red-500/10 text-red-700'
                             : 'bg-amber-500/10 text-amber-700'
@@ -582,7 +582,7 @@ export const StaffDashboardPage: React.FC = () => {
                       {statusText}
                     </span>
                     {!effectiveAvailable && item.unavailableReason && item.isAvailable && (
-                      <div className="mt-1 text-[10px] text-dusty">{item.unavailableReason}</div>
+                      <div className="mt-1 text-[10px] text-espresso">{item.unavailableReason}</div>
                     )}
                   </div>
                 </div>
@@ -592,8 +592,8 @@ export const StaffDashboardPage: React.FC = () => {
                   onClick={() => handleToggleAvailability(item.id, item.isAvailable)}
                   className={`p-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
                     item.isAvailable
-                      ? 'bg-emerald-600 text-cream hover:bg-emerald-700'
-                      : 'bg-sand/30 text-dusty hover:bg-sand/50'
+                      ? 'bg-gold text-navy hover:bg-butter'
+                      : 'bg-sand/30 text-espresso hover:bg-sand/50'
                   }`}
                 >
                   {item.isAvailable ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
@@ -601,7 +601,7 @@ export const StaffDashboardPage: React.FC = () => {
                 </button>
               </div>
             );})}
-            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 rounded-2xl bg-cream border border-line p-6 text-center text-sm text-dusty">No menu items match these filters.</div>}
+            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 rounded-2xl bg-cream border border-line p-6 text-center text-sm text-espresso">No menu items match these filters.</div>}
           </div>
         </div>
       )}

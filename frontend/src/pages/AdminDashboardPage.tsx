@@ -190,7 +190,7 @@ export const AdminDashboardPage: React.FC = () => {
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Administrator {user?.name || 'Officer'}
             </h1>
-            <p className="text-dusty text-xs sm:text-sm max-w-xl">
+            <p className="text-espresso text-xs sm:text-sm max-w-xl">
               Canteen financial oversight, user credential provisioning, and real-time operational analytics.
             </p>
           </div>
@@ -242,7 +242,7 @@ export const AdminDashboardPage: React.FC = () => {
       {/* 4 Financial & Operational KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
@@ -423,7 +423,7 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-dusty" />
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-espresso" />
               <input
                 type="text"
                 placeholder="Search name, email, ID..."
@@ -453,7 +453,7 @@ export const AdminDashboardPage: React.FC = () => {
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-line text-dusty uppercase font-bold text-[10px]">
+              <thead className="border-b border-line text-espresso uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">User</th>
                   <th className="pb-3 px-3">Role</th>
@@ -467,7 +467,7 @@ export const AdminDashboardPage: React.FC = () => {
                   <tr key={u.id} className="hover:bg-sand/50 transition">
                     <td className="py-3.5 px-3">
                       <div className="font-bold text-slateblue">{u.name}</div>
-                      <div className="text-[11px] text-dusty">{u.email}</div>
+                      <div className="text-[11px] text-espresso">{u.email}</div>
                     </td>
                     <td className="py-3.5 px-3">
                       <span
@@ -475,23 +475,23 @@ export const AdminDashboardPage: React.FC = () => {
                           u.role === 'ADMIN'
                             ? 'bg-purple-500/10 text-purple-700'
                             : u.role === 'STAFF'
-                            ? 'bg-emerald-500/10 text-emerald-700'
+                            ? 'bg-butter text-navy'
                             : 'bg-slateblue/10 text-slateblue'
                         }`}
                       >
                         {u.role}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 font-mono text-dusty">
+                    <td className="py-3.5 px-3 font-mono text-espresso">
                       {u.institutionId || '—'}
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="inline-flex items-center gap-1 text-emerald-600 font-bold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <span className="inline-flex items-center gap-1 rounded-full bg-skyblue px-2 py-0.5 text-navy font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-navy" />
                         Active
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-dusty">
+                    <td className="py-3.5 px-3 text-espresso">
                       {new Date(u.createdAt).toLocaleDateString()}
                     </td>
                   </tr>
@@ -511,7 +511,7 @@ export const AdminDashboardPage: React.FC = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-line text-dusty uppercase font-bold text-[10px]">
+              <thead className="border-b border-line text-espresso uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">Order #</th>
                   <th className="pb-3 px-3">Customer</th>
@@ -530,9 +530,9 @@ export const AdminDashboardPage: React.FC = () => {
                     </td>
                     <td className="py-3.5 px-3">
                       <div className="font-bold text-slateblue">{ord.customerName}</div>
-                      <div className="text-[10px] text-dusty">{ord.customerRole}</div>
+                      <div className="text-[10px] text-espresso">{ord.customerRole}</div>
                     </td>
-                    <td className="py-3.5 px-3 max-w-xs truncate text-dusty">
+                    <td className="py-3.5 px-3 max-w-xs truncate text-espresso">
                       {ord.items}
                     </td>
                     <td className="py-3.5 px-3 font-bold text-slateblue">
@@ -544,11 +544,11 @@ export const AdminDashboardPage: React.FC = () => {
                       </span>
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full font-extrabold text-[10px] bg-emerald-500/10 text-emerald-700">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full font-extrabold text-[10px] bg-skyblue text-navy">
                         {ord.orderStatus}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-dusty">{ord.time}</td>
+                    <td className="py-3.5 px-3 text-espresso">{ord.time}</td>
                   </tr>
                 ))}
               </tbody>
@@ -573,7 +573,7 @@ export const AdminDashboardPage: React.FC = () => {
                     </span>
                   )}
                 </h3>
-                <p className="text-xs text-dusty">
+                <p className="text-xs text-espresso">
                   Aggregate themes, recurring complaints, and practical recommendations.
                 </p>
               </div>
@@ -626,11 +626,11 @@ export const AdminDashboardPage: React.FC = () => {
                       <div className="flex items-center gap-2 font-bold text-slateblue">
                         <span>{fb.studentName}</span>
                         <span className="text-amber-500 font-extrabold">⭐ {fb.rating}/5</span>
-                        <span className="text-[10px] text-dusty font-normal">Order #{fb.orderNumber}</span>
+                        <span className="text-[10px] text-espresso font-normal">Order #{fb.orderNumber}</span>
                       </div>
-                      <p className="text-dusty mt-1">{fb.comment || 'No text review provided.'}</p>
+                      <p className="text-espresso mt-1">{fb.comment || 'No text review provided.'}</p>
                     </div>
-                    <div className="text-[10px] text-dusty font-mono whitespace-nowrap">
+                    <div className="text-[10px] text-espresso font-mono whitespace-nowrap">
                       {new Date(fb.createdAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -656,7 +656,7 @@ export const AdminDashboardPage: React.FC = () => {
               </h3>
               <button
                 onClick={() => setShowProvisionModal(false)}
-                className="text-dusty hover:text-slateblue text-sm font-bold"
+                className="text-espresso hover:text-slateblue text-sm font-bold"
               >
                 ✕
               </button>
@@ -728,7 +728,7 @@ export const AdminDashboardPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowProvisionModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-dusty font-bold hover:bg-sand/50"
+                  className="px-4 py-2.5 rounded-xl text-espresso font-bold hover:bg-sand/50"
                 >
                   Cancel
                 </button>

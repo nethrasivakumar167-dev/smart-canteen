@@ -119,7 +119,7 @@ export const StudentChatWidget: React.FC = () => {
               <X className="h-4 w-4" />
             </button>
           </header>
-          <div className="stripe-band shrink-0" />
+          <div className="checker-strip shrink-0" />
 
           <div ref={messageListRef} className="min-h-36 flex-1 space-y-3 overflow-y-auto bg-cream p-3">
             {messages.map((message) => (
@@ -143,14 +143,14 @@ export const StudentChatWidget: React.FC = () => {
                             <span className="shrink-0 font-mono text-sm font-bold">₹{item.price}</span>
                           </div>
                           <div className="mt-2 flex items-center justify-between gap-2">
-                            <span className={`text-xs font-semibold ${item.available ? 'text-emerald-700' : 'text-rust'}`}>
+                            <span className={`text-xs font-semibold ${item.available ? 'rounded-full bg-skyblue px-2 py-0.5 text-navy' : 'text-rust'}`}>
                               {item.available ? 'Available now' : 'Unavailable now'}
                             </span>
                             <button
                               type="button"
                               disabled={!item.available}
                               onClick={() => handleAddToCart(item)}
-                              className="inline-flex items-center gap-1 rounded-full bg-emerald-700 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+                              className="inline-flex items-center gap-1 rounded-full bg-gold px-3 py-1.5 text-xs font-bold text-navy transition hover:bg-butter disabled:cursor-not-allowed disabled:bg-slate-400"
                             >
                               <Plus className="h-3.5 w-3.5" />
                               Add to cart
@@ -179,7 +179,7 @@ export const StudentChatWidget: React.FC = () => {
                   type="button"
                   disabled={typing}
                   onClick={() => void submitMessage(reply)}
-                  className="shrink-0 rounded-full border border-line bg-sand px-3 py-1.5 text-[11px] font-semibold text-navy transition hover:border-emerald-700 hover:bg-skysoft disabled:opacity-50"
+                  className="shrink-0 rounded-full border border-line bg-sand px-3 py-1.5 text-[11px] font-semibold text-navy transition hover:border-skyblue hover:bg-skyblue disabled:opacity-50"
                 >
                   {reply}
                 </button>
@@ -193,7 +193,7 @@ export const StudentChatWidget: React.FC = () => {
                 onChange={(event) => setInput(event.target.value.slice(0, 300))}
                 maxLength={300}
                 placeholder="Ask about the menu…"
-                className="min-w-0 flex-1 rounded-full border border-line bg-white px-3.5 py-2.5 text-sm text-navy outline-none focus:ring-2 focus:ring-emerald-600"
+                className="min-w-0 flex-1 rounded-full border border-line bg-white px-3.5 py-2.5 text-sm text-navy outline-none focus:ring-2 focus:ring-skyblue"
               />
               <button
                 type="submit"

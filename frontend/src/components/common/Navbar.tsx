@@ -4,6 +4,7 @@ import { useAuthStore } from '../../store/authStore';
 import { useCartStore } from '../../store/cartStore';
 import { useThemeStore } from '../../store/themeStore';
 import { useToastStore } from '../../store/toastStore';
+import { PixelIcon } from '../pixel/PixelIcon';
 import {
   UtensilsCrossed,
   ShoppingBag,
@@ -36,6 +37,7 @@ export const Navbar: React.FC = () => {
 
   const cartCount = getTotalItemsCount();
   const grandTotal = getGrandTotal();
+  const isLoggedInDashboard = Boolean(isAuthenticated && user && location.pathname.endsWith('/dashboard'));
 
   const handleLogout = async () => {
     await logout();
@@ -75,10 +77,10 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16 sm:h-20">
 
           {/* Logo & Live Status */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className={`flex items-center gap-4 sm:gap-6 ${isLoggedInDashboard ? 'order-last' : ''}`}>
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-2xl bg-cream flex items-center justify-center text-navy shadow-sm group-hover:scale-105 transition-transform duration-200">
-                <UtensilsCrossed className="w-5 h-5" />
+              <div className="flex h-10 w-10 items-center justify-center bg-cream text-navy shadow-sm transition-transform duration-200 group-hover:scale-105">
+                <PixelIcon name="star" size={22} />
               </div>
               <div className="flex flex-col">
                 <span className="font-display italic font-semibold text-xl tracking-wide text-cream flex items-center gap-1.5">
@@ -285,7 +287,6 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="stripe-band" aria-hidden="true" />
     </header>
   );
 };

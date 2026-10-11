@@ -178,7 +178,7 @@ export const StudentDashboardPage: React.FC = () => {
         </div>
 
         <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
             <ShoppingBag className="w-6 h-6" />
           </div>
           <div>
@@ -207,7 +207,7 @@ export const StudentDashboardPage: React.FC = () => {
           <div className="flex items-end justify-between">
             <div>
               <h2 className="text-lg font-black text-slateblue">Recommended for you</h2>
-              <p className="text-xs text-dusty">Picks based on today's menu and your activity.</p>
+              <p className="text-xs text-espresso">Picks based on today's menu and your activity.</p>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -217,7 +217,7 @@ export const StudentDashboardPage: React.FC = () => {
                   <span className="rounded-full bg-amber-500/10 px-3 py-1 text-[10px] font-extrabold text-amber-800">
                     {recommendation.label === 'Smart pick' ? 'Smart pick' : 'Popular now'}
                   </span>
-                  <span className="truncate text-right text-[10px] text-dusty">{recommendation.reason}</span>
+                  <span className="truncate text-right text-[10px] text-espresso">{recommendation.reason}</span>
                 </div>
                 <FoodCard item={recommendation.item} />
               </article>
@@ -267,7 +267,7 @@ export const StudentDashboardPage: React.FC = () => {
                       <article key={feedback.id} className="rounded-2xl bg-cream border border-line p-4 space-y-1.5">
                         <div className="flex items-center justify-between gap-3">
                           <span className="text-sm font-bold text-slateblue">{feedback.rating}/5 stars</span>
-                          <span className="text-[11px] text-dusty">{new Date(feedback.createdAt).toLocaleDateString()}</span>
+                          <span className="text-[11px] text-espresso">{new Date(feedback.createdAt).toLocaleDateString()}</span>
                         </div>
                         <p className="text-xs font-semibold text-espresso">Order #{feedback.orderNumber}</p>
                         <p className="text-sm text-espresso">{feedback.comment || 'No comment provided.'}</p>
@@ -292,14 +292,14 @@ export const StudentDashboardPage: React.FC = () => {
                       key={step.status}
                       className={`p-3 rounded-xl border ${
                         isComplete || isDelivered
-                          ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/30'
+                          ? 'bg-skyblue text-navy border-skyblue'
                           : isCurrent
                             ? 'bg-amber-500/10 text-amber-600 border-amber-500/30 animate-pulse'
                             : 'bg-sand/30 text-navy/70 border-line'
                       }`}
                     >
                       {(isComplete || isDelivered) && (
-                        <CheckCircle2 className="w-4 h-4 mx-auto mb-1 text-emerald-500" />
+                        <CheckCircle2 className="w-4 h-4 mx-auto mb-1 text-navy" />
                       )}
                       {isCurrent && !isDelivered && (
                         <Flame className="w-4 h-4 mx-auto mb-1 text-amber-500" />
@@ -385,14 +385,14 @@ export const StudentDashboardPage: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <div className="font-extrabold text-slateblue">₹{order.total}</div>
-                    <span className="inline-block text-[10px] font-bold text-emerald-600">
+                    <span className="inline-block rounded-full bg-skyblue px-2 py-0.5 text-[10px] font-bold text-navy">
                       {order.status}
                     </span>
                   </div>
                 </div>
               ))}
               {!dashboardData?.recentOrders?.length && (
-                <div className="p-3.5 text-xs text-dusty">No previous orders yet.</div>
+                <div className="p-3.5 text-xs text-espresso">No previous orders yet.</div>
               )}
             </div>
           </div>

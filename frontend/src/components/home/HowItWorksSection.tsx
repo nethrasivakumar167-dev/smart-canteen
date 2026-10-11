@@ -64,7 +64,7 @@ export const HowItWorksSection: React.FC = () => {
                     <div className={`w-12 h-12 rounded-full ${step.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-3xl font-extrabold text-skyblue font-mono">
+                    <span className="text-3xl font-extrabold text-navy font-mono">
                       {step.number}
                     </span>
                   </div>

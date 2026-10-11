@@ -29,10 +29,10 @@ export const LiveRushMeter: React.FC = () => {
     ? 'bg-red-500/20 text-red-700 border-red-500/30'
     : activity.label === 'Busy'
       ? 'bg-amber-500/20 text-amber-700 border-amber-500/30'
-      : 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30';
+      : 'bg-skyblue text-navy border-skyblue';
 
   return (
-    <div className="w-full bg-gradient-to-r from-amber-500/10 via-navy/10 to-emerald-500/10 border border-slate/30 rounded-2xl p-4 sm:p-6 mb-12 shadow-sm">
+    <div className="w-full bg-gradient-to-r from-amber-500/10 via-navy/10 to-sky/30 border border-slate/30 rounded-2xl p-4 sm:p-6 mb-12 shadow-sm">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         
         <div className="flex items-center gap-3">
@@ -64,7 +64,7 @@ export const LiveRushMeter: React.FC = () => {
           </div>
           <div className="w-full h-2.5 bg-slate/30 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-emerald-500 via-navy to-amber-500 rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-gold via-navy to-sky rounded-full transition-all duration-500"
               style={{ width: `${activity.loadPercent}%` }}
             />
           </div>

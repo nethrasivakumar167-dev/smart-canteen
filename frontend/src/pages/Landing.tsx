@@ -1,188 +1,286 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { PixelIcon } from '../components/pixel/PixelIcon';
+import { landingDishes } from '../data/landingDishes';
 import { useAuthStore } from '../store/authStore';
-import {
-  fetchAvailableMenuItems,
-  fetchKitchenStatus,
-  getKitchenActivity,
-  KitchenStatus,
-} from '../api/publicApi';
-import { LayoutDashboard } from 'lucide-react';
 
-export const LandingPage: React.FC = () => {
-  const { user, isAuthenticated } = useAuthStore();
-  const navigate = useNavigate();
-  const [menuItemCount, setMenuItemCount] = useState<number | null>(null);
-  const [kitchenStatus, setKitchenStatus] = useState<KitchenStatus | null>(null);
+const ROTATING_WORDS = ['queue', 'wait', 'rush'];
+
+const useReveal = () => {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let isMounted = true;
+    const element = ref.current;
+    if (!element) return;
+    if (!('IntersectionObserver' in window)) {
+      element.classList.add('is-visible');
+      return;
+    }
 
-    fetchAvailableMenuItems()
-      .then((items) => {
-        if (isMounted) setMenuItemCount(items.length);
-      })
-      .catch((error) => console.error('Failed to load available menu count:', error));
-    fetchKitchenStatus()
-      .then((status) => {
-        if (isMounted) setKitchenStatus(status);
-      })
-      .catch((error) => console.error('Failed to load landing kitchen status:', error));
-
-    return () => {
-      isMounted = false;
-    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          element.classList.add('is-visible');
+          observer.unobserve(element);
+        }
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
 
-  const getDashboardPath = () => {
-    if (!user) return '/menu';
-    if (user.role === 'STUDENT') return '/menu';
-    if (user.role === 'STAFF') return '/staff/dashboard';
-    if (user.role === 'ADMIN') return '/admin/dashboard';
-    return '/menu';
-  };
+  return ref;
+};
 
-  const handleGoToDashboard = () => {
-    navigate(getDashboardPath());
-  };
+const Reveal: React.FC<React.PropsWithChildren<{ className?: string; style?: React.CSSProperties }>> = ({
+  children,
+  className = '',
+  style,
+}) => {
+  const ref = useReveal();
+  return (
+    <div ref={ref} className={`fade-up ${className}`} style={style}>
+      {children}
+    </div>
+  );
+};
 
-  const kitchenActivity = kitchenStatus
-    ? getKitchenActivity(kitchenStatus.activeOrdersCount)
-    : null;
-  const stats = [
-    ...(menuItemCount === null
-      ? []
-      : [{ value: `${menuItemCount}`, label: "Available Menu Items" }]),
-    ...(kitchenStatus
-      ? [{ value: `${kitchenStatus.activeOrdersCount}`, label: 'Active Orders' }]
-      : []),
-    ...(kitchenStatus?.feedbackCount && kitchenStatus.averageRating !== null
-      ? [{ value: `${kitchenStatus.averageRating}★`, label: 'Average Rating' }]
-      : []),
+const HeroOrbit: React.FC = () => {
+  const firstDish = landingDishes[0];
+  if (!firstDish) return null;
+
+  const orbitDishes = Array.from({ length: 4 }, (_, index) =>
+    landingDishes[(index + 1) % landingDishes.length]
+  );
+  const positions = [
+    'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2',
+    'right-0 top-1/2 translate-x-1/2 -translate-y-1/2',
+    'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2',
+    'left-0 top-1/2 -translate-x-1/2 -translate-y-1/2',
   ];
 
   return (
-    <div className="min-h-screen bg-beige flex flex-col">
-      {/* Hero Section */}
-      <section className="relative flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 lg:py-24 overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-orange-500/10 via-red-500/10 to-transparent blur-3xl rounded-full pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-orange-500/10 to-red-500/10 blur-3xl rounded-full pointer-events-none" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          {/* Logo / Brand Name */}
-          <div className="mb-10 animate-fade-in-down">
-            <h1 className="font-pacifico text-5xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 bg-clip-text text-transparent tracking-wide">
-              CampusBite
-            </h1>
-            <p className="text-espresso mt-2 text-sm sm:text-base font-medium uppercase tracking-wider">
-              Campus Canteen • Preorder & Skip the Queue
-            </p>
-          </div>
-
-          {/* Description - clean and simple */}
-          <p className="text-lg sm:text-xl text-slateblue max-w-2xl mx-auto mb-10 leading-relaxed">
-            Preorder your favorite campus meals from your phone, skip the lunch rush queue, 
-            and pick up your hot food the moment you arrive.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {!isAuthenticated ? (
-              <>
-                {/* Primary - Login */}
-                <Link
-                  to="/student/login"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-navy text-cream font-extrabold text-base shadow-lg hover:shadow-glow hover:bg-slateblue transition-all duration-200 transform hover:-translate-y-0.5"
-                >
-                  <span className="flex items-center gap-2">
-                    <span className="w-5 h-5" aria-hidden="true">🔐</span>
-                    <span className="font-extrabold">Login</span>
-                  </span>
-                </Link>
-
-                {/* Secondary - Register */}
-                <Link
-                  to="/register"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-cream text-navy font-extrabold text-base border-2 border-navy/30 hover:bg-navy hover:text-cream transition-all duration-200"
-                >
-                  <span className="font-extrabold">Register</span>
-                </Link>
-
-                {/* Tertiary - Sign In (Staff/Admin portal) */}
-                <Link
-                  to="/portals"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-transparent text-navy font-extrabold text-base border-2 border-navy/30 hover:bg-navy/5 transition-all duration-200"
-                >
-                  <span className="font-extrabold">Sign In</span>
-                </Link>
-              </>
-            ) : (
-              <button
-                onClick={handleGoToDashboard}
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-navy text-cream font-extrabold text-base shadow-lg hover:shadow-glow hover:bg-slateblue transition-all duration-200 transform hover:-translate-y-0.5"
-              >
-                <span className="flex items-center gap-2">
-                  <LayoutDashboard className="w-5 h-5" />
-                  <span className="font-extrabold">Go to Dashboard</span>
-                </span>
-              </button>
-            )}
-          </div>
-
-          {/* Trust indicators - clean and minimal */}
-          {kitchenActivity && (
-            <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-slateblue">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Kitchen: {kitchenActivity.label}</span>
-              </div>
-              {menuItemCount !== null && (
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-navy" />
-                  <span>{menuItemCount} available menu items today</span>
+    <div className="relative mx-auto aspect-square animate-bob" style={{ width: 'clamp(16rem, 68vw, 28rem)' }}>
+      <img
+        src={`/menu/${firstDish.slug}.jpg`}
+        alt={firstDish.name}
+        width="448"
+        height="448"
+        loading="eager"
+        fetchPriority="high"
+        className="absolute left-1/2 top-1/2 z-10 aspect-square w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-navy object-cover"
+      />
+      {landingDishes.length >= 4 && (
+        <div className="absolute inset-[8%] animate-orbit-spin rounded-full border-[3px] border-dashed border-gold">
+          {orbitDishes.map((dish, index) => (
+            <div
+              key={dish.slug}
+              className={`absolute ${positions[index]}`}
+              style={{ width: 'clamp(4.25rem, 13vw, 6rem)' }}
+            >
+              <div className="animate-orbit-unspin">
+                <div className="aspect-square overflow-hidden rounded-full border-[3px] border-navy bg-cream">
+                  <img
+                    src={`/menu/${dish.slug}.jpg`}
+                    alt={dish.name}
+                    width="96"
+                    height="96"
+                    loading="lazy"
+                    className="h-full w-full aspect-square object-cover"
+                  />
                 </div>
-              )}
+                <span className="orbit-label mt-2 block text-center text-[9px] leading-tight text-navy">
+                  <strong className="block font-pixel text-[10px]">{dish.name}</strong>
+                  {dish.descriptor}
+                </span>
+              </div>
             </div>
-          )}
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const MarqueeItem: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="flex shrink-0 items-center gap-6 px-5 font-pixel text-xs text-cream sm:text-sm">
+    {children}
+    <PixelIcon name="star" size={16} />
+  </span>
+);
+
+const steps = [
+  { title: 'Browse', description: 'Explore dishes with clear allergen information.', icon: 'bowl' as const },
+  { title: 'Choose a pickup slot', description: 'Pick a convenient 10-minute collection window.', icon: 'clock' as const },
+  { title: 'Pay', description: 'Pay with cash or online when you place your order.', icon: 'cart' as const },
+  { title: 'Collect with your Order ID', description: 'Show your Order ID at pickup and enjoy your meal.', icon: 'check' as const },
+];
+
+const benefits = ['No queues', 'Live order status', '10-minute pickup slots', 'Order history', 'Allergen info'];
+
+export const LandingPage: React.FC = () => {
+  const { user, isAuthenticated } = useAuthStore();
+  const [wordIndex, setWordIndex] = useState(0);
+  useEffect(() => {
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionPreference.matches) return;
+
+    const interval = window.setInterval(() => {
+      setWordIndex((index) => (index + 1) % ROTATING_WORDS.length);
+    }, 1800);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const dashboardPath = user?.role === 'ADMIN'
+    ? '/admin/dashboard'
+    : user?.role === 'STAFF'
+      ? '/staff/dashboard'
+      : '/student/dashboard';
+
+  return (
+    <div className="overflow-x-clip">
+      <section className="relative overflow-x-clip bg-cream px-4 py-12 sm:px-6 sm:py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+          {[12, 35, 61, 82].map((left, index) => (
+            <span
+              key={left}
+              className={`absolute top-0 h-2 w-2 animate-fall ${index % 2 ? 'bg-sky' : 'bg-gold'}`}
+              style={{ left: `${left}%`, animationDelay: `${index * -1.1}s` }}
+            />
+          ))}
+        </div>
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
+          <div className="relative z-10 text-center lg:text-left">
+            <p className="mb-4 font-pixel text-[10px] uppercase tracking-wide text-navy sm:text-xs">
+              Made for your campus day
+            </p>
+            <h1 className="mx-auto max-w-2xl text-4xl leading-tight text-navy sm:text-5xl lg:mx-0 lg:text-6xl">
+              Skip the <span className="text-rust">{ROTATING_WORDS[wordIndex]}</span>. Pick up hot.
+            </h1>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-navy sm:text-lg lg:mx-0">
+              Order your campus favourites ahead, choose a pickup time, and spend less of your day in line.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+              {isAuthenticated && user ? (
+                <Link className="px-btn" to={dashboardPath}>Back to dashboard</Link>
+              ) : (
+                <>
+                  <Link className="px-btn" to="/login">Login</Link>
+                  <Link className="px-btn px-btn--cream" to="/register">Register</Link>
+                </>
+              )}
+              <a className="px-btn px-btn--sky" href="#how-it-works">How it works</a>
+            </div>
+          </div>
+          <div className="relative z-10 mx-auto w-full max-w-lg">
+            {landingDishes.length > 0 && <HeroOrbit />}
+          </div>
         </div>
       </section>
 
-      {/* Quick Stats Bar - Clean and Minimal */}
-      <section className="bg-navy py-8 px-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
-            {stats.map((stat) => (
-              <div className="p-4" key={stat.label}>
-                <div className="text-3xl sm:text-4xl font-extrabold text-cream">{stat.value}</div>
-                <div className="text-xs text-slate text-uppercase tracking-wider mt-1">{stat.label}</div>
-              </div>
+      <section className="overflow-hidden bg-navy py-4" aria-label="Fresh, hot, on time, no queue">
+        <div className="flex w-max animate-marquee">
+          {[0, 1].map((copy) => (
+            <div className="flex" key={copy} aria-hidden={copy === 1}>
+              <MarqueeItem>FRESH</MarqueeItem>
+              <MarqueeItem>HOT</MarqueeItem>
+              <MarqueeItem>ON TIME</MarqueeItem>
+              <MarqueeItem>NO QUEUE</MarqueeItem>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="scallop-divider" aria-hidden="true" />
+      <section id="how-it-works" className="overflow-x-clip bg-sky px-4 pb-16 pt-5 sm:px-6 sm:pb-24">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="text-center">
+            <p className="font-pixel text-[10px] uppercase text-navy">Simple as 1, 2, 3, 4</p>
+            <h2 className="mt-3 text-3xl text-navy sm:text-4xl">How it works</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
+              <Reveal key={step.title} style={{ animationDelay: `${index * 100}ms` }}>
+                <article className="px-card h-full p-5">
+                  <PixelIcon name={step.icon} size={32} />
+                  <p className="mt-4 font-pixel text-[10px] text-navy">STEP 0{index + 1}</p>
+                  <h3 className="mt-2 text-xl text-navy">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-navy">{step.description}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
+          <Reveal className="mt-9 flex flex-wrap justify-center gap-3">
+            {['10-minute windows', '7 AM to 7 PM', 'Order at least 15 minutes ahead'].map((fact) => (
+              <span className="px-chip" key={fact}>{fact}</span>
+            ))}
+          </Reveal>
         </div>
       </section>
 
-      {/* Footer CTA - Clean & Simple */}
-      <section className="py-16 bg-beige">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-slateblue mb-6">Ready to skip the queue and eat smarter?</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/menu"
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-navy text-cream font-extrabold text-base shadow-lg hover:shadow-glow transition-all duration-200"
-            >
-              Explore Menu & Preorder
-            </Link>
-            <Link
-              to="/register"
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-transparent border-2 border-navy text-navy font-extrabold hover:bg-navy hover:text-cream transition-all duration-200"
-            >
-              Create Free Account
-            </Link>
+      {landingDishes.length >= 4 && (
+        <section className="overflow-x-clip bg-cream px-4 py-16 sm:px-6 sm:py-24">
+          <div className="mx-auto max-w-7xl">
+            <Reveal className="text-center">
+              <p className="font-pixel text-[10px] uppercase text-navy">A few campus favourites</p>
+              <h2 className="mt-3 text-3xl text-navy sm:text-4xl">Our popular menu</h2>
+            </Reveal>
+            <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:gap-x-10">
+              {landingDishes.map((dish, index) => (
+                <Reveal key={dish.slug} style={{ animationDelay: `${(index % 4) * 110}ms` }}>
+                  <article className="text-center">
+                    <div className="mx-auto aspect-square w-full max-w-48 overflow-hidden rounded-full border-[3px] border-navy bg-butter animate-bob" style={{ animationDelay: `${index * -250}ms` }}>
+                      <img
+                        src={`/menu/${dish.slug}.jpg`}
+                        alt={dish.name}
+                        width="240"
+                        height="240"
+                        loading="lazy"
+                        className="h-full w-full aspect-square object-cover"
+                      />
+                    </div>
+                    <h3 className="mt-4 text-lg text-navy">{dish.name}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-navy">{dish.descriptor}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
+        </section>
+      )}
+
+      <section className="overflow-x-clip bg-butter px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
+          <Reveal>
+            <p className="font-pixel text-[10px] uppercase text-navy">Good food, easier days</p>
+            <h2 className="mt-3 text-3xl text-navy sm:text-4xl">About CampusBite</h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-navy">
+              CampusBite is a campus canteen ordering site that helps you browse dishes, plan a pickup, and keep track of your order from one place.
+            </p>
+          </Reveal>
+          <Reveal className="flex flex-wrap gap-3">
+            {benefits.map((benefit, index) => (
+              <span className="px-chip bg-cream" key={benefit}>
+                <PixelIcon name={index === 4 ? 'heart' : 'check'} size={14} />
+                {benefit}
+              </span>
+            ))}
+          </Reveal>
         </div>
+      </section>
+
+      <section className="overflow-x-clip bg-cream px-4 py-16 text-center sm:px-6 sm:py-24">
+        <Reveal className="mx-auto max-w-3xl">
+          <PixelIcon name="star" size={28} />
+          <h2 className="mt-4 text-3xl text-navy sm:text-4xl">Right on campus</h2>
+          <p className="mt-3 text-base text-navy">SRM Ramapuram, Chennai, India</p>
+          <p className="mx-auto mt-7 max-w-xl text-lg text-navy">“A warmer welcome to the campus canteen, one pickup at a time.”</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Link className="px-btn" to="/login">Login</Link>
+            <Link className="px-btn px-btn--cream" to="/register">Register</Link>
+          </div>
+        </Reveal>
       </section>
     </div>
   );
