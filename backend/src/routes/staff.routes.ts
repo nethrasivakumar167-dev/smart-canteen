@@ -35,6 +35,10 @@ const toggleAvailabilitySchema = z.object({
   isSpecial: z.boolean().optional(),
 });
 
+const toggleTodaysSpecialSchema = z.object({
+  isTodaysSpecial: z.boolean(),
+}).strict();
+
 const VALID_TRANSITIONS: Record<string, string[]> = {
   RECEIVED: ['PREPARING', 'CANCELLED'],
   PREPARING: ['READY_TO_PICK', 'CANCELLED'],
@@ -382,6 +386,7 @@ router.get(
             : null,
       mealTimes: item.mealTimes,
       isSpecial: item.isSpecial,
+      isTodaysSpecial: item.isTodaysSpecial,
       stockStatus: item.isAvailable ? 'AVAILABLE' : 'OUT_OF_STOCK',
       price: Number(item.price),
       };
@@ -440,6 +445,40 @@ router.patch(
         isAvailable: updated.isAvailable,
         isSpecial: updated.isSpecial,
         stockStatus: updated.isAvailable ? 'AVAILABLE' : 'OUT_OF_STOCK',
+      },
+    });
+  })
+);
+
+/**
+ * @route   PATCH /api/staff/menu-status/:id/todays-special
+ * @desc    Set whether a menu item is one of today's specials
+ * @access  Private (Staff, Admin)
+ */
+router.patch(
+  '/menu-status/:id/todays-special',
+  asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const { id } = z.object({ id: z.string().trim().min(1, 'Menu item ID is required.') }).parse(req.params);
+    const { isTodaysSpecial } = toggleTodaysSpecialSchema.parse(req.body);
+    const item = await prisma.menuItem.findUnique({ where: { id } });
+
+    if (!item) {
+      res.status(404).json({ success: false, error: 'Menu item not found.' });
+      return;
+    }
+
+    const updated = await prisma.menuItem.update({
+      where: { id },
+      data: { isTodaysSpecial },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `${updated.name} today's special status is now ${updated.isTodaysSpecial ? 'ON' : 'OFF'}.`,
+      data: {
+        id: updated.id,
+        name: updated.name,
+        isTodaysSpecial: updated.isTodaysSpecial,
       },
     });
   })

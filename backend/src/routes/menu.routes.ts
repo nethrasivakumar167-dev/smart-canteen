@@ -53,6 +53,7 @@ export function formatMenuItem(item: any, now = new Date(), enforceTimeWindows =
     allergenNote: item.allergenNote,
     spiceLevel: item.spiceLevel,
     isSpecial: item.isSpecial,
+    isTodaysSpecial: item.isTodaysSpecial,
     ingredients: item.ingredients || [],
     preparationTime: item.preparationTime || 8,
     calories: item.calories || null,

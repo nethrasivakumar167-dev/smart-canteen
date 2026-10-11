@@ -27,6 +27,7 @@ export interface FormattedOrder {
     price: number;
     itemTotal: number;
     imageUrl: string;
+    isTodaysSpecial: boolean;
     categoryName: string;
     cookingTip: string | null;
   }>;
@@ -90,6 +91,7 @@ export function formatOrder(order: any): FormattedOrder {
             price: priceNum,
             itemTotal: priceNum * i.quantity,
             imageUrl: i.menuItem?.imageUrl || '',
+            isTodaysSpecial: Boolean(i.menuItem?.isTodaysSpecial),
             categoryName: i.menuItem?.category?.name || '',
             cookingTip: i.menuItem?.cookingTip || null,
           };

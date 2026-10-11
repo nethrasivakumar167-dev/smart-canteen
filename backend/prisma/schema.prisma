@@ -87,6 +87,7 @@ model MenuItem {
   allergenNote        String?
   spiceLevel          String?
   isSpecial           Boolean   @default(false)
+  isTodaysSpecial     Boolean   @default(false)
   cookingTip          String?
   cookingTipUpdatedAt DateTime?
   createdAt           DateTime  @default(now())

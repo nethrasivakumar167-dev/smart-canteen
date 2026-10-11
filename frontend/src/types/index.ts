@@ -60,6 +60,7 @@ export interface MenuItem {
   mealTimes?: string[];
   spiceLevel?: 'NONE' | 'MILD' | 'MEDIUM' | 'HOT' | string | null;
   isSpecial?: boolean;
+  isTodaysSpecial?: boolean;
   availableNow?: boolean;
   unavailableReason?: string | null;
   preparationTime: number; // in minutes
@@ -114,6 +115,7 @@ export interface Order {
     quantity: number;
     priceAtPurchase: number;
     imageUrl: string;
+    isTodaysSpecial?: boolean;
   }>;
   feedback: OrderFeedback | null;
   pickupSlot: string | null;

@@ -26,6 +26,7 @@ const menuItem = (overrides: Record<string, unknown> = {}) => ({
   allergenNote: null,
   spiceLevel: 'MILD',
   isSpecial: false,
+  isTodaysSpecial: false,
   preparationTime: 10,
   category: {
     id: 'category-1',
@@ -116,7 +117,7 @@ describe('Student favourites and recommendations', () => {
   });
 
   it('returns only currently available items and explains no-history suggestions with real facts', async () => {
-    const available = menuItem({ isSpecial: true });
+    const available = menuItem({ isTodaysSpecial: true });
     const outsideMeal = menuItem({
       id: 'menu-lunch',
       name: 'Lunch Rice',
@@ -148,7 +149,7 @@ describe('Student favourites and recommendations', () => {
 
   it('ranks previously ordered items as smart picks', async () => {
     const ordered = menuItem({ id: 'menu-ordered', name: 'Ordered Dosa' });
-    const popular = menuItem({ id: 'menu-popular', name: 'Popular Dosa', isSpecial: true });
+    const popular = menuItem({ id: 'menu-popular', name: 'Popular Dosa', isTodaysSpecial: true });
     vi.spyOn(prisma.menuItem, 'findMany').mockResolvedValue([popular, ordered] as any);
     vi.spyOn(prisma.orderItem, 'groupBy')
       .mockResolvedValueOnce([{ menuItemId: ordered.id, _count: { _all: 2 } }] as any)
@@ -180,7 +181,7 @@ describe('Student favourites and recommendations', () => {
         }) }] } }],
       }),
     }));
-    vi.spyOn(prisma.menuItem, 'findMany').mockResolvedValue([menuItem({ isSpecial: true })] as any);
+    vi.spyOn(prisma.menuItem, 'findMany').mockResolvedValue([menuItem({ isTodaysSpecial: true })] as any);
     vi.spyOn(prisma.orderItem, 'groupBy').mockResolvedValue([] as any);
     vi.spyOn(prisma.favorite, 'findMany').mockResolvedValue([]);
 
@@ -193,7 +194,7 @@ describe('Student favourites and recommendations', () => {
   });
 
   it('falls back to rule-based reasons when Gemini returns no response', async () => {
-    vi.spyOn(prisma.menuItem, 'findMany').mockResolvedValue([menuItem({ isSpecial: true })] as any);
+    vi.spyOn(prisma.menuItem, 'findMany').mockResolvedValue([menuItem({ isTodaysSpecial: true })] as any);
     vi.spyOn(prisma.orderItem, 'groupBy').mockResolvedValue([] as any);
     vi.spyOn(prisma.favorite, 'findMany').mockResolvedValue([]);
 

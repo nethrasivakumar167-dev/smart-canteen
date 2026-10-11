@@ -45,6 +45,7 @@ describe('Public Menu & Category API', () => {
     allergenNote: null,
     spiceLevel: 'MEDIUM',
     isSpecial: true,
+    isTodaysSpecial: true,
     createdAt: new Date(),
     updatedAt: new Date(),
     category: mockCategory1,
@@ -67,6 +68,7 @@ describe('Public Menu & Category API', () => {
     allergenNote: null,
     spiceLevel: null,
     isSpecial: false,
+    isTodaysSpecial: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     category: mockCategory1,
@@ -126,6 +128,7 @@ describe('Public Menu & Category API', () => {
       expect(res.body.data[0].stockStatus).toBe('AVAILABLE');
       expect(res.body.data[0].dietaryTags).toEqual(['veg']);
       expect(res.body.data[0].isSpecial).toBe(true);
+      expect(res.body.data[0].isTodaysSpecial).toBe(true);
       expect(res.body.data[0]).toMatchObject({
         tags: ['south-indian', 'spicy'],
         cuisines: ['south-indian'],

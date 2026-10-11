@@ -110,6 +110,11 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
           Special
         </span>
       )}
+      {item.isTodaysSpecial && (
+        <span className="border-2 border-navy bg-[#F2C94C] px-2 py-1 font-pixel text-[9px] uppercase leading-none text-navy shadow-[2px_2px_0_#0B2A4A]">
+          Today&apos;s Special
+        </span>
+      )}
       {unavailable && (
         <span className="text-[10px] font-semibold text-red-700">
           {item.unavailableReason || 'Unavailable now'}

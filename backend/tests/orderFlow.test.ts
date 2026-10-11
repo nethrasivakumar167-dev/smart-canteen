@@ -56,6 +56,7 @@ describe('Order Creation, Availability, Payment, Transitions & Authorization API
     name: 'Crispy Podi Dosa',
     price: 75.0,
     isAvailable: true,
+    isTodaysSpecial: true,
     category: mockCategoryAvailable,
   };
 
@@ -648,6 +649,7 @@ describe('Order Creation, Availability, Payment, Transitions & Authorization API
       expect(res.body.data[0]).toMatchObject({
         cuisine: ['south-indian'],
         cuisines: ['south-indian'],
+        isTodaysSpecial: true,
         availableNow: true,
         unavailableReason: null,
       });
@@ -694,6 +696,29 @@ describe('Order Creation, Availability, Payment, Transitions & Authorization API
       });
     });
 
+    it('allows staff to set a menu item as today’s special', async () => {
+      vi.spyOn(prisma.menuItem, 'findUnique').mockResolvedValue({
+        ...mockAvailableItem,
+        isTodaysSpecial: false,
+      } as any);
+      const updateSpy = vi.spyOn(prisma.menuItem, 'update').mockResolvedValue({
+        ...mockAvailableItem,
+        isTodaysSpecial: true,
+      } as any);
+
+      const response = await request(app)
+        .patch('/api/staff/menu-status/item-dosa-1/todays-special')
+        .set('Authorization', ['Bearer', staffToken].join(' '))
+        .send({ isTodaysSpecial: true });
+
+      expect(response.status).toBe(200);
+      expect(response.body.data.isTodaysSpecial).toBe(true);
+      expect(updateSpy).toHaveBeenCalledWith({
+        where: { id: 'item-dosa-1' },
+        data: { isTodaysSpecial: true },
+      });
+    });
+
     it('allows staff to toggle Category availability', async () => {
       vi.spyOn(prisma.category, 'findUnique').mockResolvedValue(mockCategoryAvailable as any);
       vi.spyOn(prisma.category, 'update').mockResolvedValue({
@@ -725,6 +750,16 @@ describe('Order Creation, Availability, Payment, Transitions & Authorization API
         .send({ isAvailable: false });
 
       expect(resCat.status).toBe(403);
+    });
+
+    it('rejects students from changing a menu item today’s special flag', async () => {
+      const response = await request(app)
+        .patch('/api/staff/menu-status/item-dosa-1/todays-special')
+        .set('Authorization', ['Bearer', studentToken].join(' '))
+        .send({ isTodaysSpecial: true });
+
+      expect(response.status).toBe(403);
+      expect(response.body.success).toBe(false);
     });
   });
 

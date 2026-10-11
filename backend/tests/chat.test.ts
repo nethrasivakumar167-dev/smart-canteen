@@ -22,6 +22,7 @@ const menuFixtures: ChatMenuItem[] = [
     price: 60,
     isAvailable: true,
     isSpecial: true,
+    isTodaysSpecial: true,
     imageUrl: '/images/aloo-chaat.jpg',
   },
   {
@@ -37,6 +38,7 @@ const menuFixtures: ChatMenuItem[] = [
     price: 90,
     isAvailable: true,
     isSpecial: false,
+    isTodaysSpecial: true,
     imageUrl: null,
   },
   {
@@ -52,6 +54,7 @@ const menuFixtures: ChatMenuItem[] = [
     price: 50,
     isAvailable: true,
     isSpecial: false,
+    isTodaysSpecial: false,
     imageUrl: null,
   },
   {
@@ -67,6 +70,7 @@ const menuFixtures: ChatMenuItem[] = [
     price: 45,
     isAvailable: true,
     isSpecial: false,
+    isTodaysSpecial: false,
     imageUrl: null,
   },
   {
@@ -82,6 +86,7 @@ const menuFixtures: ChatMenuItem[] = [
     price: 100,
     isAvailable: false,
     isSpecial: false,
+    isTodaysSpecial: false,
     imageUrl: null,
   },
 ];
@@ -109,7 +114,16 @@ describe('Chat rules and grounded AI responses', () => {
     const result = await answerChat("What's today's special?", [], menuFixtures, now);
 
     expect(result.intent).toBe('specials');
-    expect(result.items.map((item) => item.id)).toEqual(['chaat-special']);
+    expect(result.items.map((item) => item.id)).toEqual(['chaat-special', 'chinese-noodles']);
+  });
+
+  it('politely reports when no items are marked as today’s specials', async () => {
+    const noSpecials = menuFixtures.map((item) => ({ ...item, isTodaysSpecial: false }));
+    const result = await answerChat("What's today's special?", [], noSpecials, now);
+
+    expect(result.items).toEqual([]);
+    expect(result.reply).toContain('No items have been marked as today’s special yet');
+    expect(result.outcome).toBe('rule');
   });
 
   it('filters cuisine and category recommendations to available items', async () => {
@@ -303,7 +317,10 @@ describe('POST /api/chat', () => {
     expect(response.status).toBe(200);
     expect(response.body.data).toMatchObject({
       reply: expect.any(String),
-      items: [{ id: 'chaat-special', name: 'Aloo Chaat', price: 60, available: expect.any(Boolean), imageUrl: '/images/aloo-chaat.jpg' }],
+      items: [
+        { id: 'chaat-special', name: 'Aloo Chaat', price: 60, available: expect.any(Boolean), imageUrl: '/images/aloo-chaat.jpg' },
+        { id: 'chinese-noodles', name: 'Vegetable Hakka Noodles', price: 90, available: expect.any(Boolean) },
+      ],
     });
     expect(menuCreate).not.toHaveBeenCalled();
     expect(menuUpdate).not.toHaveBeenCalled();

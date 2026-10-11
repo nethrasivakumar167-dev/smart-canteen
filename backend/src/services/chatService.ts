@@ -15,6 +15,7 @@ export interface ChatMenuItem {
   price: number | string | { toString(): string };
   isAvailable: boolean;
   isSpecial: boolean;
+  isTodaysSpecial: boolean;
   imageUrl: string | null;
 }
 
@@ -59,6 +60,7 @@ interface GroundedItem extends ChatResultItem {
   spiceLevel: string | null;
   isAvailable: boolean;
   isSpecial: boolean;
+  isTodaysSpecial: boolean;
 }
 
 interface ChatContext {
@@ -134,6 +136,7 @@ function toGroundedItem(item: ChatMenuItem, now: Date): GroundedItem {
     price: Number(item.price),
     isAvailable,
     isSpecial: item.isSpecial,
+    isTodaysSpecial: item.isTodaysSpecial,
     available: availableNow(availabilityInput, now),
     ...(item.imageUrl ? { imageUrl: item.imageUrl } : {}),
   };
@@ -202,7 +205,7 @@ function buildContext(items: ChatMenuItem[], message: string, now: Date): ChatCo
       /\bdessert(s)?\b/i.test(item.category) && isDairyFree(item)
     );
   } else if (specialQuestion) {
-    relevantItems = allItems.filter((item) => item.isSpecial);
+    relevantItems = allItems.filter((item) => item.isTodaysSpecial);
   } else if (lunchQuestion) {
     relevantItems = allItems.filter((item) => item.mealTimes.some((meal) => normalize(meal) === 'lunch'));
   } else {
@@ -223,7 +226,7 @@ function buildContext(items: ChatMenuItem[], message: string, now: Date): ChatCo
   return {
     currentDateTime: `${current.dateTime} (Asia/Kolkata)`,
     mealPeriod: getMealPeriod(current.minutes),
-    specials: allItems.filter((item) => item.isSpecial).slice(0, 25),
+    specials: allItems.filter((item) => item.isTodaysSpecial).slice(0, 25),
     availableItems: availableItems.slice(0, 25),
     relevantItems: relevantItems.slice(0, 25),
   };
@@ -247,8 +250,10 @@ function runRules(message: string, context: ChatContext, now: Date): RuleResult 
   if (/\b(special|today'?s special|today special)\b/i.test(query)) {
     const items = context.relevantItems;
     const names = items.slice(0, 5).map((item) => item.name).join(', ');
-    const reply = items.length ? `Today’s special${items.length === 1 ? ' is' : 's are'} ${names}.` : 'There are no special items listed today.';
-    return { intent: 'specials', reply, items, useAI: true };
+    const reply = items.length
+      ? `Today’s special${items.length === 1 ? ' is' : 's are'} ${names}.`
+      : 'No items have been marked as today’s special yet. Please check back later.';
+    return { intent: 'specials', reply, items, useAI: items.length > 0 };
   }
   if (/\blunch\b/i.test(query)) {
     const items = context.relevantItems;
@@ -261,13 +266,19 @@ function runRules(message: string, context: ChatContext, now: Date): RuleResult 
     return { intent: 'lunch', reply: `${availableText} ${unavailableText}`, items, useAI: true };
   }
 
-  const items = context.relevantItems.filter((item) => item.available);
-  const description = items.length ? items.slice(0, 5).map((item) => item.name).join(', ') : 'nothing matching that request right now';
+  const items = context.relevantItems.filter((item) => item.available && item.isTodaysSpecial);
+  const description = items.length
+    ? items.slice(0, 5).map((item) => item.name).join(', ')
+    : 'no flagged specials matching that request right now';
   return {
     intent: 'recommendation',
-    reply: items.length ? `Here are a few options: ${description}.` : `I couldn’t find ${description}.`,
+    reply: items.length
+      ? `Here are a few of today’s specials: ${description}.`
+      : context.specials.length
+        ? `I couldn’t find any of today’s specials matching that request.`
+        : 'No items have been marked as today’s special yet. Please check back later.',
     items,
-    useAI: true,
+    useAI: items.length > 0,
   };
 }
 

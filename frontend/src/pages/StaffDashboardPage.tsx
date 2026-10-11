@@ -139,6 +139,28 @@ export const StaffDashboardPage: React.FC = () => {
     }
   };
 
+  const handleToggleTodaysSpecial = async (itemId: string, currentStatus: boolean) => {
+    try {
+      const res = await axios.patch(`/staff/menu-status/${itemId}/todays-special`, {
+        isTodaysSpecial: !currentStatus,
+      });
+      if (res.data.success) {
+        addToast({
+          type: 'info',
+          title: 'Today’s Special Updated',
+          message: res.data.message,
+        });
+        await loadData();
+      }
+    } catch {
+      addToast({
+        type: 'error',
+        title: 'Error',
+        message: 'Could not update today’s special status.',
+      });
+    }
+  };
+
   const handleLogout = async () => {
     await logout();
     addToast({
@@ -437,7 +459,14 @@ export const StaffDashboardPage: React.FC = () => {
                         {order.items.map((item: any, idx: number) => (
                           <li key={idx} className="flex flex-col bg-cream p-2.5 rounded-xl border border-line">
                             <div className="flex justify-between text-slateblue font-bold">
-                              <span>{item.quantity}x {item.name}</span>
+                              <span className="flex flex-wrap items-center gap-2">
+                                {item.quantity}x {item.name}
+                                {item.isTodaysSpecial && (
+                                  <span className="border-2 border-navy bg-[#F2C94C] px-2 py-1 font-pixel text-[9px] uppercase leading-none text-navy shadow-[2px_2px_0_#0B2A4A]">
+                                    Today&apos;s Special
+                                  </span>
+                                )}
+                              </span>
                             </div>
                             {item.notes && (
                               <span className="text-[11px] text-rust font-medium italic mt-0.5">
@@ -615,18 +644,33 @@ export const StaffDashboardPage: React.FC = () => {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => handleToggleAvailability(item.id, item.isAvailable)}
-                  className={`staff-pixel-switch ${item.isAvailable ? 'is-enabled' : ''} ${
-                    item.isAvailable
-                      ? ''
-                      : 'is-disabled'
-                  }`}
-                >
-                  {item.isAvailable ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
-                  <span>{item.isAvailable ? 'Active' : 'Disabled'}</span>
-                </button>
+                <div className="flex flex-col items-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleToggleAvailability(item.id, item.isAvailable)}
+                    aria-pressed={item.isAvailable}
+                    aria-label={`${item.isAvailable ? 'Disable' : 'Enable'} ${item.name} availability`}
+                    className={`staff-pixel-switch ${item.isAvailable ? 'is-enabled' : ''} ${
+                      item.isAvailable
+                        ? ''
+                        : 'is-disabled'
+                    }`}
+                  >
+                    {item.isAvailable ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
+                    <span>{item.isAvailable ? 'Active' : 'Disabled'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleToggleTodaysSpecial(item.id, item.isTodaysSpecial)}
+                    aria-pressed={item.isTodaysSpecial}
+                    aria-label={`${item.isTodaysSpecial ? 'Remove' : 'Mark'} ${item.name} as today’s special`}
+                    className={`border-2 border-navy px-2 py-2 font-pixel text-[8px] uppercase leading-tight shadow-[2px_2px_0_#0B2A4A] transition-colors ${
+                      item.isTodaysSpecial ? 'bg-[#F2C94C] text-navy' : 'bg-cream text-navy hover:bg-butter'
+                    }`}
+                  >
+                    Today&apos;s Special
+                  </button>
+                </div>
               </div>
             );})}
             {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 flex items-center justify-center gap-3 rounded-2xl bg-cream border border-line p-4 text-center text-sm text-navy"><PixelIcon name="bowl" size={18} /><span>No menu items match these filters.</span></div>}

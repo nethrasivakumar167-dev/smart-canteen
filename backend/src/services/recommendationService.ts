@@ -45,17 +45,17 @@ function localMealPeriod(now: Date): { day: string; period: 'BREAKFAST' | 'LUNCH
 }
 
 function fallbackReason(
-  facts: { orderCount: number; isFavorite: boolean; matchesMealPeriod: boolean; isSpecial: boolean; popularity: number },
+  facts: { orderCount: number; isFavorite: boolean; matchesMealPeriod: boolean; isTodaysSpecial: boolean; popularity: number },
   period: string,
   noHistory: boolean
 ): string {
   if (noHistory) {
-    if (facts.isSpecial) return "No order history yet; today's special.";
+    if (facts.isTodaysSpecial) return "No order history yet; today's special.";
     return `No order history yet; popular ${period === 'CLOSED' ? 'today' : `for ${period.toLowerCase()}`}.`;
   }
   if (facts.orderCount > 0) return `You ordered this ${facts.orderCount} time${facts.orderCount === 1 ? '' : 's'} before.`;
   if (facts.isFavorite) return 'One of your saved favourites.';
-  if (facts.isSpecial) return "Today's special.";
+  if (facts.isTodaysSpecial) return "Today's special.";
   if (facts.matchesMealPeriod) return `A pick for ${period.toLowerCase()}.`;
   return 'Popular with students.';
 }
@@ -158,13 +158,13 @@ export async function getStudentRecommendations(userId: string, now = new Date()
         orderCount,
         isFavorite,
         matchesMealPeriod,
-        isSpecial: item.isSpecial,
+        isTodaysSpecial: item.isTodaysSpecial,
         popularity: popularityCount,
       };
       const score = orderCount * 10
         + Number(isFavorite) * 8
         + Number(matchesMealPeriod) * 4
-        + Number(item.isSpecial) * 6
+        + Number(item.isTodaysSpecial) * 6
         + popularityCount / 1000;
       return {
         id: item.id,
@@ -174,7 +174,7 @@ export async function getStudentRecommendations(userId: string, now = new Date()
         score,
         popularityCount,
         item: formatMenuItem(item, now, timeWindowsEnabled),
-        label: isFavorite || orderCount > 0 || item.isSpecial ? 'Smart pick' as const : 'Popular now' as const,
+        label: isFavorite || orderCount > 0 || item.isTodaysSpecial ? 'Smart pick' as const : 'Popular now' as const,
         reason: fallbackReason(reasonFacts, period, noHistory),
       };
     })

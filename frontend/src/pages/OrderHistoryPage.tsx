@@ -133,7 +133,14 @@ export const OrderHistoryPage: React.FC = () => {
               <div className="space-y-2">
                 {order.items.map((item) => (
                   <div key={item.id} className="flex justify-between gap-3 text-sm text-slateblue">
-                    <span>{item.quantity} × {item.name}</span>
+                    <span className="flex flex-wrap items-center gap-2">
+                      {item.quantity} × {item.name}
+                      {item.isTodaysSpecial && (
+                        <span className="border-2 border-navy bg-[#F2C94C] px-2 py-1 font-pixel text-[9px] uppercase leading-none text-navy shadow-[2px_2px_0_#0B2A4A]">
+                          Today&apos;s Special
+                        </span>
+                      )}
+                    </span>
                     <span className="font-semibold">₹{item.priceAtPurchase * item.quantity}</span>
                   </div>
                 ))}

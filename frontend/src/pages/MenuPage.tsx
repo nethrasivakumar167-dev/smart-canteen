@@ -36,6 +36,7 @@ export const MenuPage: React.FC = () => {
   const [cuisine, setCuisine] = useState('');
   const [spice, setSpice] = useState('');
   const [availableNow, setAvailableNow] = useState(false);
+  const [todaysSpecialOnly, setTodaysSpecialOnly] = useState(false);
   const [excludedAllergens, setExcludedAllergens] = useState<string[]>([]);
   const [maxPrice, setMaxPrice] = useState(0);
   const [sortBy, setSortBy] = useState<'POPULAR' | 'PRICE_ASC' | 'PRICE_DESC' | 'FASTEST'>('POPULAR');
@@ -154,6 +155,7 @@ export const MenuPage: React.FC = () => {
     setCuisine('');
     setSpice('');
     setAvailableNow(false);
+    setTodaysSpecialOnly(false);
     setExcludedAllergens([]);
     setMaxPrice(0);
     setSortBy('POPULAR');
@@ -162,11 +164,14 @@ export const MenuPage: React.FC = () => {
 
   const hasActiveFilters = Boolean(
     selectedCategory !== 'all' || searchQuery.trim() || diet || cuisine || spice ||
-    availableNow || excludedAllergens.length || maxPrice || sortBy !== 'POPULAR'
+    availableNow || todaysSpecialOnly || excludedAllergens.length || maxPrice || sortBy !== 'POPULAR'
   );
 
   const filteredItems = useMemo(() => {
-    const result = menuItems.filter((item) => !maxPrice || item.price <= maxPrice);
+    const result = menuItems.filter((item) =>
+      (!maxPrice || item.price <= maxPrice) &&
+      (!todaysSpecialOnly || item.isTodaysSpecial)
+    );
     return [...result].sort((a, b) => {
       if (sortBy === 'PRICE_ASC') return a.price - b.price;
       if (sortBy === 'PRICE_DESC') return b.price - a.price;
@@ -175,7 +180,7 @@ export const MenuPage: React.FC = () => {
       if (!a.isPopular && b.isPopular) return 1;
       return b.rating - a.rating;
     });
-  }, [menuItems, maxPrice, sortBy]);
+  }, [menuItems, maxPrice, sortBy, todaysSpecialOnly]);
 
   const removeAllergen = (allergen: string) =>
     setExcludedAllergens((current) => current.filter((value) => value !== allergen));
@@ -289,6 +294,10 @@ export const MenuPage: React.FC = () => {
               <input type="checkbox" checked={availableNow} onChange={(event) => setAvailableNow(event.target.checked)} className="accent-navy" />
               Available now
             </label>
+            <label className="flex items-center gap-2 text-xs font-bold text-espresso">
+              <input type="checkbox" checked={todaysSpecialOnly} onChange={(event) => setTodaysSpecialOnly(event.target.checked)} className="accent-navy" />
+              Today&apos;s Special
+            </label>
             <fieldset className="space-y-2">
               <legend className="text-xs font-bold text-espresso">Exclude allergens</legend>
               <div className="flex flex-wrap gap-2">
@@ -323,6 +332,7 @@ export const MenuPage: React.FC = () => {
           {cuisine && <ActiveFilter label={`Cuisine: ${titleCase(cuisine)}`} onClear={() => setCuisine('')} />}
           {spice && <ActiveFilter label={`Spice: ${titleCase(spice)}`} onClear={() => setSpice('')} />}
           {availableNow && <ActiveFilter label="Available now" onClear={() => setAvailableNow(false)} />}
+          {todaysSpecialOnly && <ActiveFilter label="Today's Special" onClear={() => setTodaysSpecialOnly(false)} />}
           {excludedAllergens.map((allergen) => <ActiveFilter key={allergen} label={`Exclude: ${titleCase(allergen)}`} onClear={() => removeAllergen(allergen)} />)}
           {maxPrice > 0 && <ActiveFilter label={`Price: ≤ ₹${maxPrice}`} onClear={() => setMaxPrice(0)} />}
           {sortBy !== 'POPULAR' && <ActiveFilter label={`Sort: ${titleCase(sortBy)}`} onClear={() => setSortBy('POPULAR')} />}
