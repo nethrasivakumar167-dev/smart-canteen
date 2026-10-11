@@ -88,7 +88,7 @@ export const Navbar: React.FC = () => {
 
             {/* Live Rush / Open Pill */}
             <div className="theme-sky-badge hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium">
-              <span className="w-2 h-2 rounded-full bg-rust" />
+              <span className="w-2 h-2 rounded-full theme-danger-surface" />
               <span>Live: <strong>Open</strong> (~8m wait)</span>
             </div>
           </div>
@@ -184,7 +184,7 @@ export const Navbar: React.FC = () => {
                 {/* Profile Dropdown Menu */}
                 {profileDropdownOpen && (
                   <div className="theme-nav-dropdown absolute right-0 mt-2 w-64 rounded-2xl border shadow-sm p-2 z-50 animate-in fade-in slide-in-from-top-2">
-                    <div className="p-3 border-b border-line">
+                    <div className="p-3 border-b theme-border">
                       <p className="theme-primary-text text-sm font-bold truncate">
                         {user.name}
                       </p>
@@ -245,7 +245,7 @@ export const Navbar: React.FC = () => {
                       </Link>
                     </div>
 
-                    <div className="pt-1 border-t border-line">
+                    <div className="pt-1 border-t theme-border">
                       <button
                         onClick={handleLogout}
                         className="theme-dropdown-danger w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-xl transition"

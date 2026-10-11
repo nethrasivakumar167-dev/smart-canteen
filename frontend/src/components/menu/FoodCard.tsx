@@ -32,10 +32,10 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   const quantityInCart = cartItem ? cartItem.quantity : 0;
   const unavailable = item.availableNow === false || !item.isAvailable;
   const marker = item.dietaryTags?.includes('egg')
-    ? { label: 'Egg', className: 'border-amber-600 text-amber-700' }
+    ? { label: 'Egg', className: 'theme-warning-text theme-primary-text' }
     : item.isVegetarian
-      ? { label: 'Vegetarian', className: 'border-emerald-600 text-emerald-700' }
-      : { label: 'Non-vegetarian', className: 'border-rust text-rust' };
+      ? { label: 'Vegetarian', className: 'theme-success-border theme-success-text' }
+      : { label: 'Non-vegetarian', className: 'theme-danger-border theme-danger-text' };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -90,7 +90,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
       aria-pressed={favorited}
       aria-label={favorited ? 'Remove from favourites' : 'Add to favourites'}
       className={`px-btn px-btn--cream z-10 min-h-0 rounded-full p-2 transition-colors ${
-        favorited ? 'heart-pop' : 'hover:bg-skysoft'
+        favorited ? 'heart-pop' : 'hover:theme-sky-surface'
       }`}
     >
       <PixelIcon name="heart" size={16} heartState={favorited ? 'filled' : 'outline'} />
@@ -100,8 +100,8 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   const meta = (
     <div className="flex flex-wrap items-center gap-2">
       {item.spiceLevel && item.spiceLevel !== 'NONE' && (
-        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-espresso">
-          <Flame className="w-3 h-3 text-rust" />
+        <span className="inline-flex items-center gap-1 text-[10px] font-semibold theme-secondary-text">
+          <Flame className="w-3 h-3 theme-danger-text" />
           {titleCase(item.spiceLevel)}
         </span>
       )}
@@ -116,7 +116,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
         </span>
       )}
       {unavailable && (
-        <span className="text-[10px] font-semibold text-red-700">
+        <span className="text-[10px] font-semibold theme-danger-text">
           {item.unavailableReason || 'Unavailable now'}
         </span>
       )}
@@ -129,17 +129,17 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   const allergenDetails = (item.allergens?.length || item.allergenNote) ? (
     <div className="mt-2 space-y-1">
       {!!item.allergens?.length && (
-        <div className="flex flex-wrap items-center gap-1 text-[10px] text-espresso">
+        <div className="flex flex-wrap items-center gap-1 text-[10px] theme-secondary-text">
           <span className="font-bold">Contains:</span>
           {item.allergens.map((allergen) => (
-            <span key={allergen} className="rounded-full bg-sand px-2 py-0.5">
+            <span key={allergen} className="rounded-full theme-secondary-surface px-2 py-0.5">
               {titleCase(allergen)}
             </span>
           ))}
         </div>
       )}
       {!!item.allergenNote && (
-        <p className="truncate text-[10px] text-espresso/75" title={item.allergenNote}>
+        <p className="truncate text-[10px] theme-secondary-text" title={item.allergenNote}>
           Check: {item.allergenNote}
         </p>
       )}
@@ -147,7 +147,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   ) : null;
 
   const action = quantityInCart > 0 ? (
-    <div className="flex items-center bg-sand border border-line rounded-full p-1 shadow-sm">
+    <div className="flex items-center theme-secondary-surface border theme-border rounded-full p-1 shadow-sm">
       <button onClick={handleDecrement} aria-label="Decrease quantity" className="stepper-btn">
         <Minus className="w-4 h-4" />
       </button>
@@ -160,7 +160,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
     <button
       onClick={handleAddToCart}
       disabled={unavailable}
-      className="px-btn min-h-0 px-4 py-2.5 disabled:cursor-not-allowed disabled:opacity-50"
+      className="px-btn min-h-0 px-4 py-2.5 disabled:cursor-not-allowed disabled:opacity-100"
     >
       <Plus className="w-4 h-4 stroke-[3]" />
       <span>Add</span>
@@ -168,9 +168,9 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   );
 
   return (
-    <div className={`food-card px-card group relative flex flex-col ${unavailable ? 'opacity-65 grayscale-[0.25]' : ''}`}>
+    <div className={`food-card px-card group relative flex flex-col ${unavailable ? 'grayscale-[0.25]' : ''}`}>
       {showImage ? (
-        <Link to={`/menu/${item.id}`} className="food-card__image relative aspect-[3/2] w-full overflow-hidden bg-sand block">
+        <Link to={`/menu/${item.id}`} className="food-card__image relative aspect-[3/2] w-full overflow-hidden theme-secondary-surface block">
           <FoodImage
             imageUrl={item.imageUrl}
             alt={item.name}
@@ -178,7 +178,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             onError={() => setShowImage(false)}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy/25 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute inset-0 theme-photo-gradient-light pointer-events-none" />
           <div className="absolute top-3 left-3 z-10">{markerBadge}</div>
           {isStudent && <div className="absolute top-3 right-3">{favoriteButton}</div>}
         </Link>
@@ -196,7 +196,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
               {item.categoryName || 'Canteen Special'}
             </span>
           </div>
-          <Link to={`/menu/${item.id}`} className="block group-hover:text-rust transition">
+          <Link to={`/menu/${item.id}`} className="block group-hover:theme-danger-text transition">
             <h3 className="font-semibold text-card-title text-base leading-snug line-clamp-2">{item.name}</h3>
           </Link>
           <p className="text-xs text-card-desc line-clamp-2 mt-1.5 leading-relaxed">{item.description}</p>
@@ -204,9 +204,9 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
           {allergenDetails}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-line flex items-center justify-between">
+        <div className="mt-4 pt-3 border-t theme-border flex items-center justify-between">
           <div className="food-card__price-tag flex items-baseline gap-1 px-3 py-2">
-            <span className="text-[10px] uppercase font-bold tracking-wide opacity-75">₹</span>
+            <span className="text-[10px] uppercase font-bold tracking-wide">₹</span>
             <span className="text-lg font-extrabold font-mono leading-none">{item.price}</span>
           </div>
           {action}

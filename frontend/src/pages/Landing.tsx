@@ -69,10 +69,10 @@ const HeroOrbit: React.FC = () => {
         height="448"
         loading="eager"
         fetchPriority="high"
-        className="absolute left-1/2 top-1/2 z-10 aspect-square w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-navy object-cover"
+        className="absolute left-1/2 top-1/2 z-10 aspect-square w-[58%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] theme-strong-border object-cover"
       />
       {landingDishes.length >= 4 && (
-        <div className="absolute inset-[8%] animate-orbit-spin rounded-full border-[3px] border-dashed border-gold">
+        <div className="absolute inset-[8%] animate-orbit-spin rounded-full border-[3px] border-dashed theme-gold-border">
           {orbitDishes.map((dish, index) => (
             <div
               key={dish.slug}
@@ -80,7 +80,7 @@ const HeroOrbit: React.FC = () => {
               style={{ width: 'clamp(4.25rem, 13vw, 6rem)' }}
             >
               <div className="animate-orbit-unspin">
-                <div className="aspect-square overflow-hidden rounded-full border-[3px] border-navy bg-cream">
+                <div className="aspect-square overflow-hidden rounded-full border-[3px] theme-strong-border theme-surface">
                   <img
                     src={`/menu/${dish.slug}.jpg`}
                     alt={dish.name}
@@ -90,7 +90,7 @@ const HeroOrbit: React.FC = () => {
                     className="h-full w-full aspect-square object-cover"
                   />
                 </div>
-                <span className="orbit-label mt-2 block text-center text-[9px] leading-tight text-navy">
+                <span className="orbit-label mt-2 block text-center text-[9px] leading-tight theme-primary-text">
                   <strong className="block font-pixel text-[10px]">{dish.name}</strong>
                   {dish.descriptor}
                 </span>
@@ -104,7 +104,7 @@ const HeroOrbit: React.FC = () => {
 };
 
 const MarqueeItem: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="flex shrink-0 items-center gap-6 px-5 font-pixel text-xs text-cream sm:text-sm">
+  <span className="flex shrink-0 items-center gap-6 px-5 font-pixel text-xs theme-nav-text sm:text-sm">
     {children}
     <PixelIcon name="star" size={16} />
   </span>
@@ -140,25 +140,25 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="overflow-x-clip">
-      <section className="relative overflow-x-clip bg-cream px-4 py-12 sm:px-6 sm:py-20">
+      <section className="relative overflow-x-clip theme-surface px-4 py-12 sm:px-6 sm:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
           {[12, 35, 61, 82].map((left, index) => (
             <span
               key={left}
-              className={`absolute top-0 h-2 w-2 animate-fall ${index % 2 ? 'bg-sky' : 'bg-gold'}`}
+              className={`absolute top-0 h-2 w-2 animate-fall ${index % 2 ? 'theme-sky-surface' : 'theme-gold-surface'}`}
               style={{ left: `${left}%`, animationDelay: `${index * -1.1}s` }}
             />
           ))}
         </div>
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
           <div className="relative z-10 text-center lg:text-left">
-            <p className="mb-4 font-pixel text-[10px] uppercase tracking-wide text-navy sm:text-xs">
+            <p className="mb-4 font-pixel text-[10px] uppercase tracking-wide theme-primary-text sm:text-xs">
               Made for your campus day
             </p>
-            <h1 className="mx-auto max-w-2xl text-4xl leading-tight text-navy sm:text-5xl lg:mx-0 lg:text-6xl">
-              Skip the <span className="text-rust">{ROTATING_WORDS[wordIndex]}</span>. Pick up hot.
+            <h1 className="mx-auto max-w-2xl text-4xl leading-tight theme-primary-text sm:text-5xl lg:mx-0 lg:text-6xl">
+              Skip the <span className="theme-danger-text">{ROTATING_WORDS[wordIndex]}</span>. Pick up hot.
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-navy sm:text-lg lg:mx-0">
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed theme-primary-text sm:text-lg lg:mx-0">
               Order your campus favourites ahead, choose a pickup time, and spend less of your day in line.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
@@ -179,7 +179,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-navy py-4" aria-label="Fresh, hot, on time, no queue">
+      <section className="overflow-hidden theme-inverse-surface py-4" aria-label="Fresh, hot, on time, no queue">
         <div className="flex w-max animate-marquee">
           {[0, 1].map((copy) => (
             <div className="flex" key={copy} aria-hidden={copy === 1}>
@@ -193,20 +193,20 @@ export const LandingPage: React.FC = () => {
       </section>
 
       <div className="scallop-divider" aria-hidden="true" />
-      <section id="how-it-works" className="overflow-x-clip bg-sky px-4 pb-16 pt-5 sm:px-6 sm:pb-24">
+      <section id="how-it-works" className="overflow-x-clip theme-sky-surface px-4 pb-16 pt-5 sm:px-6 sm:pb-24">
         <div className="mx-auto max-w-7xl">
           <Reveal className="text-center">
-            <p className="font-pixel text-[10px] uppercase text-navy">Simple as 1, 2, 3, 4</p>
-            <h2 className="mt-3 text-3xl text-navy sm:text-4xl">How it works</h2>
+            <p className="font-pixel text-[10px] uppercase theme-primary-text">Simple as 1, 2, 3, 4</p>
+            <h2 className="mt-3 text-3xl theme-primary-text sm:text-4xl">How it works</h2>
           </Reveal>
           <div className="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
               <Reveal key={step.title} style={{ animationDelay: `${index * 100}ms` }}>
                 <article className="px-card h-full p-5">
                   <PixelIcon name={step.icon} size={32} />
-                  <p className="mt-4 font-pixel text-[10px] text-navy">STEP 0{index + 1}</p>
-                  <h3 className="mt-2 text-xl text-navy">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy">{step.description}</p>
+                  <p className="mt-4 font-pixel text-[10px] theme-primary-text">STEP 0{index + 1}</p>
+                  <h3 className="mt-2 text-xl theme-primary-text">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed theme-primary-text">{step.description}</p>
                 </article>
               </Reveal>
             ))}
@@ -220,17 +220,17 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {landingDishes.length >= 4 && (
-        <section className="overflow-x-clip bg-cream px-4 py-16 sm:px-6 sm:py-24">
+        <section className="overflow-x-clip theme-surface px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-7xl">
             <Reveal className="text-center">
-              <p className="font-pixel text-[10px] uppercase text-navy">A few campus favourites</p>
-              <h2 className="mt-3 text-3xl text-navy sm:text-4xl">Our popular menu</h2>
+              <p className="font-pixel text-[10px] uppercase theme-primary-text">A few campus favourites</p>
+              <h2 className="mt-3 text-3xl theme-primary-text sm:text-4xl">Our popular menu</h2>
             </Reveal>
             <div className="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:gap-x-10">
               {landingDishes.map((dish, index) => (
                 <Reveal key={dish.slug} style={{ animationDelay: `${(index % 4) * 110}ms` }}>
                   <article className="text-center">
-                    <div className="mx-auto aspect-square w-full max-w-48 overflow-hidden rounded-full border-[3px] border-navy bg-butter animate-bob" style={{ animationDelay: `${index * -250}ms` }}>
+                    <div className="mx-auto aspect-square w-full max-w-48 overflow-hidden rounded-full border-[3px] theme-strong-border theme-gold-surface animate-bob" style={{ animationDelay: `${index * -250}ms` }}>
                       <img
                         src={`/menu/${dish.slug}.jpg`}
                         alt={dish.name}
@@ -240,8 +240,8 @@ export const LandingPage: React.FC = () => {
                         className="h-full w-full aspect-square object-cover"
                       />
                     </div>
-                    <h3 className="mt-4 text-lg text-navy">{dish.name}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-navy">{dish.descriptor}</p>
+                    <h3 className="mt-4 text-lg theme-primary-text">{dish.name}</h3>
+                    <p className="mt-1 text-xs leading-relaxed theme-primary-text">{dish.descriptor}</p>
                   </article>
                 </Reveal>
               ))}
@@ -250,18 +250,18 @@ export const LandingPage: React.FC = () => {
         </section>
       )}
 
-      <section className="overflow-x-clip bg-butter px-4 py-16 sm:px-6 sm:py-20">
+      <section className="overflow-x-clip theme-gold-surface px-4 py-16 sm:px-6 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
           <Reveal>
-            <p className="font-pixel text-[10px] uppercase text-navy">Good food, easier days</p>
-            <h2 className="mt-3 text-3xl text-navy sm:text-4xl">About CampusBite</h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-navy">
+            <p className="font-pixel text-[10px] uppercase theme-primary-text">Good food, easier days</p>
+            <h2 className="mt-3 text-3xl theme-primary-text sm:text-4xl">About CampusBite</h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed theme-primary-text">
               CampusBite is a campus canteen ordering site that helps you browse dishes, plan a pickup, and keep track of your order from one place.
             </p>
           </Reveal>
           <Reveal className="flex flex-wrap gap-3">
             {benefits.map((benefit, index) => (
-              <span className="px-chip bg-cream" key={benefit}>
+              <span className="px-chip theme-surface" key={benefit}>
                 <PixelIcon name={index === 4 ? 'heart' : 'check'} size={14} />
                 {benefit}
               </span>
@@ -270,7 +270,7 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="overflow-x-clip bg-cream px-4 py-16 text-center sm:px-6 sm:py-24">
+      <section className="overflow-x-clip theme-surface px-4 py-16 text-center sm:px-6 sm:py-24">
         <Reveal className="mx-auto max-w-3xl">
           <img
             src="/brand/campusbite-logo.jpg"
@@ -279,9 +279,9 @@ export const LandingPage: React.FC = () => {
             className="mx-auto object-contain"
             alt="CampusBite"
           />
-          <h2 className="mt-4 text-3xl text-navy sm:text-4xl">Right on campus</h2>
-          <p className="mt-3 text-base text-navy">SRM Ramapuram, Chennai, India</p>
-          <p className="mx-auto mt-7 max-w-xl text-lg text-navy">“A warmer welcome to the campus canteen, one pickup at a time.”</p>
+          <h2 className="mt-4 text-3xl theme-primary-text sm:text-4xl">Right on campus</h2>
+          <p className="mt-3 text-base theme-primary-text">SRM Ramapuram, Chennai, India</p>
+          <p className="mx-auto mt-7 max-w-xl text-lg theme-primary-text">“A warmer welcome to the campus canteen, one pickup at a time.”</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link className="px-btn" to="/login">Login</Link>
             <Link className="px-btn px-btn--cream" to="/register">Register</Link>

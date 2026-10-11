@@ -12,7 +12,7 @@ export const MainLayout: React.FC = () => {
   const { user, isAuthenticated } = useAuthStore();
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream text-navy transition-colors duration-200">
+    <div className="flex min-h-screen flex-col theme-surface theme-primary-text transition-colors duration-200">
       <CheckerStrip />
       <Navbar />
       <main className="flex-grow pb-20 md:pb-0">

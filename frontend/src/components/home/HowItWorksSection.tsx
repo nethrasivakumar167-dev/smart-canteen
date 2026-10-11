@@ -8,44 +8,44 @@ export const HowItWorksSection: React.FC = () => {
       title: 'Browse & Customise',
       description: 'Explore today’s breakfast, lunch, and snack specials with real-time stock availability, spice choices, and dietary filters.',
       icon: Smartphone,
-      color: 'bg-skyblue text-navy',
+      color: 'theme-sky-surface theme-primary-text',
     },
     {
       number: '02',
       title: 'Preorder & Secure Pay',
       description: 'Select your preferred pickup window (ASAP or scheduled recess time), apply student coupons, and pay seamlessly.',
       icon: CreditCard,
-      color: 'bg-navy text-cream',
+      color: 'theme-inverse-surface theme-nav-text',
     },
     {
       number: '03',
       title: 'Live Queue Tracking',
       description: 'Track your food in real-time as the chefs receive, prepare, and pack your meal with dynamic wait time updates.',
       icon: Clock,
-      color: 'bg-cream text-rust',
+      color: 'theme-surface theme-danger-text',
     },
     {
       number: '04',
       title: 'Scan QR & Pickup',
       description: 'Arrive at the express pickup counter, flash your encrypted digital QR receipt, and pick up your hot, fresh meal instantly.',
       icon: QrCode,
-      color: 'bg-skysoft text-navy',
+      color: 'theme-sky-surface theme-primary-text',
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-16 sm:py-24 bg-sand border-y border-line">
+    <section id="how-it-works" className="py-16 sm:py-24 theme-secondary-surface border-y theme-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-[0.15em] text-rust bg-cream px-3 py-1 rounded-full border border-line">
+          <span className="text-xs font-extrabold uppercase tracking-[0.15em] theme-danger-text theme-surface px-3 py-1 rounded-full border theme-border">
             Frictionless Ordering
           </span>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-navy tracking-[0.15em] uppercase">
+          <h2 className="text-3xl sm:text-4xl font-semibold theme-primary-text tracking-[0.15em] uppercase">
             How Smart Canteen Works
           </h2>
-          <p className="text-sm sm:text-base text-espresso">
+          <p className="text-sm sm:text-base theme-secondary-text">
             Engineered to save 20–30 minutes of waiting during peak campus recess and lunch hours.
           </p>
         </div>
@@ -57,28 +57,28 @@ export const HowItWorksSection: React.FC = () => {
             return (
               <div
                 key={step.number}
-                className="relative bg-cream p-6 sm:p-7 rounded-3xl border border-line shadow-sm transition-all duration-300 flex flex-col justify-between group"
+                className="relative theme-surface p-6 sm:p-7 rounded-3xl border theme-border shadow-sm transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <div className={`w-12 h-12 rounded-full ${step.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-3xl font-extrabold text-navy font-mono">
+                    <span className="text-3xl font-extrabold theme-primary-text font-mono">
                       {step.number}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-navy mb-2">
+                  <h3 className="text-lg font-semibold theme-primary-text mb-2">
                     {step.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-espresso leading-relaxed">
+                  <p className="text-xs sm:text-sm theme-secondary-text leading-relaxed">
                     {step.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-line text-[11px] font-bold text-rust flex items-center gap-1">
+                <div className="mt-6 pt-4 border-t theme-border text-[11px] font-bold theme-danger-text flex items-center gap-1">
                   <span>Step {step.number} of 04</span>
                 </div>
               </div>

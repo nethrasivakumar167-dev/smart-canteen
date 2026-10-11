@@ -55,13 +55,13 @@ export const SmartFeaturesSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs font-extrabold uppercase tracking-[0.15em] text-rust bg-sand px-3 py-1 rounded-full border border-line">
+          <span className="text-xs font-extrabold uppercase tracking-[0.15em] theme-danger-text theme-secondary-surface px-3 py-1 rounded-full border theme-border">
             Enterprise Grade Architecture
           </span>
-          <h2 className="text-3xl sm:text-4xl font-semibold text-navy tracking-[0.15em] uppercase">
+          <h2 className="text-3xl sm:text-4xl font-semibold theme-primary-text tracking-[0.15em] uppercase">
             Built for Modern High-Traffic Campuses
           </h2>
-          <p className="text-sm sm:text-base text-espresso">
+          <p className="text-sm sm:text-base theme-secondary-text">
             A cohesive platform connecting students, faculty, kitchen chefs, inventory managers, and administrators.
           </p>
         </div>
@@ -73,28 +73,28 @@ export const SmartFeaturesSection: React.FC = () => {
             return (
               <div
                 key={feat.title}
-                className="bg-cream p-7 rounded-3xl border border-line shadow-sm hover:border-skyblue transition-all duration-300 flex flex-col justify-between group"
+                className="theme-surface p-7 rounded-3xl border theme-border shadow-sm hover:theme-accent-border transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-full bg-skyblue text-navy flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-full theme-sky-surface theme-primary-text flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-bold text-espresso uppercase tracking-wider bg-sand px-2.5 py-1 rounded-full">
+                    <span className="text-[11px] font-bold theme-secondary-text uppercase tracking-wider theme-secondary-surface px-2.5 py-1 rounded-full">
                       {feat.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-navy mb-2 group-hover:text-rust transition">
+                  <h3 className="text-lg font-semibold theme-primary-text mb-2 group-hover:theme-danger-text transition">
                     {feat.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-espresso leading-relaxed">
+                  <p className="text-xs sm:text-sm theme-secondary-text leading-relaxed">
                     {feat.description}
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-rust">
+                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold theme-danger-text">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Production Ready</span>
                 </div>

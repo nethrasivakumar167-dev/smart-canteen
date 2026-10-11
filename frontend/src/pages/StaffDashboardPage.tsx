@@ -211,20 +211,20 @@ export const StaffDashboardPage: React.FC = () => {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 theme-surface">
       
       {/* Staff Kitchen Control Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-navy p-6 text-cream shadow-xl sm:p-8">
+      <div className="relative overflow-hidden rounded-3xl theme-inverse-surface p-6 theme-nav-text shadow-xl sm:p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-butter px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
+            <div className="inline-flex items-center gap-2 rounded-full theme-gold-surface px-3 py-1 text-xs font-bold uppercase tracking-wider theme-primary-text">
               <PixelIcon name="bowl" size={14} />
               <span>Kitchen Operations Panel • Station 01</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Chef {user?.name || 'Staff Member'}
             </h1>
-            <p className="max-w-xl text-xs text-butter sm:text-sm">
+            <p className="max-w-xl text-xs theme-gold-text sm:text-sm">
               Monitor incoming campus meal orders, advance kitchen preparation stages, and manage live stock availability.
             </p>
           </div>
@@ -255,92 +255,92 @@ export const StaffDashboardPage: React.FC = () => {
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('PENDING'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'PENDING' && activeTab === 'queue'
-              ? 'bg-butter border-gold shadow-sm'
-              : 'bg-sand border border-line hover:border-gold'
+              ? 'theme-gold-surface theme-strong-border shadow-sm'
+              : 'theme-secondary-surface border theme-border hover:theme-gold-border'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider theme-primary-text">
               New / Pending
             </span>
-            <span className="w-2.5 h-2.5 rounded-full bg-gold animate-pulse" />
+            <span className="w-2.5 h-2.5 rounded-full theme-gold-surface animate-pulse" />
           </div>
-          <div className="text-3xl font-black text-slateblue mt-2">
+          <div className="text-3xl font-black theme-primary-text mt-2">
             {ordersData?.counts?.pending ?? 0}
           </div>
-          <div className="text-[11px] text-navy mt-1">Awaiting kitchen confirmation</div>
+          <div className="text-[11px] theme-primary-text mt-1">Awaiting kitchen confirmation</div>
         </button>
 
         <button
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('PREPARING'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'PREPARING' && activeTab === 'queue'
-              ? 'bg-skyblue border-skyblue shadow-sm'
-              : 'bg-sand border border-line hover:border-skyblue'
+              ? 'theme-sky-surface theme-accent-border shadow-sm'
+              : 'theme-secondary-surface border theme-border hover:theme-accent-border'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider theme-primary-text">
               Cooking / In Kitchen
             </span>
             <PixelIcon name="bowl" size={18} />
           </div>
-          <div className="text-3xl font-black text-slateblue mt-2">
+          <div className="text-3xl font-black theme-primary-text mt-2">
             {ordersData?.counts?.preparing ?? 0}
           </div>
-          <div className="text-[11px] text-navy mt-1">Currently being prepared</div>
+          <div className="text-[11px] theme-primary-text mt-1">Currently being prepared</div>
         </button>
 
         <button
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('READY'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'READY' && activeTab === 'queue'
-              ? 'bg-skyblue border-skyblue shadow-sm'
-              : 'bg-sand border border-line hover:border-skyblue'
+              ? 'theme-sky-surface theme-accent-border shadow-sm'
+              : 'theme-secondary-surface border theme-border hover:theme-accent-border'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider theme-primary-text">
               Ready for Pickup
             </span>
             <PixelIcon name="check" size={16} />
           </div>
-          <div className="text-3xl font-black text-slateblue mt-2">
+          <div className="text-3xl font-black theme-primary-text mt-2">
             {ordersData?.counts?.ready ?? 0}
           </div>
-          <div className="text-[11px] text-navy mt-1">At collection counter</div>
+          <div className="text-[11px] theme-primary-text mt-1">At collection counter</div>
         </button>
 
         <button
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('COMPLETED'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'COMPLETED' && activeTab === 'queue'
-              ? 'bg-sand/50 border-sand/50 shadow-sm'
-              : 'bg-sand border border-line hover:border-sand/50'
+              ? 'theme-secondary-surface theme-border shadow-sm'
+              : 'theme-secondary-surface border theme-border hover:theme-border'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider theme-primary-text">
               Completed
             </span>
             <PixelIcon name="check" size={16} />
           </div>
-          <div className="text-3xl font-black text-slateblue mt-2">
+          <div className="text-3xl font-black theme-primary-text mt-2">
             {ordersData?.counts?.completed ?? 0}
           </div>
-          <div className="text-[11px] text-navy mt-1">Handed over to diners</div>
+          <div className="text-[11px] theme-primary-text mt-1">Handed over to diners</div>
         </button>
       </div>
 
       {/* Main Tabs Navigation */}
-      <div className="flex items-center justify-between border-b border-line pb-4">
+      <div className="flex items-center justify-between border-b theme-border pb-4">
         <div className="flex items-center gap-2">
           <button
             onClick={() => setActiveTab('queue')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
               activeTab === 'queue'
-                ? 'bg-gold text-navy shadow-md'
-                : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+                ? 'theme-gold-surface theme-primary-text shadow-md'
+                : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
             }`}
           >
             Live Kitchen Order Queue ({ordersData?.all?.length || 0})
@@ -349,8 +349,8 @@ export const StaffDashboardPage: React.FC = () => {
             onClick={() => setActiveTab('availability')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
               activeTab === 'availability'
-                ? 'bg-gold text-navy shadow-md'
-                : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+                ? 'theme-gold-surface theme-primary-text shadow-md'
+                : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
             }`}
           >
             Menu Stock & Availability ({menuItems.length})
@@ -359,15 +359,15 @@ export const StaffDashboardPage: React.FC = () => {
 
         {activeTab === 'queue' && (
           <div className="flex items-center gap-2 text-xs">
-            <span className="px-label text-navy hidden sm:inline">Filter:</span>
+            <span className="px-label theme-primary-text hidden sm:inline">Filter:</span>
             {['ALL', 'PENDING', 'PREPARING', 'READY', 'COMPLETED'].map((st) => (
               <button
                 key={st}
                 onClick={() => setSelectedStatusFilter(st)}
                 className={`px-chip transition ${
                   selectedStatusFilter === st
-                    ? 'bg-navy text-cream'
-                    : 'hover:bg-skyblue'
+                    ? 'theme-inverse-surface theme-nav-text'
+                    : 'hover:theme-sky-surface'
                 }`}
               >
                 {st}
@@ -381,7 +381,7 @@ export const StaffDashboardPage: React.FC = () => {
       {activeTab === 'queue' && (
         <div className="px-stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedOrders.length === 0 ? (
-            <div className="col-span-full flex items-center justify-center gap-3 rounded-2xl bg-sand px-4 py-6 text-center text-sm text-navy">
+            <div className="col-span-full flex items-center justify-center gap-3 rounded-2xl theme-secondary-surface px-4 py-6 text-center text-sm theme-primary-text">
               <PixelIcon name="bowl" size={20} />
               <span>No orders match this filter.</span>
             </div>
@@ -403,25 +403,25 @@ export const StaffDashboardPage: React.FC = () => {
                   key={order.id}
                   className={`px-card h-full rounded-3xl border-2 p-6 transition-all flex flex-col ${
                     isPending
-                      ? 'border-gold'
+                      ? 'theme-gold-border'
                       : isPreparing
-                      ? 'border-skyblue'
+                      ? 'theme-accent-border'
                       : isReady
-                      ? 'border-navy'
-                      : 'border-line opacity-70'
+                      ? 'theme-strong-border'
+                      : 'theme-border'
                   }`}
                 >
                   <div className="space-y-4">
                     {/* Header */}
                     <div className="flex items-start justify-between">
                       <div>
-                        <span className="px-label text-2xl font-black text-slateblue">
+                        <span className="px-label text-2xl font-black theme-primary-text">
                           #{order.orderNumber}
                         </span>
-                        <div className="text-xs font-bold text-navy/80 mt-0.5">
+                        <div className="text-xs font-bold theme-primary-text mt-0.5">
                           {order.studentName}
                         </div>
-                        <div className="text-[11px] text-navy/70">{order.studentEmail}</div>
+                        <div className="text-[11px] theme-primary-text">{order.studentEmail}</div>
                       </div>
 
                     </div>
@@ -440,25 +440,25 @@ export const StaffDashboardPage: React.FC = () => {
                     </div>
 
                     {/* Pickup slot & elapsed time */}
-                    <div className="flex items-center justify-between text-xs py-2 px-3 rounded-xl bg-sand/30 font-medium">
-                      <span className="flex items-center gap-1.5 text-navy/75">
+                    <div className="flex items-center justify-between text-xs py-2 px-3 rounded-xl theme-secondary-surface font-medium">
+                      <span className="flex items-center gap-1.5 theme-primary-text">
                         <Clock className="w-3.5 h-3.5" />
                         Pickup: <strong>{order.pickupSlot || 'Not scheduled'}</strong>
                       </span>
-                      <span className="text-navy/70 text-[11px]">
+                      <span className="theme-primary-text text-[11px]">
                         {Math.max(0, Math.floor((Date.now() - new Date(order.createdAt).getTime()) / 60000))}m ago
                       </span>
                     </div>
 
                     {/* Order Items List */}
-                    <div className="space-y-2 pt-1 border-t border-line">
-                      <span className="px-label text-[11px] font-bold text-navy uppercase tracking-wider">
+                    <div className="space-y-2 pt-1 border-t theme-border">
+                      <span className="px-label text-[11px] font-bold theme-primary-text uppercase tracking-wider">
                         Kitchen Ticket
                       </span>
                       <ul className="space-y-2 text-xs font-semibold">
                         {order.items.map((item: any, idx: number) => (
-                          <li key={idx} className="flex flex-col bg-cream p-2.5 rounded-xl border border-line">
-                            <div className="flex justify-between text-slateblue font-bold">
+                          <li key={idx} className="flex flex-col theme-surface p-2.5 rounded-xl border theme-border">
+                            <div className="flex justify-between theme-primary-text font-bold">
                               <span className="flex flex-wrap items-center gap-2">
                                 {item.quantity}x {item.name}
                                 {item.isTodaysSpecial && (
@@ -469,12 +469,12 @@ export const StaffDashboardPage: React.FC = () => {
                               </span>
                             </div>
                             {item.notes && (
-                              <span className="text-[11px] text-rust font-medium italic mt-0.5">
+                              <span className="text-[11px] theme-danger-text font-medium italic mt-0.5">
                                 ↳ Note: {item.notes}
                               </span>
                             )}
                             {item.cookingTip && (
-                              <span className="px-card bg-butter mt-1 block rounded-lg p-2 text-[11px] font-medium text-navy">
+                              <span className="px-card theme-gold-surface mt-1 block rounded-lg p-2 text-[11px] font-medium theme-primary-text">
                                 Cooking tip: {item.cookingTip}
                               </span>
                             )}
@@ -483,7 +483,7 @@ export const StaffDashboardPage: React.FC = () => {
                       </ul>
                     </div>
                     {order.specialInstructions && (
-                      <div className="px-card rounded-xl bg-butter p-3 text-navy">
+                      <div className="px-card rounded-xl theme-gold-surface p-3 theme-primary-text">
                         <div className="text-[11px] font-bold uppercase tracking-wider">Cooking instruction</div>
                         <p className="mt-1 text-xs font-medium">{order.specialInstructions}</p>
                       </div>
@@ -491,13 +491,13 @@ export const StaffDashboardPage: React.FC = () => {
                   </div>
 
                   {/* Action Transition Buttons */}
-                  {isActive && <div className="mt-auto pt-4 border-t border-line">
+                  {isActive && <div className="mt-auto pt-4 border-t theme-border">
                     {isPending && (
                       <div className="flex gap-2">
                         <button
                           onClick={() => void handleUpdateStatus(order, 'PREPARING')}
                           disabled={actionLoadingId === order.id}
-                          className="px-btn flex-1 disabled:opacity-50"
+                          className="px-btn flex-1 disabled:opacity-100"
                         >
                           <PixelIcon name="bowl" size={16} />
                           Start cooking
@@ -505,7 +505,7 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'CANCELLED')}
                           disabled={actionLoadingId === order.id}
-                          className="rounded-xl border border-rust/40 px-3 py-3 text-rust font-bold text-xs disabled:opacity-50"
+                          className="rounded-xl border theme-danger-border px-3 py-3 theme-danger-text font-bold text-xs disabled:opacity-100"
                         >
                           Cancel
                         </button>
@@ -517,7 +517,7 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'READY_TO_PICK')}
                           disabled={actionLoadingId === order.id}
-                          className="px-btn px-btn--sky flex-1 disabled:opacity-50"
+                          className="px-btn px-btn--sky flex-1 disabled:opacity-100"
                         >
                           <PixelIcon name="check" size={16} />
                           Mark ready
@@ -525,7 +525,7 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'CANCELLED')}
                           disabled={actionLoadingId === order.id}
-                          className="rounded-xl border border-rust/40 px-3 py-3 text-rust font-bold text-xs disabled:opacity-50"
+                          className="rounded-xl border theme-danger-border px-3 py-3 theme-danger-text font-bold text-xs disabled:opacity-100"
                         >
                           Cancel
                         </button>
@@ -534,7 +534,7 @@ export const StaffDashboardPage: React.FC = () => {
 
                     {isReady && (
                       <div className="space-y-2">
-                        <label htmlFor={`delivery-id-${order.id}`} className="px-label block text-xs font-bold text-navy">
+                        <label htmlFor={`delivery-id-${order.id}`} className="px-label block text-xs font-bold theme-primary-text">
                           Order ID
                         </label>
                         <input
@@ -547,17 +547,17 @@ export const StaffDashboardPage: React.FC = () => {
                           disabled={actionLoadingId === order.id}
                           aria-invalid={Boolean(deliveryErrors[order.id])}
                           aria-describedby={deliveryErrors[order.id] ? `delivery-error-${order.id}` : undefined}
-                          className="w-full rounded-xl border border-line bg-cream px-3 py-2 text-sm text-navy focus:outline-none focus:ring-2 focus:ring-skyblue disabled:opacity-50"
+                          className="w-full rounded-xl border theme-border theme-surface px-3 py-2 text-sm theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] disabled:opacity-100"
                         />
                         {deliveryErrors[order.id] && (
-                          <p id={`delivery-error-${order.id}`} role="alert" className="text-xs font-semibold text-red-700">
+                          <p id={`delivery-error-${order.id}`} role="alert" className="text-xs font-semibold theme-danger-text">
                             {deliveryErrors[order.id]}
                           </p>
                         )}
                         <button
                           onClick={() => void handleUpdateStatus(order, 'DELIVERED', deliveryIds[order.id])}
                           disabled={actionLoadingId === order.id || !deliveryIds[order.id]?.trim()}
-                          className="px-btn w-full disabled:opacity-50"
+                          className="px-btn w-full disabled:opacity-100"
                         >
                           <PackageCheck className="w-4 h-4" />
                           Deliver
@@ -575,37 +575,37 @@ export const StaffDashboardPage: React.FC = () => {
 
       {/* Tab 2: Menu Stock & Availability Manager */}
       {activeTab === 'availability' && (
-        <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
+        <div className="theme-secondary-surface border theme-border rounded-3xl p-6 shadow-md space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b theme-border pb-4">
             <div>
-              <h2 className="text-lg font-bold text-slateblue">
+              <h2 className="text-lg font-bold theme-primary-text">
                 Live Menu Item Availability Control
               </h2>
-              <p className="text-xs text-espresso">
+              <p className="text-xs theme-secondary-text">
                 Instantly turn items ON or OFF in the student mobile ordering menu when kitchen stock runs out.
               </p>
             </div>
-            <span className="inline-flex items-center rounded-full bg-skyblue px-2 py-1 text-xs font-semibold text-navy">
+            <span className="inline-flex items-center rounded-full theme-sky-surface px-2 py-1 text-xs font-semibold theme-primary-text">
               {menuItems.filter((m) => m.availableNow).length} / {menuItems.length} items available now
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <label className="relative sm:col-span-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-espresso" />
-              <input value={menuSearch} onChange={(event) => setMenuSearch(event.target.value)} placeholder="Search menu items" className="w-full rounded-xl border border-line bg-cream py-2.5 pl-9 pr-3 text-xs text-slateblue focus:outline-none focus:ring-2 focus:ring-skyblue" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 theme-secondary-text" />
+              <input value={menuSearch} onChange={(event) => setMenuSearch(event.target.value)} placeholder="Search menu items" className="w-full rounded-xl border theme-border theme-surface py-2.5 pl-9 pr-3 text-xs theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]" />
             </label>
-            <select value={menuCategoryFilter} onChange={(event) => setMenuCategoryFilter(event.target.value)} aria-label="Filter by category" className="rounded-xl border border-line bg-cream px-3 py-2.5 text-xs text-slateblue">
+            <select value={menuCategoryFilter} onChange={(event) => setMenuCategoryFilter(event.target.value)} aria-label="Filter by category" className="rounded-xl border theme-border theme-surface px-3 py-2.5 text-xs theme-primary-text">
               <option value="">All categories</option>
               {staffCategories.map((category) => <option key={category} value={category}>{category}</option>)}
             </select>
-            <select value={menuCuisineFilter} onChange={(event) => setMenuCuisineFilter(event.target.value)} aria-label="Filter by cuisine" className="rounded-xl border border-line bg-cream px-3 py-2.5 text-xs text-slateblue">
+            <select value={menuCuisineFilter} onChange={(event) => setMenuCuisineFilter(event.target.value)} aria-label="Filter by cuisine" className="rounded-xl border theme-border theme-surface px-3 py-2.5 text-xs theme-primary-text">
               <option value="">All cuisines</option>
               {staffCuisines.map((cuisine: string) => <option key={cuisine} value={cuisine}>{cuisine.replace(/-/g, ' ')}</option>)}
             </select>
           </div>
 
-          <p className="text-[11px] text-espresso">Showing {filteredMenuItems.length} of {menuItems.length} items</p>
+          <p className="text-[11px] theme-secondary-text">Showing {filteredMenuItems.length} of {menuItems.length} items</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredMenuItems.map((item) => {
               const effectiveAvailable = item.availableNow ?? item.isAvailable;
@@ -617,29 +617,29 @@ export const StaffDashboardPage: React.FC = () => {
               return (
               <div
                 key={item.id}
-                className={`p-4 rounded-2xl bg-cream border border-line flex items-center justify-between gap-4 ${effectiveAvailable ? '' : 'opacity-70'}`}
+                className="p-4 rounded-2xl theme-surface border theme-border flex items-center justify-between gap-4"
               >
                 <div>
-                  <h4 className="text-xs font-bold text-slateblue">
+                  <h4 className="text-xs font-bold theme-primary-text">
                     {item.name}
                   </h4>
-                  <span className="text-[10px] font-semibold text-espresso uppercase tracking-wider">
+                  <span className="text-[10px] font-semibold theme-secondary-text uppercase tracking-wider">
                     {item.category}
                   </span>
                   <div className="mt-1">
                     <span
                       className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold ${
                         effectiveAvailable
-                          ? 'bg-skyblue text-navy'
+                          ? 'theme-sky-surface theme-primary-text'
                           : !item.isAvailable
-                            ? 'bg-red-500/10 text-red-700'
-                            : 'bg-amber-500/10 text-amber-700'
+                            ? 'theme-danger-soft theme-danger-text'
+                            : 'theme-gold-soft theme-primary-text'
                       }`}
                     >
                       {statusText}
                     </span>
                     {!effectiveAvailable && item.unavailableReason && item.isAvailable && (
-                      <div className="mt-1 text-[10px] text-espresso">{item.unavailableReason}</div>
+                      <div className="mt-1 text-[10px] theme-secondary-text">{item.unavailableReason}</div>
                     )}
                   </div>
                 </div>
@@ -664,8 +664,8 @@ export const StaffDashboardPage: React.FC = () => {
                     onClick={() => handleToggleTodaysSpecial(item.id, item.isTodaysSpecial)}
                     aria-pressed={item.isTodaysSpecial}
                     aria-label={`${item.isTodaysSpecial ? 'Remove' : 'Mark'} ${item.name} as today’s special`}
-                    className={`border-2 border-navy px-2 py-2 font-pixel text-[8px] uppercase leading-tight shadow-[2px_2px_0_#0B2A4A] transition-colors ${
-                      item.isTodaysSpecial ? 'bg-[#F2C94C] text-navy' : 'bg-cream text-navy hover:bg-butter'
+                    className={`border-2 theme-strong-border px-2 py-2 font-pixel text-[8px] uppercase leading-tight shadow-[2px_2px_0_var(--color-text-primary)] transition-colors ${
+                      item.isTodaysSpecial ? 'theme-gold-surface theme-primary-text' : 'theme-surface theme-primary-text hover:theme-gold-surface'
                     }`}
                   >
                     Today&apos;s Special
@@ -673,7 +673,7 @@ export const StaffDashboardPage: React.FC = () => {
                 </div>
               </div>
             );})}
-            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 flex items-center justify-center gap-3 rounded-2xl bg-cream border border-line p-4 text-center text-sm text-navy"><PixelIcon name="bowl" size={18} /><span>No menu items match these filters.</span></div>}
+            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 flex items-center justify-center gap-3 rounded-2xl theme-surface border theme-border p-4 text-center text-sm theme-primary-text"><PixelIcon name="bowl" size={18} /><span>No menu items match these filters.</span></div>}
           </div>
         </div>
       )}

@@ -11,17 +11,17 @@ export const ToastContainer: React.FC = () => {
     <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-md w-full pointer-events-none px-4">
       {toasts.map((toast: Toast) => {
         let icon = <CheckCircle2 className="toast-icon-success w-5 h-5 shrink-0" />;
-        let borderClass = 'border-skyblue';
+        let borderClass = 'theme-accent-border';
 
         if (toast.type === 'error') {
           icon = <AlertCircle className="toast-icon-danger w-5 h-5 shrink-0" />;
-          borderClass = 'border-red-500/30';
+          borderClass = 'theme-danger-border';
         } else if (toast.type === 'warning') {
           icon = <AlertTriangle className="toast-icon-warning w-5 h-5 shrink-0" />;
-          borderClass = 'border-amber-500/30';
+          borderClass = 'theme-gold-border';
         } else if (toast.type === 'info') {
           icon = <Info className="toast-icon-info w-5 h-5 shrink-0" />;
-          borderClass = 'border-blue-500/30';
+          borderClass = 'theme-accent-border';
         }
 
         return (

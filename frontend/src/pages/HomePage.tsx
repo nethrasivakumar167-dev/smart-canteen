@@ -56,7 +56,7 @@ export const HomePage: React.FC = () => {
   const categoryIcons = { Sunrise, Soup, Sandwich, Coffee, IceCream, Salad };
 
   return (
-    <div className="bg-beige">
+    <div className="theme-secondary-surface">
       {/* Hero Section */}
       <HeroSection />
 
@@ -65,19 +65,19 @@ export const HomePage: React.FC = () => {
         <LiveRushMeter />
 
         {/* Category Tabs Strip */}
-        <section className="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 py-10 bg-sand space-y-6">
+        <section className="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 py-10 theme-secondary-surface space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-semibold uppercase tracking-[0.15em] text-navy">
+              <h2 className="text-2xl sm:text-3xl font-semibold uppercase tracking-[0.15em] theme-primary-text">
                 Explore Categories
               </h2>
-              <p className="text-xs sm:text-sm text-espresso mt-1">
+              <p className="text-xs sm:text-sm theme-secondary-text mt-1">
                 Freshly prepared campus meals cooked with premium ingredients
               </p>
             </div>
             <Link
               to="/menu"
-              className="text-xs sm:text-sm font-bold text-navy hover:text-rust flex items-center gap-1 group"
+              className="text-xs sm:text-sm font-bold theme-primary-text hover:theme-danger-text flex items-center gap-1 group"
             >
               <span>See all categories</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -92,12 +92,12 @@ export const HomePage: React.FC = () => {
                   <Link
                     key={cat.id}
                     to={`/menu?category=${cat.slug || cat.id}`}
-                    className="flex flex-col items-center gap-2 px-4 py-3 bg-cream text-navy hover:bg-sand rounded-3xl border border-line transition-all duration-200 whitespace-nowrap group"
+                    className="flex flex-col items-center gap-2 px-4 py-3 theme-surface theme-primary-text hover:theme-secondary-surface rounded-3xl border theme-border transition-all duration-200 whitespace-nowrap group"
                   >
-                    <div className="w-11 h-11 rounded-xl bg-cream text-navy flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-11 h-11 rounded-xl theme-surface theme-primary-text flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="font-bold text-xs sm:text-sm text-navy group-hover:text-rust transition-colors">
+                    <span className="font-bold text-xs sm:text-sm theme-primary-text group-hover:theme-danger-text transition-colors">
                       {cat.name}
                     </span>
                   </Link>
@@ -111,20 +111,20 @@ export const HomePage: React.FC = () => {
         <section className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-bold mb-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full theme-gold-soft theme-primary-text text-xs font-bold mb-2">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Today's Campus Favorites</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-semibold uppercase tracking-[0.15em] text-navy">
+              <h2 className="text-2xl sm:text-3xl font-semibold uppercase tracking-[0.15em] theme-primary-text">
                 Most Preordered Items
               </h2>
-              <p className="text-xs sm:text-sm text-espresso mt-1">
+              <p className="text-xs sm:text-sm theme-secondary-text mt-1">
                 Highest rated dishes by students and professors today
               </p>
             </div>
             <Link
               to="/menu"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sand text-xs sm:text-sm font-bold text-navy hover:bg-dusty transition group"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full theme-secondary-surface text-xs sm:text-sm font-bold theme-primary-text hover:theme-sky-surface transition group"
             >
               <span>Explore Complete Menu ({menuItems.length})</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -146,30 +146,30 @@ export const HomePage: React.FC = () => {
 
         {/* Bottom CTA Banner */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <div className="bg-navy rounded-3xl p-8 sm:p-12 text-cream shadow-sm relative overflow-hidden border border-navy-light">
-            <div className="absolute -right-10 -bottom-10 w-80 h-80 bg-slate/70 rounded-full blur-3xl pointer-events-none" />
+          <div className="theme-inverse-surface rounded-3xl p-8 sm:p-12 theme-nav-text shadow-sm relative overflow-hidden border theme-border">
+            <div className="absolute -right-10 -bottom-10 w-80 h-80 theme-scrim rounded-full blur-3xl pointer-events-none" />
             
             <div className="relative z-10 max-w-2xl space-y-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream/20 text-cream text-xs font-bold border border-cream/30">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full theme-secondary-surface theme-primary-text text-xs font-bold border theme-border">
                 <Award className="w-3.5 h-3.5" />
                 Smart Preordering Live Now
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
                 Ready to skip the canteen queue and eat on time?
               </h2>
-              <p className="text-cream text-sm sm:text-base leading-relaxed">
+              <p className="theme-nav-text text-sm sm:text-base leading-relaxed">
                 Open your phone, choose your meal, and pick up your hot food the second you step out of class.
               </p>
               <div className="pt-3 flex flex-col sm:flex-row items-center gap-4">
                 <Link
                   to="/menu"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-cream hover:bg-sand text-navy font-bold text-sm shadow-sm transition text-center"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-full theme-surface hover:theme-secondary-surface theme-primary-text font-bold text-sm shadow-sm transition text-center"
                 >
                   Explore Today's Menu
                 </Link>
                 <Link
                   to="/register"
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-navy-light hover:bg-navy text-cream font-semibold text-sm transition text-center border border-dusty/30"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-full theme-inverse-surface hover:theme-inverse-surface theme-nav-text font-semibold text-sm transition text-center border theme-accent-border"
                 >
                   Create Student Account
                 </Link>

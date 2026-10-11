@@ -29,12 +29,12 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4">
         <div className="relative">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-amber-500 text-white flex items-center justify-center animate-pulse shadow-glow">
+          <div className="w-14 h-14 rounded-2xl theme-inverse-surface flex items-center justify-center animate-pulse shadow-glow">
             <UtensilsCrossed className="w-7 h-7" />
           </div>
-          <div className="w-14 h-14 rounded-2xl border-2 border-brand-500 border-t-transparent animate-spin absolute inset-0" />
+          <div className="w-14 h-14 rounded-2xl border-2 theme-accent-border border-t-transparent animate-spin absolute inset-0" />
         </div>
-        <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+        <p className="text-sm font-semibold theme-secondary-text">
           Verifying secure session...
         </p>
       </div>

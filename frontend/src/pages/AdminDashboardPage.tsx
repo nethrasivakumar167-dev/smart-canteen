@@ -165,20 +165,20 @@ export const AdminDashboardPage: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 theme-surface">
       
       {/* Admin Executive Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-navy p-6 text-cream shadow-xl sm:p-8">
+      <div className="relative overflow-hidden rounded-3xl theme-inverse-surface p-6 theme-nav-text shadow-xl sm:p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-butter px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
+            <div className="inline-flex items-center gap-2 rounded-full theme-gold-surface px-3 py-1 text-xs font-bold uppercase tracking-wider theme-primary-text">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Campus Dining Administration • Executive Level</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Administrator {user?.name || 'Officer'}
             </h1>
-            <p className="max-w-xl text-xs text-butter sm:text-sm">
+            <p className="max-w-xl text-xs theme-gold-text sm:text-sm">
               Canteen financial oversight, user credential provisioning, and real-time operational analytics.
             </p>
           </div>
@@ -208,7 +208,7 @@ export const AdminDashboardPage: React.FC = () => {
                   void loadAdminData(range);
                 }
               }}
-              className="px-select rounded-xl bg-butter px-3 py-2.5 text-xs font-bold text-navy"
+              className="px-select rounded-xl theme-gold-surface px-3 py-2.5 text-xs font-bold theme-primary-text"
               aria-label="Analytics date range"
             >
               <option value="today">Today</option>
@@ -218,7 +218,7 @@ export const AdminDashboardPage: React.FC = () => {
             </select>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-xl bg-black/30 hover:bg-black/50 text-cream transition flex items-center justify-center"
+              className="p-2.5 rounded-xl theme-backdrop hover:theme-backdrop theme-nav-text transition flex items-center justify-center"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -230,14 +230,14 @@ export const AdminDashboardPage: React.FC = () => {
       {/* 4 Financial & Operational KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div className="px-card rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-xl theme-gold-surface theme-primary-text flex items-center justify-center font-bold">
             <PixelIcon name="star" size={22} />
           </div>
           <div>
-            <div className="px-stat-value text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black theme-primary-text">
               ₹{(statsData?.financials?.revenue ?? 0).toLocaleString()}
             </div>
-            <div className="px-label text-xs text-navy font-medium">
+            <div className="px-label text-xs theme-primary-text font-medium">
               Revenue • {analyticsRange === 'today'
                 ? 'Today'
                 : analyticsRange === '7d'
@@ -250,50 +250,50 @@ export const AdminDashboardPage: React.FC = () => {
         </div>
 
         <div className="px-card rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-slateblue/10 text-slateblue flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-xl theme-secondary-surface theme-primary-text flex items-center justify-center font-bold">
             <PixelIcon name="cart" size={22} />
           </div>
           <div>
-            <div className="px-stat-value text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black theme-primary-text">
               {statsData?.operations?.totalOrders ?? 0}
             </div>
-            <div className="px-label text-xs text-navy font-medium">Orders Processed</div>
+            <div className="px-label text-xs theme-primary-text font-medium">Orders Processed</div>
           </div>
         </div>
 
         <div className="px-card rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-skyblue text-navy flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-xl theme-sky-surface theme-primary-text flex items-center justify-center font-bold">
             <PixelIcon name="heart" size={22} />
           </div>
           <div>
-            <div className="px-stat-value text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black theme-primary-text">
               {statsData?.userMetrics?.totalRegisteredUsers ?? usersList.length}
             </div>
-            <div className="px-label text-xs text-navy font-medium">Registered Accounts</div>
+            <div className="px-label text-xs theme-primary-text font-medium">Registered Accounts</div>
           </div>
         </div>
 
         <div className="px-card rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-xl theme-gold-surface theme-primary-text flex items-center justify-center font-bold">
             <PixelIcon name="clock" size={22} />
           </div>
           <div>
-            <div className="px-stat-value text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black theme-primary-text">
               {statsData?.operations?.averageFulfillmentMinutes ?? 0}m
             </div>
-            <div className="px-label text-xs text-navy font-medium">Avg Order Fulfillment</div>
+            <div className="px-label text-xs theme-primary-text font-medium">Avg Order Fulfillment</div>
           </div>
         </div>
       </div>
 
       {/* Tabs Bar */}
-      <div className="flex items-center gap-2 border-b border-line pb-4">
+      <div className="flex items-center gap-2 border-b theme-border pb-4">
         <button
           onClick={() => setActiveTab('overview')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'overview'
-              ? 'bg-slateblue text-cream shadow-md'
-              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+              ? 'theme-inverse-surface theme-nav-text shadow-md'
+              : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
           }`}
         >
           Overview & Demand Analytics
@@ -302,8 +302,8 @@ export const AdminDashboardPage: React.FC = () => {
           onClick={() => setActiveTab('users')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'users'
-              ? 'bg-slateblue text-cream shadow-md'
-              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+              ? 'theme-inverse-surface theme-nav-text shadow-md'
+              : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
           }`}
         >
           User Accounts Directory ({usersList.length})
@@ -312,8 +312,8 @@ export const AdminDashboardPage: React.FC = () => {
           onClick={() => setActiveTab('orders')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'orders'
-              ? 'bg-slateblue text-cream shadow-md'
-              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+              ? 'theme-inverse-surface theme-nav-text shadow-md'
+              : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
           }`}
         >
           Master Transaction Logs ({ordersList.length})
@@ -322,8 +322,8 @@ export const AdminDashboardPage: React.FC = () => {
           onClick={() => setActiveTab('feedback')}
           className={`px-4 py-2 rounded-xl text-xs font-extrabold transition ${
             activeTab === 'feedback'
-              ? 'bg-slateblue text-cream shadow-md'
-              : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+              ? 'theme-inverse-surface theme-nav-text shadow-md'
+              : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
           }`}
         >
           Student Feedback & AI Insights
@@ -336,16 +336,16 @@ export const AdminDashboardPage: React.FC = () => {
           
           {/* Hourly Demand Breakdown */}
           <div className="px-card lg:col-span-2 rounded-3xl p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-line pb-3">
+            <div className="flex items-center justify-between border-b theme-border pb-3">
               <div>
-                <h3 className="text-base font-bold text-slateblue">
+                <h3 className="text-base font-bold theme-primary-text">
                   Peak Dining Rush Demand (Hourly)
                 </h3>
-                <p className="text-xs text-navy">
+                <p className="text-xs theme-primary-text">
                   Orders placed from 8 AM to 4 PM across the selected date range.
                 </p>
               </div>
-              <span className="text-xs font-bold text-slateblue">
+              <span className="text-xs font-bold theme-primary-text">
                 Peak: {statsData?.operations?.peakRushHour ?? 'No orders'}
               </span>
             </div>
@@ -359,24 +359,24 @@ export const AdminDashboardPage: React.FC = () => {
 
                 return (
                   <div key={idx} className="flex flex-col items-center gap-2 h-full justify-end group">
-                    <span className="text-[10px] font-bold text-navy group-hover:text-slateblue transition">
+                    <span className="text-[10px] font-bold theme-primary-text group-hover:theme-primary-text transition">
                       {item.orders}
                     </span>
                     <div
                       className={`w-full rounded-t-lg transition-all ${
                         isPeak
-                          ? 'bg-gold'
-                          : 'bg-skyblue group-hover:bg-navy'
+                          ? 'theme-gold-surface'
+                          : 'theme-sky-surface group-hover:theme-inverse-surface'
                       }`}
                       style={{ height: `${heightPct}%` }}
                     />
-                    <span className="text-[10px] font-semibold text-navy">{item.hour}</span>
+                    <span className="text-[10px] font-semibold theme-primary-text">{item.hour}</span>
                   </div>
                 );
                 })}
               </div>
             ) : (
-              <div className="flex items-center justify-center gap-3 py-3 text-sm text-navy">
+              <div className="flex items-center justify-center gap-3 py-3 text-sm theme-primary-text">
                 <PixelIcon name="bowl" size={18} />
                 <span>No hourly orders for this period.</span>
               </div>
@@ -385,7 +385,7 @@ export const AdminDashboardPage: React.FC = () => {
 
           {/* Top Selling Items */}
           <div className="px-card rounded-3xl p-6 space-y-4">
-            <h3 className="text-base font-bold text-slateblue border-b border-line pb-3">
+            <h3 className="text-base font-bold theme-primary-text border-b theme-border pb-3">
               Top Selling Preorders
             </h3>
 
@@ -396,16 +396,16 @@ export const AdminDashboardPage: React.FC = () => {
                   className="px-card p-3 rounded-2xl flex items-center justify-between"
                 >
                   <div>
-                    <div className="text-xs font-bold text-slateblue">{item.name}</div>
-                    <div className="text-[11px] text-navy">{item.ordersCount} orders placed</div>
+                    <div className="text-xs font-bold theme-primary-text">{item.name}</div>
+                    <div className="text-[11px] theme-primary-text">{item.ordersCount} orders placed</div>
                   </div>
-                  <div className="text-xs font-extrabold text-slateblue">
+                  <div className="text-xs font-extrabold theme-primary-text">
                     ₹{item.revenue.toLocaleString()}
                   </div>
                 </div>
               ))}
               {!statsData?.topSellingItems?.length && (
-                <div className="flex items-center gap-2 py-2 text-xs text-navy"><PixelIcon name="bowl" size={16} /><span>No sales data for this period.</span></div>
+                <div className="flex items-center gap-2 py-2 text-xs theme-primary-text"><PixelIcon name="bowl" size={16} /><span>No sales data for this period.</span></div>
               )}
             </div>
           </div>
@@ -418,13 +418,13 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="px-card rounded-3xl p-6 space-y-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-espresso" />
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 theme-secondary-text" />
               <input
                 type="text"
                 placeholder="Search name, email, ID..."
                 value={userSearchTerm}
                 onChange={(e) => setUserSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 rounded-xl bg-cream border border-line text-xs focus:outline-none focus:ring-2 focus:ring-slateblue/50"
+                className="w-full pl-9 pr-4 py-2 rounded-xl theme-surface border theme-border text-xs focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]"
               />
             </div>
 
@@ -435,8 +435,8 @@ export const AdminDashboardPage: React.FC = () => {
                   onClick={() => setUserRoleFilter(r)}
                   className={`px-3 py-1.5 rounded-xl font-bold text-[11px] transition ${
                     userRoleFilter === r
-                      ? 'bg-slateblue text-cream'
-                      : 'bg-sand border border-line text-slateblue hover:bg-sand/50'
+                      ? 'theme-inverse-surface theme-nav-text'
+                      : 'theme-secondary-surface border theme-border theme-primary-text hover:theme-secondary-surface'
                   }`}
                 >
                   {r}
@@ -448,7 +448,7 @@ export const AdminDashboardPage: React.FC = () => {
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="px-label bg-navy text-cream uppercase font-bold text-[10px]">
+              <thead className="px-label theme-inverse-surface theme-nav-text uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">User</th>
                   <th className="pb-3 px-3">Role</th>
@@ -459,34 +459,34 @@ export const AdminDashboardPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-line font-medium">
                 {filteredUsers.map((u) => (
-                  <tr key={u.id} className="hover:bg-butter transition">
+                  <tr key={u.id} className="hover:theme-gold-surface transition">
                     <td className="py-3.5 px-3">
-                      <div className="font-bold text-slateblue">{u.name}</div>
-                      <div className="text-[11px] text-espresso">{u.email}</div>
+                      <div className="font-bold theme-primary-text">{u.name}</div>
+                      <div className="text-[11px] theme-secondary-text">{u.email}</div>
                     </td>
                     <td className="py-3.5 px-3">
                       <span
                         className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase ${
                           u.role === 'ADMIN'
-                            ? 'bg-skyblue text-navy'
+                            ? 'theme-sky-surface theme-primary-text'
                             : u.role === 'STAFF'
-                            ? 'bg-butter text-navy'
-                            : 'bg-slateblue/10 text-slateblue'
+                            ? 'theme-gold-surface theme-primary-text'
+                            : 'theme-secondary-surface theme-primary-text'
                         }`}
                       >
                         {u.role}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 font-mono text-espresso">
+                    <td className="py-3.5 px-3 font-mono theme-secondary-text">
                       {u.institutionId || '—'}
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-skyblue px-2 py-0.5 text-navy font-bold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-navy" />
+                      <span className="inline-flex items-center gap-1 rounded-full theme-sky-surface px-2 py-0.5 theme-primary-text font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full theme-inverse-surface" />
                         Active
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-espresso">
+                    <td className="py-3.5 px-3 theme-secondary-text">
                       {new Date(u.createdAt).toLocaleDateString()}
                     </td>
                   </tr>
@@ -494,7 +494,7 @@ export const AdminDashboardPage: React.FC = () => {
                 {!filteredUsers.length && (
                   <tr>
                     <td colSpan={5} className="py-4 px-3">
-                      <div className="flex items-center justify-center gap-2 text-navy"><PixelIcon name="bowl" size={16} /><span>No users match this search.</span></div>
+                      <div className="flex items-center justify-center gap-2 theme-primary-text"><PixelIcon name="bowl" size={16} /><span>No users match this search.</span></div>
                     </td>
                   </tr>
                 )}
@@ -507,13 +507,13 @@ export const AdminDashboardPage: React.FC = () => {
       {/* Tab 3: Master Orders Log */}
       {activeTab === 'orders' && (
         <div className="px-card rounded-3xl p-6 space-y-4">
-          <h3 className="text-base font-bold text-slateblue border-b border-line pb-3">
+          <h3 className="text-base font-bold theme-primary-text border-b theme-border pb-3">
             Campus Master Preorder Ledger
           </h3>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="px-label bg-navy text-cream uppercase font-bold text-[10px]">
+              <thead className="px-label theme-inverse-surface theme-nav-text uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">Order #</th>
                   <th className="pb-3 px-3">Customer</th>
@@ -526,37 +526,37 @@ export const AdminDashboardPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-line font-medium">
                 {ordersList.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-butter transition">
-                    <td className="py-3.5 px-3 font-bold text-slateblue">
+                  <tr key={ord.id} className="hover:theme-gold-surface transition">
+                    <td className="py-3.5 px-3 font-bold theme-primary-text">
                       #{ord.orderNumber}
                     </td>
                     <td className="py-3.5 px-3">
-                      <div className="font-bold text-slateblue">{ord.customerName}</div>
-                      <div className="text-[10px] text-espresso">{ord.customerRole}</div>
+                      <div className="font-bold theme-primary-text">{ord.customerName}</div>
+                      <div className="text-[10px] theme-secondary-text">{ord.customerRole}</div>
                     </td>
-                    <td className="py-3.5 px-3 max-w-xs truncate text-espresso">
+                    <td className="py-3.5 px-3 max-w-xs truncate theme-secondary-text">
                       {ord.items}
                     </td>
-                    <td className="py-3.5 px-3 font-bold text-slateblue">
+                    <td className="py-3.5 px-3 font-bold theme-primary-text">
                       ₹{ord.total}
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="px-2 py-0.5 rounded bg-sand/50 font-mono text-[10px] font-bold">
+                      <span className="px-2 py-0.5 rounded theme-secondary-surface font-mono text-[10px] font-bold">
                         {ord.paymentMethod}
                       </span>
                     </td>
                     <td className="py-3.5 px-3">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full font-extrabold text-[10px] bg-skyblue text-navy">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full font-extrabold text-[10px] theme-sky-surface theme-primary-text">
                         {ord.orderStatus}
                       </span>
                     </td>
-                    <td className="py-3.5 px-3 text-espresso">{ord.time}</td>
+                    <td className="py-3.5 px-3 theme-secondary-text">{ord.time}</td>
                   </tr>
                 ))}
                 {!ordersList.length && (
                   <tr>
                     <td colSpan={7} className="py-4 px-3">
-                      <div className="flex items-center justify-center gap-2 text-navy"><PixelIcon name="bowl" size={16} /><span>No orders are available for this period.</span></div>
+                      <div className="flex items-center justify-center gap-2 theme-primary-text"><PixelIcon name="bowl" size={16} /><span>No orders are available for this period.</span></div>
                     </td>
                   </tr>
                 )}
@@ -570,26 +570,26 @@ export const AdminDashboardPage: React.FC = () => {
       {activeTab === 'feedback' && (
         <div className="space-y-6">
           {feedbackData?.totalFeedbacks > 0 && (
-          <div className="px-card bg-butter rounded-3xl p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-line pb-4">
+          <div className="px-card theme-gold-surface rounded-3xl p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b theme-border pb-4">
               <div>
-                <h3 className="text-base font-bold text-slateblue flex items-center gap-2">
+                <h3 className="text-base font-bold theme-primary-text flex items-center gap-2">
                   <PixelIcon name="star" size={18} />
                   <span>Feedback Summary</span>
                   {feedbackSummary?.source && (
-                    <span className="px-label rounded-full bg-butter px-2 py-1 text-[10px] font-extrabold uppercase text-navy">
+                    <span className="px-label rounded-full theme-gold-surface px-2 py-1 text-[10px] font-extrabold uppercase theme-primary-text">
                       {feedbackSummary.source === 'ai' ? 'AI' : 'Rule-based'}
                     </span>
                   )}
                 </h3>
-                <p className="text-xs text-espresso">
+                <p className="text-xs theme-secondary-text">
                   Aggregate themes, recurring complaints, and practical recommendations.
                 </p>
               </div>
               <button
                 onClick={handleRefreshFeedbackSummary}
                 disabled={generatingAi}
-                className="px-btn px-btn--sky disabled:opacity-50"
+                className="px-btn px-btn--sky disabled:opacity-100"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${generatingAi ? 'animate-spin' : ''}`} />
                 <span>{generatingAi ? 'Refreshing...' : 'Refresh'}</span>
@@ -603,7 +603,7 @@ export const AdminDashboardPage: React.FC = () => {
                   ['Complaints', feedbackSummary.complaints],
                   ['Recommendations', feedbackSummary.recommendations],
                 ].map(([title, entries]: any) => (
-                  <div key={title} className="px-card p-4 rounded-2xl text-xs text-slateblue">
+                  <div key={title} className="px-card p-4 rounded-2xl text-xs theme-primary-text">
                     <h4 className="px-label mb-2 font-extrabold">{title}</h4>
                     <ul className="list-disc space-y-1 pl-4 leading-relaxed">
                       {entries.map((entry: string, index: number) => <li key={`${title}-${index}`}>{entry}</li>)}
@@ -615,12 +615,12 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
           )}
 
-          <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
-            <div className="flex items-center justify-between border-b border-line pb-3">
-              <h3 className="text-base font-bold text-slateblue">
+          <div className="theme-secondary-surface border theme-border rounded-3xl p-6 shadow-md space-y-4">
+            <div className="flex items-center justify-between border-b theme-border pb-3">
+              <h3 className="text-base font-bold theme-primary-text">
                 Student Order Ratings & Reviews
               </h3>
-              <span className="text-xs font-bold text-slateblue">
+              <span className="text-xs font-bold theme-primary-text">
                 {feedbackData?.totalFeedbacks > 0
                   ? `Avg Rating: ⭐ ${feedbackData.averageRating} / 5.0 (${feedbackData.totalFeedbacks} reviews)`
                   : 'No ratings yet'}
@@ -630,22 +630,22 @@ export const AdminDashboardPage: React.FC = () => {
             <div className="space-y-3">
               {feedbackData?.list && feedbackData.list.length > 0 ? (
                 feedbackData.list.map((fb: any) => (
-                  <div key={fb.id} className="p-4 rounded-2xl bg-cream border border-line flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                  <div key={fb.id} className="p-4 rounded-2xl theme-surface border theme-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                     <div>
-                      <div className="flex items-center gap-2 font-bold text-slateblue">
+                      <div className="flex items-center gap-2 font-bold theme-primary-text">
                         <span>{fb.studentName}</span>
-                        <span className="text-navy font-extrabold">⭐ {fb.rating}/5</span>
-                        <span className="text-[10px] text-espresso font-normal">Order #{fb.orderNumber}</span>
+                        <span className="theme-primary-text font-extrabold">⭐ {fb.rating}/5</span>
+                        <span className="text-[10px] theme-secondary-text font-normal">Order #{fb.orderNumber}</span>
                       </div>
-                      <p className="text-espresso mt-1">{fb.comment || 'No text review provided.'}</p>
+                      <p className="theme-secondary-text mt-1">{fb.comment || 'No text review provided.'}</p>
                     </div>
-                    <div className="text-[10px] text-espresso font-mono whitespace-nowrap">
+                    <div className="text-[10px] theme-secondary-text font-mono whitespace-nowrap">
                       {new Date(fb.createdAt).toLocaleDateString()}
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="flex items-center justify-center gap-2 py-3 text-xs text-navy">
+                <div className="flex items-center justify-center gap-2 py-3 text-xs theme-primary-text">
                   <PixelIcon name="bowl" size={16} />
                   <span>No student feedback submissions recorded yet.</span>
                 </div>
@@ -657,16 +657,16 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Provisioning Modal */}
       {showProvisionModal && (
-        <div className="fixed inset-0 z-50 bg-slateblue/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 theme-backdrop backdrop-blur-sm flex items-center justify-center p-4">
           <div className="px-card rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-line pb-3">
-              <h3 className="text-lg font-black text-slateblue flex items-center gap-2">
-                <UserPlus className="w-5 h-5 text-slateblue" />
+            <div className="flex items-center justify-between border-b theme-border pb-3">
+              <h3 className="text-lg font-black theme-primary-text flex items-center gap-2">
+                <UserPlus className="w-5 h-5 theme-primary-text" />
                 <span>Provision User Account</span>
               </h3>
               <button
                 onClick={() => setShowProvisionModal(false)}
-                className="text-espresso hover:text-slateblue text-sm font-bold"
+                className="theme-secondary-text hover:theme-primary-text text-sm font-bold"
               >
                 ✕
               </button>
@@ -674,36 +674,36 @@ export const AdminDashboardPage: React.FC = () => {
 
             <form onSubmit={handleProvisionUser} className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="px-label font-bold text-slateblue">Full Name *</label>
+                <label className="px-label font-bold theme-primary-text">Full Name *</label>
                 <input
                   type="text"
                   required
                   value={provisionName}
                   onChange={(e) => setProvisionName(e.target.value)}
                   placeholder="e.g. Ramesh Kumar"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl theme-surface border theme-border focus:ring-2 focus:ring-[var(--color-focus)] outline-none"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="px-label font-bold text-slateblue">Email Address *</label>
+                <label className="px-label font-bold theme-primary-text">Email Address *</label>
                 <input
                   type="email"
                   required
                   value={provisionEmail}
                   onChange={(e) => setProvisionEmail(e.target.value)}
                   placeholder="ramesh@canteen.edu"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl theme-surface border theme-border focus:ring-2 focus:ring-[var(--color-focus)] outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="px-label font-bold text-slateblue">Assigned Role *</label>
+                  <label className="px-label font-bold theme-primary-text">Assigned Role *</label>
                   <select
                     value={provisionRole}
                     onChange={(e) => setProvisionRole(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none font-bold"
+                    className="w-full px-3.5 py-2.5 rounded-xl theme-surface border theme-border focus:ring-2 focus:ring-[var(--color-focus)] outline-none font-bold"
                   >
                     <option value="STAFF">STAFF (Kitchen)</option>
                     <option value="ADMIN">ADMIN (Manager)</option>
@@ -712,25 +712,25 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="px-label font-bold text-slateblue">Staff / ID Code</label>
+                  <label className="px-label font-bold theme-primary-text">Staff / ID Code</label>
                   <input
                     type="text"
                     value={provisionId}
                     onChange={(e) => setProvisionId(e.target.value)}
                     placeholder="e.g. STF-KIT-02"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl theme-surface border theme-border focus:ring-2 focus:ring-[var(--color-focus)] outline-none"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="px-label font-bold text-slateblue">Initial Password *</label>
+                <label className="px-label font-bold theme-primary-text">Initial Password *</label>
                 <input
                   type="password"
                   required
                   value={provisionPassword}
                   onChange={(e) => setProvisionPassword(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-cream border border-line focus:ring-2 focus:ring-slateblue/50 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl theme-surface border theme-border focus:ring-2 focus:ring-[var(--color-focus)] outline-none"
                 />
               </div>
 
@@ -738,14 +738,14 @@ export const AdminDashboardPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowProvisionModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-espresso font-bold hover:bg-sand/50"
+                  className="px-4 py-2.5 rounded-xl theme-secondary-text font-bold hover:theme-secondary-surface"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isProvisioning}
-                  className="px-btn disabled:opacity-50"
+                  className="px-btn disabled:opacity-100"
                 >
                   {isProvisioning ? 'Creating...' : 'Create Account'}
                 </button>

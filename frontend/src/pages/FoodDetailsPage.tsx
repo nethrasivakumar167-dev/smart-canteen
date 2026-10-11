@@ -66,8 +66,8 @@ export const FoodDetailsPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4">
-        <div className="w-10 h-10 border-4 border-navy border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-sm font-semibold text-espresso">Loading dish details...</p>
+        <div className="w-10 h-10 border-4 theme-strong-border border-t-transparent rounded-full animate-spin mx-auto" />
+        <p className="text-sm font-semibold theme-secondary-text">Loading dish details...</p>
       </div>
     );
   }
@@ -75,8 +75,8 @@ export const FoodDetailsPage: React.FC = () => {
   if (!item) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-navy">Dish Not Found</h2>
-        <p className="text-espresso">The requested canteen item does not exist or has been discontinued.</p>
+        <h2 className="text-2xl font-bold theme-primary-text">Dish Not Found</h2>
+        <p className="theme-secondary-text">The requested canteen item does not exist or has been discontinued.</p>
         <Link
           to="/menu"
           className="px-btn px-btn--sky"
@@ -148,12 +148,12 @@ export const FoodDetailsPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
       
       {/* Breadcrumbs & Back */}
-      <div className="flex items-center gap-2 text-xs font-semibold text-espresso">
-        <Link to="/" className="hover:text-navy transition">Home</Link>
+      <div className="flex items-center gap-2 text-xs font-semibold theme-secondary-text">
+        <Link to="/" className="hover:theme-primary-text transition">Home</Link>
         <span>/</span>
-        <Link to="/menu" className="hover:text-navy transition">Menu</Link>
+        <Link to="/menu" className="hover:theme-primary-text transition">Menu</Link>
         <span>/</span>
-        <span className="text-navy truncate">{item.name}</span>
+        <span className="theme-primary-text truncate">{item.name}</span>
       </div>
 
       {/* Main Details Section */}
@@ -161,18 +161,18 @@ export const FoodDetailsPage: React.FC = () => {
         
         {/* Left Column: Image Showcase */}
         {showImage && <div className="lg:col-span-6 space-y-4">
-          <div className="relative rounded-3xl overflow-hidden bg-cream border border-line shadow-sm aspect-square sm:aspect-4/3 max-h-[480px] w-full">
+          <div className="relative rounded-3xl overflow-hidden theme-surface border theme-border shadow-sm aspect-square sm:aspect-4/3 max-h-[480px] w-full">
             <FoodImage
               imageUrl={item.imageUrl}
               alt={item.name}
               className="w-full h-full object-cover"
               onError={() => setShowImage(false)}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 theme-photo-gradient-light pointer-events-none" />
 
             {/* Badges Overlay */}
             <div className="absolute top-4 left-4 flex items-center gap-2">
-              <div className="bg-cream/95 backdrop-blur-md p-1.5 rounded-lg shadow-sm">
+              <div className="theme-surface backdrop-blur-md p-1.5 rounded-lg shadow-sm">
                 {item.isVegetarian ? (
                   <span className="veg-badge">
                     <span className="veg-badge-dot" />
@@ -183,7 +183,7 @@ export const FoodDetailsPage: React.FC = () => {
                   </span>
                 )}
               </div>
-              <span className="bg-navy text-cream text-xs font-bold px-3 py-1 rounded-full">
+              <span className="theme-inverse-surface theme-nav-text text-xs font-bold px-3 py-1 rounded-full">
                 {item.categoryName}
               </span>
             </div>
@@ -195,35 +195,35 @@ export const FoodDetailsPage: React.FC = () => {
         <div className={`${showImage ? 'lg:col-span-6' : 'lg:col-span-12'} px-card space-y-6 rounded-2xl p-5 sm:p-7`}>
           
           <div>
-            <h1 className="font-display text-2xl font-semibold tracking-tight text-navy sm:text-3xl">
+            <h1 className="font-display text-2xl font-semibold tracking-tight theme-primary-text sm:text-3xl">
               {item.name}
             </h1>
 
             <div className="mt-3 flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-rust font-mono">
+              <span className="text-3xl font-extrabold theme-danger-text font-mono">
                 ₹{unitPrice}
               </span>
               {customizationExtraPerUnit > 0 && (
-                <span className="text-xs text-espresso">
+                <span className="text-xs theme-secondary-text">
                   (Base ₹{item.price} + ₹{customizationExtraPerUnit} add-ons)
                 </span>
               )}
             </div>
 
-            <p className="mt-4 text-sm text-espresso leading-relaxed">
+            <p className="mt-4 text-sm theme-secondary-text leading-relaxed">
               {item.description}
             </p>
             {!!item.allergens?.length && (
               <div className="mt-4">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-navy">Allergens</h2>
-                <p className="mt-1 text-sm text-espresso">{item.allergens.map((allergen) => allergen.replace(/[-_]/g, ' ')).join(', ')}</p>
+                <h2 className="text-xs font-bold uppercase tracking-wider theme-primary-text">Allergens</h2>
+                <p className="mt-1 text-sm theme-secondary-text">{item.allergens.map((allergen) => allergen.replace(/[-_]/g, ' ')).join(', ')}</p>
               </div>
             )}
             {!!item.allergenNote && (
-              <p className="mt-2 text-sm text-espresso">Check: {item.allergenNote}</p>
+              <p className="mt-2 text-sm theme-secondary-text">Check: {item.allergenNote}</p>
             )}
             {(item.allergens?.length || item.allergenNote) && (
-              <p className="mt-2 text-xs text-espresso/75">
+              <p className="mt-2 text-xs theme-secondary-text">
                 Allergen information is indicative. Please confirm with canteen staff before ordering.
               </p>
             )}
@@ -232,8 +232,8 @@ export const FoodDetailsPage: React.FC = () => {
           {/* Customization Options (if any) */}
           {item.customizationGroups && item.customizationGroups.length > 0 && (
             <div className="space-y-4 pt-2">
-              <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-navy flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-navy" />
+              <h3 className="text-sm font-bold uppercase tracking-[0.15em] theme-primary-text flex items-center gap-2">
+                <Sparkles className="w-4 h-4 theme-primary-text" />
                 Customise Your Order
               </h3>
 
@@ -247,10 +247,10 @@ export const FoodDetailsPage: React.FC = () => {
                     className="px-card space-y-2.5 rounded-2xl p-4"
                   >
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-navy">
+                      <span className="font-bold theme-primary-text">
                         {group.title}
                       </span>
-                      <span className="text-espresso">
+                      <span className="theme-secondary-text">
                         {isSingle ? '(Select 1)' : '(Optional Multi-select)'}
                       </span>
                     </div>
@@ -267,12 +267,12 @@ export const FoodDetailsPage: React.FC = () => {
                             }
                             className={`flex items-center justify-between p-2.5 rounded-xl border text-xs font-semibold transition text-left ${
                               isSelected
-                                ? 'bg-navy text-cream border-navy'
-                                : 'bg-cream border-line text-navy hover:bg-skysoft'
+                                ? 'theme-inverse-surface theme-nav-text theme-strong-border'
+                                : 'theme-surface theme-border theme-primary-text hover:theme-sky-surface'
                             }`}
                           >
                             <span>{opt.name}</span>
-                            <span className={`font-mono ${isSelected ? 'text-cream' : 'text-rust'}`}>
+                            <span className={`font-mono ${isSelected ? 'theme-nav-text' : 'theme-danger-text'}`}>
                               {opt.price > 0 ? `+₹${opt.price}` : 'Free'}
                             </span>
                           </button>
@@ -286,16 +286,16 @@ export const FoodDetailsPage: React.FC = () => {
           )}
 
           {/* Stepper & Preorder Button - sticky bottom bar on mobile */}
-          <div className="pt-4 border-t border-line flex flex-col sm:flex-row items-center gap-4 sticky bottom-0 bg-cream pb-4 md:pb-0 z-10">
+          <div className="pt-4 border-t theme-border flex flex-col sm:flex-row items-center gap-4 sticky bottom-0 theme-surface pb-4 md:pb-0 z-10">
             {/* Quantity Stepper */}
-            <div className="flex items-center bg-sand border border-line rounded-full p-1.5 w-full sm:w-auto justify-between">
+            <div className="flex items-center theme-secondary-surface border theme-border rounded-full p-1.5 w-full sm:w-auto justify-between">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 className="stepper-btn w-9 h-9"
               >
                 <Minus className="w-4 h-4" />
               </button>
-              <span className="w-12 text-center font-extrabold text-base font-mono text-navy">
+              <span className="w-12 text-center font-extrabold text-base font-mono theme-primary-text">
                 {quantity}
               </span>
               <button
@@ -311,7 +311,7 @@ export const FoodDetailsPage: React.FC = () => {
               aria-pressed={favorited}
               aria-label={favorited ? 'Remove from favourites' : 'Add to favourites'}
               className={`px-btn px-btn--cream h-12 w-12 min-h-0 shrink-0 rounded-full p-2 transition-colors ${
-                favorited ? 'heart-pop' : 'hover:bg-skysoft'
+                favorited ? 'heart-pop' : 'hover:theme-sky-surface'
               }`}
             >
               <PixelIcon name="heart" size={20} heartState={favorited ? 'filled' : 'outline'} />
@@ -321,7 +321,7 @@ export const FoodDetailsPage: React.FC = () => {
             <button
               onClick={handleAddToCart}
               disabled={unavailable}
-              className="px-btn w-full flex-1 disabled:cursor-not-allowed disabled:opacity-50"
+              className="px-btn w-full flex-1 disabled:cursor-not-allowed disabled:opacity-100"
             >
               <PixelIcon name="cart" size={20} />
               <span>{unavailable ? item.unavailableReason || 'Unavailable now' : `Add to Preorder • ₹${totalPrice}`}</span>
@@ -333,12 +333,12 @@ export const FoodDetailsPage: React.FC = () => {
 
       {/* Related Dishes */}
       {relatedItems.length > 0 && (
-        <section className="pt-8 border-t border-line space-y-6">
+        <section className="pt-8 border-t theme-border space-y-6">
           <div>
-            <h3 className="font-display text-xl font-semibold text-navy">
+            <h3 className="font-display text-xl font-semibold theme-primary-text">
               Frequently Preordered Together
             </h3>
-            <p className="text-xs text-espresso mt-0.5">
+            <p className="text-xs theme-secondary-text mt-0.5">
               More popular items from {item.categoryName}
             </p>
           </div>

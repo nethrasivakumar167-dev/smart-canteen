@@ -56,13 +56,13 @@ export const StudentLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-beige">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 theme-secondary-surface">
       <div className="max-w-md w-full space-y-6">
         
         {/* Back to portals */}
         <Link
           to="/portals"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso hover:text-navy transition"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold theme-secondary-text hover:theme-primary-text transition"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Switch Portal</span>
@@ -77,21 +77,21 @@ export const StudentLoginPage: React.FC = () => {
             className="mx-auto object-contain"
             alt="CampusBite"
           />
-          <div className="inline-block px-3 py-0.5 rounded-full bg-navy/10 text-navy text-xs font-extrabold uppercase tracking-wider">
+          <div className="inline-block px-3 py-0.5 rounded-full theme-secondary-surface theme-primary-text text-xs font-extrabold uppercase tracking-wider">
             Student & Diner Portal
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-navy tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black theme-primary-text tracking-tight">
             Student Sign In
           </h1>
-          <p className="text-xs sm:text-sm text-espresso">
+          <p className="text-xs sm:text-sm theme-secondary-text">
             Preorder meals, skip the canteen queue & track orders live
           </p>
         </div>
 
         {/* Demo Credentials Quick Fill Banner */}
-        <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-800 flex items-center justify-between">
+        <div className="p-3.5 rounded-2xl theme-gold-soft border theme-border text-xs theme-primary-text flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+            <Sparkles className="w-4 h-4 theme-warning-text shrink-0" />
             <span>Demo: <strong>student@demo.com</strong> / <strong>password123</strong></span>
           </div>
           <button
@@ -105,8 +105,8 @@ export const StudentLoginPage: React.FC = () => {
 
         {/* Error Alert */}
         {(localError || error) && (
-          <div className="px-card flex items-center gap-2.5 rounded-2xl bg-butter p-3.5 text-xs text-navy animate-in fade-in">
-            <AlertCircle className="w-4 h-4 shrink-0 text-navy" />
+          <div className="px-card flex items-center gap-2.5 rounded-2xl theme-gold-surface p-3.5 text-xs theme-primary-text animate-in fade-in">
+            <AlertCircle className="w-4 h-4 shrink-0 theme-primary-text" />
             <span>{localError || error}</span>
           </div>
         )}
@@ -114,45 +114,45 @@ export const StudentLoginPage: React.FC = () => {
         {/* Form */}
         <form onSubmit={handleLogin} className="px-card space-y-4 rounded-2xl p-6 sm:p-8">
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-navy font-pixel">
+            <label className="block text-xs font-bold theme-primary-text font-pixel">
               Student Email or Roll ID
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
+              <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 theme-secondary-text" />
               <input
                 type="text"
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="student@demo.com or CS-2024-8841"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl theme-surface border theme-border text-xs sm:text-sm theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-navy font-pixel">
+              <label className="block text-xs font-bold theme-primary-text font-pixel">
                 Password
               </label>
-              <span className="text-[11px] text-navy cursor-pointer hover:underline">
+              <span className="text-[11px] theme-primary-text cursor-pointer hover:underline">
                 Forgot password?
               </span>
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
+              <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 theme-secondary-text" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-navy/50"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl theme-surface border theme-border text-xs sm:text-sm theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-espresso hover:text-navy"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 theme-secondary-text hover:theme-primary-text"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -162,11 +162,11 @@ export const StudentLoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-btn mt-2 w-full disabled:cursor-not-allowed disabled:opacity-50"
+            className="px-btn mt-2 w-full disabled:cursor-not-allowed disabled:opacity-100"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-cream border-t-transparent rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 theme-border border-t-transparent rounded-full animate-spin" />
                 Signing In...
               </span>
             ) : (
@@ -177,15 +177,15 @@ export const StudentLoginPage: React.FC = () => {
 
         {/* Footer Link to Register */}
         <div className="text-center space-y-2">
-          <p className="text-xs text-espresso">
+          <p className="text-xs theme-secondary-text">
             Don't have a student account yet?{' '}
-            <Link to="/register" className="font-bold text-navy hover:underline">
+            <Link to="/register" className="font-bold theme-primary-text hover:underline">
               Create Student Account
             </Link>
           </p>
-          <div className="text-[11px] text-espresso">
+          <div className="text-[11px] theme-secondary-text">
             Are you Canteen Staff?{' '}
-            <Link to="/staff/login" className="font-semibold text-navy hover:underline">
+            <Link to="/staff/login" className="font-semibold theme-primary-text hover:underline">
               Staff Portal →
             </Link>
           </div>

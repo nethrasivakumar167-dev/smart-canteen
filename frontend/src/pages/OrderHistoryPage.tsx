@@ -91,33 +91,33 @@ export const OrderHistoryPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6 bg-beige min-h-[60vh]">
-      <div className="border-b border-line pb-4">
-        <h1 className="font-display text-2xl font-bold text-navy sm:text-3xl">Order History</h1>
-        <p className="mt-1 text-sm text-espresso">Your campus orders and feedback.</p>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6 theme-secondary-surface min-h-[60vh]">
+      <div className="border-b theme-border pb-4">
+        <h1 className="font-display text-2xl font-bold theme-primary-text sm:text-3xl">Order History</h1>
+        <p className="mt-1 text-sm theme-secondary-text">Your campus orders and feedback.</p>
       </div>
       {loading ? (
-        <div className="py-12 text-center text-sm font-semibold text-espresso">Loading orders...</div>
+        <div className="py-12 text-center text-sm font-semibold theme-secondary-text">Loading orders...</div>
       ) : errors.page ? (
-        <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{errors.page}</div>
+        <div className="rounded-2xl border theme-danger-border theme-danger-soft p-4 text-sm theme-danger-text">{errors.page}</div>
       ) : orders.length === 0 ? (
-        <div className="px-card rounded-2xl p-10 text-center text-sm font-semibold text-espresso">No orders yet.</div>
+        <div className="px-card rounded-2xl p-10 text-center text-sm font-semibold theme-secondary-text">No orders yet.</div>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
             <article key={order.id} className="px-card space-y-4 rounded-2xl p-5 sm:p-6">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 border-b border-line pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 border-b theme-border pb-4">
                 <div>
-                  <h2 className="font-display text-base font-bold text-slateblue">Order #{order.orderNumber}</h2>
-                  <p className="mt-1 text-xs text-espresso">{new Date(order.createdAt).toLocaleString()}</p>
+                  <h2 className="font-display text-base font-bold theme-primary-text">Order #{order.orderNumber}</h2>
+                  <p className="mt-1 text-xs theme-secondary-text">{new Date(order.createdAt).toLocaleString()}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 text-[11px] font-bold">
                   <span className="px-chip">{order.orderStatus.replace(/_/g, ' ')}</span>
-                  <span className="px-chip bg-cream">{order.paymentMethod}</span>
+                  <span className="px-chip theme-surface">{order.paymentMethod}</span>
                 </div>
               </div>
                 {order.pickupSlot && (
-                  <div className="rounded-xl bg-cream px-3 py-2 text-xs text-espresso">
+                  <div className="rounded-xl theme-surface px-3 py-2 text-xs theme-secondary-text">
                     Pickup slot: <strong>{order.pickupSlot}</strong>
                     {order.estimatedMinutes !== null && order.estimatedMinutes !== undefined && (
                       <span className="ml-2">({order.estimatedMinutes} min remaining)</span>
@@ -125,14 +125,14 @@ export const OrderHistoryPage: React.FC = () => {
                   </div>
                 )}
               {order.specialInstructions && (
-                <div className="px-card rounded-xl bg-butter p-3 text-navy">
+                <div className="px-card rounded-xl theme-gold-surface p-3 theme-primary-text">
                   <div className="text-[11px] font-bold uppercase tracking-wider">Cooking instruction</div>
                   <p className="mt-1 text-xs font-medium">{order.specialInstructions}</p>
                 </div>
               )}
               <div className="space-y-2">
                 {order.items.map((item) => (
-                  <div key={item.id} className="flex justify-between gap-3 text-sm text-slateblue">
+                  <div key={item.id} className="flex justify-between gap-3 text-sm theme-primary-text">
                     <span className="flex flex-wrap items-center gap-2">
                       {item.quantity} × {item.name}
                       {item.isTodaysSpecial && (
@@ -145,45 +145,45 @@ export const OrderHistoryPage: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex justify-between border-t border-line pt-3 text-sm font-extrabold text-slateblue">
+              <div className="flex justify-between border-t theme-border pt-3 text-sm font-extrabold theme-primary-text">
                 <span>Total</span><span>₹{order.totalAmount}</span>
               </div>
 
               {order.orderStatus === 'DELIVERED' && (
                 order.feedback ? (
-                  <div className="rounded-2xl border border-line bg-cream p-4 space-y-2">
-                    <div className="flex items-center gap-2 text-sm font-bold text-slateblue">
-                      <Star className="h-4 w-4 fill-amber-500 text-amber-500" />
+                  <div className="rounded-2xl border theme-border theme-surface p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm font-bold theme-primary-text">
+                      <Star className="h-4 w-4 fill-current theme-warning-text" />
                       {order.feedback.rating}/5
                     </div>
-                    {order.feedback.comment && <p className="text-sm text-espresso">{order.feedback.comment}</p>}
+                    {order.feedback.comment && <p className="text-sm theme-secondary-text">{order.feedback.comment}</p>}
                     {order.feedback.items.some((entry) => entry.tags.length > 0) && (
                       <div className="space-y-2">
                         {order.feedback.items.filter((entry) => entry.tags.length > 0).map((entry) => (
                           <div key={entry.menuItemId} className="flex flex-wrap gap-1.5">
-                            {entry.tags.map((tag) => <span key={tag} className="px-chip bg-sand">{tagLabel(tag)}</span>)}
+                            {entry.tags.map((tag) => <span key={tag} className="px-chip theme-secondary-surface">{tagLabel(tag)}</span>)}
                           </div>
                         ))}
                       </div>
                     )}
                   </div>
                 ) : feedbackOrderId === order.id ? (
-                  <div className="rounded-2xl border border-line bg-cream p-4 space-y-4">
+                  <div className="rounded-2xl border theme-border theme-surface p-4 space-y-4">
                     <div>
-                      <label className="block text-xs font-bold text-slateblue" htmlFor={`rating-${order.id}`}>Rating</label>
-                      <select id={`rating-${order.id}`} value={ratings[order.id] || 5} onChange={(event) => setRatings((current) => ({ ...current, [order.id]: Number(event.target.value) }))} className="mt-1 rounded-xl border border-line bg-sand px-3 py-2 text-sm text-slateblue">
+                      <label className="block text-xs font-bold theme-primary-text" htmlFor={`rating-${order.id}`}>Rating</label>
+                      <select id={`rating-${order.id}`} value={ratings[order.id] || 5} onChange={(event) => setRatings((current) => ({ ...current, [order.id]: Number(event.target.value) }))} className="mt-1 rounded-xl border theme-border theme-secondary-surface px-3 py-2 text-sm theme-primary-text">
                         {[1, 2, 3, 4, 5].map((rating) => <option key={rating} value={rating}>{rating} / 5</option>)}
                       </select>
                     </div>
-                    <label className="block text-xs font-bold text-slateblue">
+                    <label className="block text-xs font-bold theme-primary-text">
                       Comment (optional)
-                      <textarea value={comments[order.id] || ''} onChange={(event) => setComments((current) => ({ ...current, [order.id]: event.target.value }))} rows={3} className="mt-1 w-full rounded-xl border border-line bg-sand p-3 text-sm font-normal text-slateblue focus:outline-none focus:ring-2 focus:ring-skyblue" />
+                      <textarea value={comments[order.id] || ''} onChange={(event) => setComments((current) => ({ ...current, [order.id]: event.target.value }))} rows={3} className="mt-1 w-full rounded-xl border theme-border theme-secondary-surface p-3 text-sm font-normal theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]" />
                     </label>
                     <div className="space-y-3">
-                      <p className="text-xs font-bold text-slateblue">Tell us about each item</p>
+                      <p className="text-xs font-bold theme-primary-text">Tell us about each item</p>
                       {order.items.map((item) => (
                         <div key={item.menuItemId} className="space-y-2">
-                          <p className="text-xs font-semibold text-espresso">{item.name}</p>
+                          <p className="text-xs font-semibold theme-secondary-text">{item.name}</p>
                           <div className="flex flex-wrap gap-2">
                             {FEEDBACK_TAGS.map((tag) => {
                               const checked = itemTags[order.id]?.[item.menuItemId]?.includes(tag) || false;
@@ -193,10 +193,10 @@ export const OrderHistoryPage: React.FC = () => {
                                   type="button"
                                   aria-pressed={checked}
                                   onClick={() => toggleTag(order.id, item.menuItemId, tag)}
-                                  className={`px-chip border-2 border-navy transition-[transform,background-color,box-shadow] hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-skyblue focus-visible:ring-offset-2 ${
+                                  className={`px-chip border-2 theme-strong-border transition-[transform,background-color,box-shadow] hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 ${
                                     checked
-                                      ? 'bg-[#F2C94C] shadow-[3px_3px_0_#0B2A4A] hover:bg-[#F2C94C]'
-                                      : 'bg-cream hover:bg-sand'
+                                      ? 'theme-gold-surface shadow-[3px_3px_0_var(--color-text-primary)] hover:theme-gold-surface'
+                                      : 'theme-surface hover:theme-secondary-surface'
                                   }`}
                                 >
                                   {checked && <PixelIcon name="check" size={12} />}
@@ -208,9 +208,9 @@ export const OrderHistoryPage: React.FC = () => {
                         </div>
                       ))}
                     </div>
-                    {errors[order.id] && <p role="alert" className="text-xs font-semibold text-red-700">{errors[order.id]}</p>}
+                    {errors[order.id] && <p role="alert" className="text-xs font-semibold theme-danger-text">{errors[order.id]}</p>}
                     <div className="flex gap-2">
-                      <button type="button" disabled={submittingOrderId === order.id} onClick={() => submitFeedback(order)} className="px-btn disabled:cursor-not-allowed disabled:opacity-50"><Send className="h-3.5 w-3.5" />{submittingOrderId === order.id ? 'Submitting...' : 'Submit feedback'}</button>
+                      <button type="button" disabled={submittingOrderId === order.id} onClick={() => submitFeedback(order)} className="px-btn disabled:cursor-not-allowed disabled:opacity-100"><Send className="h-3.5 w-3.5" />{submittingOrderId === order.id ? 'Submitting...' : 'Submit feedback'}</button>
                       <button type="button" onClick={() => setFeedbackOrderId(null)} className="px-btn px-btn--cream">Cancel</button>
                     </div>
                   </div>

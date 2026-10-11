@@ -28,14 +28,14 @@ const portals = [
 ] as const;
 
 export const PortalSelectionPage: React.FC = () => (
-  <main className="min-h-[85vh] bg-beige px-4 py-12 sm:px-6 lg:px-8">
+  <main className="min-h-[85vh] theme-secondary-surface px-4 py-12 sm:px-6 lg:px-8">
     <div className="mx-auto flex max-w-6xl flex-col items-center justify-center">
       <header className="mb-10 max-w-2xl space-y-3 text-center">
         <span className="px-chip">CampusBite access</span>
-        <h1 className="font-display text-4xl font-extrabold text-navy sm:text-5xl">
+        <h1 className="font-display text-4xl font-extrabold theme-primary-text sm:text-5xl">
           Welcome to the canteen
         </h1>
-        <p className="text-sm text-espresso sm:text-base">
+        <p className="text-sm theme-secondary-text sm:text-base">
           Choose your portal to continue to Smart Canteen.
         </p>
       </header>
@@ -47,12 +47,12 @@ export const PortalSelectionPage: React.FC = () => (
             className="px-card flex flex-col items-start gap-5 rounded-2xl p-6 sm:p-8"
             style={{ animationDelay: `${index * 70}ms` }}
           >
-            <div className="flex h-14 w-14 items-center justify-center bg-butter text-navy">
+            <div className="flex h-14 w-14 items-center justify-center theme-gold-surface theme-primary-text">
               <PixelIcon name={portal.icon} size={28} />
             </div>
             <div className="space-y-2">
-              <h2 className="font-display text-2xl font-bold text-navy">{portal.title}</h2>
-              <p className="text-sm leading-relaxed text-espresso">{portal.description}</p>
+              <h2 className="font-display text-2xl font-bold theme-primary-text">{portal.title}</h2>
+              <p className="text-sm leading-relaxed theme-secondary-text">{portal.description}</p>
             </div>
             <Link to={portal.path} className="px-btn mt-auto w-full">
               {portal.action}
@@ -61,7 +61,7 @@ export const PortalSelectionPage: React.FC = () => (
         ))}
       </div>
 
-      <p className="mt-8 text-center text-sm text-navy">
+      <p className="mt-8 text-center text-sm theme-primary-text">
         New student?{' '}
         <Link to="/register" className="font-bold underline underline-offset-4">
           Register

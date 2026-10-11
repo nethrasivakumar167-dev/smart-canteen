@@ -56,13 +56,13 @@ export const StaffLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-beige">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 theme-secondary-surface">
       <div className="max-w-md w-full space-y-6">
         
         {/* Back Link */}
         <Link
           to="/portals"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso hover:text-navy transition"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold theme-secondary-text hover:theme-primary-text transition"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Switch Portal</span>
@@ -77,21 +77,21 @@ export const StaffLoginPage: React.FC = () => {
             className="mx-auto object-contain"
             alt="CampusBite"
           />
-          <div className="inline-block px-3 py-0.5 rounded-full bg-skyblue text-navy text-xs font-extrabold uppercase tracking-wider">
+          <div className="inline-block px-3 py-0.5 rounded-full theme-sky-surface theme-primary-text text-xs font-extrabold uppercase tracking-wider">
             Kitchen & Staff Portal
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-navy tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black theme-primary-text tracking-tight">
             Staff Sign In
           </h1>
-          <p className="text-xs sm:text-sm text-espresso">
+          <p className="text-xs sm:text-sm theme-secondary-text">
             Canteen kitchen control, live orders & food availability panel
           </p>
         </div>
 
         {!import.meta.env.PROD && (
-          <div className="p-3.5 rounded-2xl bg-butter border border-gold text-xs text-navy flex items-center justify-between">
+          <div className="p-3.5 rounded-2xl theme-gold-surface border theme-gold-border text-xs theme-primary-text flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-navy shrink-0" />
+              <Sparkles className="w-4 h-4 theme-primary-text shrink-0" />
               <span>Staff Demo: <strong>staff@demo.com</strong> / <strong>password123</strong></span>
             </div>
             <button type="button" onClick={handleQuickFill} className="px-btn px-btn--sky min-h-0 px-3 py-1 text-[10px]">
@@ -102,8 +102,8 @@ export const StaffLoginPage: React.FC = () => {
 
         {/* Error Alert */}
         {(localError || error) && (
-          <div className="px-card flex items-center gap-2.5 rounded-2xl bg-butter p-3.5 text-xs text-navy animate-in fade-in">
-            <AlertCircle className="w-4 h-4 shrink-0 text-navy" />
+          <div className="px-card flex items-center gap-2.5 rounded-2xl theme-gold-surface p-3.5 text-xs theme-primary-text animate-in fade-in">
+            <AlertCircle className="w-4 h-4 shrink-0 theme-primary-text" />
             <span>{localError || error}</span>
           </div>
         )}
@@ -111,40 +111,40 @@ export const StaffLoginPage: React.FC = () => {
         {/* Form Card */}
         <form onSubmit={handleLogin} className="px-card space-y-4 rounded-2xl p-6 sm:p-8">
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-navy font-pixel">
+            <label className="block text-xs font-bold theme-primary-text font-pixel">
               Staff ID or Canteen Email
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
+              <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 theme-secondary-text" />
               <input
                 type="text"
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="staff@demo.com or STF-KIT-01"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-skyblue"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl theme-surface border theme-border text-xs sm:text-sm theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-navy font-pixel">
+            <label className="block text-xs font-bold theme-primary-text font-pixel">
               Password
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-espresso" />
+              <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 theme-secondary-text" />
               <input
                 type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-cream border border-line text-xs sm:text-sm text-navy focus:outline-none focus:ring-2 focus:ring-skyblue"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl theme-surface border theme-border text-xs sm:text-sm theme-primary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-espresso hover:text-navy"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 theme-secondary-text hover:theme-primary-text"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -154,11 +154,11 @@ export const StaffLoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-btn mt-2 w-full disabled:cursor-not-allowed disabled:opacity-50"
+            className="px-btn mt-2 w-full disabled:cursor-not-allowed disabled:opacity-100"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
-                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-[var(--color-nav-text)] border-t-transparent rounded-full animate-spin" />
                 Signing In...
               </span>
             ) : (
@@ -168,8 +168,8 @@ export const StaffLoginPage: React.FC = () => {
         </form>
 
         {/* Security Note */}
-        <div className="p-3 rounded-xl bg-sand/30 border border-line text-center text-xs text-espresso flex items-center justify-center gap-1.5">
-          <ShieldAlert className="w-3.5 h-3.5 text-navy shrink-0" />
+        <div className="p-3 rounded-xl theme-secondary-surface border theme-border text-center text-xs theme-secondary-text flex items-center justify-center gap-1.5">
+          <ShieldAlert className="w-3.5 h-3.5 theme-primary-text shrink-0" />
           <span>Staff credentials are provisioned by Canteen Administration.</span>
         </div>
 

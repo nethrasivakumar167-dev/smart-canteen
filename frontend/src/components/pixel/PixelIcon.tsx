@@ -41,7 +41,7 @@ export const PixelIcon: React.FC<PixelIconProps> = ({ name, size = 16, heartStat
         )}
         {heartState === 'filled' && HEART_INTERIOR.flatMap((row, y) =>
           [...row].flatMap((pixel, x) =>
-            pixel === '1' ? <rect key={`fill-${x}-${y}`} x={x} y={y} width="1" height="1" fill="#D62F3A" /> : []
+            pixel === '1' ? <rect key={`fill-${x}-${y}`} x={x} y={y} width="1" height="1" fill="var(--color-accent-danger-text)" /> : []
           )
         )}
         {heartState === 'filled' && HEART_HIGHLIGHT.flatMap((row, y) =>

@@ -155,16 +155,16 @@ export const CartPage: React.FC = () => {
 
   if (items.length === 0 && !orderSuccessModal) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center space-y-6 bg-beige">
-        <div className="w-24 h-24 rounded-full bg-navy/10 text-navy flex items-center justify-center mx-auto shadow-inner">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center space-y-6 theme-secondary-surface">
+        <div className="w-24 h-24 rounded-full theme-secondary-surface theme-primary-text flex items-center justify-center mx-auto shadow-inner">
           <PixelIcon name="cart" size={48} />
         </div>
 
         <div className="space-y-2 max-w-md mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-navy">
+          <h2 className="text-2xl sm:text-3xl font-extrabold theme-primary-text">
             Your Preorder Cart is Empty
           </h2>
-          <p className="text-sm text-espresso">
+          <p className="text-sm theme-secondary-text">
             Looks like you haven't added any dishes yet. Explore today's freshly prepared campus menu.
           </p>
         </div>
@@ -178,15 +178,15 @@ export const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 bg-beige">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 theme-secondary-surface">
 
       {/* Title Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b theme-border">
         <div>
-          <h1 className="font-display text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
+          <h1 className="font-display text-2xl font-extrabold tracking-tight theme-primary-text sm:text-3xl">
             Review Your Preorder
           </h1>
-          <p className="text-xs sm:text-sm text-espresso mt-0.5">
+          <p className="text-xs sm:text-sm theme-secondary-text mt-0.5">
             {items.reduce((acc, i) => acc + i.quantity, 0)} items in your cart
           </p>
         </div>
@@ -225,18 +225,18 @@ export const CartPage: React.FC = () => {
                           <span className="non-veg-badge-dot" />
                         </span>
                       )}
-                      <h4 className="font-bold text-sm text-navy truncate">
+                      <h4 className="font-bold text-sm theme-primary-text truncate">
                         {item.name}
                       </h4>
                     </div>
 
                     {item.customizations && item.customizations.length > 0 && (
-                      <p className="text-[11px] text-espresso truncate mt-0.5">
+                      <p className="text-[11px] theme-secondary-text truncate mt-0.5">
                         {item.customizations.map((c) => c.selectedOption).join(', ')}
                       </p>
                     )}
 
-                    <div className="text-xs font-bold text-navy font-mono mt-1">
+                    <div className="text-xs font-bold theme-primary-text font-mono mt-1">
                       ₹{item.price} each
                     </div>
                   </div>
@@ -244,33 +244,33 @@ export const CartPage: React.FC = () => {
 
                 {/* Stepper & Total */}
                 <div className="flex items-center gap-3 shrink-0">
-                  <div className="flex items-center bg-cream border border-line rounded-xl p-1">
+                  <div className="flex items-center theme-surface border theme-border rounded-xl p-1">
                     <button
                       onClick={() => updateQuantity(item.id, -1)}
-                      className="w-6 h-6 rounded-lg bg-cream text-navy flex items-center justify-center text-xs shadow-sm hover:bg-navy hover:text-cream transition"
+                      className="w-6 h-6 rounded-lg theme-surface theme-primary-text flex items-center justify-center text-xs shadow-sm hover:theme-inverse-surface hover:theme-nav-text transition"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="w-7 text-center text-xs font-bold font-mono text-navy">
+                    <span className="w-7 text-center text-xs font-bold font-mono theme-primary-text">
                       {item.quantity}
                     </span>
                     <button
                       onClick={() => updateQuantity(item.id, 1)}
-                      className="w-6 h-6 rounded-lg bg-cream text-navy flex items-center justify-center text-xs shadow-sm hover:bg-navy hover:text-cream transition"
+                      className="w-6 h-6 rounded-lg theme-surface theme-primary-text flex items-center justify-center text-xs shadow-sm hover:theme-inverse-surface hover:theme-nav-text transition"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
                   <div className="text-right min-w-[60px]">
-                    <span className="text-sm font-extrabold text-navy font-mono">
+                    <span className="text-sm font-extrabold theme-primary-text font-mono">
                       ₹{item.itemTotal}
                     </span>
                   </div>
 
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="text-espresso hover:text-red-500 p-1 transition"
+                    className="theme-secondary-text hover:theme-danger-text p-1 transition"
                     aria-label="Remove item"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -282,24 +282,24 @@ export const CartPage: React.FC = () => {
 
           {/* Pickup Slot Selection */}
           <div className="px-card space-y-3 rounded-2xl p-5">
-            <h3 className="text-sm font-bold text-navy flex items-center gap-2">
+            <h3 className="text-sm font-bold theme-primary-text flex items-center gap-2">
               <PixelIcon name="clock" size={16} />
               Pickup Schedule
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {slotsLoading ? (
-                <p className="col-span-full text-xs text-espresso">Loading available pickup slots...</p>
+                <p className="col-span-full text-xs theme-secondary-text">Loading available pickup slots...</p>
               ) : pickupSlots.map((slot) => (
                 <button
                   key={slot.start}
                   type="button"
                   disabled={!slot.bookable}
                   onClick={() => setSelectedSlotStart(slot.start)}
-                  className={`p-3 rounded-xl border text-left transition flex items-center justify-between disabled:cursor-not-allowed disabled:opacity-50 ${
+                  className={`p-3 rounded-xl border text-left transition flex items-center justify-between disabled:cursor-not-allowed disabled:opacity-100 ${
                     selectedSlotStart === slot.start
-                      ? 'bg-navy text-cream border-navy shadow-sm'
-                      : 'bg-cream border-line text-navy'
+                      ? 'theme-inverse-surface theme-nav-text theme-strong-border shadow-sm'
+                      : 'theme-surface theme-border theme-primary-text'
                   }`}
                 >
                   <span className="text-xs font-bold">{slot.label}</span>
@@ -318,18 +318,18 @@ export const CartPage: React.FC = () => {
               ))}
             </div>
             {unavailableAtSlot.length > 0 && (
-              <p role="alert" className="text-xs font-semibold text-amber-700">
+              <p role="alert" className="text-xs font-semibold theme-primary-text">
                 Not available at this slot: {unavailableAtSlot.map((item) => item.name).join(', ')}.
               </p>
             )}
             {!selectedSlotStart && !slotsLoading && (
-              <p role="alert" className="text-xs font-semibold text-red-700">No pickup slot is currently bookable. Please try again later.</p>
+              <p role="alert" className="text-xs font-semibold theme-danger-text">No pickup slot is currently bookable. Please try again later.</p>
             )}
           </div>
 
           {/* Cooking Notes / Special Instructions */}
-          <div className="p-5 bg-sand border border-line rounded-2xl shadow-sm space-y-2">
-            <label className="text-xs font-bold text-espresso block">
+          <div className="p-5 theme-secondary-surface border theme-border rounded-2xl shadow-sm space-y-2">
+            <label className="text-xs font-bold theme-secondary-text block">
               Kitchen Instructions / Notes (Optional)
             </label>
             <input
@@ -338,7 +338,7 @@ export const CartPage: React.FC = () => {
               maxLength={500}
               onChange={(e) => setSpecialInstructions(e.target.value)}
               placeholder="e.g. Less spicy, pack chutney separately, extra hot coffee..."
-              className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-line text-xs sm:text-sm text-navy placeholder:text-espresso/50 focus:outline-none focus:ring-2 focus:ring-skyblue/50"
+              className="w-full px-3.5 py-2.5 rounded-xl theme-raised border theme-border text-xs sm:text-sm theme-primary-text placeholder:theme-secondary-text focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)]"
             />
           </div>
 
@@ -349,8 +349,8 @@ export const CartPage: React.FC = () => {
 
           {/* Payment Method Selector */}
           <div className="px-card space-y-3 rounded-2xl p-5">
-            <h3 className="text-sm font-bold text-navy flex items-center gap-2">
-              <CreditCard className="w-4 h-4 text-navy" />
+            <h3 className="text-sm font-bold theme-primary-text flex items-center gap-2">
+              <CreditCard className="w-4 h-4 theme-primary-text" />
               Payment Mode
             </h3>
 
@@ -360,8 +360,8 @@ export const CartPage: React.FC = () => {
                 onClick={() => setPaymentMethod('DEMO')}
                 className={`p-2.5 rounded-xl border text-left transition flex items-center justify-between ${
                   paymentMethod === 'DEMO'
-                    ? 'bg-navy text-cream border-navy font-bold'
-                    : 'bg-white border-line text-navy'
+                    ? 'theme-inverse-surface theme-nav-text theme-strong-border font-bold'
+                    : 'theme-raised theme-border theme-primary-text'
                 }`}
               >
                 <span>⚡ Demo Instant Pay</span>
@@ -373,8 +373,8 @@ export const CartPage: React.FC = () => {
                 onClick={() => setPaymentMethod('UPI')}
                 className={`p-2.5 rounded-xl border text-left transition flex items-center justify-between ${
                   paymentMethod === 'UPI'
-                    ? 'bg-navy text-cream border-navy font-bold'
-                    : 'bg-white border-line text-navy'
+                    ? 'theme-inverse-surface theme-nav-text theme-strong-border font-bold'
+                    : 'theme-raised theme-border theme-primary-text'
                 }`}
               >
                 <span>📱 UPI / QR</span>
@@ -386,8 +386,8 @@ export const CartPage: React.FC = () => {
                 onClick={() => setPaymentMethod('CARD')}
                 className={`p-2.5 rounded-xl border text-left transition flex items-center justify-between ${
                   paymentMethod === 'CARD'
-                    ? 'bg-navy text-cream border-navy font-bold'
-                    : 'bg-white border-line text-navy'
+                    ? 'theme-inverse-surface theme-nav-text theme-strong-border font-bold'
+                    : 'theme-raised theme-border theme-primary-text'
                 }`}
               >
                 <span>💳 Campus / Debit Card</span>
@@ -399,8 +399,8 @@ export const CartPage: React.FC = () => {
                 onClick={() => setPaymentMethod('CASH')}
                 className={`p-2.5 rounded-xl border text-left transition flex items-center justify-between ${
                   paymentMethod === 'CASH'
-                    ? 'bg-navy text-cream border-navy font-bold'
-                    : 'bg-white border-line text-navy'
+                    ? 'theme-inverse-surface theme-nav-text theme-strong-border font-bold'
+                    : 'theme-raised theme-border theme-primary-text'
                 }`}
               >
                 <span>💵 Pay at Pickup Counter</span>
@@ -411,23 +411,23 @@ export const CartPage: React.FC = () => {
 
           {/* Bill Summary Box */}
           <div className="px-card space-y-4 rounded-2xl p-5">
-            <h3 className="text-sm font-bold text-navy">
+            <h3 className="text-sm font-bold theme-primary-text">
               Bill Breakdown
             </h3>
 
-            <div className="space-y-2 text-xs text-espresso">
+            <div className="space-y-2 text-xs theme-secondary-text">
               <div className="flex justify-between">
                 <span>Items Subtotal</span>
-                <span className="font-mono font-bold text-navy">₹{subtotal.toFixed(2)}</span>
+                <span className="font-mono font-bold theme-primary-text">₹{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Campus Preorder Fee</span>
-                <span className="font-mono font-bold text-navy">FREE (₹0.00)</span>
+                <span className="font-mono font-bold theme-primary-text">FREE (₹0.00)</span>
               </div>
 
-              <div className="pt-3 border-t border-line flex justify-between items-baseline text-base font-extrabold text-navy">
+              <div className="pt-3 border-t theme-border flex justify-between items-baseline text-base font-extrabold theme-primary-text">
                 <span>To Pay</span>
-                <span className="text-xl font-mono text-navy">
+                <span className="text-xl font-mono theme-primary-text">
                   ₹{grandTotal.toFixed(2)}
                 </span>
               </div>
@@ -437,20 +437,20 @@ export const CartPage: React.FC = () => {
             <button
               onClick={handleSimulateCheckout}
               disabled={isPlacingOrder}
-              className="px-btn w-full disabled:cursor-not-allowed disabled:opacity-50"
+              className="px-btn w-full disabled:cursor-not-allowed disabled:opacity-100"
             >
               {isPlacingOrder ? (
                 <span>Dispatching Order to Kitchen...</span>
               ) : (
                 <>
-                  <Zap className="w-5 h-5 fill-cream" />
+                  <Zap className="w-5 h-5 fill-current" />
                   <span>Confirm Preorder • ₹{grandTotal.toFixed(2)}</span>
                 </>
               )}
             </button>
 
-            <div className="flex items-center justify-center gap-1.5 text-[11px] text-espresso text-center">
-              <ShieldCheck className="w-3.5 h-3.5 text-navy" />
+            <div className="flex items-center justify-center gap-1.5 text-[11px] theme-secondary-text text-center">
+              <ShieldCheck className="w-3.5 h-3.5 theme-primary-text" />
               <span>Safe 256-bit encrypted checkout</span>
             </div>
           </div>
@@ -460,31 +460,31 @@ export const CartPage: React.FC = () => {
 
       {/* Real Order Success Modal */}
       {orderSuccessModal && (
-        <div className="fixed inset-0 z-50 bg-navy/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
+        <div className="fixed inset-0 z-50 theme-scrim backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
           <div className="px-card max-w-md w-full space-y-5 rounded-2xl p-6 text-center animate-in zoom-in-95 sm:p-8">
 
-            <div className="w-16 h-16 rounded-full bg-skyblue text-navy flex items-center justify-center mx-auto">
+            <div className="w-16 h-16 rounded-full theme-sky-surface theme-primary-text flex items-center justify-center mx-auto">
               <PixelIcon name="check" size={40} />
             </div>
 
             <div className="space-y-1">
-              <span className="text-[11px] font-extrabold text-navy uppercase tracking-wider">
+              <span className="text-[11px] font-extrabold theme-primary-text uppercase tracking-wider">
                 Order Received in Kitchen
               </span>
-              <h3 className="text-2xl font-extrabold text-navy">
+              <h3 className="text-2xl font-extrabold theme-primary-text">
                 Preorder #{placedOrder?.orderNumber || 'SC-1024'}
               </h3>
-              <p className="text-xs text-espresso">
+              <p className="text-xs theme-secondary-text">
                 Pickup Slot: <strong>{placedOrder?.pickupSlot || selectedSlot?.label || '—'}</strong>
               </p>
             </div>
 
             {/* Order Token */}
-            <div className="p-4 bg-cream rounded-2xl border border-line flex flex-col items-center gap-2">
-              <div className="w-24 h-24 rounded-xl bg-navy text-cream flex items-center justify-center font-mono text-[11px] font-bold">
+            <div className="p-4 theme-surface rounded-2xl border theme-border flex flex-col items-center gap-2">
+              <div className="w-24 h-24 rounded-xl theme-inverse-surface theme-nav-text flex items-center justify-center font-mono text-[11px] font-bold">
                 {placedOrder?.orderNumber || 'SC-1024'}
               </div>
-              <span className="text-[10px] font-mono text-espresso">
+              <span className="text-[10px] font-mono theme-secondary-text">
                 Order ID: {placedOrder?.orderNumber || 'SC-1024'}
               </span>
             </div>
@@ -515,7 +515,7 @@ const CartFoodImage: React.FC<{ imageUrl: string; name: string }> = ({ imageUrl,
     <FoodImage
       imageUrl={imageUrl}
       alt={name}
-      className="w-16 h-16 rounded-xl object-cover shrink-0 bg-cream"
+      className="w-16 h-16 rounded-xl object-cover shrink-0 theme-surface"
       onError={() => setShowImage(false)}
     />
   );
