@@ -123,4 +123,14 @@ cd frontend
 npm run build
 ```
 
-`npm run build` in the backend generates the Prisma client and compiles TypeScript. In production, `npm start` runs `prisma migrate deploy` before starting the compiled server.
+`npm run build` in the backend generates the Prisma client and compiles TypeScript. Use `npm run migrate:deploy` as the production pre-deploy command before `npm start`.
+
+## Deployment
+
+Deploy the backend as a Render Web Service with the `backend` directory as its root and Neon PostgreSQL as its database. Set `DATABASE_URL`, `JWT_SECRET`, and `CLIENT_URL` (the deployed frontend origin; comma-separated origins are supported). Set `AI_PROVIDER=gemini`, `GEMINI_API_KEY`, and `GEMINI_MODEL` only when enabling Gemini features. Render supplies `PORT`; optional settings include `MENU_TIME_WINDOWS` and `PICKUP_SLOT_STRICT`.
+
+For the backend service, use `npm install && npm run build` as the build command. Set the pre-deploy command to `npm run migrate:deploy` and the start command to `npm start`.
+
+Deploy the `frontend` directory as a Render Static Site. Set `VITE_API_URL` to the backend URL ending in `/api` and `VITE_SOCKET_URL` to the backend origin, then use `npm install && npm run build` as the build command. `VITE_SOCKET_URL` is exposed for Socket.IO connections; the current frontend does not instantiate a Socket.IO client.
+
+Run `npm run prisma:seed` from `backend` only for non-production demo data; it requires the `DEMO_PASSWORD` environment variable and the `ts-node` development dependency. For demos, set `MENU_TIME_WINDOWS=false` and `PICKUP_SLOT_STRICT=false`.

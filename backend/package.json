@@ -5,12 +5,13 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "prisma generate && tsc",
-    "start": "prisma migrate deploy && node dist/server.js",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "create-admin": "ts-node scripts/createAdmin.ts",
     "walkthrough": "ts-node scripts/walkthrough.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
     "prisma:seed": "prisma db seed",
     "test": "node --max-old-space-size=4096 ./node_modules/vitest/vitest.mjs run --fileParallelism=false"
   },

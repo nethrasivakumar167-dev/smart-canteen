@@ -3,8 +3,7 @@ import axios from 'axios';
 import { User, Role } from '../types';
 import { useCartStore } from './cartStore';
 import { useFavoriteStore } from './favoriteStore';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import { API_BASE_URL } from '../config';
 
 // Configure Axios defaults
 axios.defaults.baseURL = API_BASE_URL;
