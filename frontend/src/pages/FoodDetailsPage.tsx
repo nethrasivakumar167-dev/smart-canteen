@@ -308,12 +308,13 @@ export const FoodDetailsPage: React.FC = () => {
 
             <button
               onClick={handleToggleFavorite}
-              aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-              className={`px-btn px-btn--cream h-12 w-12 min-h-0 shrink-0 rounded-full p-2 ${
-                favorited ? 'heart-pop bg-butter text-navy' : 'text-navy hover:bg-skysoft'
+              aria-pressed={favorited}
+              aria-label={favorited ? 'Remove from favourites' : 'Add to favourites'}
+              className={`px-btn px-btn--cream h-12 w-12 min-h-0 shrink-0 rounded-full p-2 transition-colors ${
+                favorited ? 'heart-pop' : 'hover:bg-skysoft'
               }`}
             >
-              <PixelIcon name="heart" size={20} />
+              <PixelIcon name="heart" size={20} heartState={favorited ? 'filled' : 'outline'} />
             </button>
 
             {/* Add to Cart Button */}

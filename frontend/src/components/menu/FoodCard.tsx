@@ -87,12 +87,13 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   const favoriteButton = (
     <button
       onClick={handleToggleFavorite}
-      aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-      className={`px-btn px-btn--cream z-10 min-h-0 rounded-full p-2 ${
-        favorited ? 'heart-pop bg-butter text-navy shadow-sm' : 'text-navy hover:bg-skysoft'
+      aria-pressed={favorited}
+      aria-label={favorited ? 'Remove from favourites' : 'Add to favourites'}
+      className={`px-btn px-btn--cream z-10 min-h-0 rounded-full p-2 transition-colors ${
+        favorited ? 'heart-pop' : 'hover:bg-skysoft'
       }`}
     >
-      <PixelIcon name="heart" size={16} />
+      <PixelIcon name="heart" size={16} heartState={favorited ? 'filled' : 'outline'} />
     </button>
   );
 

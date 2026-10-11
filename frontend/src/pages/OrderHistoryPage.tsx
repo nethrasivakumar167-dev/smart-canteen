@@ -181,7 +181,18 @@ export const OrderHistoryPage: React.FC = () => {
                             {FEEDBACK_TAGS.map((tag) => {
                               const checked = itemTags[order.id]?.[item.menuItemId]?.includes(tag) || false;
                               return (
-                                <button key={tag} type="button" onClick={() => toggleTag(order.id, item.menuItemId, tag)} className={`px-chip ${checked ? 'bg-skyblue' : 'bg-sand'}`}>
+                                <button
+                                  key={tag}
+                                  type="button"
+                                  aria-pressed={checked}
+                                  onClick={() => toggleTag(order.id, item.menuItemId, tag)}
+                                  className={`px-chip border-2 border-navy transition-[transform,background-color,box-shadow] hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-skyblue focus-visible:ring-offset-2 ${
+                                    checked
+                                      ? 'bg-[#F2C94C] shadow-[3px_3px_0_#0B2A4A] hover:bg-[#F2C94C]'
+                                      : 'bg-cream hover:bg-sand'
+                                  }`}
+                                >
+                                  {checked && <PixelIcon name="check" size={12} />}
                                   {tagLabel(tag)}
                                 </button>
                               );

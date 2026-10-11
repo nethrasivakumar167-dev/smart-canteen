@@ -16,22 +16,58 @@ export type PixelIconName = keyof typeof BITMAPS;
 interface PixelIconProps {
   name: PixelIconName;
   size?: number;
+  heartState?: 'outline' | 'filled';
 }
 
-export const PixelIcon: React.FC<PixelIconProps> = ({ name, size = 16 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 8 8"
-    shapeRendering="crispEdges"
-    fill="currentColor"
-    aria-hidden="true"
-    focusable="false"
-  >
-    {BITMAPS[name].flatMap((row, y) =>
-      [...row].flatMap((pixel, x) =>
-        pixel === '1' ? <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" /> : []
-      )
-    )}
-  </svg>
-);
+const HEART_OUTLINE = ['00000000', '01100110', '10000001', '10000001', '01000010', '00100100', '00011000', '00000000'];
+const HEART_INTERIOR = ['00000000', '00000000', '01111110', '01111110', '00111100', '00011000', '00000000', '00000000'];
+const HEART_HIGHLIGHT = ['00000000', '00000000', '00110000', '00000000', '00000000', '00000000', '00000000', '00000000'];
+
+export const PixelIcon: React.FC<PixelIconProps> = ({ name, size = 16, heartState }) => {
+  if (name === 'heart' && heartState) {
+    return (
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 8 8"
+        shapeRendering="crispEdges"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {HEART_OUTLINE.flatMap((row, y) =>
+          [...row].flatMap((pixel, x) =>
+            pixel === '1' ? <rect key={`outline-${x}-${y}`} x={x} y={y} width="1" height="1" fill="#0B2A4A" /> : []
+          )
+        )}
+        {heartState === 'filled' && HEART_INTERIOR.flatMap((row, y) =>
+          [...row].flatMap((pixel, x) =>
+            pixel === '1' ? <rect key={`fill-${x}-${y}`} x={x} y={y} width="1" height="1" fill="#D62F3A" /> : []
+          )
+        )}
+        {heartState === 'filled' && HEART_HIGHLIGHT.flatMap((row, y) =>
+          [...row].flatMap((pixel, x) =>
+            pixel === '1' ? <rect key={`highlight-${x}-${y}`} x={x} y={y} width="1" height="1" fill="#FFFFFF" /> : []
+          )
+        )}
+      </svg>
+    );
+  }
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 8 8"
+      shapeRendering="crispEdges"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {BITMAPS[name].flatMap((row, y) =>
+        [...row].flatMap((pixel, x) =>
+          pixel === '1' ? <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" /> : []
+        )
+      )}
+    </svg>
+  );
+};
