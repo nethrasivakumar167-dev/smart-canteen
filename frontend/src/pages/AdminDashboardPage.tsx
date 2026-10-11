@@ -5,22 +5,12 @@ import { useAuthStore } from '../store/authStore';
 import { useToastStore } from '../store/toastStore';
 import {
   ShieldCheck,
-  TrendingUp,
-  Users,
-  ShoppingBag,
-  DollarSign,
-  Clock,
   UserPlus,
   RefreshCw,
   LogOut,
-  BarChart3,
-  CheckCircle2,
-  AlertCircle,
   Search,
-  Filter,
-  Layers,
-  Sparkles,
 } from 'lucide-react';
+import { PixelIcon } from '../components/pixel/PixelIcon';
 
 export const AdminDashboardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -218,7 +208,7 @@ export const AdminDashboardPage: React.FC = () => {
                   void loadAdminData(range);
                 }
               }}
-              className="rounded-xl border border-line bg-butter px-3 py-2.5 text-xs font-bold text-navy"
+              className="px-select rounded-xl bg-butter px-3 py-2.5 text-xs font-bold text-navy"
               aria-label="Analytics date range"
             >
               <option value="today">Today</option>
@@ -239,15 +229,15 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* 4 Financial & Operational KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
+        <div className="px-card rounded-2xl p-5 flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
-            <DollarSign className="w-6 h-6" />
+            <PixelIcon name="star" size={22} />
           </div>
           <div>
-            <div className="text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black text-slateblue">
               ₹{(statsData?.financials?.revenue ?? 0).toLocaleString()}
             </div>
-            <div className="text-xs text-navy font-medium">
+            <div className="px-label text-xs text-navy font-medium">
               Revenue • {analyticsRange === 'today'
                 ? 'Today'
                 : analyticsRange === '7d'
@@ -259,39 +249,39 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
+        <div className="px-card rounded-2xl p-5 flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-slateblue/10 text-slateblue flex items-center justify-center font-bold">
-            <ShoppingBag className="w-6 h-6" />
+            <PixelIcon name="cart" size={22} />
           </div>
           <div>
-            <div className="text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black text-slateblue">
               {statsData?.operations?.totalOrders ?? 0}
             </div>
-            <div className="text-xs text-navy font-medium">Orders Processed</div>
+            <div className="px-label text-xs text-navy font-medium">Orders Processed</div>
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
-            <Users className="w-6 h-6" />
+        <div className="px-card rounded-2xl p-5 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-skyblue text-navy flex items-center justify-center font-bold">
+            <PixelIcon name="heart" size={22} />
           </div>
           <div>
-            <div className="text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black text-slateblue">
               {statsData?.userMetrics?.totalRegisteredUsers ?? usersList.length}
             </div>
-            <div className="text-xs text-navy font-medium">Registered Accounts</div>
+            <div className="px-label text-xs text-navy font-medium">Registered Accounts</div>
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
-            <Clock className="w-6 h-6" />
+        <div className="px-card rounded-2xl p-5 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
+            <PixelIcon name="clock" size={22} />
           </div>
           <div>
-            <div className="text-2xl font-black text-slateblue">
+            <div className="px-stat-value text-2xl font-black text-slateblue">
               {statsData?.operations?.averageFulfillmentMinutes ?? 0}m
             </div>
-            <div className="text-xs text-navy font-medium">Avg Order Fulfillment</div>
+            <div className="px-label text-xs text-navy font-medium">Avg Order Fulfillment</div>
           </div>
         </div>
       </div>
@@ -345,7 +335,7 @@ export const AdminDashboardPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Hourly Demand Breakdown */}
-          <div className="lg:col-span-2 bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+          <div className="px-card lg:col-span-2 rounded-3xl p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-line pb-3">
               <div>
                 <h3 className="text-base font-bold text-slateblue">
@@ -360,8 +350,9 @@ export const AdminDashboardPage: React.FC = () => {
               </span>
             </div>
 
-            <div className="grid grid-cols-9 gap-2 pt-6 items-end h-48 text-center text-xs">
-              {(statsData?.hourlyDemand || []).map((item: any, idx: number, rows: any[]) => {
+            {(statsData?.hourlyDemand || []).length ? (
+              <div className="grid grid-cols-9 gap-2 pt-6 items-end h-48 text-center text-xs">
+                {(statsData?.hourlyDemand || []).map((item: any, idx: number, rows: any[]) => {
                 const max = Math.max(...rows.map((row) => row.orders), 1);
                 const heightPct = Math.min(100, Math.round((item.orders / max) * 100));
                 const isPeak = item.orders > 0 && item.orders === max;
@@ -374,20 +365,26 @@ export const AdminDashboardPage: React.FC = () => {
                     <div
                       className={`w-full rounded-t-lg transition-all ${
                         isPeak
-                          ? 'bg-gradient-to-t from-slateblue to-slate'
-                          : 'bg-sand/50 dark:bg-slateblue group-hover:bg-slateblue'
+                          ? 'bg-gold'
+                          : 'bg-skyblue group-hover:bg-navy'
                       }`}
                       style={{ height: `${heightPct}%` }}
                     />
                     <span className="text-[10px] font-semibold text-navy">{item.hour}</span>
                   </div>
                 );
-              })}
-            </div>
+                })}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center gap-3 py-3 text-sm text-navy">
+                <PixelIcon name="bowl" size={18} />
+                <span>No hourly orders for this period.</span>
+              </div>
+            )}
           </div>
 
           {/* Top Selling Items */}
-          <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+          <div className="px-card rounded-3xl p-6 space-y-4">
             <h3 className="text-base font-bold text-slateblue border-b border-line pb-3">
               Top Selling Preorders
             </h3>
@@ -396,7 +393,7 @@ export const AdminDashboardPage: React.FC = () => {
               {(statsData?.topSellingItems || []).map((item: any, idx: number) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-2xl bg-cream border border-line flex items-center justify-between"
+                  className="px-card p-3 rounded-2xl flex items-center justify-between"
                 >
                   <div>
                     <div className="text-xs font-bold text-slateblue">{item.name}</div>
@@ -408,7 +405,7 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
               ))}
               {!statsData?.topSellingItems?.length && (
-                <div className="p-3 text-xs text-navy">No sales data for this period.</div>
+                <div className="flex items-center gap-2 py-2 text-xs text-navy"><PixelIcon name="bowl" size={16} /><span>No sales data for this period.</span></div>
               )}
             </div>
           </div>
@@ -418,7 +415,7 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Tab 2: User Directory */}
       {activeTab === 'users' && (
-        <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-5">
+        <div className="px-card rounded-3xl p-6 space-y-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="relative w-full sm:w-72">
               <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-espresso" />
@@ -451,7 +448,7 @@ export const AdminDashboardPage: React.FC = () => {
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-line text-espresso uppercase font-bold text-[10px]">
+              <thead className="px-label bg-navy text-cream uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">User</th>
                   <th className="pb-3 px-3">Role</th>
@@ -462,7 +459,7 @@ export const AdminDashboardPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-line font-medium">
                 {filteredUsers.map((u) => (
-                  <tr key={u.id} className="hover:bg-sand/50 transition">
+                  <tr key={u.id} className="hover:bg-butter transition">
                     <td className="py-3.5 px-3">
                       <div className="font-bold text-slateblue">{u.name}</div>
                       <div className="text-[11px] text-espresso">{u.email}</div>
@@ -471,7 +468,7 @@ export const AdminDashboardPage: React.FC = () => {
                       <span
                         className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase ${
                           u.role === 'ADMIN'
-                            ? 'bg-purple-500/10 text-purple-700'
+                            ? 'bg-skyblue text-navy'
                             : u.role === 'STAFF'
                             ? 'bg-butter text-navy'
                             : 'bg-slateblue/10 text-slateblue'
@@ -494,6 +491,13 @@ export const AdminDashboardPage: React.FC = () => {
                     </td>
                   </tr>
                 ))}
+                {!filteredUsers.length && (
+                  <tr>
+                    <td colSpan={5} className="py-4 px-3">
+                      <div className="flex items-center justify-center gap-2 text-navy"><PixelIcon name="bowl" size={16} /><span>No users match this search.</span></div>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -502,14 +506,14 @@ export const AdminDashboardPage: React.FC = () => {
 
       {/* Tab 3: Master Orders Log */}
       {activeTab === 'orders' && (
-        <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+        <div className="px-card rounded-3xl p-6 space-y-4">
           <h3 className="text-base font-bold text-slateblue border-b border-line pb-3">
             Campus Master Preorder Ledger
           </h3>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-line text-espresso uppercase font-bold text-[10px]">
+              <thead className="px-label bg-navy text-cream uppercase font-bold text-[10px]">
                 <tr>
                   <th className="pb-3 px-3">Order #</th>
                   <th className="pb-3 px-3">Customer</th>
@@ -522,7 +526,7 @@ export const AdminDashboardPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-line font-medium">
                 {ordersList.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-cream/50 transition">
+                  <tr key={ord.id} className="hover:bg-butter transition">
                     <td className="py-3.5 px-3 font-bold text-slateblue">
                       #{ord.orderNumber}
                     </td>
@@ -549,6 +553,13 @@ export const AdminDashboardPage: React.FC = () => {
                     <td className="py-3.5 px-3 text-espresso">{ord.time}</td>
                   </tr>
                 ))}
+                {!ordersList.length && (
+                  <tr>
+                    <td colSpan={7} className="py-4 px-3">
+                      <div className="flex items-center justify-center gap-2 text-navy"><PixelIcon name="bowl" size={16} /><span>No orders are available for this period.</span></div>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -559,14 +570,14 @@ export const AdminDashboardPage: React.FC = () => {
       {activeTab === 'feedback' && (
         <div className="space-y-6">
           {feedbackData?.totalFeedbacks > 0 && (
-          <div className="bg-sand border border-line rounded-3xl p-6 shadow-md space-y-4">
+          <div className="px-card bg-butter rounded-3xl p-6 space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-line pb-4">
               <div>
                 <h3 className="text-base font-bold text-slateblue flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-amber-500" />
+                  <PixelIcon name="star" size={18} />
                   <span>Feedback Summary</span>
                   {feedbackSummary?.source && (
-                    <span className="rounded-full bg-amber-500/10 px-2 py-1 text-[10px] font-extrabold uppercase text-amber-800">
+                    <span className="px-label rounded-full bg-butter px-2 py-1 text-[10px] font-extrabold uppercase text-navy">
                       {feedbackSummary.source === 'ai' ? 'AI' : 'Rule-based'}
                     </span>
                   )}
@@ -578,7 +589,7 @@ export const AdminDashboardPage: React.FC = () => {
               <button
                 onClick={handleRefreshFeedbackSummary}
                 disabled={generatingAi}
-                className="px-4 py-2 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold text-xs shadow-md flex items-center gap-2 transition disabled:opacity-50"
+                className="px-btn px-btn--sky disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${generatingAi ? 'animate-spin' : ''}`} />
                 <span>{generatingAi ? 'Refreshing...' : 'Refresh'}</span>
@@ -592,8 +603,8 @@ export const AdminDashboardPage: React.FC = () => {
                   ['Complaints', feedbackSummary.complaints],
                   ['Recommendations', feedbackSummary.recommendations],
                 ].map(([title, entries]: any) => (
-                  <div key={title} className="p-4 rounded-2xl bg-cream border border-amber-500/30 text-xs text-slateblue shadow-inner">
-                    <h4 className="mb-2 font-extrabold">{title}</h4>
+                  <div key={title} className="px-card p-4 rounded-2xl text-xs text-slateblue">
+                    <h4 className="px-label mb-2 font-extrabold">{title}</h4>
                     <ul className="list-disc space-y-1 pl-4 leading-relaxed">
                       {entries.map((entry: string, index: number) => <li key={`${title}-${index}`}>{entry}</li>)}
                     </ul>
@@ -623,7 +634,7 @@ export const AdminDashboardPage: React.FC = () => {
                     <div>
                       <div className="flex items-center gap-2 font-bold text-slateblue">
                         <span>{fb.studentName}</span>
-                        <span className="text-amber-500 font-extrabold">⭐ {fb.rating}/5</span>
+                        <span className="text-navy font-extrabold">⭐ {fb.rating}/5</span>
                         <span className="text-[10px] text-espresso font-normal">Order #{fb.orderNumber}</span>
                       </div>
                       <p className="text-espresso mt-1">{fb.comment || 'No text review provided.'}</p>
@@ -634,8 +645,9 @@ export const AdminDashboardPage: React.FC = () => {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-8 text-xs text-navy/75">
-                  No student feedback submissions recorded yet.
+                <div className="flex items-center justify-center gap-2 py-3 text-xs text-navy">
+                  <PixelIcon name="bowl" size={16} />
+                  <span>No student feedback submissions recorded yet.</span>
                 </div>
               )}
             </div>
@@ -646,7 +658,7 @@ export const AdminDashboardPage: React.FC = () => {
       {/* Provisioning Modal */}
       {showProvisionModal && (
         <div className="fixed inset-0 z-50 bg-slateblue/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-sand rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-line space-y-5 animate-in zoom-in-95">
+          <div className="px-card rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-line pb-3">
               <h3 className="text-lg font-black text-slateblue flex items-center gap-2">
                 <UserPlus className="w-5 h-5 text-slateblue" />
@@ -662,7 +674,7 @@ export const AdminDashboardPage: React.FC = () => {
 
             <form onSubmit={handleProvisionUser} className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="font-bold text-slateblue">Full Name *</label>
+                <label className="px-label font-bold text-slateblue">Full Name *</label>
                 <input
                   type="text"
                   required
@@ -674,7 +686,7 @@ export const AdminDashboardPage: React.FC = () => {
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-slateblue">Email Address *</label>
+                <label className="px-label font-bold text-slateblue">Email Address *</label>
                 <input
                   type="email"
                   required
@@ -687,7 +699,7 @@ export const AdminDashboardPage: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="font-bold text-slateblue">Assigned Role *</label>
+                  <label className="px-label font-bold text-slateblue">Assigned Role *</label>
                   <select
                     value={provisionRole}
                     onChange={(e) => setProvisionRole(e.target.value)}
@@ -700,7 +712,7 @@ export const AdminDashboardPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-slateblue">Staff / ID Code</label>
+                  <label className="px-label font-bold text-slateblue">Staff / ID Code</label>
                   <input
                     type="text"
                     value={provisionId}
@@ -712,7 +724,7 @@ export const AdminDashboardPage: React.FC = () => {
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-slateblue">Initial Password *</label>
+                <label className="px-label font-bold text-slateblue">Initial Password *</label>
                 <input
                   type="password"
                   required
@@ -733,7 +745,7 @@ export const AdminDashboardPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isProvisioning}
-                  className="px-5 py-2.5 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold shadow-md disabled:opacity-50"
+                  className="px-btn disabled:opacity-50"
                 >
                   {isProvisioning ? 'Creating...' : 'Create Account'}
                 </button>

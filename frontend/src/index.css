@@ -146,6 +146,47 @@
   font-family: 'Silkscreen', monospace;
   font-size: 0.625rem;
 }
+.px-label { font-family: 'Silkscreen', monospace; }
+.px-stat-value { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
+.px-select {
+  border: 2px solid #0B2A4A;
+  box-shadow: 3px 3px 0 #0B2A4A;
+}
+.staff-pixel-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 82px;
+  min-height: 40px;
+  padding: 0;
+  color: #0B2A4A;
+  background: #E6DCC6;
+  border: 3px solid #0B2A4A;
+  font-family: 'Silkscreen', monospace;
+  font-size: 0.55rem;
+  line-height: 1;
+}
+.staff-pixel-switch.is-enabled { background: #F2C94C; }
+.staff-pixel-switch svg { display: none; }
+.staff-pixel-switch span { font-size: 0; }
+.staff-pixel-switch::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  width: 23px;
+  height: 23px;
+  background: #FFF9F0;
+  border: 2px solid #0B2A4A;
+  transition: transform 160ms steps(2);
+}
+.staff-pixel-switch::after {
+  content: 'OFF';
+  position: absolute;
+  right: 7px;
+  font-size: 0.5rem;
+}
+.staff-pixel-switch.is-enabled::before { transform: translateX(42px); }
+.staff-pixel-switch.is-enabled::after { content: 'ON'; left: 27px; right: auto; }
 .scallop-divider {
   height: 28px;
   background: radial-gradient(circle at 14px 0, #C4DAE8 14px, transparent 14.5px) 0 0 / 28px 28px repeat-x;

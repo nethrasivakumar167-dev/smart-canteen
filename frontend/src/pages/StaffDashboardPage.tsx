@@ -3,19 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
 import { useToastStore } from '../store/toastStore';
+import { PixelIcon } from '../components/pixel/PixelIcon';
 import {
-  ChefHat,
   Clock,
-  CheckCircle2,
-  Flame,
-  AlertCircle,
   RefreshCw,
   LogOut,
   ToggleLeft,
   ToggleRight,
   PackageCheck,
-  UtensilsCrossed,
-  Layers,
   Search,
 } from 'lucide-react';
 
@@ -201,7 +196,7 @@ export const StaffDashboardPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 rounded-full bg-butter px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
-              <ChefHat className="w-3.5 h-3.5 text-skyblue" />
+              <PixelIcon name="bowl" size={14} />
               <span>Kitchen Operations Panel • Station 01</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
@@ -238,15 +233,15 @@ export const StaffDashboardPage: React.FC = () => {
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('PENDING'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'PENDING' && activeTab === 'queue'
-              ? 'bg-amber-500/15 border-amber-500 shadow-sm'
-              : 'bg-sand border border-line hover:border-amber-500/50'
+              ? 'bg-butter border-gold shadow-sm'
+              : 'bg-sand border border-line hover:border-gold'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-amber-900">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
               New / Pending
             </span>
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+            <span className="w-2.5 h-2.5 rounded-full bg-gold animate-pulse" />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.pending ?? 0}
@@ -258,15 +253,15 @@ export const StaffDashboardPage: React.FC = () => {
           onClick={() => { setActiveTab('queue'); setSelectedStatusFilter('PREPARING'); }}
           className={`p-5 rounded-2xl border text-left transition ${
             selectedStatusFilter === 'PREPARING' && activeTab === 'queue'
-              ? 'bg-blue-500/15 border-blue-500 shadow-sm'
-              : 'bg-sand border border-line hover:border-blue-500/50'
+              ? 'bg-skyblue border-skyblue shadow-sm'
+              : 'bg-sand border border-line hover:border-skyblue'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-navy/80">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
               Cooking / In Kitchen
             </span>
-            <Flame className="w-4 h-4 text-blue-500" />
+            <PixelIcon name="bowl" size={18} />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.preparing ?? 0}
@@ -283,10 +278,10 @@ export const StaffDashboardPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-navy">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
               Ready for Pickup
             </span>
-            <CheckCircle2 className="w-4 h-4 text-navy" />
+            <PixelIcon name="check" size={16} />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.ready ?? 0}
@@ -303,10 +298,10 @@ export const StaffDashboardPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-navy/75">
+            <span className="px-label text-xs font-extrabold uppercase tracking-wider text-navy">
               Completed
             </span>
-            <PackageCheck className="w-4 h-4 text-espresso" />
+            <PixelIcon name="check" size={16} />
           </div>
           <div className="text-3xl font-black text-slateblue mt-2">
             {ordersData?.counts?.completed ?? 0}
@@ -342,15 +337,15 @@ export const StaffDashboardPage: React.FC = () => {
 
         {activeTab === 'queue' && (
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-navy hidden sm:inline">Filter:</span>
+            <span className="px-label text-navy hidden sm:inline">Filter:</span>
             {['ALL', 'PENDING', 'PREPARING', 'READY', 'COMPLETED'].map((st) => (
               <button
                 key={st}
                 onClick={() => setSelectedStatusFilter(st)}
-                className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition ${
+                className={`px-chip transition ${
                   selectedStatusFilter === st
-                    ? 'bg-slateblue text-cream'
-                    : 'text-navy hover:bg-sand/50'
+                    ? 'bg-navy text-cream'
+                    : 'hover:bg-skyblue'
                 }`}
               >
                 {st}
@@ -362,10 +357,11 @@ export const StaffDashboardPage: React.FC = () => {
 
       {/* Tab 1: Live Kitchen Queue */}
       {activeTab === 'queue' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="px-stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedOrders.length === 0 ? (
-            <div className="col-span-full py-12 text-center text-espresso text-sm">
-              No orders found matching filter "{selectedStatusFilter}".
+            <div className="col-span-full flex items-center justify-center gap-3 rounded-2xl bg-sand px-4 py-6 text-center text-sm text-navy">
+              <PixelIcon name="bowl" size={20} />
+              <span>No orders match this filter.</span>
             </div>
           ) : (
             displayedOrders.map((order: any) => {
@@ -373,17 +369,23 @@ export const StaffDashboardPage: React.FC = () => {
               const isPreparing = order.orderStatus === 'PREPARING';
               const isReady = order.orderStatus === 'READY_TO_PICK';
               const isActive = isPending || isPreparing || isReady;
+              const statusSteps = [
+                { status: 'RECEIVED', label: 'Received' },
+                { status: 'PREPARING', label: 'Cooking' },
+                { status: 'READY_TO_PICK', label: 'Ready' },
+                { status: 'DELIVERED', label: 'Delivered' },
+              ];
 
               return (
                 <div
                   key={order.id}
-                  className={`h-full rounded-3xl bg-sand border-2 p-6 shadow-md transition-all flex flex-col ${
+                  className={`px-card h-full rounded-3xl border-2 p-6 transition-all flex flex-col ${
                     isPending
-                      ? 'border-amber-500/40 bg-amber-500/5'
+                      ? 'border-gold'
                       : isPreparing
-                      ? 'border-blue-500/40 bg-blue-500/5'
+                      ? 'border-skyblue'
                       : isReady
-                      ? 'border-skyblue bg-skyblue'
+                      ? 'border-navy'
                       : 'border-line opacity-70'
                   }`}
                 >
@@ -391,7 +393,7 @@ export const StaffDashboardPage: React.FC = () => {
                     {/* Header */}
                     <div className="flex items-start justify-between">
                       <div>
-                        <span className="text-2xl font-black text-slateblue">
+                        <span className="px-label text-2xl font-black text-slateblue">
                           #{order.orderNumber}
                         </span>
                         <div className="text-xs font-bold text-navy/80 mt-0.5">
@@ -400,19 +402,19 @@ export const StaffDashboardPage: React.FC = () => {
                         <div className="text-[11px] text-navy/70">{order.studentEmail}</div>
                       </div>
 
-                      <span
-                        className={`px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider ${
-                          isPending
-                            ? 'bg-amber-500/10 text-amber-800'
-                            : isPreparing
-                            ? 'bg-blue-500/10 text-blue-800 animate-pulse'
-                            : isReady
-                            ? 'bg-skyblue text-navy'
-                            : 'bg-sand/30 text-espresso'
-                        }`}
-                      >
-                        {order.orderStatus}
-                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2" aria-label="Order status progress">
+                      {order.orderStatus === 'CANCELLED' ? (
+                        <span className="px-chip">Cancelled</span>
+                      ) : statusSteps.map((step) => (
+                        <span
+                          key={step.status}
+                          className={`px-chip px-order-step ${order.orderStatus === step.status ? 'is-current' : ''}`}
+                        >
+                          {step.label}
+                        </span>
+                      ))}
                     </div>
 
                     {/* Pickup slot & elapsed time */}
@@ -428,7 +430,7 @@ export const StaffDashboardPage: React.FC = () => {
 
                     {/* Order Items List */}
                     <div className="space-y-2 pt-1 border-t border-line">
-                      <span className="text-[11px] font-bold text-navy/75 uppercase tracking-wider">
+                      <span className="px-label text-[11px] font-bold text-navy uppercase tracking-wider">
                         Kitchen Ticket
                       </span>
                       <ul className="space-y-2 text-xs font-semibold">
@@ -438,12 +440,12 @@ export const StaffDashboardPage: React.FC = () => {
                               <span>{item.quantity}x {item.name}</span>
                             </div>
                             {item.notes && (
-                              <span className="text-[11px] text-amber-600 font-medium italic mt-0.5">
+                              <span className="text-[11px] text-rust font-medium italic mt-0.5">
                                 ↳ Note: {item.notes}
                               </span>
                             )}
                             {item.cookingTip && (
-                              <span className="mt-1 rounded-lg bg-amber-500/10 px-2 py-1 text-[11px] font-medium text-amber-800">
+                              <span className="px-card bg-butter mt-1 block rounded-lg p-2 text-[11px] font-medium text-navy">
                                 Cooking tip: {item.cookingTip}
                               </span>
                             )}
@@ -466,10 +468,10 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'PREPARING')}
                           disabled={actionLoadingId === order.id}
-                          className="flex-1 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-cream font-extrabold text-xs shadow-md transition disabled:opacity-50"
+                          className="px-btn flex-1 disabled:opacity-50"
                         >
-                          <Flame className="inline w-4 h-4 mr-1" />
-                          Start preparing
+                          <PixelIcon name="bowl" size={16} />
+                          Start cooking
                         </button>
                         <button
                           onClick={() => void handleUpdateStatus(order, 'CANCELLED')}
@@ -486,9 +488,9 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'READY_TO_PICK')}
                           disabled={actionLoadingId === order.id}
-                          className="flex-1 py-3 rounded-xl bg-gold hover:bg-butter text-navy font-extrabold text-xs shadow-md transition disabled:opacity-50"
+                          className="px-btn px-btn--sky flex-1 disabled:opacity-50"
                         >
-                          <CheckCircle2 className="inline w-4 h-4 mr-1" />
+                          <PixelIcon name="check" size={16} />
                           Mark ready
                         </button>
                         <button
@@ -503,7 +505,7 @@ export const StaffDashboardPage: React.FC = () => {
 
                     {isReady && (
                       <div className="space-y-2">
-                        <label htmlFor={`delivery-id-${order.id}`} className="block text-xs font-bold text-navy/80">
+                        <label htmlFor={`delivery-id-${order.id}`} className="px-label block text-xs font-bold text-navy">
                           Order ID
                         </label>
                         <input
@@ -526,7 +528,7 @@ export const StaffDashboardPage: React.FC = () => {
                         <button
                           onClick={() => void handleUpdateStatus(order, 'DELIVERED', deliveryIds[order.id])}
                           disabled={actionLoadingId === order.id || !deliveryIds[order.id]?.trim()}
-                          className="w-full py-3 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-extrabold text-xs shadow-md transition flex items-center justify-center gap-1.5 disabled:opacity-50"
+                          className="px-btn w-full disabled:opacity-50"
                         >
                           <PackageCheck className="w-4 h-4" />
                           Deliver
@@ -616,10 +618,10 @@ export const StaffDashboardPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleToggleAvailability(item.id, item.isAvailable)}
-                  className={`p-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                  className={`staff-pixel-switch ${item.isAvailable ? 'is-enabled' : ''} ${
                     item.isAvailable
-                      ? 'bg-gold text-navy hover:bg-butter'
-                      : 'bg-sand/30 text-espresso hover:bg-sand/50'
+                      ? ''
+                      : 'is-disabled'
                   }`}
                 >
                   {item.isAvailable ? <ToggleRight className="w-5 h-5" /> : <ToggleLeft className="w-5 h-5" />}
@@ -627,7 +629,7 @@ export const StaffDashboardPage: React.FC = () => {
                 </button>
               </div>
             );})}
-            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 rounded-2xl bg-cream border border-line p-6 text-center text-sm text-espresso">No menu items match these filters.</div>}
+            {!filteredMenuItems.length && <div className="sm:col-span-2 lg:col-span-3 flex items-center justify-center gap-3 rounded-2xl bg-cream border border-line p-4 text-center text-sm text-navy"><PixelIcon name="bowl" size={18} /><span>No menu items match these filters.</span></div>}
           </div>
         </div>
       )}
