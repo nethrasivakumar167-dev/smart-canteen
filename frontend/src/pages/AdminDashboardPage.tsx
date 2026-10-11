@@ -570,7 +570,7 @@ export const AdminDashboardPage: React.FC = () => {
       {activeTab === 'feedback' && (
         <div className="space-y-6">
           {feedbackData?.totalFeedbacks > 0 && (
-          <div className="px-card theme-gold-surface rounded-3xl p-6 space-y-4">
+          <div className="px-card rounded-3xl p-6 space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b theme-border pb-4">
               <div>
                 <h3 className="text-base font-bold theme-primary-text flex items-center gap-2">
