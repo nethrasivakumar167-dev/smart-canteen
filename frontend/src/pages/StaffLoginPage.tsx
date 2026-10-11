@@ -88,16 +88,17 @@ export const StaffLoginPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Demo Credentials Quick Fill Banner */}
-        <div className="p-3.5 rounded-2xl bg-butter border border-gold text-xs text-navy flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-navy shrink-0" />
-            <span>Staff Demo: <strong>staff@demo.com</strong> / <strong>password123</strong></span>
+        {!import.meta.env.PROD && (
+          <div className="p-3.5 rounded-2xl bg-butter border border-gold text-xs text-navy flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-navy shrink-0" />
+              <span>Staff Demo: <strong>staff@demo.com</strong> / <strong>password123</strong></span>
+            </div>
+            <button type="button" onClick={handleQuickFill} className="px-btn px-btn--sky min-h-0 px-3 py-1 text-[10px]">
+              Auto-fill
+            </button>
           </div>
-          <button type="button" onClick={handleQuickFill} className="px-btn px-btn--sky min-h-0 px-3 py-1 text-[10px]">
-            Auto-fill
-          </button>
-        </div>
+        )}
 
         {/* Error Alert */}
         {(localError || error) && (
