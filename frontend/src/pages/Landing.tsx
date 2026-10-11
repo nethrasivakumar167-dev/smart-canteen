@@ -272,7 +272,13 @@ export const LandingPage: React.FC = () => {
 
       <section className="overflow-x-clip bg-cream px-4 py-16 text-center sm:px-6 sm:py-24">
         <Reveal className="mx-auto max-w-3xl">
-          <PixelIcon name="star" size={28} />
+          <img
+            src="/brand/campusbite-logo.jpg"
+            width={120}
+            height={120}
+            className="mx-auto object-contain"
+            alt="CampusBite"
+          />
           <h2 className="mt-4 text-3xl text-navy sm:text-4xl">Right on campus</h2>
           <p className="mt-3 text-base text-navy">SRM Ramapuram, Chennai, India</p>
           <p className="mx-auto mt-7 max-w-xl text-lg text-navy">“A warmer welcome to the campus canteen, one pickup at a time.”</p>

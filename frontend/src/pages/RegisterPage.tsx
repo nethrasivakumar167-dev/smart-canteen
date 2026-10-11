@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useToastStore } from '../store/toastStore';
 import {
-  GraduationCap,
   User,
   Mail,
   Lock,
@@ -94,9 +93,13 @@ export const RegisterPage: React.FC = () => {
 
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-navy to-slate text-cream flex items-center justify-center mx-auto shadow-glow">
-            <GraduationCap className="w-7 h-7" />
-          </div>
+          <img
+            src="/brand/campusbite-logo.jpg"
+            width={72}
+            height={72}
+            className="mx-auto object-contain"
+            alt="CampusBite"
+          />
           <div className="inline-block px-3 py-0.5 rounded-full bg-navy/10 text-navy text-xs font-extrabold uppercase tracking-wider">
             New Student Onboarding
           </div>
@@ -110,18 +113,18 @@ export const RegisterPage: React.FC = () => {
 
         {/* Error Alert */}
         {(localError || error) && (
-          <div className="p-3.5 rounded-2xl bg-rust/10 border border-rust/20 text-xs text-rust flex items-center gap-2.5 animate-in fade-in">
-            <AlertCircle className="w-4 h-4 text-rust shrink-0" />
+          <div className="px-card flex items-center gap-2.5 rounded-2xl bg-butter p-3.5 text-xs text-navy animate-in fade-in">
+            <AlertCircle className="w-4 h-4 shrink-0 text-navy" />
             <span>{localError || error}</span>
           </div>
         )}
 
         {/* Form Card */}
-        <form onSubmit={handleRegister} className="space-y-4 bg-sand p-6 sm:p-8 rounded-3xl border border-line shadow-md">
+        <form onSubmit={handleRegister} className="px-card space-y-4 rounded-2xl p-6 sm:p-8">
           
           {/* Full Name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-espresso">
+            <label className="block text-xs font-bold text-navy font-pixel">
               Full Name *
             </label>
             <div className="relative">
@@ -140,7 +143,7 @@ export const RegisterPage: React.FC = () => {
           {/* Email & Student ID Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-espresso">
+              <label className="block text-xs font-bold text-navy font-pixel">
                 Campus Email *
               </label>
               <div className="relative">
@@ -157,7 +160,7 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-espresso">
+              <label className="block text-xs font-bold text-navy font-pixel">
                 Student ID / Roll No
               </label>
               <input
@@ -172,7 +175,7 @@ export const RegisterPage: React.FC = () => {
 
           {/* Phone Number */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-espresso">
+            <label className="block text-xs font-bold text-navy font-pixel">
               Mobile Phone Number
             </label>
             <div className="relative">
@@ -190,7 +193,7 @@ export const RegisterPage: React.FC = () => {
           {/* Password & Confirm Password Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-espresso">
+              <label className="block text-xs font-bold text-navy font-pixel">
                 Password *
               </label>
               <div className="relative">
@@ -214,7 +217,7 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-espresso">
+              <label className="block text-xs font-bold text-navy font-pixel">
                 Confirm Password *
               </label>
               <div className="relative">
@@ -235,7 +238,7 @@ export const RegisterPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-navy to-slate hover:from-slate hover:to-navy text-cream font-bold text-sm shadow-md hover:shadow-glow transition transform active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="px-btn w-full disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">

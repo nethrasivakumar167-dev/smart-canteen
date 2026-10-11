@@ -85,6 +85,7 @@ describe('Order Creation, Availability, Payment, Transitions & Authorization API
     paymentMethod: 'CASH',
     paymentStatus: 'PENDING',
     orderStatus: 'RECEIVED',
+    specialInstructions: null,
     deliveredAt: null,
     deliveredById: null,
     createdAt: new Date('2026-10-10T05:00:00.000Z'),
@@ -199,15 +200,67 @@ describe('Order Creation, Availability, Payment, Transitions & Authorization API
       expect(res.body.success).toBe(true);
       expect(res.body.data.orderNumber).toBe('SC-7K4M9Q');
       expect(res.body.data.paymentMethod).toBe('CASH');
+      expect(res.body.data.specialInstructions).toBeNull();
       expect(res.body.data.items[0].priceAtPurchase).toBe(75);
       expect(createOrder).toHaveBeenCalledWith(expect.objectContaining({
         data: expect.objectContaining({
           totalAmount: 150,
+          specialInstructions: null,
           items: {
             create: [{ menuItemId: 'item-dosa-1', quantity: 2, priceAtPurchase: 75 }],
           },
         }),
       }));
+    });
+
+    it('stores cooking instructions and returns them from the staff orders endpoint', async () => {
+      const specialInstructions = 'Less spicy, chutney separately.';
+      const orderWithInstructions = { ...mockCreatedOrder, specialInstructions };
+      const createOrder = vi.fn().mockResolvedValue(orderWithInstructions);
+      vi.spyOn(prisma, '$transaction').mockImplementation(async (cb: any) => {
+        const txMock = {
+          menuItem: {
+            findUnique: vi.fn().mockResolvedValue(mockAvailableItem),
+          },
+          order: {
+            findMany: vi.fn().mockResolvedValue([]),
+            findUnique: vi.fn().mockResolvedValue(null),
+            create: createOrder,
+          },
+        };
+        return cb(txMock);
+      });
+
+      const createResponse = await request(app)
+        .post('/api/student/orders')
+        .set('Authorization', `Bearer ${studentToken}`)
+        .send({
+          items: [{ menuItemId: 'item-dosa-1', quantity: 1 }],
+          paymentMethod: 'CASH',
+          specialInstructions: `  ${specialInstructions}  `,
+        });
+
+      expect(createResponse.status).toBe(201);
+      expect(createResponse.body.data.specialInstructions).toBe(specialInstructions);
+      expect(createOrder).toHaveBeenCalledWith(expect.objectContaining({
+        data: expect.objectContaining({ specialInstructions }),
+      }));
+
+      vi.spyOn(prisma.order, 'findMany').mockResolvedValue([orderWithInstructions] as any);
+      const staffResponse = await request(app)
+        .get('/api/staff/orders')
+        .set('Authorization', `Bearer ${staffToken}`);
+
+      expect(staffResponse.status).toBe(200);
+      expect(staffResponse.body.data.all[0].specialInstructions).toBe(specialInstructions);
+
+      vi.spyOn(prisma.order, 'findMany').mockResolvedValue([mockCreatedOrder] as any);
+      const staffResponseWithoutInstructions = await request(app)
+        .get('/api/staff/orders')
+        .set('Authorization', `Bearer ${staffToken}`);
+
+      expect(staffResponseWithoutInstructions.status).toBe(200);
+      expect(staffResponseWithoutInstructions.body.data.all[0].specialInstructions).toBeNull();
     });
 
     it('rejects order placement with 400 when an item is unavailable', async () => {

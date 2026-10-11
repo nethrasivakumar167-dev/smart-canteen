@@ -91,11 +91,25 @@
 
 .food-card { background: var(--color-card); border: 1px solid var(--color-border); border-radius: 1.5rem; box-shadow: 0 1px 2px rgba(11, 42, 74, 0.08); overflow: hidden; }
 .food-card__image { border-radius: 0; }
-.food-card:hover { border-color: #C4DAE8; box-shadow: 0 1px 2px rgba(11, 42, 74, 0.08); }
+.food-card:hover { border-color: #C4DAE8; box-shadow: 0 1px 2px rgba(11, 42, 74, 0.08); transform: translateY(-4px); }
+.food-card { transition: transform 160ms steps(2), border-color 160ms steps(2); }
 .food-card:nth-child(even) { border-radius: 1.5rem; }
 .food-card:nth-child(even) .food-card__image { border-radius: 0; }
 .food-card__price-tag { background: transparent; color: #8B3A1E; border-radius: 0; }
 .dark .food-card { background: #12365C; border-color: #376487; }
+
+.px-stagger-grid > * { animation: fade-up 420ms ease-out backwards; }
+.px-stagger-grid > :nth-child(1) { animation-delay: 0ms; }
+.px-stagger-grid > :nth-child(2) { animation-delay: 60ms; }
+.px-stagger-grid > :nth-child(3) { animation-delay: 120ms; }
+.px-stagger-grid > :nth-child(4) { animation-delay: 180ms; }
+.px-stagger-grid > :nth-child(5) { animation-delay: 240ms; }
+.px-stagger-grid > :nth-child(6) { animation-delay: 300ms; }
+.px-stagger-grid > :nth-child(7) { animation-delay: 360ms; }
+.px-stagger-grid > :nth-child(n+8) { animation-delay: 420ms; }
+.heart-pop { animation: heart-pop 260ms steps(3, end); }
+.px-cart-count { animation: cart-bump 280ms steps(2, end); }
+.px-order-step.is-current { animation: step-blink 700ms steps(2, end) infinite; }
 
 .px-btn {
   display: inline-flex;
@@ -121,6 +135,7 @@
   box-shadow: -3px 0 0 #0B2A4A, 3px 0 0 #0B2A4A, 0 -3px 0 #0B2A4A, 0 3px 0 #0B2A4A,
     inset -3px -3px 0 rgba(31, 42, 68, 0.22);
 }
+.px-card.bg-butter { background-color: #FEEFB8; }
 .px-chip {
   display: inline-flex;
   align-items: center;
@@ -145,6 +160,9 @@
 @keyframes fall { 0% { transform: translateY(-15vh); } 100% { transform: translateY(105vh); } }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes heart-pop { 0% { transform: scale(0.7); } 70% { transform: scale(1.25); } 100% { transform: scale(1); } }
+@keyframes cart-bump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes step-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -153,4 +171,5 @@
     scroll-behavior: auto !important;
   }
   .fade-up { opacity: 1; transform: none; }
+  .px-stagger-grid > * { opacity: 1; transform: none; }
 }

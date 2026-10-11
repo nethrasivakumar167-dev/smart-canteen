@@ -3,7 +3,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useToastStore } from '../store/toastStore';
 import {
-  GraduationCap,
   Mail,
   Lock,
   Eye,
@@ -71,9 +70,13 @@ export const StudentLoginPage: React.FC = () => {
 
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-navy to-slate text-cream flex items-center justify-center mx-auto shadow-glow">
-            <GraduationCap className="w-7 h-7" />
-          </div>
+          <img
+            src="/brand/campusbite-logo.jpg"
+            width={72}
+            height={72}
+            className="mx-auto object-contain"
+            alt="CampusBite"
+          />
           <div className="inline-block px-3 py-0.5 rounded-full bg-navy/10 text-navy text-xs font-extrabold uppercase tracking-wider">
             Student & Diner Portal
           </div>
@@ -94,7 +97,7 @@ export const StudentLoginPage: React.FC = () => {
           <button
             type="button"
             onClick={handleQuickFill}
-            className="px-2.5 py-1 rounded-lg bg-amber-500 text-white font-bold text-[11px] hover:bg-amber-600 transition"
+            className="px-btn px-btn--sky min-h-0 px-3 py-1 text-[10px]"
           >
             Auto-fill
           </button>
@@ -102,16 +105,16 @@ export const StudentLoginPage: React.FC = () => {
 
         {/* Error Alert */}
         {(localError || error) && (
-          <div className="p-3.5 rounded-2xl bg-rust/10 border border-rust/20 text-xs text-rust flex items-center gap-2.5 animate-in fade-in">
-            <AlertCircle className="w-4 h-4 text-rust shrink-0" />
+          <div className="px-card flex items-center gap-2.5 rounded-2xl bg-butter p-3.5 text-xs text-navy animate-in fade-in">
+            <AlertCircle className="w-4 h-4 shrink-0 text-navy" />
             <span>{localError || error}</span>
           </div>
         )}
 
         {/* Form */}
-        <form onSubmit={handleLogin} className="space-y-4 bg-sand p-6 sm:p-8 rounded-3xl border border-line shadow-md">
+        <form onSubmit={handleLogin} className="px-card space-y-4 rounded-2xl p-6 sm:p-8">
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-espresso">
+            <label className="block text-xs font-bold text-navy font-pixel">
               Student Email or Roll ID
             </label>
             <div className="relative">
@@ -129,7 +132,7 @@ export const StudentLoginPage: React.FC = () => {
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-espresso">
+              <label className="block text-xs font-bold text-navy font-pixel">
                 Password
               </label>
               <span className="text-[11px] text-navy cursor-pointer hover:underline">
@@ -159,7 +162,7 @@ export const StudentLoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-navy to-slate hover:from-slate hover:to-navy text-cream font-bold text-sm shadow-md hover:shadow-glow transition transform active:scale-98 disabled:opacity-50 mt-2 flex items-center justify-center gap-2"
+            className="px-btn mt-2 w-full disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">

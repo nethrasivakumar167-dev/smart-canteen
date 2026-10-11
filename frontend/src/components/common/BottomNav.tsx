@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCartStore } from '../../store/cartStore';
 import { useAuthStore } from '../../store/authStore';
+import { PixelIcon } from '../pixel/PixelIcon';
 import {
   Home,
   UtensilsCrossed,
@@ -75,10 +76,10 @@ export const BottomNav: React.FC = () => {
                   : 'text-skyblue hover:text-cream'
               }`}
             >
-              <Icon className="w-6 h-6" />
+              {item.label === 'Cart' ? <PixelIcon name="cart" size={24} /> : item.label === 'Favourites' ? <PixelIcon name="heart" size={24} /> : <Icon className="w-6 h-6" />}
               <span className="text-[10px] font-semibold">{item.label}</span>
               {item.badge !== undefined && item.badge > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[16px] h-5 px-1.5 text-[10px] font-extrabold text-cream bg-rust rounded-full flex items-center justify-center animate-in zoom-in">
+                <span key={item.badge} className="px-cart-count absolute -top-1 -right-1 min-w-[16px] h-5 px-1.5 text-[10px] font-extrabold text-cream bg-rust rounded-full flex items-center justify-center animate-in zoom-in">
                   {item.badge > 99 ? '99+' : item.badge}
                 </span>
               )}

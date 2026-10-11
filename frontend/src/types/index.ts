@@ -100,6 +100,27 @@ export interface OrderFeedback {
   items: Array<{ menuItemId: string; tags: string[] }>;
 }
 
+export interface Order {
+  id: string;
+  orderNumber: string;
+  createdAt: string;
+  orderStatus: string;
+  paymentMethod: string;
+  totalAmount: number;
+  items: Array<{
+    id: string;
+    menuItemId: string;
+    name: string;
+    quantity: number;
+    priceAtPurchase: number;
+    imageUrl: string;
+  }>;
+  feedback: OrderFeedback | null;
+  pickupSlot: string | null;
+  estimatedMinutes: number | null;
+  specialInstructions?: string | null;
+}
+
 export interface Review {
   id: string;
   userName: string;

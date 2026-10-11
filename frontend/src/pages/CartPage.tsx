@@ -9,17 +9,15 @@ import { fetchMenuItems } from '../api/menuApi';
 import { MenuItem } from '../types';
 import { FoodImage, hasUsableMenuImage } from '../components/common/FoodImage';
 import {
-  ShoppingBag,
   Trash2,
   Plus,
   Minus,
   ArrowRight,
-  Clock,
-  CheckCircle2,
   Zap,
   CreditCard,
   ShieldCheck,
 } from 'lucide-react';
+import { PixelIcon } from '../components/pixel/PixelIcon';
 
 export const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -159,7 +157,7 @@ export const CartPage: React.FC = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center space-y-6 bg-beige">
         <div className="w-24 h-24 rounded-full bg-navy/10 text-navy flex items-center justify-center mx-auto shadow-inner">
-          <ShoppingBag className="w-12 h-12" />
+          <PixelIcon name="cart" size={48} />
         </div>
 
         <div className="space-y-2 max-w-md mx-auto">
@@ -171,10 +169,7 @@ export const CartPage: React.FC = () => {
           </p>
         </div>
 
-        <Link
-          to="/menu"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-navy to-slate text-cream font-extrabold text-sm shadow-lg hover:shadow-glow transition transform hover:-translate-y-0.5"
-        >
+        <Link to="/menu" className="px-btn">
           <span>Explore Campus Menu</span>
           <ArrowRight className="w-4 h-4" />
         </Link>
@@ -184,11 +179,11 @@ export const CartPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 bg-beige">
-      
+
       {/* Title Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-navy tracking-tight">
+          <h1 className="font-display text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
             Review Your Preorder
           </h1>
           <p className="text-xs sm:text-sm text-espresso mt-0.5">
@@ -198,7 +193,7 @@ export const CartPage: React.FC = () => {
 
         <button
           onClick={clearCart}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:underline"
+          className="px-btn px-btn--cream min-h-0 text-xs"
         >
           <Trash2 className="w-3.5 h-3.5" />
           <span>Clear Cart</span>
@@ -206,16 +201,16 @@ export const CartPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+
         {/* Left Column: Cart Items & Customizations & Pickup Slot */}
         <div className="lg:col-span-7 space-y-6">
-          
+
           {/* Cart Items List */}
           <div className="space-y-3">
             {items.map((item) => (
               <div
                 key={item.id}
-                className="bg-sand p-4 rounded-2xl border border-line shadow-sm flex items-center justify-between gap-4"
+                className="px-card flex items-center justify-between gap-4 rounded-2xl p-4"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <CartFoodImage imageUrl={item.imageUrl} name={item.name} />
@@ -286,9 +281,9 @@ export const CartPage: React.FC = () => {
           </div>
 
           {/* Pickup Slot Selection */}
-          <div className="p-5 bg-sand border border-line rounded-2xl shadow-sm space-y-3">
+          <div className="px-card space-y-3 rounded-2xl p-5">
             <h3 className="text-sm font-bold text-navy flex items-center gap-2">
-              <Clock className="w-4 h-4 text-navy" />
+              <PixelIcon name="clock" size={16} />
               Pickup Schedule
             </h3>
 
@@ -317,7 +312,7 @@ export const CartPage: React.FC = () => {
                           : 'Soon'}
                     </span>
                   ) : selectedSlotStart === slot.start ? (
-                    <CheckCircle2 className="w-4 h-4 text-cream" />
+                    <PixelIcon name="check" size={16} />
                   ) : null}
                 </button>
               ))}
@@ -340,6 +335,7 @@ export const CartPage: React.FC = () => {
             <input
               type="text"
               value={specialInstructions}
+              maxLength={500}
               onChange={(e) => setSpecialInstructions(e.target.value)}
               placeholder="e.g. Less spicy, pack chutney separately, extra hot coffee..."
               className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-line text-xs sm:text-sm text-navy placeholder:text-espresso/50 focus:outline-none focus:ring-2 focus:ring-skyblue/50"
@@ -352,7 +348,7 @@ export const CartPage: React.FC = () => {
         <div className="lg:col-span-5 space-y-6">
 
           {/* Payment Method Selector */}
-          <div className="p-5 bg-sand border border-line rounded-2xl shadow-sm space-y-3">
+          <div className="px-card space-y-3 rounded-2xl p-5">
             <h3 className="text-sm font-bold text-navy flex items-center gap-2">
               <CreditCard className="w-4 h-4 text-navy" />
               Payment Mode
@@ -369,7 +365,7 @@ export const CartPage: React.FC = () => {
                 }`}
               >
                 <span>⚡ Demo Instant Pay</span>
-                {paymentMethod === 'DEMO' && <CheckCircle2 className="w-4 h-4 text-cream" />}
+                {paymentMethod === 'DEMO' && <PixelIcon name="check" size={16} />}
               </button>
 
               <button
@@ -382,7 +378,7 @@ export const CartPage: React.FC = () => {
                 }`}
               >
                 <span>📱 UPI / QR</span>
-                {paymentMethod === 'UPI' && <CheckCircle2 className="w-4 h-4 text-cream" />}
+                {paymentMethod === 'UPI' && <PixelIcon name="check" size={16} />}
               </button>
 
               <button
@@ -395,7 +391,7 @@ export const CartPage: React.FC = () => {
                 }`}
               >
                 <span>💳 Campus / Debit Card</span>
-                {paymentMethod === 'CARD' && <CheckCircle2 className="w-4 h-4 text-cream" />}
+                {paymentMethod === 'CARD' && <PixelIcon name="check" size={16} />}
               </button>
 
               <button
@@ -408,13 +404,13 @@ export const CartPage: React.FC = () => {
                 }`}
               >
                 <span>💵 Pay at Pickup Counter</span>
-                {paymentMethod === 'CASH' && <CheckCircle2 className="w-4 h-4 text-cream" />}
+                {paymentMethod === 'CASH' && <PixelIcon name="check" size={16} />}
               </button>
             </div>
           </div>
 
           {/* Bill Summary Box */}
-          <div className="p-5 bg-sand border border-line rounded-2xl shadow-sm space-y-4">
+          <div className="px-card space-y-4 rounded-2xl p-5">
             <h3 className="text-sm font-bold text-navy">
               Bill Breakdown
             </h3>
@@ -441,7 +437,7 @@ export const CartPage: React.FC = () => {
             <button
               onClick={handleSimulateCheckout}
               disabled={isPlacingOrder}
-              className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-navy to-slate hover:from-slate hover:to-navy text-cream font-extrabold text-base shadow-lg hover:shadow-glow transition transform active:scale-98 disabled:opacity-50"
+              className="px-btn w-full disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isPlacingOrder ? (
                 <span>Dispatching Order to Kitchen...</span>
@@ -465,10 +461,10 @@ export const CartPage: React.FC = () => {
       {/* Real Order Success Modal */}
       {orderSuccessModal && (
         <div className="fixed inset-0 z-50 bg-navy/70 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-sand rounded-3xl max-w-md w-full p-6 sm:p-8 border border-line shadow-2xl text-center space-y-5 animate-in zoom-in-95">
-            
+          <div className="px-card max-w-md w-full space-y-5 rounded-2xl p-6 text-center animate-in zoom-in-95 sm:p-8">
+
             <div className="w-16 h-16 rounded-full bg-skyblue text-navy flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-10 h-10" />
+              <PixelIcon name="check" size={40} />
             </div>
 
             <div className="space-y-1">
@@ -499,7 +495,7 @@ export const CartPage: React.FC = () => {
                   setOrderSuccessModal(false);
                   navigate('/student/dashboard');
                 }}
-                className="flex-1 py-3 rounded-xl bg-navy text-cream font-bold text-xs shadow-md hover:bg-slate transition"
+                className="px-btn flex-1"
               >
                 Go to Student Dashboard
               </button>
@@ -512,7 +508,6 @@ export const CartPage: React.FC = () => {
     </div>
   );
 };
-
 const CartFoodImage: React.FC<{ imageUrl: string; name: string }> = ({ imageUrl, name }) => {
   const [showImage, setShowImage] = useState(() => hasUsableMenuImage(imageUrl, name));
   if (!showImage) return null;

@@ -6,7 +6,8 @@ import { useFavoriteStore } from '../../store/favoriteStore';
 import { useAuthStore } from '../../store/authStore';
 import { useToastStore } from '../../store/toastStore';
 import { FoodImage, hasUsableMenuImage } from '../common/FoodImage';
-import { Heart, Plus, Minus, Flame } from 'lucide-react';
+import { Plus, Minus, Flame } from 'lucide-react';
+import { PixelIcon } from '../pixel/PixelIcon';
 
 interface FoodCardProps {
   item: MenuItem;
@@ -87,11 +88,11 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
     <button
       onClick={handleToggleFavorite}
       aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-      className={`p-2 rounded-full transition z-10 ${
-        favorited ? 'bg-rust text-cream shadow-sm scale-110' : 'bg-cream hover:bg-skysoft text-navy'
+      className={`px-btn px-btn--cream z-10 min-h-0 rounded-full p-2 ${
+        favorited ? 'heart-pop bg-butter text-navy shadow-sm' : 'text-navy hover:bg-skysoft'
       }`}
     >
-      <Heart className={`w-4 h-4 ${favorited ? 'fill-cream' : ''}`} />
+      <PixelIcon name="heart" size={16} />
     </button>
   );
 
@@ -153,7 +154,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
     <button
       onClick={handleAddToCart}
       disabled={unavailable}
-      className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-navy hover:bg-slateblue-light active:scale-95 text-cream font-bold text-xs shadow-sm transition-all disabled:cursor-not-allowed disabled:bg-slate-400 disabled:hover:bg-slate-400"
+      className="px-btn min-h-0 px-4 py-2.5 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <Plus className="w-4 h-4 stroke-[3]" />
       <span>Add</span>
@@ -161,7 +162,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
   );
 
   return (
-    <div className={`food-card group relative transition-all duration-300 hover:-translate-y-1 flex flex-col ${unavailable ? 'opacity-65 grayscale-[0.25]' : ''}`}>
+    <div className={`food-card px-card group relative flex flex-col ${unavailable ? 'opacity-65 grayscale-[0.25]' : ''}`}>
       {showImage ? (
         <Link to={`/menu/${item.id}`} className="food-card__image relative aspect-[3/2] w-full overflow-hidden bg-sand block">
           <FoodImage
@@ -185,7 +186,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
       <div className={`p-4 flex-1 flex flex-col justify-between ${showImage ? '' : 'pt-1'}`}>
         <div>
           <div className="flex items-center justify-between text-[11px] text-card-label mb-1">
-            <span className="font-semibold uppercase tracking-wider text-card-label">
+            <span className="font-pixel text-[9px] uppercase tracking-wider text-card-label">
               {item.categoryName || 'Canteen Special'}
             </span>
           </div>

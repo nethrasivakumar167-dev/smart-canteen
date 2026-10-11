@@ -49,7 +49,7 @@ export const CategoryFilterBar: React.FC<CategoryFilterBarProps> = ({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.slug === 'all' ? 'all' : cat.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-full border font-bold text-xs sm:text-sm transition-all duration-200 shadow-sm ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-full border font-pixel text-[10px] sm:text-xs transition-all duration-200 shadow-sm ${
                 isSelected
                   ? 'bg-navy border-navy text-cream'
                   : 'bg-sand border-line text-navy hover:bg-skysoft'
@@ -61,7 +61,7 @@ export const CategoryFilterBar: React.FC<CategoryFilterBarProps> = ({
               <span>{cat.name}</span>
               {cat.itemCount !== undefined && (
                 <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-extrabold ${
+                  className={`font-pixel text-[9px] px-1.5 py-0.5 rounded-full font-extrabold ${
                     isSelected
                       ? 'bg-cream/20 text-cream'
                   : 'bg-cream text-navy'

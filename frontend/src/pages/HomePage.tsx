@@ -157,7 +157,7 @@ export const HomePage: React.FC = () => {
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
                 Ready to skip the canteen queue and eat on time?
               </h2>
-              <p className="text-espresso text-sm sm:text-base leading-relaxed">
+              <p className="text-cream text-sm sm:text-base leading-relaxed">
                 Open your phone, choose your meal, and pick up your hot food the second you step out of class.
               </p>
               <div className="pt-3 flex flex-col sm:flex-row items-center gap-4">

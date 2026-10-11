@@ -163,6 +163,28 @@ export const StaffDashboardPage: React.FC = () => {
     };
     return o.orderStatus === (statusFilterMap[selectedStatusFilter] || selectedStatusFilter);
   });
+  const displayedOrders = selectedStatusFilter === 'ALL'
+    ? filteredOrders
+        .map((order: any, index: number) => ({ order, index }))
+        .sort((left: any, right: any) => {
+          const statusOrder: Record<string, number> = {
+            RECEIVED: 0,
+            PREPARING: 1,
+            READY_TO_PICK: 2,
+            DELIVERED: 3,
+            CANCELLED: 4,
+          };
+          const leftRank = statusOrder[left.order.orderStatus] ?? 5;
+          const rightRank = statusOrder[right.order.orderStatus] ?? 5;
+          if (leftRank !== rightRank) return leftRank - rightRank;
+          if (leftRank > 4) return left.index - right.index;
+          const createdAtOrder =
+            new Date(left.order.createdAt).getTime() - new Date(right.order.createdAt).getTime();
+          if (createdAtOrder === 0) return left.index - right.index;
+          return leftRank <= 2 ? createdAtOrder : -createdAtOrder;
+        })
+        .map(({ order }: { order: any }) => order)
+    : filteredOrders;
   const staffCategories = [...new Set(menuItems.map((item) => item.category))].sort();
   const staffCuisines = [...new Set(menuItems.flatMap((item) => item.cuisines || []))].sort();
   const filteredMenuItems = menuItems.filter((item) =>
@@ -175,19 +197,17 @@ export const StaffDashboardPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
       
       {/* Staff Kitchen Control Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-navy via-slateblue to-navy p-6 sm:p-8 text-cream shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
-        
+      <div className="relative overflow-hidden rounded-3xl bg-navy p-6 text-cream shadow-xl sm:p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/25 backdrop-blur-md text-cream text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 rounded-full bg-butter px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <ChefHat className="w-3.5 h-3.5 text-skyblue" />
               <span>Kitchen Operations Panel • Station 01</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Chef {user?.name || 'Staff Member'}
             </h1>
-            <p className="text-skyblue text-xs sm:text-sm max-w-xl">
+            <p className="max-w-xl text-xs text-butter sm:text-sm">
               Monitor incoming campus meal orders, advance kitchen preparation stages, and manage live stock availability.
             </p>
           </div>
@@ -196,14 +216,14 @@ export const StaffDashboardPage: React.FC = () => {
             <button
               onClick={loadData}
               disabled={loading}
-              className="px-4 py-2.5 rounded-xl bg-cream/10 hover:bg-cream/20 text-cream font-bold text-xs transition flex items-center gap-2 backdrop-blur-md"
+              className="px-btn px-btn--cream"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span>Refresh Queue</span>
             </button>
             <button
               onClick={handleLogout}
-              className="p-2.5 rounded-xl bg-black/25 hover:bg-black/40 text-cream transition flex items-center justify-center"
+              className="px-btn h-11 w-11 p-0"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -343,12 +363,12 @@ export const StaffDashboardPage: React.FC = () => {
       {/* Tab 1: Live Kitchen Queue */}
       {activeTab === 'queue' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredOrders.length === 0 ? (
+          {displayedOrders.length === 0 ? (
             <div className="col-span-full py-12 text-center text-espresso text-sm">
               No orders found matching filter "{selectedStatusFilter}".
             </div>
           ) : (
-            filteredOrders.map((order: any) => {
+            displayedOrders.map((order: any) => {
               const isPending = order.orderStatus === 'RECEIVED';
               const isPreparing = order.orderStatus === 'PREPARING';
               const isReady = order.orderStatus === 'READY_TO_PICK';
@@ -431,6 +451,12 @@ export const StaffDashboardPage: React.FC = () => {
                         ))}
                       </ul>
                     </div>
+                    {order.specialInstructions && (
+                      <div className="px-card rounded-xl bg-butter p-3 text-navy">
+                        <div className="text-[11px] font-bold uppercase tracking-wider">Cooking instruction</div>
+                        <p className="mt-1 text-xs font-medium">{order.specialInstructions}</p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Action Transition Buttons */}

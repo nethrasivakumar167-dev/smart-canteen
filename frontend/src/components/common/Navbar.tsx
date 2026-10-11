@@ -7,8 +7,6 @@ import { useToastStore } from '../../store/toastStore';
 import { PixelIcon } from '../pixel/PixelIcon';
 import {
   UtensilsCrossed,
-  ShoppingBag,
-  Heart,
   Sun,
   Moon,
   LogOut,
@@ -79,17 +77,13 @@ export const Navbar: React.FC = () => {
           {/* Logo & Live Status */}
           <div className={`flex items-center gap-4 sm:gap-6 ${isLoggedInDashboard ? 'order-last' : ''}`}>
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="flex h-10 w-10 items-center justify-center bg-cream text-navy shadow-sm transition-transform duration-200 group-hover:scale-105">
-                <PixelIcon name="star" size={22} />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display italic font-semibold text-xl tracking-wide text-cream flex items-center gap-1.5">
-                  CampusBite
-                </span>
-                <span className="text-[10px] tracking-wider uppercase font-semibold text-skyblue hidden sm:inline">
-                  Skip the Queue • Eat Smarter
-                </span>
-              </div>
+              <img
+                src="/brand/campusbite-logo.jpg"
+                width={56}
+                height={56}
+                className="object-contain"
+                alt="CampusBite"
+              />
             </Link>
 
             {/* Live Rush / Open Pill */}
@@ -158,12 +152,12 @@ export const Navbar: React.FC = () => {
                 to="/cart"
                 className="relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-cream hover:bg-skysoft text-navy transition group"
               >
-                <ShoppingBag className="w-5 h-5 text-navy group-hover:scale-110 transition-transform" />
+                <PixelIcon name="cart" size={20} />
                 <span className="hidden sm:inline text-xs font-bold">
                   {cartCount > 0 ? `₹${grandTotal.toFixed(0)}` : 'Cart'}
                 </span>
                 {cartCount > 0 && (
-                  <span className="flex items-center justify-center min-w-[20px] h-5 px-1 text-[11px] font-extrabold text-cream bg-rust rounded-full shadow-sm animate-in zoom-in">
+                  <span key={cartCount} className="px-cart-count flex items-center justify-center min-w-[20px] h-5 px-1 text-[11px] font-extrabold text-cream bg-rust rounded-full shadow-sm animate-in zoom-in">
                     {cartCount}
                   </span>
                 )}
@@ -232,7 +226,7 @@ export const Navbar: React.FC = () => {
                             onClick={() => setProfileDropdownOpen(false)}
                             className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-espresso hover:bg-skysoft rounded-xl transition"
                           >
-                            <Heart className="w-4 h-4 text-navy" />
+                            <PixelIcon name="heart" size={16} />
                             Favourites
                           </Link>
                           <Link

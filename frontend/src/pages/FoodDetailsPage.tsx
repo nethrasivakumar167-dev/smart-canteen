@@ -8,13 +8,12 @@ import { useToastStore } from '../store/toastStore';
 import { FoodCard } from '../components/menu/FoodCard';
 import { FoodImage, hasUsableMenuImage } from '../components/common/FoodImage';
 import {
-  Heart,
   Plus,
   Minus,
   ArrowLeft,
   Sparkles,
-  ShoppingBag,
 } from 'lucide-react';
+import { PixelIcon } from '../components/pixel/PixelIcon';
 
 export const FoodDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -80,7 +79,7 @@ export const FoodDetailsPage: React.FC = () => {
         <p className="text-espresso">The requested canteen item does not exist or has been discontinued.</p>
         <Link
           to="/menu"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-navy text-cream font-bold text-sm shadow-sm"
+          className="px-btn px-btn--sky"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Menu
@@ -193,10 +192,10 @@ export const FoodDetailsPage: React.FC = () => {
         </div>}
 
         {/* Right Column: Information & Ordering Controls */}
-        <div className={`${showImage ? 'lg:col-span-6' : 'lg:col-span-12'} space-y-6 bg-cream border border-line rounded-3xl p-5 sm:p-7 shadow-sm`}>
+        <div className={`${showImage ? 'lg:col-span-6' : 'lg:col-span-12'} px-card space-y-6 rounded-2xl p-5 sm:p-7`}>
           
           <div>
-            <h1 className="text-2xl sm:text-3xl font-semibold text-navy tracking-tight">
+            <h1 className="font-display text-2xl font-semibold tracking-tight text-navy sm:text-3xl">
               {item.name}
             </h1>
 
@@ -245,7 +244,7 @@ export const FoodDetailsPage: React.FC = () => {
                 return (
                   <div
                     key={group.id}
-                    className="p-4 rounded-2xl bg-sand border border-line space-y-2.5"
+                    className="px-card space-y-2.5 rounded-2xl p-4"
                   >
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-bold text-navy">
@@ -310,20 +309,20 @@ export const FoodDetailsPage: React.FC = () => {
             <button
               onClick={handleToggleFavorite}
               aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-              className={`w-12 h-12 shrink-0 rounded-full flex items-center justify-center transition ${
-                favorited ? 'bg-rust text-cream' : 'bg-skyblue text-navy hover:bg-skysoft'
+              className={`px-btn px-btn--cream h-12 w-12 min-h-0 shrink-0 rounded-full p-2 ${
+                favorited ? 'heart-pop bg-butter text-navy' : 'text-navy hover:bg-skysoft'
               }`}
             >
-              <Heart className={`w-5 h-5 ${favorited ? 'fill-cream' : ''}`} />
+              <PixelIcon name="heart" size={20} />
             </button>
 
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
               disabled={unavailable}
-              className="w-full flex-1 flex items-center justify-center gap-2.5 py-4 px-6 rounded-full bg-navy hover:bg-slateblue-light text-cream font-extrabold text-base shadow-sm transition transform active:scale-98 disabled:cursor-not-allowed disabled:bg-slate-400 disabled:hover:bg-slate-400"
+              className="px-btn w-full flex-1 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <PixelIcon name="cart" size={20} />
               <span>{unavailable ? item.unavailableReason || 'Unavailable now' : `Add to Preorder • ₹${totalPrice}`}</span>
             </button>
           </div>
@@ -335,7 +334,7 @@ export const FoodDetailsPage: React.FC = () => {
       {relatedItems.length > 0 && (
         <section className="pt-8 border-t border-line space-y-6">
           <div>
-            <h3 className="text-xl font-semibold text-navy">
+            <h3 className="font-display text-xl font-semibold text-navy">
               Frequently Preordered Together
             </h3>
             <p className="text-xs text-espresso mt-0.5">
@@ -343,7 +342,7 @@ export const FoodDetailsPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="px-stagger-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {relatedItems.map((rel) => (
               <FoodCard key={rel.id} item={rel} />
             ))}

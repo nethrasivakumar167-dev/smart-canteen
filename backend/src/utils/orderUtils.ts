@@ -10,6 +10,7 @@ export interface FormattedOrder {
   paymentMethod: string;
   paymentStatus: string;
   orderStatus: string;
+  specialInstructions: string | null;
   deliveredAt: Date | null;
   deliveredById: string | null;
   createdAt: Date;
@@ -69,6 +70,7 @@ export function formatOrder(order: any): FormattedOrder {
     paymentMethod: order.paymentMethod,
     paymentStatus: order.paymentStatus,
     orderStatus: order.orderStatus,
+    specialInstructions: order.specialInstructions ?? null,
     deliveredAt: order.deliveredAt,
     deliveredById: order.deliveredById,
     createdAt: order.createdAt,

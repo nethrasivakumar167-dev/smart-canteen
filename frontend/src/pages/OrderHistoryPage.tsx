@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { fetchStudentOrders } from '../api/orderApi';
-import { OrderFeedback } from '../types';
+import { Order, OrderFeedback } from '../types';
 import { Star, MessageSquareText, Send } from 'lucide-react';
+import { PixelIcon } from '../components/pixel/PixelIcon';
 
 const FEEDBACK_TAGS = [
   'too_spicy',
@@ -15,32 +16,10 @@ const FEEDBACK_TAGS = [
   'great_taste',
 ];
 
-interface OrderItem {
-  id: string;
-  menuItemId: string;
-  name: string;
-  quantity: number;
-  priceAtPurchase: number;
-  imageUrl: string;
-}
-
-interface StudentOrder {
-  id: string;
-  orderNumber: string;
-  createdAt: string;
-  orderStatus: string;
-  paymentMethod: string;
-  totalAmount: number;
-  items: OrderItem[];
-  feedback: OrderFeedback | null;
-  pickupSlot: string | null;
-  estimatedMinutes: number | null;
-}
-
 const tagLabel = (tag: string) => tag.replace(/_/g, ' ');
 
 export const OrderHistoryPage: React.FC = () => {
-  const [orders, setOrders] = useState<StudentOrder[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [feedbackOrderId, setFeedbackOrderId] = useState<string | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>({});
@@ -80,7 +59,7 @@ export const OrderHistoryPage: React.FC = () => {
     });
   };
 
-  const submitFeedback = async (order: StudentOrder) => {
+  const submitFeedback = async (order: Order) => {
     setSubmittingOrderId(order.id);
     setErrors((current) => ({ ...current, [order.id]: '' }));
     try {
@@ -114,7 +93,7 @@ export const OrderHistoryPage: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6 bg-beige min-h-[60vh]">
       <div className="border-b border-line pb-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-navy">Order History</h1>
+        <h1 className="font-display text-2xl font-bold text-navy sm:text-3xl">Order History</h1>
         <p className="mt-1 text-sm text-espresso">Your campus orders and feedback.</p>
       </div>
       {loading ? (
@@ -122,19 +101,19 @@ export const OrderHistoryPage: React.FC = () => {
       ) : errors.page ? (
         <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{errors.page}</div>
       ) : orders.length === 0 ? (
-        <div className="rounded-3xl border border-line bg-sand p-10 text-center text-sm font-semibold text-espresso">No orders yet.</div>
+        <div className="px-card rounded-2xl p-10 text-center text-sm font-semibold text-espresso">No orders yet.</div>
       ) : (
         <div className="space-y-4">
           {orders.map((order) => (
-            <article key={order.id} className="rounded-3xl border border-line bg-sand p-5 sm:p-6 shadow-sm space-y-4">
+            <article key={order.id} className="px-card space-y-4 rounded-2xl p-5 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 border-b border-line pb-4">
                 <div>
-                  <h2 className="text-base font-bold text-slateblue">Order #{order.orderNumber}</h2>
+                  <h2 className="font-display text-base font-bold text-slateblue">Order #{order.orderNumber}</h2>
                   <p className="mt-1 text-xs text-espresso">{new Date(order.createdAt).toLocaleString()}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 text-[11px] font-bold">
-                  <span className="rounded-full bg-cream px-3 py-1 text-slateblue">{order.orderStatus.replace(/_/g, ' ')}</span>
-                  <span className="rounded-full bg-cream px-3 py-1 text-espresso">{order.paymentMethod}</span>
+                  <span className="px-chip">{order.orderStatus.replace(/_/g, ' ')}</span>
+                  <span className="px-chip bg-cream">{order.paymentMethod}</span>
                 </div>
               </div>
                 {order.pickupSlot && (
@@ -145,6 +124,12 @@ export const OrderHistoryPage: React.FC = () => {
                     )}
                   </div>
                 )}
+              {order.specialInstructions && (
+                <div className="px-card rounded-xl bg-butter p-3 text-navy">
+                  <div className="text-[11px] font-bold uppercase tracking-wider">Cooking instruction</div>
+                  <p className="mt-1 text-xs font-medium">{order.specialInstructions}</p>
+                </div>
+              )}
               <div className="space-y-2">
                 {order.items.map((item) => (
                   <div key={item.id} className="flex justify-between gap-3 text-sm text-slateblue">
@@ -169,7 +154,7 @@ export const OrderHistoryPage: React.FC = () => {
                       <div className="space-y-2">
                         {order.feedback.items.filter((entry) => entry.tags.length > 0).map((entry) => (
                           <div key={entry.menuItemId} className="flex flex-wrap gap-1.5">
-                            {entry.tags.map((tag) => <span key={tag} className="rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold text-slateblue">{tagLabel(tag)}</span>)}
+                            {entry.tags.map((tag) => <span key={tag} className="px-chip bg-sand">{tagLabel(tag)}</span>)}
                           </div>
                         ))}
                       </div>
@@ -196,7 +181,7 @@ export const OrderHistoryPage: React.FC = () => {
                             {FEEDBACK_TAGS.map((tag) => {
                               const checked = itemTags[order.id]?.[item.menuItemId]?.includes(tag) || false;
                               return (
-                                <button key={tag} type="button" onClick={() => toggleTag(order.id, item.menuItemId, tag)} className={`rounded-full border px-2.5 py-1 text-[10px] font-semibold ${checked ? 'border-slateblue bg-slateblue text-cream' : 'border-line bg-sand text-slateblue'}`}>
+                                <button key={tag} type="button" onClick={() => toggleTag(order.id, item.menuItemId, tag)} className={`px-chip ${checked ? 'bg-skyblue' : 'bg-sand'}`}>
                                   {tagLabel(tag)}
                                 </button>
                               );
@@ -207,12 +192,12 @@ export const OrderHistoryPage: React.FC = () => {
                     </div>
                     {errors[order.id] && <p role="alert" className="text-xs font-semibold text-red-700">{errors[order.id]}</p>}
                     <div className="flex gap-2">
-                      <button type="button" disabled={submittingOrderId === order.id} onClick={() => submitFeedback(order)} className="inline-flex items-center gap-2 rounded-xl bg-slateblue px-4 py-2.5 text-xs font-bold text-cream disabled:opacity-50"><Send className="h-3.5 w-3.5" />{submittingOrderId === order.id ? 'Submitting...' : 'Submit feedback'}</button>
-                      <button type="button" onClick={() => setFeedbackOrderId(null)} className="rounded-xl border border-line px-4 py-2.5 text-xs font-bold text-slateblue">Cancel</button>
+                      <button type="button" disabled={submittingOrderId === order.id} onClick={() => submitFeedback(order)} className="px-btn disabled:cursor-not-allowed disabled:opacity-50"><Send className="h-3.5 w-3.5" />{submittingOrderId === order.id ? 'Submitting...' : 'Submit feedback'}</button>
+                      <button type="button" onClick={() => setFeedbackOrderId(null)} className="px-btn px-btn--cream">Cancel</button>
                     </div>
                   </div>
                 ) : (
-                  <button onClick={() => { setFeedbackOrderId(order.id); setErrors((current) => ({ ...current, [order.id]: '' })); }} className="inline-flex items-center gap-2 rounded-xl bg-slateblue px-4 py-2.5 text-xs font-bold text-cream">
+                  <button onClick={() => { setFeedbackOrderId(order.id); setErrors((current) => ({ ...current, [order.id]: '' })); }} className="px-btn px-btn--sky">
                     <MessageSquareText className="h-4 w-4" />Rate this order
                   </button>
                 )

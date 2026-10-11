@@ -178,19 +178,17 @@ export const AdminDashboardPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
       
       {/* Admin Executive Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-slateblue via-slate to-indigo-950 p-6 sm:p-8 text-cream shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-cream/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
-        
+      <div className="relative overflow-hidden rounded-3xl bg-navy p-6 text-cream shadow-xl sm:p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slateblue/20 backdrop-blur-md text-slateblue text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 rounded-full bg-butter px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Campus Dining Administration • Executive Level</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
               Administrator {user?.name || 'Officer'}
             </h1>
-            <p className="text-espresso text-xs sm:text-sm max-w-xl">
+            <p className="max-w-xl text-xs text-butter sm:text-sm">
               Canteen financial oversight, user credential provisioning, and real-time operational analytics.
             </p>
           </div>
@@ -198,7 +196,7 @@ export const AdminDashboardPage: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowProvisionModal(true)}
-              className="px-4 py-2.5 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold text-xs transition flex items-center gap-2 shadow-md"
+              className="px-btn"
             >
               <UserPlus className="w-3.5 h-3.5" />
               <span>Provision User</span>
@@ -206,7 +204,7 @@ export const AdminDashboardPage: React.FC = () => {
             <button
               onClick={() => loadAdminData()}
               disabled={loading}
-              className="p-2.5 rounded-xl bg-cream/10 hover:bg-cream/20 text-cream transition flex items-center justify-center backdrop-blur-md"
+              className="px-btn h-11 w-11 p-0"
               title="Refresh Analytics"
             >
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -220,7 +218,7 @@ export const AdminDashboardPage: React.FC = () => {
                   void loadAdminData(range);
                 }
               }}
-              className="px-3 py-2.5 rounded-xl bg-sand border border-line text-slateblue text-xs font-bold"
+              className="rounded-xl border border-line bg-butter px-3 py-2.5 text-xs font-bold text-navy"
               aria-label="Analytics date range"
             >
               <option value="today">Today</option>

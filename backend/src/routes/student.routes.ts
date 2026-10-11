@@ -38,7 +38,7 @@ const createOrderSchema = z.object({
   ).min(1, 'Order must contain at least one item'),
   paymentMethod: z.enum(['CASH', 'ONLINE_MOCK', 'DEMO', 'UPI', 'CARD']).default('CASH'),
   pickupSlotStart: z.string().datetime({ offset: true }).optional(),
-  specialInstructions: z.string().optional(),
+  specialInstructions: z.string().trim().max(500).optional(),
   scheduledTime: z.string().optional(),
 });
 
@@ -267,6 +267,7 @@ router.post(
             paymentStatus: pStatus,
             orderStatus: 'RECEIVED',
             pickupSlotStart: slotStart,
+            specialInstructions: specialInstructions?.trim() || null,
             items: {
               create: orderItemsData,
             },

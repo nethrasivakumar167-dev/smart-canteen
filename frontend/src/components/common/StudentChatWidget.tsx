@@ -1,9 +1,10 @@
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
-import { MessageCircle, Plus, Send, X } from 'lucide-react';
+import { Plus, Send, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { sendChatMessage, ChatItemResult, ChatTurn } from '../../api/chatApi';
 import { useCartStore } from '../../store/cartStore';
 import { useToastStore } from '../../store/toastStore';
+import { PixelBot } from '../pixel/PixelBot';
 
 interface ChatMessage {
   id: string;
@@ -106,9 +107,12 @@ export const StudentChatWidget: React.FC = () => {
           className="fixed bottom-[5.25rem] right-3 z-[60] flex max-h-[calc(100dvh-7rem)] w-[min(23rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-2xl border border-line bg-cream shadow-2xl md:bottom-6"
         >
           <header className="flex items-center justify-between bg-navy px-4 py-3 text-cream">
-            <div>
-              <h2 className="font-serif text-lg font-semibold">CampusBite Assistant</h2>
-              <p className="text-[11px] text-skyblue">Menu, specials & availability</p>
+            <div className="flex items-center gap-3">
+              <PixelBot size={28} />
+              <div>
+                <h2 className="font-serif text-lg font-semibold">CampusBite Assistant</h2>
+                <p className="text-[11px] text-skyblue">Menu, specials & availability</p>
+              </div>
             </div>
             <button
               type="button"
@@ -213,9 +217,9 @@ export const StudentChatWidget: React.FC = () => {
         onClick={() => setOpen((current) => !current)}
         aria-label={open ? 'Close canteen chat' : 'Open canteen chat'}
         aria-expanded={open}
-        className="fixed bottom-[5.25rem] right-4 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-navy text-cream shadow-xl transition hover:scale-105 hover:bg-slateblue-light md:bottom-6"
+        className="px-btn fixed bottom-[5.25rem] right-4 z-[60] h-14 w-14 animate-bob p-0 shadow-xl md:bottom-6"
       >
-        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {open ? <X className="h-6 w-6" /> : <PixelBot size={32} />}
       </button>
     </>
   );

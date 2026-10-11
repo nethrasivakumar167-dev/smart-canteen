@@ -2,31 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
-import { useCartStore } from '../store/cartStore';
 import { useToastStore } from '../store/toastStore';
 import { fetchStudentOrders } from '../api/orderApi';
 import { FoodCard } from '../components/menu/FoodCard';
-import { FoodImage, hasUsableMenuImage } from '../components/common/FoodImage';
 import {
   GraduationCap,
   UtensilsCrossed,
-  ShoppingBag,
   Award,
-  Clock,
   ArrowRight,
   Flame,
-  CheckCircle2,
   AlertCircle,
-  Plus,
   RefreshCw,
   LogOut,
-  ChevronRight,
 } from 'lucide-react';
+import { PixelIcon } from '../components/pixel/PixelIcon';
 
 export const StudentDashboardPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-  const { addItem } = useCartStore();
   const { addToast } = useToastStore();
 
   const [dashboardData, setDashboardData] = useState<any>(null);
@@ -87,22 +80,6 @@ export const StudentDashboardPage: React.FC = () => {
     }
   };
 
-  const handleQuickAdd = (item: any) => {
-    addItem({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      imageUrl: item.imageUrl || '',
-      isVegetarian: true,
-      preparationTime: item.preparationTime || 5,
-    });
-    addToast({
-      type: 'success',
-      title: 'Added to Cart',
-      message: `${item.name} added to your tray.`,
-    });
-  };
-
   const handleLogout = async () => {
     await logout();
     addToast({
@@ -127,19 +104,17 @@ export const StudentDashboardPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 bg-cream">
       
       {/* Top Welcome Header */}
-      <div className="rounded-3xl bg-gradient-to-r from-slateblue via-slate to-amber-600 p-6 sm:p-8 text-cream shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-cream/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
-        
+      <div className="relative overflow-hidden rounded-3xl bg-navy p-6 text-cream shadow-xl sm:p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slateblue/20 backdrop-blur-md text-cream text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 rounded-full bg-butter px-3 py-1 text-xs font-bold uppercase tracking-wider text-navy">
               <GraduationCap className="w-3.5 h-3.5" />
               <span>Student Account • {user?.institutionId || 'Not set'}</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
+            <h1 className="font-display text-2xl font-black tracking-tight sm:text-4xl">
               Welcome back, {user?.name || 'Student'}!
             </h1>
-            <p className="text-cream/90 text-xs sm:text-sm max-w-xl">
+            <p className="max-w-xl text-xs text-butter sm:text-sm">
               Preorder your favorite campus meals, check live queue times, and earn rewards on every meal.
             </p>
           </div>
@@ -147,14 +122,14 @@ export const StudentDashboardPage: React.FC = () => {
           <div className="flex items-center gap-3 w-full sm:w-auto">
             <Link
               to="/menu"
-              className="flex-1 sm:flex-none px-5 py-3 rounded-2xl bg-cream text-slateblue hover:bg-mist font-extrabold text-sm shadow-md transition flex items-center justify-center gap-2"
+              className="px-btn px-btn--cream flex-1 sm:flex-none"
             >
               <UtensilsCrossed className="w-4 h-4" />
               <span>Order Food Now</span>
             </Link>
             <button
               onClick={handleLogout}
-              className="p-3 rounded-2xl bg-slateblue/20 hover:bg-slateblue/30 text-cream transition flex items-center justify-center"
+              className="px-btn h-11 w-11 p-0"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -165,9 +140,9 @@ export const StudentDashboardPage: React.FC = () => {
 
       {/* 3 KPI Summary Cards (Loyalty hidden) */}
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-slateblue/10 text-slateblue flex items-center justify-center font-bold">
-            <Clock className="w-6 h-6" />
+        <div className="px-card flex items-center gap-4 rounded-2xl p-5">
+          <div className="w-12 h-12 rounded-xl bg-skyblue text-navy flex items-center justify-center font-bold">
+            <PixelIcon name="clock" size={24} />
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
@@ -177,9 +152,9 @@ export const StudentDashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
+        <div className="px-card flex items-center gap-4 rounded-2xl p-5">
           <div className="w-12 h-12 rounded-xl bg-butter text-navy flex items-center justify-center font-bold">
-            <ShoppingBag className="w-6 h-6" />
+            <PixelIcon name="cart" size={24} />
           </div>
           <div>
             <div className="text-2xl font-black text-slateblue">
@@ -189,8 +164,8 @@ export const StudentDashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-sand border border-line shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
+        <div className="px-card flex items-center gap-4 rounded-2xl p-5">
+          <div className="w-12 h-12 rounded-xl bg-gold text-navy flex items-center justify-center font-bold">
             <Flame className="w-6 h-6" />
           </div>
           <div>
@@ -210,7 +185,7 @@ export const StudentDashboardPage: React.FC = () => {
               <p className="text-xs text-espresso">Picks based on today's menu and your activity.</p>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="px-stagger-grid grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {recommendations.map((recommendation) => (
               <article key={recommendation.item.id} className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
@@ -227,11 +202,11 @@ export const StudentDashboardPage: React.FC = () => {
       )}
 
       {/* Main Grid: Active Order + Favorites */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         
         {/* Left 2 Cols: Live Order Tracker */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="p-6 sm:p-7 rounded-3xl bg-sand border border-line shadow-md space-y-5">
+        <div className="space-y-6">
+          <div className="px-card space-y-5 rounded-2xl p-6 sm:p-7">
             <div className="flex items-center justify-between border-b border-line pb-4">
               <div>
                 <span className="text-[11px] font-extrabold uppercase tracking-wider text-slateblue">
@@ -290,19 +265,19 @@ export const StudentDashboardPage: React.FC = () => {
                   return (
                     <div
                       key={step.status}
-                      className={`p-3 rounded-xl border ${
+                      className={`px-chip px-order-step flex-col justify-center rounded-xl p-3 ${
                         isComplete || isDelivered
-                          ? 'bg-skyblue text-navy border-skyblue'
+                          ? 'bg-skyblue'
                           : isCurrent
-                            ? 'bg-amber-500/10 text-amber-600 border-amber-500/30 animate-pulse'
-                            : 'bg-sand/30 text-navy/70 border-line'
+                            ? 'is-current bg-butter'
+                            : 'bg-cream'
                       }`}
                     >
                       {(isComplete || isDelivered) && (
-                        <CheckCircle2 className="w-4 h-4 mx-auto mb-1 text-navy" />
+                        <span className="mb-1"><PixelIcon name="check" size={16} /></span>
                       )}
                       {isCurrent && !isDelivered && (
-                        <Flame className="w-4 h-4 mx-auto mb-1 text-amber-500" />
+                        <span className="mb-1"><PixelIcon name="clock" size={16} /></span>
                       )}
                       {!isComplete && !isCurrent && (
                         <span className="block mb-1">{index + 1}.</span>
@@ -398,66 +373,6 @@ export const StudentDashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Right 1 Col: Quick Re-Order Favorites */}
-        <div className="space-y-6">
-          <div className="p-6 rounded-3xl bg-sand border border-line shadow-md space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-slateblue flex items-center gap-1.5">
-                <Flame className="w-4 h-4 text-slateblue" />
-                <span>Quick Re-Order</span>
-              </h3>
-              <span className="text-xs text-navy/75">Top Picks</span>
-            </div>
-
-            <div className="space-y-3">
-              {(dashboardData?.quickFavorites || []).map((item: any) => (
-                <div
-                  key={item.id}
-                  className="p-3 rounded-2xl bg-cream border border-line flex items-center justify-between gap-3"
-                >
-                  {hasUsableMenuImage(item.imageUrl, item.name) && (
-                    <div className="aspect-square w-12 shrink-0 overflow-hidden rounded-xl">
-                      <FoodImage
-                        imageUrl={item.imageUrl}
-                        alt={item.name}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-bold text-slateblue truncate">
-                      {item.name}
-                    </h4>
-                    <span className="text-xs font-extrabold text-slateblue">
-                      ₹{item.price}
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => handleQuickAdd(item)}
-                    className="p-2 rounded-xl bg-slateblue hover:bg-slateblue-light text-cream font-bold transition shadow-sm"
-                    title="Add to tray"
-                  >
-                    <Plus className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-              {!dashboardData?.quickFavorites?.length && (
-                <div className="p-3 text-center text-xs text-navy/75">No saved favourites yet.</div>
-              )}
-            </div>
-
-            <Link
-              to="/menu"
-              className="w-full py-3 rounded-xl bg-cream hover:bg-slateblue hover:text-cream text-xs font-bold transition flex items-center justify-center gap-1.5"
-            >
-              <span>View Complete Canteen Menu</span>
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-            <Link to="/favourites" className="block text-center text-xs font-bold text-navy hover:text-rust hover:underline">
-              View all favourites
-            </Link>
-          </div>
-        </div>
       </div>
     </div>
   );

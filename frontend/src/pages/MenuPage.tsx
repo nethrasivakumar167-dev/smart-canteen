@@ -187,8 +187,8 @@ export const MenuPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8 bg-beige">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-line">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-navy">Freshly Prepared Daily</span>
-          <h1 className="text-3xl sm:text-4xl font-semibold text-navy tracking-[0.1em] uppercase">Campus Canteen Menu</h1>
+          <span className="font-pixel text-[10px] uppercase tracking-wider text-navy">Freshly Prepared Daily</span>
+          <h1 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Campus Canteen Menu</h1>
           <p className="text-xs sm:text-sm text-espresso mt-1">Preorder ahead • Customized spice levels • Live kitchen dispatch</p>
         </div>
         <div className="flex items-center gap-2 text-xs font-bold text-espresso">
@@ -250,7 +250,7 @@ export const MenuPage: React.FC = () => {
       <CategoryFilterBar categories={categories} selectedCategoryId={selectedCategory} onSelectCategory={handleCategoryChange} />
 
       {showFiltersModal && (
-        <div className="p-5 bg-cream border border-line rounded-2xl shadow-sm space-y-4 animate-in fade-in">
+        <div className="px-card space-y-4 rounded-2xl p-5 animate-in fade-in">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-bold text-navy flex items-center gap-2"><SlidersHorizontal className="w-4 h-4 text-navy" />Advanced Filters</h4>
             <button onClick={clearFilters} className="text-xs text-navy hover:underline flex items-center gap-1 font-semibold"><RotateCcw className="w-3 h-3" />Reset All</button>
@@ -314,7 +314,7 @@ export const MenuPage: React.FC = () => {
 
       {hasActiveFilters && (
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <span className="text-xs font-bold text-espresso">Active Filters:</span>
+          <span className="font-pixel text-[10px] font-bold text-espresso">Active Filters:</span>
           {selectedCategory !== 'all' && (
             <ActiveFilter label={`Category: ${categories.find((category) => category.id === selectedCategory || category.slug === selectedCategory)?.name || selectedCategory}`} onClear={() => handleCategoryChange('all')} />
           )}
@@ -333,14 +333,14 @@ export const MenuPage: React.FC = () => {
       {isLoading ? (
         <div className="py-16 text-center text-sm font-semibold text-espresso">Loading menu...</div>
       ) : filteredItems.length ? (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="px-stagger-grid grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3">
           {filteredItems.map((item) => <FoodCard key={item.id} item={item} />)}
         </div>
       ) : (
         <div className="text-center py-16 bg-cream border border-line rounded-3xl p-8 space-y-4">
           <div className="w-16 h-16 rounded-full bg-navy/10 text-navy flex items-center justify-center mx-auto"><Search className="w-8 h-8" /></div>
           <h3 className="text-xl font-bold text-navy">No dishes match your filters</h3>
-          <button onClick={clearFilters} className="px-6 py-2.5 rounded-full bg-navy text-cream font-bold text-xs shadow-sm hover:bg-slateblue-light transition">Clear filters</button>
+          <button onClick={clearFilters} className="px-btn px-btn--sky">Clear filters</button>
         </div>
       )}
     </div>
