@@ -17,11 +17,11 @@ const BITMAP = [
 ];
 
 const COLORS: Record<string, string> = {
-  o: '#1F2A44',
-  s: '#FEEFB8',
-  w: '#FFF9E6',
-  d: '#34405E',
-  e: '#C4DAE8',
+  o: 'var(--color-text-primary)',
+  s: 'var(--color-pixel-warm)',
+  w: 'var(--color-text-primary)',
+  d: 'var(--color-pixel-secondary)',
+  e: 'var(--color-pixel-accent)',
 };
 
 interface PixelBotProps {

@@ -78,7 +78,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
     <span
       title={marker.label}
       aria-label={marker.label}
-      className={`inline-flex w-5 h-5 items-center justify-center rounded border-2 bg-cream text-[8px] font-black ${marker.className}`}
+      className={`theme-raised inline-flex w-5 h-5 items-center justify-center rounded border-2 text-[8px] font-black ${marker.className}`}
     >
       {marker.label === 'Egg' ? 'E' : '•'}
     </span>
@@ -106,12 +106,12 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
         </span>
       )}
       {item.isSpecial && (
-        <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-bold text-amber-700">
+        <span className="pixel-gold-badge">
           Special
         </span>
       )}
       {item.isTodaysSpecial && (
-        <span className="border-2 border-navy bg-[#F2C94C] px-2 py-1 font-pixel text-[9px] uppercase leading-none text-navy shadow-[2px_2px_0_#0B2A4A]">
+        <span className="pixel-gold-badge">
           Today&apos;s Special
         </span>
       )}
@@ -121,7 +121,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({ item }) => {
         </span>
       )}
       {!unavailable && item.availableNow === true && (
-        <span className="inline-flex items-center rounded-full bg-skyblue px-2 py-0.5 text-[10px] font-semibold text-navy">Available now</span>
+        <span className="theme-sky-badge inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold">Available now</span>
       )}
     </div>
   );

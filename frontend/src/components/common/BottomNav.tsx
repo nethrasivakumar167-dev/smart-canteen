@@ -59,7 +59,7 @@ export const BottomNav: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-navy border-t border-slateblue-light transition-colors duration-200">
+    <nav className="theme-bottom-nav fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-[var(--color-border)] transition-colors duration-200">
       <div className={`grid ${isStudent ? 'grid-cols-5' : 'grid-cols-4'}`}>
         {navItems.map((item) => {
           const isActive = location.pathname === item.path ||
@@ -72,14 +72,14 @@ export const BottomNav: React.FC = () => {
               to={item.path}
               className={`relative flex flex-col items-center justify-center gap-1 py-2.5 px-2 transition-colors ${
                 isActive
-                  ? 'text-cream'
-                  : 'text-skyblue hover:text-cream'
+                  ? 'text-[var(--color-nav-text)]'
+                  : 'theme-nav-muted'
               }`}
             >
               {item.label === 'Cart' ? <PixelIcon name="cart" size={24} /> : item.label === 'Favourites' ? <PixelIcon name="heart" size={24} /> : <Icon className="w-6 h-6" />}
               <span className="text-[10px] font-semibold">{item.label}</span>
               {item.badge !== undefined && item.badge > 0 && (
-                <span key={item.badge} className="px-cart-count absolute -top-1 -right-1 min-w-[16px] h-5 px-1.5 text-[10px] font-extrabold text-cream bg-rust rounded-full flex items-center justify-center animate-in zoom-in">
+                <span key={item.badge} className="theme-count-badge px-cart-count absolute -top-1 -right-1 min-w-[16px] h-5 px-1.5 text-[10px] font-extrabold rounded-full flex items-center justify-center animate-in zoom-in">
                   {item.badge > 99 ? '99+' : item.badge}
                 </span>
               )}

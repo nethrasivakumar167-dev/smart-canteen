@@ -8,8 +8,8 @@ interface ThemeState {
 
 const getInitialTheme = (): 'light' | 'dark' => {
   if (typeof window === 'undefined') return 'light';
-  const saved = localStorage.getItem('sc_theme') as 'light' | 'dark';
-  if (saved) return saved;
+  const saved = localStorage.getItem('sc_theme');
+  if (saved === 'light' || saved === 'dark') return saved;
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 

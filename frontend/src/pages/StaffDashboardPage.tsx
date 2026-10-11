@@ -462,7 +462,7 @@ export const StaffDashboardPage: React.FC = () => {
                               <span className="flex flex-wrap items-center gap-2">
                                 {item.quantity}x {item.name}
                                 {item.isTodaysSpecial && (
-                                  <span className="border-2 border-navy bg-[#F2C94C] px-2 py-1 font-pixel text-[9px] uppercase leading-none text-navy shadow-[2px_2px_0_#0B2A4A]">
+                                  <span className="pixel-gold-badge">
                                     Today&apos;s Special
                                   </span>
                                 )}

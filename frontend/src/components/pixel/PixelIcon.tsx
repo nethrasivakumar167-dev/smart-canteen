@@ -36,7 +36,7 @@ export const PixelIcon: React.FC<PixelIconProps> = ({ name, size = 16, heartStat
       >
         {HEART_OUTLINE.flatMap((row, y) =>
           [...row].flatMap((pixel, x) =>
-            pixel === '1' ? <rect key={`outline-${x}-${y}`} x={x} y={y} width="1" height="1" fill="#0B2A4A" /> : []
+            pixel === '1' ? <rect key={`outline-${x}-${y}`} x={x} y={y} width="1" height="1" fill="currentColor" /> : []
           )
         )}
         {heartState === 'filled' && HEART_INTERIOR.flatMap((row, y) =>
@@ -46,7 +46,7 @@ export const PixelIcon: React.FC<PixelIconProps> = ({ name, size = 16, heartStat
         )}
         {heartState === 'filled' && HEART_HIGHLIGHT.flatMap((row, y) =>
           [...row].flatMap((pixel, x) =>
-            pixel === '1' ? <rect key={`highlight-${x}-${y}`} x={x} y={y} width="1" height="1" fill="#FFFFFF" /> : []
+            pixel === '1' ? <rect key={`highlight-${x}-${y}`} x={x} y={y} width="1" height="1" fill="var(--color-pixel-highlight)" /> : []
           )
         )}
       </svg>
