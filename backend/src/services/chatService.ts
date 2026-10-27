@@ -163,16 +163,60 @@ function getMealReason(item: GroundedItem, now: Date): string {
   return `Outside meal window${detail ? ` - ${detail}` : ''}`;
 }
 
+const CATEGORY_ALIASES: Record<string, string[]> = {
+  beverage: ['beverages', 'cold beverages', 'hot beverages', 'juice', 'juices'],
+  beverages: ['beverages', 'cold beverages', 'hot beverages', 'juice', 'juices'],
+  drink: ['beverages', 'cold beverages', 'hot beverages', 'juice', 'juices'],
+  drinks: ['beverages', 'cold beverages', 'hot beverages', 'juice', 'juices'],
+  juice: ['beverages', 'cold beverages', 'juice', 'juices'],
+  juices: ['beverages', 'cold beverages', 'juice', 'juices'],
+  tea: ['beverages', 'hot beverages', 'tea'],
+  coffee: ['beverages', 'hot beverages', 'cold beverages', 'coffee'],
+  chai: ['beverages', 'hot beverages'],
+  dessert: ['desserts'],
+  desserts: ['desserts'],
+  sweet: ['desserts'],
+  sweets: ['desserts'],
+  snack: ['snacks', 'snacks & quick bites', 'snacks & chaats', 'chaats'],
+  snacks: ['snacks', 'snacks & quick bites', 'snacks & chaats', 'chaats'],
+  chaat: ['chaats', 'snacks & chaats'],
+  chaats: ['chaats', 'snacks & chaats'],
+  noodle: ['noodles', 'chinese'],
+  noodles: ['noodles', 'chinese'],
+  chinese: ['chinese', 'noodles'],
+};
+
 function getCategoryAndCuisineMatches(message: string, items: GroundedItem[]): Set<string> {
   const normalizedMessage = normalize(message);
+  const messageWords = normalizedMessage.split(/\s+/).map((w) => w.replace(/(s|es)$/, ''));
   const matches = new Set<string>();
+
   for (const item of items) {
     const values = [item.category, ...item.cuisines].filter(Boolean);
-    if (values.some((value) => {
+    const matched = values.some((value) => {
       const normalizedValue = normalize(value);
-      return normalizedValue.length > 1 && normalizedMessage.includes(normalizedValue);
-    })) {
-      matches.add(item.category);
+      if (normalizedValue.length > 1 && normalizedMessage.includes(normalizedValue)) {
+        return true;
+      }
+      const valWords = normalizedValue.split(/\s+/).filter((w) => w.length > 2 && !['and', 'quick', 'food'].includes(w));
+      const wordMatch = valWords.some((valWord) => {
+        const valStem = valWord.replace(/(s|es)$/, '');
+        return messageWords.includes(valStem) || new RegExp(`\\b${valStem}(s|es)?\\b`, 'i').test(normalizedMessage);
+      });
+      if (wordMatch) return true;
+
+      for (const [aliasWord, mappedCategories] of Object.entries(CATEGORY_ALIASES)) {
+        if (new RegExp(`\\b${aliasWord}\\b`, 'i').test(normalizedMessage)) {
+          if (mappedCategories.some((cat) => normalizedValue.includes(cat) || cat.includes(normalizedValue))) {
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+
+    if (matched) {
+      if (item.category) matches.add(item.category);
       item.cuisines.forEach((cuisine) => matches.add(cuisine));
     }
   }
@@ -185,10 +229,11 @@ function isGreeting(message: string): boolean {
 
 function isCanteenQuestion(message: string, items: GroundedItem[]): boolean {
   if (UNRELATED_WORDS.test(message)) return false;
-  if (/\b(canteen|menu|food|dish|dishes|eat|order|special|available|availability|recommend|suggest|breakfast|lunch|dinner|dessert|chaat|chinese|meal|price|₹|rupees?)\b/i.test(message)) {
+  if (/\b(canteen|menu|food|dish|dishes|eat|order|special|specials|available|availability|recommend|recommendation|suggest|suggestion|breakfast|lunch|dinner|dessert|desserts|beverage|beverages|drink|drinks|coffee|tea|juice|juices|chaat|chaats|chinese|noodle|noodles|snack|snacks|meal|meals|price|pricing|cost|₹|rupees?)\b/i.test(message)) {
     return true;
   }
-  return getCategoryAndCuisineMatches(message, items).size > 0;
+  return /\b(dairy|milk)[ -]?free\b/i.test(message)
+    || getCategoryAndCuisineMatches(message, items).size > 0;
 }
 
 function buildContext(items: ChatMenuItem[], message: string, now: Date): ChatContext {
@@ -201,9 +246,13 @@ function buildContext(items: ChatMenuItem[], message: string, now: Date): ChatCo
   let relevantItems: GroundedItem[];
 
   if (dairyQuestion) {
-    relevantItems = availableItems.filter((item) =>
-      /\bdessert(s)?\b/i.test(item.category) && isDairyFree(item)
-    );
+    const categoryMatches = getCategoryAndCuisineMatches(message, allItems);
+    relevantItems = availableItems.filter((item) => {
+      const matchesRequestedCategory = categoryMatches.size > 0
+        ? categoryMatches.has(item.category) || item.cuisines.some((cuisine) => categoryMatches.has(cuisine))
+        : true;
+      return matchesRequestedCategory && isDairyFree(item);
+    });
   } else if (specialQuestion) {
     relevantItems = allItems.filter((item) => item.isTodaysSpecial);
   } else if (lunchQuestion) {
@@ -243,9 +292,15 @@ function runRules(message: string, context: ChatContext, now: Date): RuleResult 
   if (/\b(dairy|milk)[ -]?free\b/i.test(query)) {
     const items = context.relevantItems.filter(isDairyFree);
     const reply = items.length
-      ? `Dairy-free desserts available now: ${items.slice(0, 5).map((item) => item.name).join(', ')}.`
-      : 'I could not confirm any dairy-free desserts available now.';
-    return { intent: 'dairy_free', reply: `${reply}\n${DAIRY_SAFETY_LINE}`, items, safetyLine: DAIRY_SAFETY_LINE, useAI: true };
+      ? `Dairy-free options available now: ${items.slice(0, 5).map((item) => item.name).join(', ')}.`
+      : 'I could not confirm any dairy-free options available now.';
+    return {
+      intent: 'dairy_free',
+      reply: `${reply}\n${DAIRY_SAFETY_LINE}`,
+      items,
+      safetyLine: DAIRY_SAFETY_LINE,
+      useAI: items.length > 0,
+    };
   }
   if (/\b(special|today'?s special|today special)\b/i.test(query)) {
     const items = context.relevantItems;
@@ -266,17 +321,14 @@ function runRules(message: string, context: ChatContext, now: Date): RuleResult 
     return { intent: 'lunch', reply: `${availableText} ${unavailableText}`, items, useAI: true };
   }
 
-  const items = context.relevantItems.filter((item) => item.available && item.isTodaysSpecial);
-  const description = items.length
-    ? items.slice(0, 5).map((item) => item.name).join(', ')
-    : 'no flagged specials matching that request right now';
+  const matchingItems = context.relevantItems.filter((item) => item.available);
+  const specials = matchingItems.filter((item) => item.isTodaysSpecial);
+  const items = specials.length > 0 ? specials : matchingItems;
   return {
     intent: 'recommendation',
     reply: items.length
-      ? `Here are a few of today’s specials: ${description}.`
-      : context.specials.length
-        ? `I couldn’t find any of today’s specials matching that request.`
-        : 'No items have been marked as today’s special yet. Please check back later.',
+      ? `Here are a few ${specials.length > 0 ? 'of today’s specials' : 'options'}: ${items.slice(0, 5).map((item) => item.name).join(', ')}.`
+      : 'I could not find any matching items available right now. Please check back later.',
     items,
     useAI: items.length > 0,
   };
@@ -319,6 +371,7 @@ async function generateFriendlyReply(
       || !payload.reply.trim()
       || payload.reply.length > 600
       || !Array.isArray(payload.itemIds)
+      || (allowedIds.size > 0 && payload.itemIds.length === 0)
       || !payload.itemIds.every((id) => typeof id === 'string' && allowedIds.has(id))
       || SAFETY_CLAIM_WORDS.test(payload.reply)
     ) {

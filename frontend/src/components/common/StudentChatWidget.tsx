@@ -44,6 +44,18 @@ export const StudentChatWidget: React.FC = () => {
     messageListRef.current?.scrollTo({ top: messageListRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, typing]);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    };
+    if (open) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [open]);
+
   const submitMessage = async (value: string) => {
     const message = value.trim();
     if (!message || typing) return;
@@ -152,15 +164,20 @@ export const StudentChatWidget: React.FC = () => {
                             <span className={`text-xs font-semibold ${item.available ? 'theme-chat-available rounded-full px-2 py-0.5' : 'theme-chat-danger'}`}>
                               {item.available ? 'Available now' : 'Unavailable now'}
                             </span>
-                            <button
-                              type="button"
-                              disabled={!item.available}
-                              onClick={() => handleAddToCart(item)}
-                              className="theme-chat-accent inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-100"
-                            >
-                              <Plus className="h-3.5 w-3.5" />
-                              Add to cart
-                            </button>
+                            {item.available ? (
+                              <button
+                                type="button"
+                                onClick={() => handleAddToCart(item)}
+                                className="theme-chat-accent inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold transition hover:brightness-95"
+                              >
+                                <Plus className="h-3.5 w-3.5" />
+                                Add to cart
+                              </button>
+                            ) : (
+                              <span className="text-[11px] font-medium text-[var(--color-text-secondary)]">
+                                Unavailable
+                              </span>
+                            )}
                           </div>
                         </article>
                       ))}
@@ -185,7 +202,7 @@ export const StudentChatWidget: React.FC = () => {
                   type="button"
                   disabled={typing}
                   onClick={() => void submitMessage(reply)}
-                  className="theme-chat-surface shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-semibold transition hover:bg-[var(--color-bg-secondary)] disabled:opacity-100"
+                  className="theme-chat-surface shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-[11px] font-semibold transition hover:bg-[var(--color-bg-secondary)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {reply}
                 </button>
@@ -205,7 +222,7 @@ export const StudentChatWidget: React.FC = () => {
                 type="submit"
                 aria-label="Send message"
                 disabled={!input.trim() || typing}
-                className="theme-chat-inverse flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-100"
+                className="theme-chat-inverse flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <Send className="h-4 w-4" />
               </button>
@@ -214,19 +231,19 @@ export const StudentChatWidget: React.FC = () => {
         </section>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen((current) => !current)}
-        aria-label={open ? 'Close BiteBuddy chat' : 'Open BiteBuddy'}
-        aria-expanded={open}
-        className="px-btn fixed bottom-[5.25rem] right-4 z-[60] h-14 w-14 animate-bob p-0 shadow-xl md:bottom-6"
-      >
-        {open ? <X className="h-6 w-6" /> : (
+      {!open && (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Open BiteBuddy"
+          aria-expanded={false}
+          className="px-btn fixed bottom-[5.25rem] right-4 z-[60] h-14 w-14 animate-bob p-0 shadow-xl md:bottom-6"
+        >
           <span className="theme-pixel-tile h-10 w-10 rounded-lg">
             <PixelBot size={32} />
           </span>
-        )}
-      </button>
+        </button>
+      )}
     </>
   );
 };

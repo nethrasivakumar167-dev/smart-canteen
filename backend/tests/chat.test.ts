@@ -74,6 +74,38 @@ const menuFixtures: ChatMenuItem[] = [
     imageUrl: null,
   },
   {
+    id: 'dairy-free-beverage',
+    name: 'Coconut Cooler',
+    category: { name: 'Beverages', isAvailable: true },
+    cuisines: [],
+    mealTimes: ['ALL_DAY'],
+    dietaryTags: ['dairy-free'],
+    allergens: [],
+    allergenNote: null,
+    spiceLevel: null,
+    price: 45,
+    isAvailable: true,
+    isSpecial: false,
+    isTodaysSpecial: false,
+    imageUrl: null,
+  },
+  {
+    id: 'milk-beverage',
+    name: 'Masala Tea',
+    category: { name: 'Beverages', isAvailable: true },
+    cuisines: [],
+    mealTimes: ['ALL_DAY'],
+    dietaryTags: [],
+    allergens: ['milk'],
+    allergenNote: null,
+    spiceLevel: null,
+    price: 25,
+    isAvailable: true,
+    isSpecial: false,
+    isTodaysSpecial: false,
+    imageUrl: null,
+  },
+  {
     id: 'staff-disabled-lunch',
     name: 'Disabled Rice Bowl',
     category: { name: 'Rice Bowls', isAvailable: true },
@@ -134,6 +166,30 @@ describe('Chat rules and grounded AI responses', () => {
     expect(chaat.items.map((item) => item.id)).toEqual(['chaat-special']);
   });
 
+  it('recommends available matching menu items when there are no matching specials', async () => {
+    const menuWithoutSpecials = menuFixtures.map((item) => ({ ...item, isTodaysSpecial: false }));
+    const beverage = await answerChat('Recommend beverages', [], menuWithoutSpecials, now);
+    const general = await answerChat('Recommend something', [], menuWithoutSpecials, now);
+
+    expect(beverage.items.map((item) => item.id)).toEqual(['dairy-free-beverage', 'milk-beverage']);
+    expect(beverage.reply).toContain('Here are a few options');
+    expect(general.items.length).toBeGreaterThan(0);
+    expect(general.reply).not.toContain('today’s specials');
+  });
+
+  it('recognizes milk-free beverage requests and only returns explicitly confirmed matches', async () => {
+    const plural = await answerChat('Give me milk free beverages', [], menuFixtures, now);
+    const singular = await answerChat('Give milk free beverage', [], menuFixtures, now);
+    const drinks = await answerChat('Give milk free drinks', [], menuFixtures, now);
+
+    for (const result of [plural, singular, drinks]) {
+      expect(result.intent).toBe('dairy_free');
+      expect(result.items.map((item) => item.id)).toEqual(['dairy-free-beverage']);
+      expect(result.reply).toContain('Dairy-free options available now');
+      expect(result.reply).toContain('Please check allergens on the item page or ask the counter before ordering.');
+    }
+  });
+
   it('lists only explicitly confirmed dairy-free desserts and includes the safety line', async () => {
     const result = await answerChat('Milk-free desserts available now', [], menuFixtures, now);
 
@@ -168,6 +224,23 @@ describe('Chat rules and grounded AI responses', () => {
 
     expect(result.outcome).toBe('fallback');
     expect(result.items.map((item) => item.id)).toEqual(['chinese-noodles']);
+  });
+
+  it('falls back when Gemini contradicts a matching recommendation with an empty selection', async () => {
+    const generator = vi.fn().mockResolvedValue({
+      candidates: [{
+        content: {
+          parts: [{
+            text: JSON.stringify({ reply: 'I could not find a matching special.', itemIds: [] }),
+          }],
+        },
+      }],
+    });
+    const result = await answerChat('Recommend Chinese dishes', [], menuFixtures, now, generator, true);
+
+    expect(result.outcome).toBe('fallback');
+    expect(result.items.map((item) => item.id)).toEqual(['chinese-noodles']);
+    expect(result.reply).toContain('Here are a few');
   });
 
   it('uses a valid friendly response and only returns selected database items', async () => {
